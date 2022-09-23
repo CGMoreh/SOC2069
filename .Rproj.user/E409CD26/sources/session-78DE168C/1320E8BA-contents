@@ -1,0 +1,159 @@
+---
+title: "Week 2: Measurement"
+output: 
+  rmdformats::readthedown:
+      highlight: tango
+      df_print: paged
+---
+
+```{r setup, include=FALSE} 
+knitr::opts_chunk$set(
+  fig.width = 10, fig.height = 6, fig.retina = 2,
+  warning = FALSE, message = FALSE, eval = FALSE
+)
+```  
+
+## Measuring "trust"
+
+```{r get haven, eval=FALSE}
+## To import datasets stored in the format of other statistical programmes (e.g. SPSS, Stata and SAS) we can use the 'haven' package (see. R4DS Ch. 11.6)
+## Install 'haven' if not already installed:
+install.packages("haven") 
+```
+
+```{r use haven, eval=FALSE}
+## Once you have a package installed, there are two ways in which you can use the functions contained in the package:
+
+# 1. to only use a specific function in one instance, state the package name followed by two colons (::) followed by the function name; e.g.:
+haven::read_sav()
+
+# 2. to load the entire package and then use any function from the package for the duration of your R session; e.g.:
+library(haven)
+read_sav()
+```
+
+First, let's import three datasets.
+
+```{r import ess, eval=FALSE}
+## Let's import the European Social Survey Round 9 dataset (the version stored in SPSS format) into R
+ess9 <- haven::read_sav("https://cgmoreh.github.io/SSC7001M/data/ess9.sav")
+```
+
+```{r import evs, eval=FALSE}
+## Let's import the European Values Study Wave 5 dataset (the version stored in Stata format) into R
+evs5 <- haven::read_dta("https://cgmoreh.github.io/SSC7001M/data/evs5.dta")
+```
+
+```{r import eb, eval=FALSE}
+## Let's import the Eurobarometer 89.1 dataset (the version stored in SPSS format) into R
+eb89.1 <- haven::read_sav("https://cgmoreh.github.io/SSC7001M/data/eb89.1.sav")
+```
+
+Once we have imported the datasets and have them available in our 'Environment', we can have a quick look at the data. There are a few options for this (see R4DS Ch. 10). One is to 'View' the entire dataset in a separate viewer window. This allows us to scroll through the entire data just as we would with a large spreadsheet; however, with large datasets this may be very heavy and slow. Let's try to view the `eb89.1` dataset:
+
+```{r view, message=FALSE}
+## We can achieve this by clicking on the dataset in the 'Environment' pane, or typing "View(eb89.1)", or using the tidyverse workflow by first selecting the data tibble we want to manipulate and then instructing a "View()"
+
+## IMPORTANT! To use the tidyverse workflow and get access to the so-called 'pipe' operator (%>%) we must first load the 'tidyverse' packages (or at least the 'magrittr' package which contains the 'pipe'); HOWEVER: since the 4.1.0 version of R, we now have a native pipe operator (|>) which can be used instead of the 'magrittr' pipe
+
+library(tidyverse)
+
+eb89.1 %>% 
+    View()
+
+```
+
+Another option is to 'print' into our outputs a table, which in html format can be set to be interactive, so we can scroll through the dataset; we can also limit the number of rows and columns we see to make larger datasets more manageable. Let's check this option by 'printing' the first 10 cases (rows) of the `ess9` data, leaving all the variables (columns, 'width') in:
+
+```{r print, paged.print=TRUE}
+ess9 %>% 
+  print()
+```
+
+Instead of importing the entire dataset, we could rely on the information from the questionnaire and codebook to identify the variables we are interested in for a particular analysis and select only those variables for further manipulation. We can use the 'select' function from the `dplyr` package for this purpose (part of `tidyverse`, so it should be already loaded by now).  For example, let's only load the 'trust'-related variables from the `ess9` dataset:
+
+```{r}
+## Before that, let's clear our environment so that it doesn't end up too cluttered with objects
+rm(list = ls())
+```
+
+
+```{r}
+## Let's import selected variables from the European Social Survey Round 9 dataset
+ess9_trust <- haven::read_sav("https://cgmoreh.github.io/SSC7001M/data/ess9.sav") %>%
+  select(ppltrst, starts_with("trst"))
+```
+
+```{r}
+## Now let's import selected variables from the European Values Study Wave 5 dataset
+evs5_trust <- haven::read_sav("https://cgmoreh.github.io/SSC7001M/data/evs5.sav") %>%
+  select(v31:v37)
+```
+
+```{r}
+## Now the's do the same for the Eurobarometer 89.1 dataset
+eb89.1_trust <- haven::read_sav("https://cgmoreh.github.io/SSC7001M/data/eb89.1.sav") %>%
+  select(starts_with("qa8") | starts_with("qa14"))
+```
+
+## Describing the data
+
+We can get a rough summary of the variables in the dataset using the 'summary' function. We can ask for a summary of individual variables, or if we select a small number of variables in advance, we can summarise the entire dataset:
+```{r}
+ess9_trust %>% summary()
+evs5_trust %>% summary()
+eb89.1_trust %>% summary()
+```
+
+We find that measurements are either on *binary*, *nominal* or *ordinal* scales. The 11-point ordinal scale used in the ESS can potentially be treated as a *numeric* rather than *categorical* variable for the purposes of analysis. As such, we can describe it visually using a histogram or a box-plot:
+
+```{r}
+## Histogram
+hist(ess9_trust$ppltrst)
+```
+```{r}
+## Box plot
+boxplot(ess9_trust$ppltrst)
+
+```
+
+To quickly visualise categorical variables we can use a barplot. 
+
+```{r}
+## Bar plot
+
+ggplot(evs5_trust, aes(x = v31))+
+  geom_bar()
+```
+
+We can get the labels of the categories to have at hand when creating the plot. We can use the 'levels()' function, which outputs the names of all the levels of a factor:
+```{r}
+## Set the v31 variable in the EVS dataset as 'factor'
+evs5_trust <- evs5_trust %>% mutate(v31 = as_factor(v31))
+
+## Now let's check its 'levels'
+levels(evs5_trust$v31)
+
+## Filter out missing values
+evs5_trust <- evs5_trust %>% filter(v31 == c("most people can be trusted", "can not be too careful"))
+```
+
+
+```{r}
+## Bar plot
+
+ggplot(evs5_trust, aes(x = v31))+
+  geom_bar()
+```
+
+Let's try now to apply these basic descriptive steps to other variables in the dataset too!
+
+Quick recode:
+
+```{r}
+vote <- vote %>% mutate(to_labour=recode(to_labour,
+                                         `0`=0, 
+                                         `1`=2))
+```
+
+
