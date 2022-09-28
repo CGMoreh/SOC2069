@@ -1,0 +1,70 @@
+---
+title: "1 (TW5) Lab worksheet"
+author: "Dr. Chris Moreh"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    toc_highlight: false
+    tabset: true
+    number_sections: false
+    anchor_sections: false
+    self_contained: false
+    code_download: true
+    css: "labcss.css"
+
+---
+
+
+We begin our exploration of sociological research methods by looking at some real data that social scientists have used in empirical research. Before starting to think in a more structured way about research questions, how to design a sociological research project, and how to create useful instruments to capture and collect relevant information about the social world, let's look at some 'semi-tamed' information: data collected by others for academic and/or policy analysis purposes.
+
+## Set readings
+
+There are no set readings for this week, just the general assigned core and secondary readings.
+
+
+## Exercise 1: Exploring the UK Data Service (UKDS)
+
+The UK Data Service is the country's largest data repository. It makes a variety of research data available for UK researchers and students, and we will be using secondary data accessible through this repository a lot in this module (and for the assignments!). It is also useful to become acquainted with the variety of secondary data available there and the basic functionalities of the site, as you may decide to use secondary data for your final third-year dissertation.
+
+The UKDS is available at this website: <https://ukdataservice.ac.uk/>
+
+### Task 1: Browse data by type
+
+Begin by exploring the options available under the **Find data** tab of the UKDS website. The **Find data** page contains a short video on *How to use the UK Data Service catalogue search tool*, which you can watch outside class. As we are just exploring the data offerings of the service, navigate to the *Browse and access data* page, where you can browse data by theme or type, among some other options.
+
+Let's look into the first option: *UK Surveys*. This takes us to the main data catalogue, where we can see that the search is filtered down to "UK Survey data" in the *Data Type* field of the menu on the left. We can perform various selections using that menu, refining the search by date or setting other filters.
+
+
+```{block Question 1, type = 'questionblock'}
+**Question 1**:
+
+
+This is a question box
+
+
+<details>
+  <summary><i>Click to view answer</i></summary>
+  
+This is the answer to the question right here!!!
+
+</details>
+
+
+```
+
+
+
+### Task 2:
+
+he UK Data Service is the country’s largest data repository. It makes a variety of research data available for UK researchers and students, and we will be using secondary data accessible through this repository a lot in this module (and for the assignments!). It is also useful to become acquainted with the variety of secondary data available there and the basic functionalities of the site, as you may decide to use secondary data for your final third-year dissertation.
+he UK Data Service is the country’s largest data repository. It makes a variety of research data available for UK researchers and students, and we will be using secondary data accessible through this repository a lot in this module (and for the assignments!). It is also useful to become acquainted with the variety of secondary data available there and the basic functionalities of the site, as you may decide to use secondary data for your final third-year dissertation.
+he UK Data Service is the country’s largest data repository. It makes a variety of research data available for UK researchers and students, and we will be using secondary data accessible through this repository a lot in this module (and for the assignments!). It is also useful to become acquainted with the variety of secondary data available there and the basic functionalities of the site, as you may decide to use secondary data for your final third-year dissertation.
+
+### Task 3:
+
+## Exercise 2: Explore some cross-national surveys
+
+```{r}
+knitr::all_labels()
+```

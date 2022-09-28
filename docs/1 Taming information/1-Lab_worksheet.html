@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Dr. Chris Moreh" />
+
+
+<title>1 (TW5) Lab worksheet</title>
+
+<script src="1-Lab_worksheet_files/header-attrs-2.14/header-attrs.js"></script>
+<script src="1-Lab_worksheet_files/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="1-Lab_worksheet_files/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="1-Lab_worksheet_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="1-Lab_worksheet_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="1-Lab_worksheet_files/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="1-Lab_worksheet_files/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="1-Lab_worksheet_files/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="1-Lab_worksheet_files/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="1-Lab_worksheet_files/navigation-1.1/tabsets.js"></script>
+<script src="1-Lab_worksheet_files/navigation-1.1/codefolding.js"></script>
+<script src="1-Lab_worksheet_files/navigation-1.1/sourceembed.js"></script>
+<link href="1-Lab_worksheet_files/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="1-Lab_worksheet_files/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+<style type="text/css">
+#rmd-source-code {
+  display: none;
+}
+</style>
+
+
+<link rel="stylesheet" href="labcss.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-download-source" href="#">Download Rmd</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">1 (TW5) Lab worksheet</h1>
+<h4 class="author">Dr. Chris Moreh</h4>
+
+</div>
+
+
+<p>We begin our exploration of sociological research methods by looking
+at some real data that social scientists have used in empirical
+research. Before starting to think in a more structured way about
+research questions, how to design a sociological research project, and
+how to create useful instruments to capture and collect relevant
+information about the social world, let’s look at some ‘semi-tamed’
+information: data collected by others for academic and/or policy
+analysis purposes.</p>
+<div id="set-readings" class="section level2">
+<h2>Set readings</h2>
+<p>There are no set readings for this week, just the general assigned
+core and secondary readings.</p>
+</div>
+<div id="exercise-1-exploring-the-uk-data-service-ukds"
+class="section level2">
+<h2>Exercise 1: Exploring the UK Data Service (UKDS)</h2>
+<p>The UK Data Service is the country’s largest data repository. It
+makes a variety of research data available for UK researchers and
+students, and we will be using secondary data accessible through this
+repository a lot in this module (and for the assignments!). It is also
+useful to become acquainted with the variety of secondary data available
+there and the basic functionalities of the site, as you may decide to
+use secondary data for your final third-year dissertation.</p>
+<p>The UKDS is available at this website: <a
+href="https://ukdataservice.ac.uk/"
+class="uri">https://ukdataservice.ac.uk/</a></p>
+<div id="task-1-browse-data-by-type" class="section level3">
+<h3>Task 1: Browse data by type</h3>
+<p>Begin by exploring the options available under the <strong>Find
+data</strong> tab of the UKDS website. The <strong>Find data</strong>
+page contains a short video on <em>How to use the UK Data Service
+catalogue search tool</em>, which you can watch outside class. As we are
+just exploring the data offerings of the service, navigate to the
+<em>Browse and access data</em> page, where you can browse data by theme
+or type, among some other options.</p>
+<p>Let’s look into the first option: <em>UK Surveys</em>. This takes us
+to the main data catalogue, where we can see that the search is filtered
+down to “UK Survey data” in the <em>Data Type</em> field of the menu on
+the left. We can perform various selections using that menu, refining
+the search by date or setting other filters.</p>
+<div class="questionblock">
+<p>
+<strong>Question 1</strong>:
+</p>
+<p>
+This is a question box
+</p>
+<details>
+<summary>
+<i>Click to view answer</i>
+</summary>
+<p>
+This is the answer to the question right here!!!
+</p>
+</details>
+</div>
+</div>
+<div id="task-2" class="section level3">
+<h3>Task 2:</h3>
+<p>he UK Data Service is the country’s largest data repository. It makes
+a variety of research data available for UK researchers and students,
+and we will be using secondary data accessible through this repository a
+lot in this module (and for the assignments!). It is also useful to
+become acquainted with the variety of secondary data available there and
+the basic functionalities of the site, as you may decide to use
+secondary data for your final third-year dissertation. he UK Data
+Service is the country’s largest data repository. It makes a variety of
+research data available for UK researchers and students, and we will be
+using secondary data accessible through this repository a lot in this
+module (and for the assignments!). It is also useful to become
+acquainted with the variety of secondary data available there and the
+basic functionalities of the site, as you may decide to use secondary
+data for your final third-year dissertation. he UK Data Service is the
+country’s largest data repository. It makes a variety of research data
+available for UK researchers and students, and we will be using
+secondary data accessible through this repository a lot in this module
+(and for the assignments!). It is also useful to become acquainted with
+the variety of secondary data available there and the basic
+functionalities of the site, as you may decide to use secondary data for
+your final third-year dissertation.</p>
+</div>
+<div id="task-3" class="section level3">
+<h3>Task 3:</h3>
+</div>
+</div>
+<div id="exercise-2-explore-some-cross-national-surveys"
+class="section level2">
+<h2>Exercise 2: Explore some cross-national surveys</h2>
+<pre class="r"><code>knitr::all_labels()</code></pre>
+<pre><code>## [1] &quot;Question 1&quot;      &quot;unnamed-chunk-1&quot;</code></pre>
+</div>
+
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIjEgKFRXNSkgTGFiIHdvcmtzaGVldCINCmF1dGhvcjogIkRyLiBDaHJpcyBNb3JlaCINCm91dHB1dDoNCiAgaHRtbF9kb2N1bWVudDoNCiAgICB0b2M6IHRydWUNCiAgICB0b2NfZmxvYXQ6IHRydWUNCiAgICB0b2NfaGlnaGxpZ2h0OiBmYWxzZQ0KICAgIHRhYnNldDogdHJ1ZQ0KICAgIG51bWJlcl9zZWN0aW9uczogZmFsc2UNCiAgICBhbmNob3Jfc2VjdGlvbnM6IGZhbHNlDQogICAgc2VsZl9jb250YWluZWQ6IGZhbHNlDQogICAgY29kZV9kb3dubG9hZDogdHJ1ZQ0KICAgIGNzczogImxhYmNzcy5jc3MiDQoNCi0tLQ0KDQoNCldlIGJlZ2luIG91ciBleHBsb3JhdGlvbiBvZiBzb2Npb2xvZ2ljYWwgcmVzZWFyY2ggbWV0aG9kcyBieSBsb29raW5nIGF0IHNvbWUgcmVhbCBkYXRhIHRoYXQgc29jaWFsIHNjaWVudGlzdHMgaGF2ZSB1c2VkIGluIGVtcGlyaWNhbCByZXNlYXJjaC4gQmVmb3JlIHN0YXJ0aW5nIHRvIHRoaW5rIGluIGEgbW9yZSBzdHJ1Y3R1cmVkIHdheSBhYm91dCByZXNlYXJjaCBxdWVzdGlvbnMsIGhvdyB0byBkZXNpZ24gYSBzb2Npb2xvZ2ljYWwgcmVzZWFyY2ggcHJvamVjdCwgYW5kIGhvdyB0byBjcmVhdGUgdXNlZnVsIGluc3RydW1lbnRzIHRvIGNhcHR1cmUgYW5kIGNvbGxlY3QgcmVsZXZhbnQgaW5mb3JtYXRpb24gYWJvdXQgdGhlIHNvY2lhbCB3b3JsZCwgbGV0J3MgbG9vayBhdCBzb21lICdzZW1pLXRhbWVkJyBpbmZvcm1hdGlvbjogZGF0YSBjb2xsZWN0ZWQgYnkgb3RoZXJzIGZvciBhY2FkZW1pYyBhbmQvb3IgcG9saWN5IGFuYWx5c2lzIHB1cnBvc2VzLg0KDQojIyBTZXQgcmVhZGluZ3MNCg0KVGhlcmUgYXJlIG5vIHNldCByZWFkaW5ncyBmb3IgdGhpcyB3ZWVrLCBqdXN0IHRoZSBnZW5lcmFsIGFzc2lnbmVkIGNvcmUgYW5kIHNlY29uZGFyeSByZWFkaW5ncy4NCg0KDQojIyBFeGVyY2lzZSAxOiBFeHBsb3JpbmcgdGhlIFVLIERhdGEgU2VydmljZSAoVUtEUykNCg0KVGhlIFVLIERhdGEgU2VydmljZSBpcyB0aGUgY291bnRyeSdzIGxhcmdlc3QgZGF0YSByZXBvc2l0b3J5LiBJdCBtYWtlcyBhIHZhcmlldHkgb2YgcmVzZWFyY2ggZGF0YSBhdmFpbGFibGUgZm9yIFVLIHJlc2VhcmNoZXJzIGFuZCBzdHVkZW50cywgYW5kIHdlIHdpbGwgYmUgdXNpbmcgc2Vjb25kYXJ5IGRhdGEgYWNjZXNzaWJsZSB0aHJvdWdoIHRoaXMgcmVwb3NpdG9yeSBhIGxvdCBpbiB0aGlzIG1vZHVsZSAoYW5kIGZvciB0aGUgYXNzaWdubWVudHMhKS4gSXQgaXMgYWxzbyB1c2VmdWwgdG8gYmVjb21lIGFjcXVhaW50ZWQgd2l0aCB0aGUgdmFyaWV0eSBvZiBzZWNvbmRhcnkgZGF0YSBhdmFpbGFibGUgdGhlcmUgYW5kIHRoZSBiYXNpYyBmdW5jdGlvbmFsaXRpZXMgb2YgdGhlIHNpdGUsIGFzIHlvdSBtYXkgZGVjaWRlIHRvIHVzZSBzZWNvbmRhcnkgZGF0YSBmb3IgeW91ciBmaW5hbCB0aGlyZC15ZWFyIGRpc3NlcnRhdGlvbi4NCg0KVGhlIFVLRFMgaXMgYXZhaWxhYmxlIGF0IHRoaXMgd2Vic2l0ZTogPGh0dHBzOi8vdWtkYXRhc2VydmljZS5hYy51ay8+DQoNCiMjIyBUYXNrIDE6IEJyb3dzZSBkYXRhIGJ5IHR5cGUNCg0KQmVnaW4gYnkgZXhwbG9yaW5nIHRoZSBvcHRpb25zIGF2YWlsYWJsZSB1bmRlciB0aGUgKipGaW5kIGRhdGEqKiB0YWIgb2YgdGhlIFVLRFMgd2Vic2l0ZS4gVGhlICoqRmluZCBkYXRhKiogcGFnZSBjb250YWlucyBhIHNob3J0IHZpZGVvIG9uICpIb3cgdG8gdXNlIHRoZSBVSyBEYXRhIFNlcnZpY2UgY2F0YWxvZ3VlIHNlYXJjaCB0b29sKiwgd2hpY2ggeW91IGNhbiB3YXRjaCBvdXRzaWRlIGNsYXNzLiBBcyB3ZSBhcmUganVzdCBleHBsb3JpbmcgdGhlIGRhdGEgb2ZmZXJpbmdzIG9mIHRoZSBzZXJ2aWNlLCBuYXZpZ2F0ZSB0byB0aGUgKkJyb3dzZSBhbmQgYWNjZXNzIGRhdGEqIHBhZ2UsIHdoZXJlIHlvdSBjYW4gYnJvd3NlIGRhdGEgYnkgdGhlbWUgb3IgdHlwZSwgYW1vbmcgc29tZSBvdGhlciBvcHRpb25zLg0KDQpMZXQncyBsb29rIGludG8gdGhlIGZpcnN0IG9wdGlvbjogKlVLIFN1cnZleXMqLiBUaGlzIHRha2VzIHVzIHRvIHRoZSBtYWluIGRhdGEgY2F0YWxvZ3VlLCB3aGVyZSB3ZSBjYW4gc2VlIHRoYXQgdGhlIHNlYXJjaCBpcyBmaWx0ZXJlZCBkb3duIHRvICJVSyBTdXJ2ZXkgZGF0YSIgaW4gdGhlICpEYXRhIFR5cGUqIGZpZWxkIG9mIHRoZSBtZW51IG9uIHRoZSBsZWZ0LiBXZSBjYW4gcGVyZm9ybSB2YXJpb3VzIHNlbGVjdGlvbnMgdXNpbmcgdGhhdCBtZW51LCByZWZpbmluZyB0aGUgc2VhcmNoIGJ5IGRhdGUgb3Igc2V0dGluZyBvdGhlciBmaWx0ZXJzLg0KDQoNCmBgYHtibG9jayBRdWVzdGlvbiAxLCB0eXBlID0gJ3F1ZXN0aW9uYmxvY2snfQ0KKipRdWVzdGlvbiAxKio6DQoNCg0KVGhpcyBpcyBhIHF1ZXN0aW9uIGJveA0KDQoNCjxkZXRhaWxzPg0KICA8c3VtbWFyeT48aT5DbGljayB0byB2aWV3IGFuc3dlcjwvaT48L3N1bW1hcnk+DQogIA0KVGhpcyBpcyB0aGUgYW5zd2VyIHRvIHRoZSBxdWVzdGlvbiByaWdodCBoZXJlISEhDQoNCjwvZGV0YWlscz4NCg0KDQpgYGANCg0KDQoNCiMjIyBUYXNrIDI6DQoNCmhlIFVLIERhdGEgU2VydmljZSBpcyB0aGUgY291bnRyeeKAmXMgbGFyZ2VzdCBkYXRhIHJlcG9zaXRvcnkuIEl0IG1ha2VzIGEgdmFyaWV0eSBvZiByZXNlYXJjaCBkYXRhIGF2YWlsYWJsZSBmb3IgVUsgcmVzZWFyY2hlcnMgYW5kIHN0dWRlbnRzLCBhbmQgd2Ugd2lsbCBiZSB1c2luZyBzZWNvbmRhcnkgZGF0YSBhY2Nlc3NpYmxlIHRocm91Z2ggdGhpcyByZXBvc2l0b3J5IGEgbG90IGluIHRoaXMgbW9kdWxlIChhbmQgZm9yIHRoZSBhc3NpZ25tZW50cyEpLiBJdCBpcyBhbHNvIHVzZWZ1bCB0byBiZWNvbWUgYWNxdWFpbnRlZCB3aXRoIHRoZSB2YXJpZXR5IG9mIHNlY29uZGFyeSBkYXRhIGF2YWlsYWJsZSB0aGVyZSBhbmQgdGhlIGJhc2ljIGZ1bmN0aW9uYWxpdGllcyBvZiB0aGUgc2l0ZSwgYXMgeW91IG1heSBkZWNpZGUgdG8gdXNlIHNlY29uZGFyeSBkYXRhIGZvciB5b3VyIGZpbmFsIHRoaXJkLXllYXIgZGlzc2VydGF0aW9uLg0KaGUgVUsgRGF0YSBTZXJ2aWNlIGlzIHRoZSBjb3VudHJ54oCZcyBsYXJnZXN0IGRhdGEgcmVwb3NpdG9yeS4gSXQgbWFrZXMgYSB2YXJpZXR5IG9mIHJlc2VhcmNoIGRhdGEgYXZhaWxhYmxlIGZvciBVSyByZXNlYXJjaGVycyBhbmQgc3R1ZGVudHMsIGFuZCB3ZSB3aWxsIGJlIHVzaW5nIHNlY29uZGFyeSBkYXRhIGFjY2Vzc2libGUgdGhyb3VnaCB0aGlzIHJlcG9zaXRvcnkgYSBsb3QgaW4gdGhpcyBtb2R1bGUgKGFuZCBmb3IgdGhlIGFzc2lnbm1lbnRzISkuIEl0IGlzIGFsc28gdXNlZnVsIHRvIGJlY29tZSBhY3F1YWludGVkIHdpdGggdGhlIHZhcmlldHkgb2Ygc2Vjb25kYXJ5IGRhdGEgYXZhaWxhYmxlIHRoZXJlIGFuZCB0aGUgYmFzaWMgZnVuY3Rpb25hbGl0aWVzIG9mIHRoZSBzaXRlLCBhcyB5b3UgbWF5IGRlY2lkZSB0byB1c2Ugc2Vjb25kYXJ5IGRhdGEgZm9yIHlvdXIgZmluYWwgdGhpcmQteWVhciBkaXNzZXJ0YXRpb24uDQpoZSBVSyBEYXRhIFNlcnZpY2UgaXMgdGhlIGNvdW50cnnigJlzIGxhcmdlc3QgZGF0YSByZXBvc2l0b3J5LiBJdCBtYWtlcyBhIHZhcmlldHkgb2YgcmVzZWFyY2ggZGF0YSBhdmFpbGFibGUgZm9yIFVLIHJlc2VhcmNoZXJzIGFuZCBzdHVkZW50cywgYW5kIHdlIHdpbGwgYmUgdXNpbmcgc2Vjb25kYXJ5IGRhdGEgYWNjZXNzaWJsZSB0aHJvdWdoIHRoaXMgcmVwb3NpdG9yeSBhIGxvdCBpbiB0aGlzIG1vZHVsZSAoYW5kIGZvciB0aGUgYXNzaWdubWVudHMhKS4gSXQgaXMgYWxzbyB1c2VmdWwgdG8gYmVjb21lIGFjcXVhaW50ZWQgd2l0aCB0aGUgdmFyaWV0eSBvZiBzZWNvbmRhcnkgZGF0YSBhdmFpbGFibGUgdGhlcmUgYW5kIHRoZSBiYXNpYyBmdW5jdGlvbmFsaXRpZXMgb2YgdGhlIHNpdGUsIGFzIHlvdSBtYXkgZGVjaWRlIHRvIHVzZSBzZWNvbmRhcnkgZGF0YSBmb3IgeW91ciBmaW5hbCB0aGlyZC15ZWFyIGRpc3NlcnRhdGlvbi4NCg0KIyMjIFRhc2sgMzoNCg0KIyMgRXhlcmNpc2UgMjogRXhwbG9yZSBzb21lIGNyb3NzLW5hdGlvbmFsIHN1cnZleXMNCg0KYGBge3J9DQprbml0cjo6YWxsX2xhYmVscygpDQpgYGA=</div>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeSourceEmbed("1-Lab_worksheet.Rmd");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
