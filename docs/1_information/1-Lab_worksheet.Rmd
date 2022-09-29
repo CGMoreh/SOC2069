@@ -134,13 +134,13 @@ Why is there less qualitative data made publicly available?
 
 You may have found some studies that you find interesting based on their titles. You can have a closer look at them outside class, but because not all datasets are equally well documented and made available, let's look at a few studies that I find particularly interesting:
 
-- "The Illiberal Turn? News Consumption, Polarization and Democracy in Central and Eastern Europe, 2019-2020" [https://doi.org/10.5255/UKDA-SN-855088](https://doi.org/10.5255/UKDA-SN-855088){target="_blank"}
+- Stetka, Vaclav and Mihelj, Sabina and Toth, Fanni and Kondor, Katherine (2022) **"The Illiberal Turn? News Consumption, Polarization and Democracy in Central and Eastern Europe, 2019-2020"** [https://doi.org/10.5255/UKDA-SN-855088](https://doi.org/10.5255/UKDA-SN-855088){target="_blank"}
 
-- "The Annexation of Populations: A New State Strategy, 2017-2021" [https://doi.org/10.5255/UKDA-SN-854598](https://doi.org/10.5255/UKDA-SN-854598){target="_blank"}
+- Wrighton, Sam J (2021) **"The Annexation of Populations: A New State Strategy, 2017-2021"** [https://doi.org/10.5255/UKDA-SN-854598](https://doi.org/10.5255/UKDA-SN-854598){target="_blank"}
 
-- "LGBT+ Networks, 2017-2020" [https://doi.org/10.5255/UKDA-SN-855322](https://doi.org/10.5255/UKDA-SN-855322){target="_blank"}
+- Einarsdottir, Anna and Mumford, Karen and Birks, Yvonne and Lockyer, Bridget and Sayli, Melisa and Jeep, Sudthasiri (2021) **"LGBT+ Networks, 2017-2020"** [https://doi.org/10.5255/UKDA-SN-855322](https://doi.org/10.5255/UKDA-SN-855322){target="_blank"}
 
-- "Attitudes Towards Brexit, 2017-2020" [https://doi.org/10.5255/UKDA-SN-854869](https://doi.org/10.5255/UKDA-SN-854869){target="_blank"}
+- Pearce, Sioned and Fox, Stuart (2020) **"Young people and Brexit 2017"** [https://doi.org/10.5255/UKDA-SN-854031](https://doi.org/10.5255/UKDA-SN-854031){target="_blank"}
 
 Write down a few notes on the aims, methodology, etc. employed, as you have done in the previous exercise.
 
