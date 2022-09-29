@@ -1,5 +1,5 @@
 name: "docs"
-title: "SOC2069"
+title: "SOC2069 Researching Social Life 1"
 description: |
   Researching Social Life 1
 output_dir: "."
@@ -36,7 +36,7 @@ navbar:
     - text: "Seminars"
       menu:
         - text: "Worksheet 1"
-          href: "./1 Taming information/1-Lab_worksheet.html"
+          href: "./1_information/1-Lab_worksheet.html"
     #     - text: "Worksheet 2"
     #     - text: "Worksheet 3"
     #     - text: "Worksheet 4"

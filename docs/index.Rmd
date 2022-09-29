@@ -22,19 +22,3 @@ d-title {
 }
 ```
 
-<br><br>
-
-<center>
-
-<img src="./../pics/Res_Soc_Life_logo.png" width="100%"/>
-
-</center>
-
-### Welcome to **Researching Social Life 1**
-
-
-### Try out your `R` code here
-
-<iframe width="100%" height="1000" src="https://rdrr.io/snippets/embed/?code=print(%22Hello%2C%20world!%22)" frameborder="0">
-
-</iframe>
