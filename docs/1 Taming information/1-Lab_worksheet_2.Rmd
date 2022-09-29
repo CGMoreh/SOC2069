@@ -1,0 +1,103 @@
+---
+title: "Worksheet 1"
+output:
+  html_document:
+    theme: lumen
+    toc: yes
+    toc_float: yes
+    toc_highlight: no
+    tabset: yes
+    number_sections: no
+    anchor_sections: no
+    self_contained: no
+    code_download: no
+    css: labcss.css
+---
+
+------------------------------------------------------------------------
+
+    Timetable week: 5
+
+------------------------------------------------------------------------
+
+We begin our exploration of sociological research methods by looking at some real data that social scientists have used in empirical research. Before starting to think in a more structured way about research questions, how to design a sociological research project, and how to create useful instruments to capture and collect relevant information about the social world, let's look at some 'semi-tamed' information: data collected by others for academic and/or policy analysis purposes.
+
+```{=html}
+<!--
+
+#  Set readings
+
+There are no set readings for this week, just the general assigned core and secondary readings. 
+
+-->
+```
+# Exercise 1: Exploring the UK Data Service
+
+The UK Data Service (UKDS) is the country's largest data repository. It makes a variety of data available to UK researchers for secondary analysis, and we will be using data accessible through this repository throughout this module (and for the assignments!).
+
+It is also useful to become acquainted with the variety of secondary data available there and the basic functionalities of the site, as you may decide to use secondary data for your final third-year dissertation.
+
+The UKDS is available at this website: <https://ukdataservice.ac.uk/>
+
+## Task 1: Browse and search data
+
+Begin by exploring the options available under the **Find data** tab of the UKDS website. The **Find data** page contains a short video on *How to use the UK Data Service catalogue search tool*, which you can watch outside class. As we are just exploring the data offerings of the service, navigate to the *Browse and access data* page, where you can browse data by theme or type, among some other options. Let's choose to *Browse by data type* and select *UK Surveys*.
+
+This takes us to the main data catalogue, where we can see that the search is filtered down to "UK Survey data" in the *Data Type* field of the menu on the left. We can perform various selections using that menu, refining the search by date or setting other filters.
+
+```{block Question 1, type = 'questionblock'}
+
+**Question 1**
+
+Look at the information on the UKDA Data catalogue page and answer:
+
+- How many *studies* are available on the UKDA in total?
+- How many data *series* are available? (*Series* are large surveys that are
+taken regularly; they can be *longitudinal* or *time series*)
+- How many *studies* categorised as *UK Survey data* are there?
+
+To check whether you've found the corrent information, you can check the answers below.
+
+<details>
+  <summary><i>Click to view answer</i></summary>
+
+The numbers shown in the main tab refer to the overall number of studies available through the UKDA, so <ins>at the time of writing</ins> **8937** studies and **79** series. 
+
+The number of results in the light blue box above the results list refer to the number of studies based on our set filter, so in this case **4891** in *UK Survey data*.
+
+
+</details>
+
+```
+
+Take some time to explore and become familiar with the page. Try to:
+
+-   Find the newest studies based on their date of collection (tip: check out *Sort by*)
+
+-   Remove the filter on data type and scroll through some of the most recently released datasets
+
+-   **Search a keyword** of your own interest in the search field (*Search our data catalogue)* (e.g. 'migration', 'gender violence', or any topic you are currently interested in). How many studies did you find?
+
+-   **Choose one study** that you find most interesting and read through the details. Write down a few notes on the aims, methodology, etc. employed:
+
+    -   What was the main aim of the study? (usually stated somewhere in the abstract)
+
+    -   When was the study conducted and where?
+
+    -   What kind of data was collected? (e.g. qualitative, quantitative, mixed, etc.)
+
+    -   What was the sampling methodology?
+
+    -   What were the methods of data collection?
+
+    -   Under what conditions are the data available? (tip: click on *Access data*) [$\rightarrow$ read more about data access conditions here](https://ukdataservice.ac.uk/terms-and-conditions/)
+
+-   are there any *Series* that match your keyword? This is useful information because the *Series* contain data from large-scale publicly funded surveys with publicly available data that can be used for secondary analysis.
+
+## Task 2:
+
+he UK Data Service is the country's largest data repository. It makes a variety of research data available for UK researchers and students, and we will be using secondary data accessible through this repository a lot in this module (and for the assignments!). It is also useful to become acquainted with the variety of secondary data available there and the basic functionalities of the site, as you may decide to use secondary data for your final third-year dissertation. he UK Data Service is the country's largest data repository. It makes a variety of research data available for UK researchers and students, and we will be using secondary data accessible through this repository a lot in this module (and for the assignments!). It is also useful to become acquainted with the variety of secondary data available there and the basic functionalities of the site, as you may decide to use secondary data for your final third-year dissertation. he UK Data Service is the country's largest data repository. It makes a variety of research data available for UK researchers and students, and we will be using secondary data accessible through this repository a lot in this module (and for the assignments!). It is also useful to become acquainted with the variety of secondary data available there and the basic functionalities of the site, as you may decide to use secondary data for your final third-year dissertation.
+
+## Task 3:
+
+# Exercise 2: Explore some cross-national surveys
