@@ -72,6 +72,8 @@
 }
 
 
+/* Headings and text */
+
 h1, .h1, h2, .h2, h3, .h3 {
     margin-top: 20px;
 }
@@ -129,9 +131,9 @@ a:hover {
 
 /* ---------- TOC ----------------- */
 #TOC {
-  top: 40%;
+  top: 5%;
   position: fixed;
-  width: 210px;
+  width: 200px;
 }
 .tocify {
   border: none;
@@ -156,22 +158,41 @@ a:hover {
 .tocify-header {
     text-indent: 0px;
 }
+.tocify .list-group-item {
+  border-radius: 0px;
+  font-size: 16px;
+}
 
 /* ------ This is just to fix the bug on Safari where table of content is on top of content */
 .toc-content {
   margin-left: 210px
 }
 
-/* ------ Don't display on small media */
-@media (max-width: 1400px) {
+/* ------ Small media display */
+@media (max-width: 1260px) {
   #TOC {
     width: auto;
-    display: none;
+    display: top;
   }
   .toc-content {
     margin-left: auto
   }
 }
+
+/*----------LOGO above TOC---------*/
+
+#TOC::before {
+  content: "";
+  display: block;
+  height: 200px;
+  margin: 0px 0px 0px 0px;
+  background-image: url("../pics/Res_Soc_Life_logo.png");
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+
 
 
 /* ---------- Button ----------------- */

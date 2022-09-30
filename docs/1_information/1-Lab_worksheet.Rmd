@@ -14,6 +14,12 @@ output:
     css: labcss.css
 ---
 
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  comment = ""
+)
+```
+
 ------------------------------------------------------------------------
 
 ```
@@ -22,17 +28,19 @@ Topic: "Taming information"
 ```
 ------------------------------------------------------------------------
 
+# Intro
+
 We begin our exploration of sociological research methods by looking at some real data that social scientists have used in empirical research. Before starting to think in a more structured way about research questions, how to design a sociological research project, and how to create useful instruments to capture and collect relevant information about the social world, let's look at some 'semi-tamed' information: data collected by others for academic and/or policy analysis purposes.
 
-```{=html}
-<!--
+
+<!---
 
 #  Set readings
 
 There are no set readings for this week, just the general assigned core and secondary readings. 
 
--->
-```
+--->
+
 
 # Exercise 1: Exploring the UK Data Service
 
@@ -190,7 +198,7 @@ The *Understanding Society* survey allows us to study changes in British society
 
 Have a quick look at the description pages linked above to gain a sense of what these surveys are about. 
 
-# Next steps
+# Outro
 
 We have now seen some examples of social science data and have learnt how to find out more about them and how to access them. Thinking ahead to your third-year dissertation, you may want to register for a free user account on the UKDS or some of the international comparative surveys. The UKDS provides some great [resources and advice on using their data for undergraduate dissertations](https://ukdataservice.ac.uk/learning-hub/new-to-using-data/students/resources-for-dissertations/) and there's also an annual [Dissertation Award!](https://ukdataservice.ac.uk/learning-hub/new-to-using-data/students/dissertation-award/) So, keep this great option in mind.
 
