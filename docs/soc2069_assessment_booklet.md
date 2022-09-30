@@ -3,8 +3,8 @@ title: |
        | SOC2069 - Researching Social Life I
        |
        | Assessment guide
-date: Semester 1, 2022-2023
-author: "Module leader: Dr. Chris Moreh"
+# date: Semester 1, 2022-2023
+# author: "Module leader: Dr. Chris Moreh"
 ---
   
 &nbsp;
