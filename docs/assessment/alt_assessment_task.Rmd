@@ -1,0 +1,19 @@
+
+---
+output:
+  html_document:
+    theme: lumen
+    toc: yes
+    toc_float: yes
+    toc_highlight: no
+    tabset: yes
+    number_sections: no
+    anchor_sections: no
+    self_contained: no
+    code_download: no
+---
+
+# Resit paper task: PART 1 – Interpreting statistical results
+
+Outputs from a statistical analysis will be available here in Spring 2023.
+
