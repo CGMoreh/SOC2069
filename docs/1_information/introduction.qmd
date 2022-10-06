@@ -14,7 +14,7 @@ format:
       data-background-color: "white"
     #  data-background-iframe: "https://lab.hakim.se/particles/01/"
       data-background-interactive: true
-      data-background-image: chord.gif
+      data-background-image: ../pics/chord.gif
       data-background-opacity: "0.2"
       data-background-size: 100vh
   # self-contained: true   
@@ -40,7 +40,7 @@ library(here)
 
 Quarto enables you to weave together content and executable code into a finished presentation. To learn more about Quarto presentations see <https://quarto.org/docs/presentations/>.
 
-![](./pics/the-vitruvian-man.jpg)
+![](../pics/the-vitruvian-man.jpg)
 
 ## Bullets
 
