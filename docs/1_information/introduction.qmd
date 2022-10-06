@@ -31,10 +31,11 @@ format:
     #css: ../my_themes/
     #footer: "[chrismoreh.com](https://chrismoreh.com) | [chris.moreh@newcastle.ac.uk](mailto: chris.moreh@newcastle.ac.uk)"
     incremental: true
+    self-contained: true
 ---
 
 ```{r include=FALSE}
-library(here)
+# library(here)
 ```
 
 
