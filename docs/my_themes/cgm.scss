@@ -5,8 +5,14 @@
 
 
 
-$font-family-sans-serif:	"Source Sans Pro", Helvetica, sans-serif;
-$font-family-monospace:	monospace;
+// fonts
+$font-family-sans-serif: "Palatino Linotype", "Book Antiqua", Palatino,
+  FreeSerif, serif !default;
+  
+// headings
+$presentation-heading-font: Arial, serif !default;  
+  
+/*$font-family-monospace:	monospace; */
 $presentation-font-size-root:	36px;
 $presentation-font-smaller:	0.7;
 $presentation-line-height:	1.1;
@@ -29,7 +35,7 @@ $presentation-heading-text-shadow:	none;
 $presentation-h1-text-shadow:	2px 2px 4px black;
 $presentation-heading-font-weight:	600;
 $presentation-h1-font-size:	2em;
-$presentation-h2-font-size:	1.9em;
+$presentation-h2-font-size:	1.7em;
 $presentation-h3-font-size:	1.3em;
 $presentation-h4-font-size:	1em;
 $presentation-block-margin:	2px;
@@ -49,6 +55,11 @@ $dark-bg-link-color:	#42affa;
 $dark-bg-code-color:	#ffa07a;
 
 
+.single h1, h2 {
+    margin-bottom: 30px !important;
+}
+
+
 /*-- scss:rules --*/
 
 /*
@@ -63,7 +74,7 @@ $dark-bg-code-color:	#ffa07a;
 .reveal .progress {
     background: rgba(0,0,0,0);
     color: rgba(215, 168, 15, 1);
-    height: 7px;
+    height: 6px;
 }
 
 .reveal .footer p {
