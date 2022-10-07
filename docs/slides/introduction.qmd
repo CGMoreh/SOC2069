@@ -48,6 +48,40 @@ format:
 :::
 :::
 
-## 2
+## Your undergraduate research training journay
+
+-   connection between Stage 1 , Stage 2 and Stage 3 - chart
+
+-   
 
 ## 3
+
+-   chart 2: Venn diagram of the skills that the module aims rto develop
+
+-   
+
+## Structure
+
+-   Structure of the module - table of topics
+
+-   teaching methods - mention the role of the drop-in Q&A sessions
+
+## Readings
+
+-   general outline of the readings
+
+## Software and online training
+
+-   general installation requirements and guidance
+
+-   **mention difficullties for installation on Google Chrome machines; possible but probably too complicated for it to be worth it**
+
+-   show the R for Social Scientists training page
+
+## Assessment overview
+
+-   general intro and signpost the assessment guide document
+
+## 8 
+
+-   some general closing information
