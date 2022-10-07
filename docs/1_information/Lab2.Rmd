@@ -23,40 +23,45 @@ knitr::opts_chunk$set(
 ------------------------------------------------------------------------
 
 ```
-Timetable week: 5
-Topic: "Taming information"
+Timetable week: 6
+Topic: "Designing social research"
 ```
 ------------------------------------------------------------------------
 
 # Intro
 
-We begin our exploration of sociological research methods by looking at some real data that social scientists have used in empirical research. Before starting to think in a more structured way about research questions, how to design a sociological research project, and how to create useful instruments to capture and collect relevant information about the social world, let's look at some 'semi-tamed' information: data collected by others for academic and/or policy analysis purposes.
+This week we begin to think about steps in the process of designing a research project. Continuing from the previous week, the first step in ‘taming’ information about the social world is actually coming up with a relevant **research question** that requires social research in order to be answered. Coming up with a good research question requires a good understanding of **existing literature** on a topic of interest. 
+
+Then there are a number of next steps: selecting cases of interest; identifying units of analysis; sampling considerations; data collection methods with a prospective view on methods of analysis; ethical considerations, etc. So, there is a lot to cover in very short time. In the IT labs we will look at some examples of what all this entails, and we will think about how we would design our own project.
 
 
-<!---
 
-#  Set readings
+#  Readings
 
 There are no set readings for this week, just the general assigned core and secondary readings. 
 
---->
+Core readings:
+
+*	Luker (2008): Chapters 4, 5 and 6 (pp. 51–128)
+
+Secondary readings:
+
+*	Ragin and Amoroso (2011): Chapters 3, 4 and 5 (pp. 57–134)
+
+*	Gerson and Damaske (2020): Chapters 1, 2 and 3 (pp. 1–65)
+
+*	Kara (2015): Chapters 1, 2, 3 and 4 (pp. 1–76)
+
+*	Neuman (2014): Chapter 5 and 8 (pp. 125–164; 245–280)
 
 
-# Exercise 1: Exploring the UK Data Service
+# Exercise 1: 
 
-`About 25 minutes + 5 minutes discussion`
+`About 25 minutes + 5 minutes discussion; in groups of 3`
 
 ****
 
-The UK Data Service (UKDS) is the country's largest data repository. It makes a variety of data available to UK researchers for secondary analysis, and we will be using data accessible through this repository throughout this module (and for the assignments!).
 
-It is also useful to become acquainted with the variety of secondary data available there and the basic functionalities of the site, as you may decide to use secondary data for your final third-year dissertation.
-
-The UKDS is available at this website: [https://ukdataservice.ac.uk/](https://ukdataservice.ac.uk/){target="_blank"}
-
-Begin by exploring the options available under the **Find data** tab of the UKDS website. The **Find data** page contains a short video on *How to use the UK Data Service catalogue search tool*, which you can watch outside class. As we are just exploring the data offerings of the service, navigate to the *Browse and access data* page, where you can browse data by theme or type, among some other options. Let's choose to *Browse by data type* and select *UK Surveys*.
-
-This takes us to the main data catalogue, where we can see that the search is filtered down to "UK Survey data" in the *Data Type* field of the menu on the left. We can perform various selections using that menu, refining the search by date or setting other filters.
 
 ```{block Question 1, type = 'questionblock'}
 
@@ -81,29 +86,7 @@ The number of results in the light blue box above the results list refer to the 
 </details>
 ```
 
-Take some time to explore and become familiar with the page. Try to:
 
--   Find the newest studies based on their date of collection (tip: check out *Sort by*)
-
--   Remove the filter on data type and scroll through some of the most recently released datasets
-
--   **Search a keyword** of your own interest in the search field (*Search our data catalogue)* (e.g. 'migration', 'gender violence', or any topic you are currently interested in). How many studies did you find?
-
--   **Choose one study** that you find most interesting and read through the details. Write down a few notes on the aims, methodology, etc. employed:
-
-    -   What was the main aim of the study? (usually stated somewhere in the abstract)
-
-    -   When was the study conducted and where?
-
-    -   What kind of data was collected? (e.g. qualitative, quantitative, mixed, etc.)
-
-    -   What was the sampling methodology?
-
-    -   What were the methods of data collection?
-
-    -   Under what conditions are the data available? (tip: click on *Access data*) [$\rightarrow$ read more about data access conditions here](https://ukdataservice.ac.uk/terms-and-conditions/){target="_blank"}
-
--   Are there any *Series* that matched your keyword? This is useful information because the *Series* contain data from large-scale publicly funded surveys with publicly available data that can be used for secondary analysis.
 
 ```{block , type = 'discussion'}
 **Discussion**
@@ -112,13 +95,13 @@ Share what you have found out about your chosen study with the group.
 ```
 
 
-# Exercise 2: Find qualitative and mixed data
+# Exercise 2:
 
 `About 30 minutes + 10 minutes discussion`
 
 ****
 
-Most of the secondary data available is *quantitative*. But we can find some qualitative and mixed methods studies too, some of which have made their data (e.g. transcribed and anonymised interview data) available. We can find such studies if we filter by data type. Give it a go - but remember to clear your previous search to find *all* qualitative and mixed methods studies, not only the ones relevant to your keyword.
+
 
 ```{block Question 2, type = 'questionblock'}
 
