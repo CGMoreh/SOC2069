@@ -45,6 +45,59 @@
   font-size: 18px;
  }
 
+
+ .discussion-10 {
+  padding: 2em 1em 1em 7em;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-radius: 25px;
+  background-color: #408000;
+  color: white;
+  position:relative;
+}
+
+.discussion-10::before {
+  content: "10" "\A" "minutes";
+  white-space: pre-wrap;
+  text-align: center;
+  text-indent: 0px;
+  /* background-color: yellow;*/
+  color: #FFFFFF95; /* #990000; */
+  font-weight: bold;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 20px;
+  position:absolute;
+  font-size: 18px;
+ }
+
+
+ .discussion-15 {
+  padding: 2em 1em 1em 7em;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-radius: 25px;
+  background-color: #408000;
+  color: white;
+  position:relative;
+}
+
+.discussion-15::before {
+  content: "15" "\A" "minutes";
+  white-space: pre-wrap;
+  text-align: center;
+  text-indent: 0px;
+  /* background-color: yellow;*/
+  color: #FFFFFF95; /* #990000; */
+  font-weight: bold;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 20px;
+  position:absolute;
+  font-size: 18px;
+ }
+
+
 .main-container {
     margin-left: 200px;       # 0px = max. to the left (with default padding)
 }

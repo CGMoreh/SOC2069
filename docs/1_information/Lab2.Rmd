@@ -55,137 +55,123 @@ Secondary readings:
 *	Neuman (2014): Chapter 5 and 8 (pp. 125–164; 245–280)
 
 
-# Exercise 1: 
+# Exercise 1: Finding your *research interests*
 
-`About 25 minutes + 5 minutes discussion; in groups of 3`
+`About 15 minutes`
 
 ****
 
+In the core reading for today, Luker (2008: 51) tells us to pay attention to the difference between a *research interest* and a *research question*. We can have a general interest in a topic, but to be able to study it "scientifically" (*sociologically*, that is), we must focus it down to a particular research question or a set of questions.
 
+Research *questions* are more strictly a methodological matter, but first one must develop an interest in a broader topic of sociological interest. We will start with a discussion about this.
+
+```{block , type = 'discussion-10'}
+**Discussion (groups of three)**
+
+- What topic(s), issue(s), social problem(s) are you interested in? Why?
+- Do you already have an idea what topic you would be interested in researching for your third-year dissertation?
+- Do you already know about social scientists working on that broad topic?
+- What specific *research questions* can you think of in relation to your topic of interest?
+```
+
+
+# Exercise 2: *Identifying* and *researching* a research question
+
+`About 25 minutes + 5 minutes discussion`
+
+****
+
+Now that you have had the opportunity to think about your sociological interests - and maybe even come up with some more specific research questions - it's time to explore what sociological knowledge already exists on that topic. In this exercise, we will attempt a brief literature review and will explore some of the research questions that professional sociologists with similar interests to ours have raised.
 
 ```{block Question 1, type = 'questionblock'}
 
 **Question 1**
 
-Look at the information on the UKDA Data catalogue page and answer:
+What does Luker (2008: 52) mean when she writes:
 
-- How many *studies* are available on the UKDA in total?
-- How many data *series* are available? (*Series* are large surveys that are
-taken regularly; they can be *longitudinal* or *time series*)
-- How many *studies* categorised as *UK Survey data* are there?
+> "... a good research question, properly answered, advances the state of play in one or more intellectual conversations that are already going on in some part of the scholarly world that matters to you."
 
-To check whether you've found the corrent information, you can check the answers below.
-
-<details>
-  <summary><i>Click to view answer</i></summary>
-
-The numbers shown in the main tab refer to the overall number of studies available through the UKDA, so <ins>at the time of writing</ins> `8937` studies and `79` series. 
-
-The number of results in the light blue box above the results list refer to the number of studies based on our set filter, so in this case `4891` in *UK Survey data*.
-
-</details>
 ```
 
+## Library search
+
+Let's go to [the library's search page](https://libsearch.ncl.ac.uk/) and explore publications related to our research interests. 
+1. On the main page, **log into your library account** using your username and password, so you can save any literature of interest for later. 
+2. Now change the search setting from *Everything except articles* to *Everything*.
+3. Come up with a few keywords that describe your tentative research interest/questions (think about Luker's “bedraggled daisy” (Chapter 5) here) and performs a search (e.g. something like: "students" AND "work" AND "gender", for research topic related to the gendered aspects of student work)
+
+You may get too many or too few results. But it's a start, and you can begin refining your search. Browse through the list and save a few titles that you think are closest to what you were looking for.
+
+## Google scholar and journal search
+
+You can do a similar search on ["Google Scholar"](https://scholar.google.com/) or specific sociology journals, such as [Sociology](https://journals.sagepub.com/home/soc), [The British Journal of Sociology](https://onlinelibrary.wiley.com/journal/14684446), the [European Sociological Review](https://academic.oup.com/esr?login=true), or a great number of other sociology journals ([see a list here](https://ooir.org/journals.php?category=sociology)). Spend some more time searching for your topic, refining your search words as needed, and find **three journal articles** that are closest in their topic to your search, and which you can access freely via the university's subscription.
 
 
 ```{block , type = 'discussion'}
 **Discussion**
 
-Share what you have found out about your chosen study with the group. 
+Share what you have found with the group.
+- Did your search provide too many or too few results?
+- Did you have to change or adjust your keywords? If so, how?
+- What does this search tell you about your chosen topic/question?
+
 ```
 
 
-# Exercise 2:
+# Exercise 3: *Specifying* research questions
 
-`About 30 minutes + 10 minutes discussion`
+`About 15 minutes`
 
 ****
 
-
+Work with the **three articles** that you have selected based on your search. Read their *abstract* and if needed skim through the introduction/methodology sections to identify where and how the author(s) state(s) their research question. Make a note of the relevant statements.
 
 ```{block Question 2, type = 'questionblock'}
 
 **Question 2**
 
-How many qualitative and mixed methods studies are available on the UKDA in total?
-
-<details>
-  <summary><i>Click to view answer</i></summary>
-
-At the time of writing there were `1585`
-
-</details>
+What were the research questions as stated by the author(s)?
 ```
 
-```{block , type = 'discussion'}
-**Discussion**
 
-Why is there less qualitative data made publicly available?
-```
+# Exercise 4: *Sampling* and case selection
 
-You may have found some studies that you find interesting based on their titles. You can have a closer look at them outside class, but because not all datasets are equally well documented and made available, let's look at a few studies that I find particularly interesting:
-
-- Stetka, Vaclav and Mihelj, Sabina and Toth, Fanni and Kondor, Katherine (2022) **"The Illiberal Turn? News Consumption, Polarization and Democracy in Central and Eastern Europe, 2019-2020"** [https://doi.org/10.5255/UKDA-SN-855088](https://doi.org/10.5255/UKDA-SN-855088){target="_blank"}
-
-- Wrighton, Sam J (2021) **"The Annexation of Populations: A New State Strategy, 2017-2021"** [https://doi.org/10.5255/UKDA-SN-854598](https://doi.org/10.5255/UKDA-SN-854598){target="_blank"}
-
-- Einarsdottir, Anna and Mumford, Karen and Birks, Yvonne and Lockyer, Bridget and Sayli, Melisa and Jeep, Sudthasiri (2021) **"LGBT+ Networks, 2017-2020"** [https://doi.org/10.5255/UKDA-SN-855322](https://doi.org/10.5255/UKDA-SN-855322){target="_blank"}
-
-- Pearce, Sioned and Fox, Stuart (2020) **"Young people and Brexit 2017"** [https://doi.org/10.5255/UKDA-SN-854031](https://doi.org/10.5255/UKDA-SN-854031){target="_blank"}
-
-Write down a few notes on the aims, methodology, etc. employed, as you have done in the previous exercise.
-
-```{block , type = 'discussion'}
-**Discussion**
-
-What are the most interesting aspects of these studies? (i.e. things that really caught your attention)
-```
-
-If one of the studies has caught your attention, make a note of it, as we will use some data from them later for the purposes of the first assessment.
-
-
-# Exercise 3: Explore the *Understanding Society* panel study
-
-`About 20 minutes + 5 minutes discussion`
+`About 15 minutes + 10-minute discussion`
 
 ****
 
-After looking at some characteristics of qualitative and mixed-methods studies, let's have a quick look at a highly complex survey: *The UK Household Longitudinal Study (UKHLS)*, a.k.a. *Understanding Society*. This survey is the UK's largest panel study, offering sociological insight into continuous developments in British society.
+You will notice that statements about the research question are usually closely followed by some description of what *data* was used to answer the question(s) posed. This is often detailed in a dedicated *methodology* section. Spend some more time skimming through the articles and briefly note down any relevant information about:
 
-Find the study on the UKDS site among the *Series* (tip: the study's code number is `SN 2000053`) and read through some general information about it in the FAQ's. The study has it's own separate website that contains a lot more information and is worth having a look at ([www.understandingsociety.ac.uk/](https://www.understandingsociety.ac.uk/)). It's useful to start familiarising yourself with the study because we will be using data from it later on in the module and for the second assessment.
+- selection of cases/case studies
+- research participants
+- sample selection
+- anything else that describes what groups, geographical locations, *units of analysis* the author(s) focused on to address their research question(s)
 
-There is a lot of information on the survey website! Eventually, you'll become a bit more familiar with the questionnaires used and the resulting variables; but for now, it may be interesting to scroll through some of the publications that have used data from *Understanding Society* to get a feel for what researchers using this type of data are interested in: [https://www.understandingsociety.ac.uk/research/publications](https://www.understandingsociety.ac.uk/research/publications). Find a few publications that sound interesting and check their summaries for some more information. 
-
-```{block , type = 'discussion'}
+```{block , type = 'discussion-10'}
 **Discussion**
 
-What was/were the most interesting publication/s you have found, and why do you find them interesting?
-
-What are your initial thoughts on the differences between the types of analysis that such survey data provides compared to the data from the qualitative/mixed studies you read about earlier?
+Based on the readings for this week, what *sampling* methods were adopted by the three studies you have looked at?
+Were there any *ethical* challenges mentioned by the authors?
+How convincing were the authors in explaining their choice of cases?
 
 ```
 
-# Exercise 4: Explore some cross-national surveys
+# Exercise 5: Making *sampling* decisions
 
-`If there is time left, in class; if not, outside class`
+`About 15 minutes + discussion`
 
-****
+In groups of three, discuss with your peers about how **you** would approach your research question.
 
-The *Understanding Society* survey allows us to study changes in British society over time. There are other large-scale social surveys that are conducted internationally and allow researchers to compare different societies. There is a [Wikipedia article](https://en.wikipedia.org/wiki/List_of_comparative_social_surveys) that lists many such surveys. Some of the most generally relevant to social scientists are:
+- Ask each other questions about your sampling decision: what data would you collect; who would be your participants; what are your *cases*, etc. Try to identify the strengths and weaknesses of these decisions
+- Can you already think about any *ethical* challenges that your proposed research mights involve? (you can read through the [British Sociological Association's Statement of Ethical Practice](https://www.britsoc.co.uk/media/24310/bsa_statement_of_ethical_practice.pdf) to guide this discussion )
 
-- [The European Social Survey (ESS)](https://www.europeansocialsurvey.org/about/)
+```{block , type = 'discussion'}
+**Discussion (groups of three)**
 
-- [The European Values Study (EVS)](https://europeanvaluesstudy.eu/about-evs/) and its twin sister [The World Values Survey (WVS)](https://www.worldvaluessurvey.org/WVSContents.jsp)
+Share some of your reflections with the wider group.
 
-- [The International Social Survey Programme(ISSP)](https://issp.org/about-issp/)
+```
 
-Have a quick look at the description pages linked above to gain a sense of what these surveys are about. 
-
-# Outro
-
-We have now seen some examples of social science data and have learnt how to find out more about them and how to access them. Thinking ahead to your third-year dissertation, you may want to register for a free user account on the UKDS or some of the international comparative surveys. The UKDS provides some great [resources and advice on using their data for undergraduate dissertations](https://ukdataservice.ac.uk/learning-hub/new-to-using-data/students/resources-for-dissertations/) and there's also an annual [Dissertation Award!](https://ukdataservice.ac.uk/learning-hub/new-to-using-data/students/dissertation-award/) So, keep this great option in mind.
-
-Next week we will be thinking more closely about designing a research project starting from a relevant research question (another step in the process of "taming information"), sampling considerations, case selection, data collection methods and so on.
 
 
 
