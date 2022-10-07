@@ -41,31 +41,13 @@ format:
 # library(here)
 ```
 
-## SOC2069 - Researching Social Life 1 {#soc2069---researching-social-life-1 background-image="https://www.ucl.ac.uk/epidemiology-health-care/sites/epidemiology_health_care/files/CeLSIUS_button.jpg" background-opacity="0.2"}
+## SOC2069 - Researching Social Life 1 {#soc2069---researching-social-life-1}
 
 ::: columns
 ::: {.column width="50%"}
-Just some long text gere like this: kkkkkkkkkkkkkkkk kkkkkkkkkkk kkkkkk kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk kkkkkkk kkkkkkkkkkkkkkk kkkkkkkkkkkkkkkkkkkkkkkk kkkkkkkkkkkkkkkk kkkkkkkkkkkk kkkkkkkkkkkkk kkkkkkkkk kkkkkkkkkkk kkkkkkkkkkk kkkkkkkkkkkkkkkkk kkkkk kkkkkkkkkkk
-:::
-
-::: {.column width="50%"}
-![Picture of flows](../pics/chord.gif){height="300"}
 :::
 :::
 
-## New slide here
+## 2
 
-This will be some very very very long text here to check what can be done so that it doesn't clash with the picture on the right hand side...
-
-And some more text here, just to fill in the space a bit better.
-
-## Second slide
-
-Some general text here
-
-::: nonincremental
--   Some text here
--   Some more text here
-:::
-
-Some additional text here then
+## 3
