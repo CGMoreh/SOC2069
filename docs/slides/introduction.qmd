@@ -70,7 +70,10 @@ format:
 
 -   general outline of the readings
 
-## Software and online training
+## Software and online training {.nonincremental}
+
+::: {.fragment .semi-fade-out}
+::: {.fragment .fade-in}
 
 -   general installation requirements and guidance
 
@@ -78,10 +81,13 @@ format:
 
 -   show the R for Social Scientists training page
 
+:::
+:::
+
 ## Assessment overview
 
 -   general intro and signpost the assessment guide document
 
-## 8 
+## 8
 
 -   some general closing information
