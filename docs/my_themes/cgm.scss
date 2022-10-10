@@ -1,9 +1,13 @@
 /*-- scss:defaults --*/
 
-// Add theme-specific fonts
+// My colours
 
+$d-red: #a10000; /* dark red */
+$vd-red: #400000; /* very dark red */
 
-
+.d-red {
+  color: #a10000;
+}
 
 // fonts
 $font-family-sans-serif: "Palatino Linotype", "Book Antiqua", Palatino,
@@ -12,8 +16,8 @@ $font-family-sans-serif: "Palatino Linotype", "Book Antiqua", Palatino,
 // headings
 $presentation-heading-font: Arial, serif !default;  
   
-/*$font-family-monospace:	monospace; */
-$presentation-font-size-root:	36px;
+//$font-family-monospace:	monospace;
+$presentation-font-size-root:	30px;
 $presentation-font-smaller:	0.7;
 $presentation-line-height:	1.1;
 $body-bg:	#fff;
@@ -34,17 +38,17 @@ $presentation-heading-text-transform:	none;
 $presentation-heading-text-shadow:	none;
 $presentation-h1-text-shadow:	2px 2px 4px black;
 $presentation-heading-font-weight:	600;
-$presentation-h1-font-size:	2em;
+$presentation-h1-font-size:	2.5em;
 $presentation-h2-font-size:	1.7em;
 $presentation-h3-font-size:	1.3em;
 $presentation-h4-font-size:	1em;
 $presentation-block-margin:	2px;
 $presentation-slide-text-align:	left;
 $presentation-title-slide-text-align:	center;
-$code-block-bg:	$body-bg;
-$code-block-border-color:	lighten($body-color, 60%);
+$code-block-bg:	#fdf9f9;
+$code-block-border-color:	lighten($body-color, 70%);
 $code-block-font-size:	0.55em;
-$code-color:	var(-quarto-hl-fu-color);
+$code-color:	$vd-red;
 $code-bg:	transparent;
 $tabset-border-color:	$code-block-border-color;
 $light-bg-text-color:	#222;
@@ -57,6 +61,53 @@ $dark-bg-code-color:	#ffa07a;
 
 .single h1, h2 {
     margin-bottom: 30px !important;
+}
+
+
+.text-xs {
+  font-size: 0.7rem;
+  line-height: 1rem;
+}
+.text-sm {
+  font-size: 1rem;
+  line-height: 1.25rem;
+}
+
+
+/* The below specs come from https://github.com/meghall06/personal-website/blob/master/static/slides/NEAIR/custom.scss */
+
+.reveal .slides section .fragment.semi-fade-out {
+	opacity: 1;
+	visibility: inherit;
+
+	&.visible {
+		opacity: 0.25;
+		visibility: inherit;
+	}
+}
+
+.sectionhead {
+  font-size: 0.8em;
+  text-align: center;
+  position: absolute;
+  top: 3%;
+  left: 90%;
+  color: $presentation-heading-color;
+  font-family: $presentation-heading-font;
+  background-color: $body-bg;
+  margin: 1px;
+  padding: 2px 2px 2px 2px;
+  width: 120px;
+  border-left: 10px solid;
+}
+
+.blackbox {
+  color: #000000;
+  background-color: transparent;
+  margin: 1px;
+  padding: 5px 2px 5px 2px;
+  height: 205px;
+  border: 2px solid;
 }
 
 
