@@ -36,6 +36,7 @@ format:
     # background-opacity: 0.2
     self-contained: true
 bibliography: references.bib
+csl: ../../american-sociological-association.csl
 ---
 
 ## Taming information
@@ -68,10 +69,14 @@ bibliography: references.bib
 
 ## Sanpling 1
 
--   setting 'sample bundaries' 9depth interviewing)
+-   setting 'sample bundaries' depth interviewing)
 
 -   
 
 ## Sampling 2
 
 ## Conc
+
+[@goldthorpe2007; @hacking1990; @halsey2004, p. 23]
+
+## References and further readings
