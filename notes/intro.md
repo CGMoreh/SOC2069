@@ -1,3 +1,7 @@
+---
+self-contained: true
+---
+
 # Introduction
 
 Welcome to Researching Social Life 1. My name is Chris Moreh, your module leader.
