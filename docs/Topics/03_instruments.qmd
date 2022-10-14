@@ -1,5 +1,17 @@
 ---
 title: "Designing research instruments"
+output:
+  html_document:
+    theme: lumen
+    toc: yes
+    toc_float: yes
+    toc_highlight: no
+    tabset: yes
+    number_sections: no
+    anchor_sections: no
+    self_contained: yes
+    code_download: no
+    css: labcss.css
 ---
 
 This week we get practical and learn some methods for designing data collection tools appropriate to the research design(s) we developed. The IT labs will provide space to practice designing some short interview guides, questionnaires, etc. Once we know how to design methods of data collection, we'll think about the challenges and methods of applying them to collect primary empirical data. During the week you will practice some data collection methods.

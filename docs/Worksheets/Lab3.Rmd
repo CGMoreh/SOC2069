@@ -9,7 +9,7 @@ output:
     tabset: yes
     number_sections: no
     anchor_sections: no
-    self_contained: no
+    self_contained: yes
     code_download: no
     css: labcss.css
 ---
