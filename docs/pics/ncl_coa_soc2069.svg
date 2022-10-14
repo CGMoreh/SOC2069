@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg id="svg2" version="1.0" width="575.42999" height="675.68799" xmlns="http://www.w3.org/2000/svg" xmlns:bx="https://boxy-svg.com">
+  <title id="title1432">University of Newcastle Arms</title>
+  <defs id="defs6">
+    <polygon id="star" transform="scale(53)" points="0,-1 0.58778525,0.80901699 -0.95105652,-0.30901699 0.95105652,-0.30901699 -0.58778525,0.80901699 "/>
+    <g id="s">
+      <g id="c">
+        <path transform="rotate(17.999992,3.1568772,-0.49999528)" d="M 0,0 V 1 H 0.5 Z" id="t"/>
+        <path transform="matrix(-0.9510565574432469, 0.30901686773410925, 0.30901686773410925, 0.9510565574432469, -0.0000014537891734889286, -0.9999998209383225)" d="M 0,0 V 1 H 0.5 Z" id="use2144"/>
+      </g>
+      <g id="a">
+        <g id="use2147" transform="matrix(0.30901686773410925, 0.9510565574432469, -0.9510565574432469, 0.30901686773410925, 0, 0)">
+          <path transform="rotate(17.999992,3.1568772,-0.49999528)" d="M 0,0 V 1 H 0.5 Z"/>
+          <path transform="matrix(-0.9510565574432469, 0.30901686773410925, 0.30901686773410925, 0.9510565574432469, -0.0000014537891734889286, -0.9999998209383225)" d="M 0,0 V 1 H 0.5 Z"/>
+        </g>
+        <g id="use2149" transform="matrix(-0.8090171509116001, 0.5877850368381942, -0.5877850368381942, -0.8090171509116001, 0, 0)">
+          <path transform="rotate(17.999992,3.1568772,-0.49999528)" d="M 0,0 V 1 H 0.5 Z"/>
+          <path transform="matrix(-0.9510565574432469, 0.30901686773410925, 0.30901686773410925, 0.9510565574432469, -0.0000014537891734889286, -0.9999998209383225)" d="M 0,0 V 1 H 0.5 Z"/>
+        </g>
+      </g>
+      <g id="use2151" transform="matrix(-1, 0, 0, 1, 0, 0)">
+        <g transform="matrix(0.30901686773410925, 0.9510565574432469, -0.9510565574432469, 0.30901686773410925, 0, 0)">
+          <path transform="rotate(17.999992,3.1568772,-0.49999528)" d="M 0,0 V 1 H 0.5 Z"/>
+          <path transform="matrix(-0.9510565574432469, 0.30901686773410925, 0.30901686773410925, 0.9510565574432469, -0.0000014537891734889286, -0.9999998209383225)" d="M 0,0 V 1 H 0.5 Z"/>
+        </g>
+        <g transform="matrix(-0.8090171509116001, 0.5877850368381942, -0.5877850368381942, -0.8090171509116001, 0, 0)">
+          <path transform="rotate(17.999992,3.1568772,-0.49999528)" d="M 0,0 V 1 H 0.5 Z"/>
+          <path transform="matrix(-0.9510565574432469, 0.30901686773410925, 0.30901686773410925, 0.9510565574432469, -0.0000014537891734889286, -0.9999998209383225)" d="M 0,0 V 1 H 0.5 Z"/>
+        </g>
+      </g>
+    </g>
+    <polygon id="star-5" transform="scale(53)" points="0.58778525,0.80901699 -0.95105652,-0.30901699 0.95105652,-0.30901699 -0.58778525,0.80901699 0,-1 "/>
+    <clipPath id="SVGID_40_">
+      <path id="use186" d="M 0,0 H 212.6 V 70 H 0 Z" transform="matrix(1, 0, 0, 1, 0, 0)" overflow="visible"/>
+    </clipPath>
+    <path id="SVGID_39_" d="M 0,0 H 212.6 V 70 H 0 Z"/>
+    <style bx:fonts="Alfa Slab One">@import url(https://fonts.googleapis.com/css2?family=Alfa+Slab+One%3Aital%2Cwght%400%2C400&amp;display=swap);</style>
+    <path id="path-0" d="M 58.994 278.789 C 202.346 313.628 319.971 346.529 434.653 394.313 C 471.97 414.634 467.727 427.406 463.742 443.348 C 459.102 445.01 453.771 449.046 450.444 449.997 C 424.475 457.417 393.704 463.295 366.502 463.295 C 329.372 463.295 296.526 441.338 265.939 430.05 C 243.023 421.593 217.962 418.491 195.295 410.935 C 166.292 403.061 148.377 387.197 131.3 373.535 L 126.313 371.873 C 123.856 370.235 121.301 368.367 118.833 366.887" style="fill: none;"/>
+    <linearGradient gradientUnits="userSpaceOnUse" x1="124.677" y1="16.937" x2="124.677" y2="49.256" id="gradient-0" gradientTransform="matrix(1, 0, 0, 0.36932, -0.518539, 20.49177)">
+      <stop offset="0" style="stop-color: rgb(213, 17, 45);"/>
+      <stop offset="1" style="stop-color: rgb(0, 58, 101);"/>
+    </linearGradient>
+  </defs>
+  <g id="layer1" style="display:inline" transform="matrix(1, 0, 0, 1, -12.417353, -10.706456)">
+    <g transform="translate(1143.4174,-214.07239)" id="layer1-6"/>
+    <g id="g191" transform="matrix(9.6548658,0,0,9.6526857,12.417353,10.706456)" style="fill:#003b71;fill-opacity:1">
+      <defs id="defs184">
+        <path id="path1445" d="M 0,0 H 212.6 V 70 H 0 Z"/>
+      </defs>
+      <path class="st19" d="M 0,0 V 22.7 C 0,56.1 29.8,70 29.8,70 29.8,70 59.6,56.1 59.6,22.7 V 0" clip-path="url(#SVGID_40_)" id="path189" style="fill:#003a65;fill-opacity:1"/>
+    </g>
+    <path style="fill:#003b71;fill-opacity:1;stroke-width:1.32839" d="m 281.11476,464.76097 c -9.40297,-1.733 -18.23218,-8.50336 -23.15672,-17.75688 -3.98676,-7.49138 -3.9499,-21.7844 0.0758,-29.41401 8.50162,-16.11229 28.02102,-22.32656 44.26019,-14.09085 33.89602,17.19041 16.27338,68.1644 -21.17931,61.26174 z" id="path2474" transform="translate(12.417353,10.706456)"/>
+  </g>
+  <g id="layer3" transform="matrix(1, 0, 0, 1, -0.014688, 0)">
+    <text style="font: 42.6667px / 1.25 &quot;Fira Sans&quot;; letter-spacing: 5.24px; word-spacing: 0px; fill: rgb(0, 0, 0); fill-opacity: 1; stroke: none; white-space: pre;" x="227.68839" y="381.18161" id="text5469"><tspan id="tspan5467" x="227.68839" y="381.18161" style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Old English Five';-inkscape-font-specification:'Old English Five'"/></text>
+    <text style="font: 42.6667px / 1.25 &quot;Fira Sans&quot;; letter-spacing: 5.24px; word-spacing: 0px; fill: rgb(0, 0, 0); fill-opacity: 1; stroke: none; white-space: pre;" x="306" y="524.29388" id="text1092"><tspan id="tspan1090" x="306" y="524.29388"/></text>
+    <g id="g3412" transform="matrix(0.29558092,0,0,0.33676758,123.52308,43.493683)"/>
+    <g id="g1452" transform="matrix(0.0561719,0,0,0.04698221,7.982644,560.50494)" style="stroke:#000000">
+      <g id="g1471" transform="matrix(1.2576137,0,0,1.0143673,-1632.9513,-53.124131)"/>
+    </g>
+    <circle style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:#003a65;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:16.1377;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;enable-background:accumulate" id="path16725-3" cx="287.5697" cy="432.50101" r="33.845001"/>
+    <rect style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.00397;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" id="rect1706" width="557.92499" height="209.463" x="9.4116879" y="9.6569996" rx="0"/>
+  </g>
+  <text style="fill: url(#gradient-0); font-family: &quot;Alfa Slab One&quot;; font-size: 23.5736px; line-height: 37.7177px; paint-order: fill; white-space: pre;" transform="matrix(10.484419, -0.001591, 0, 7.12527, -1018.502625, -114.37796)" x="98.887" y="41.371">SOC</text>
+  <text style="fill: rgb(255, 255, 255); font-family: &quot;Alfa Slab One&quot;; font-size: 150px; white-space: pre;" transform="matrix(1.162198, 0, 0, 1.39613, -3.099281, -2.124964)" x="49.852" y="299.567">2069</text>
+  <text style="white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 23.3px;" x="1177.661" y="282.945"> </text>
+  <path style="color: rgb(0, 0, 0); display: inline; overflow: visible; visibility: visible; fill: rgb(255, 255, 255); fill-opacity: 1; fill-rule: nonzero; stroke: rgb(0, 0, 0); stroke-width: 0; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 4; stroke-dasharray: none; stroke-dashoffset: 0; stroke-opacity: 1; marker: none;" d="M 288.899 474.499 C 270.648 474.499 270.15 477.137 270.15 478.495 C 270.15 479.884 280.225 492.214 280.225 509.75 C 280.225 517.962 279.06 523.231 277.548 526.808 C 276.594 526.503 275.575 526.335 274.52 526.335 C 269.044 526.335 264.588 530.77 264.588 536.245 C 264.588 537.278 264.747 538.274 265.042 539.21 C 261.448 540.753 256.134 541.973 247.756 541.973 C 230.22 541.973 217.89 531.898 216.503 531.898 C 215.141 531.898 212.506 532.396 212.506 550.645 C 212.506 568.896 215.141 569.395 216.503 569.395 C 217.89 569.395 230.22 559.32 247.756 559.32 C 256.134 559.32 261.448 560.537 265.042 562.082 C 264.747 563.018 264.588 564.015 264.588 565.047 C 264.588 570.523 269.044 574.957 274.52 574.957 C 275.575 574.957 276.594 574.789 277.548 574.484 C 279.06 578.062 280.225 583.332 280.225 591.543 C 280.225 609.078 270.15 621.407 270.15 622.797 C 270.15 624.156 270.648 626.794 288.899 626.794 C 307.15 626.794 307.647 624.156 307.647 622.797 C 307.647 621.407 297.572 609.078 297.572 591.543 C 297.572 583.313 298.755 578.042 300.271 574.465 C 301.231 574.769 302.241 574.957 303.3 574.957 C 308.776 574.957 313.21 570.523 313.21 565.047 C 313.21 564.015 313.049 563.018 312.757 562.082 C 316.35 560.537 321.663 559.32 330.043 559.32 C 347.578 559.32 359.908 569.395 361.298 569.395 C 362.656 569.395 365.295 568.896 365.295 550.645 C 365.295 532.396 362.656 531.898 361.298 531.898 C 359.908 531.898 347.578 541.973 330.043 541.973 C 321.663 541.973 316.35 540.753 312.757 539.21 C 313.049 538.274 313.21 537.278 313.21 536.245 C 313.21 530.77 308.776 526.335 303.3 526.335 C 302.241 526.335 301.231 526.522 300.271 526.83 C 298.755 523.251 297.572 517.98 297.572 509.75 C 297.572 492.214 307.647 479.884 307.647 478.495 C 307.647 477.137 307.15 474.499 288.899 474.499 Z" id="path16721" transform="matrix(0.999834, 0.018209, -0.018209, 0.999834, 10.074625, -5.169295)"/>
+  <circle style="color: rgb(0, 0, 0); display: inline; overflow: visible; visibility: visible; fill: rgb(0, 58, 101); fill-opacity: 1; fill-rule: nonzero; stroke: none; stroke-width: 16.1377; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 4; stroke-dasharray: none; stroke-dashoffset: 0; stroke-opacity: 1; marker: none;" id="circle-1" cx="287.57" cy="432.501" r="15.051" transform="matrix(0.999834, 0.018209, -0.018209, 0.999834, 8.47664, 112.204601)"/>
+</svg>

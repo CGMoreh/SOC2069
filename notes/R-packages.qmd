@@ -1,0 +1,16 @@
+---
+title: "R packages"
+self-contained: true
+bibliography: ../../../OneDrive - Newcastle University/LIBRARY/My Library.bib
+csl: https://raw.githubusercontent.com/citation-style-language/styles/master/dependent/the-sociological-review.csl
+---
+
+## Packages to use in the course
+
+For all tidyverse: [`tidyverse`](https://www.tidyverse.org/)`;` but we'll only use functions from:
+
+-   `dplyr`:
+-   `ggplot2`:
+-   maybe others?
+
+For data import: [`rio`](https://cran.r-project.org/web/packages/rio/vignettes/rio.html)
