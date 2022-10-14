@@ -1,0 +1,212 @@
+---
+title: "Worksheet 1"
+output:
+  html_document:
+    theme: lumen
+    toc: yes
+    toc_float: yes
+    toc_highlight: no
+    tabset: yes
+    number_sections: no
+    anchor_sections: no
+    self_contained: yes
+    code_download: no
+    css: labcss.css
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  comment = ""
+)
+```
+
+------------------------------------------------------------------------
+
+```
+Timetable week: 5
+Topic: "Taming information"
+```
+------------------------------------------------------------------------
+
+# Intro
+
+We begin our exploration of sociological research methods by looking at some real data that social scientists have used in empirical research. Before starting to think in a more structured way about research questions, how to design a sociological research project, and how to create useful instruments to capture and collect relevant information about the social world, let's look at some 'semi-tamed' information: data collected by others for academic and/or policy analysis purposes.
+
+
+<!---
+
+#  Set readings
+
+There are no set readings for this week, just the general assigned core and secondary readings. 
+
+--->
+
+
+# Exercise 1: Exploring the UK Data Service
+
+`About 25 minutes + 5 minutes discussion`
+
+****
+
+The UK Data Service (UKDS) is the country's largest data repository. It makes a variety of data available to UK researchers for secondary analysis, and we will be using data accessible through this repository throughout this module (and for the assignments!).
+
+It is also useful to become acquainted with the variety of secondary data available there and the basic functionalities of the site, as you may decide to use secondary data for your final third-year dissertation.
+
+The UKDS is available at this website: [https://ukdataservice.ac.uk/](https://ukdataservice.ac.uk/){target="_blank"}
+
+Begin by exploring the options available under the **Find data** tab of the UKDS website. The **Find data** page contains a short video on *How to use the UK Data Service catalogue search tool*, which you can watch outside class. As we are just exploring the data offerings of the service, navigate to the *Browse and access data* page, where you can browse data by theme or type, among some other options. Let's choose to *Browse by data type* and select *UK Surveys*.
+
+This takes us to the main data catalogue, where we can see that the search is filtered down to "UK Survey data" in the *Data Type* field of the menu on the left. We can perform various selections using that menu, refining the search by date or setting other filters.
+
+```{block Question 1, type = 'questionblock'}
+
+**Question 1**
+
+Look at the information on the UKDA Data catalogue page and answer:
+
+- How many *studies* are available on the UKDA in total?
+- How many data *series* are available? (*Series* are large surveys that are
+taken regularly; they can be *longitudinal* or *time series*)
+- How many *studies* categorised as *UK Survey data* are there?
+
+To check whether you've found the corrent information, you can check the answers below.
+
+<details>
+  <summary><i>Click to view answer</i></summary>
+
+The numbers shown in the main tab refer to the overall number of studies available through the UKDA, so <ins>at the time of writing</ins> `8937` studies and `79` series. 
+
+The number of results in the light blue box above the results list refer to the number of studies based on our set filter, so in this case `4891` in *UK Survey data*.
+
+</details>
+```
+
+Take some time to explore and become familiar with the page. Try to:
+
+-   Find the newest studies based on their date of collection (tip: check out *Sort by*)
+
+-   Remove the filter on data type and scroll through some of the most recently released datasets
+
+-   **Search a keyword** of your own interest in the search field (*Search our data catalogue)* (e.g. 'migration', 'gender violence', or any topic you are currently interested in). How many studies did you find?
+
+-   **Choose one study** that you find most interesting and read through the details. Write down a few notes on the aims, methodology, etc. employed:
+
+    -   What was the main aim of the study? (usually stated somewhere in the abstract)
+
+    -   When was the study conducted and where?
+
+    -   What kind of data was collected? (e.g. qualitative, quantitative, mixed, etc.)
+
+    -   What was the sampling methodology?
+
+    -   What were the methods of data collection?
+
+    -   Under what conditions are the data available? (tip: click on *Access data*) [$\rightarrow$ read more about data access conditions here](https://ukdataservice.ac.uk/terms-and-conditions/){target="_blank"}
+
+-   Are there any *Series* that matched your keyword? This is useful information because the *Series* contain data from large-scale publicly funded surveys with publicly available data that can be used for secondary analysis.
+
+```{block , type = 'discussion'}
+**Discussion**
+
+Share what you have found out about your chosen study with the group. 
+```
+
+
+# Exercise 2: Find qualitative and mixed data
+
+`About 30 minutes + 10 minutes discussion`
+
+****
+
+Most of the secondary data available is *quantitative*. But we can find some qualitative and mixed methods studies too, some of which have made their data (e.g. transcribed and anonymised interview data) available. We can find such studies if we filter by data type. Give it a go - but remember to clear your previous search to find *all* qualitative and mixed methods studies, not only the ones relevant to your keyword.
+
+```{block Question 2, type = 'questionblock'}
+
+**Question 2**
+
+How many qualitative and mixed methods studies are available on the UKDA in total?
+
+<details>
+  <summary><i>Click to view answer</i></summary>
+
+At the time of writing there were `1585`
+
+</details>
+```
+
+```{block , type = 'discussion'}
+**Discussion**
+
+Why is there less qualitative data made publicly available?
+```
+
+You may have found some studies that you find interesting based on their titles. You can have a closer look at them outside class, but because not all datasets are equally well documented and made available, let's look at a few studies that I find particularly interesting:
+
+- Stetka, Vaclav and Mihelj, Sabina and Toth, Fanni and Kondor, Katherine (2022) **"The Illiberal Turn? News Consumption, Polarization and Democracy in Central and Eastern Europe, 2019-2020"** [https://doi.org/10.5255/UKDA-SN-855088](https://doi.org/10.5255/UKDA-SN-855088){target="_blank"}
+
+- Wrighton, Sam J (2021) **"The Annexation of Populations: A New State Strategy, 2017-2021"** [https://doi.org/10.5255/UKDA-SN-854598](https://doi.org/10.5255/UKDA-SN-854598){target="_blank"}
+
+- Einarsdottir, Anna and Mumford, Karen and Birks, Yvonne and Lockyer, Bridget and Sayli, Melisa and Jeep, Sudthasiri (2021) **"LGBT+ Networks, 2017-2020"** [https://doi.org/10.5255/UKDA-SN-855322](https://doi.org/10.5255/UKDA-SN-855322){target="_blank"}
+
+- Pearce, Sioned and Fox, Stuart (2020) **"Young people and Brexit 2017"** [https://doi.org/10.5255/UKDA-SN-854031](https://doi.org/10.5255/UKDA-SN-854031){target="_blank"}
+
+Write down a few notes on the aims, methodology, etc. employed, as you have done in the previous exercise.
+
+```{block , type = 'discussion'}
+**Discussion**
+
+What are the most interesting aspects of these studies? (i.e. things that really caught your attention)
+```
+
+If one of the studies has caught your attention, make a note of it, as we will use some data from them later for the purposes of the first assessment.
+
+
+# Exercise 3: Explore the *Understanding Society* panel study
+
+`About 20 minutes + 5 minutes discussion`
+
+****
+
+After looking at some characteristics of qualitative and mixed-methods studies, let's have a quick look at a highly complex survey: *The UK Household Longitudinal Study (UKHLS)*, a.k.a. *Understanding Society*. This survey is the UK's largest panel study, offering sociological insight into continuous developments in British society.
+
+Find the study on the UKDS site among the *Series* (tip: the study's code number is `SN 2000053`) and read through some general information about it in the FAQ's. The study has it's own separate website that contains a lot more information and is worth having a look at ([www.understandingsociety.ac.uk/](https://www.understandingsociety.ac.uk/)). It's useful to start familiarising yourself with the study because we will be using data from it later on in the module and for the second assessment.
+
+There is a lot of information on the survey website! Eventually, you'll become a bit more familiar with the questionnaires used and the resulting variables; but for now, it may be interesting to scroll through some of the publications that have used data from *Understanding Society* to get a feel for what researchers using this type of data are interested in: [https://www.understandingsociety.ac.uk/research/publications](https://www.understandingsociety.ac.uk/research/publications). Find a few publications that sound interesting and check their summaries for some more information. 
+
+```{block , type = 'discussion'}
+**Discussion**
+
+What was/were the most interesting publication/s you have found, and why do you find them interesting?
+
+What are your initial thoughts on the differences between the types of analysis that such survey data provides compared to the data from the qualitative/mixed studies you read about earlier?
+
+```
+
+# Exercise 4: Explore some cross-national surveys
+
+`If there is time left, in class; if not, outside class`
+
+****
+
+The *Understanding Society* survey allows us to study changes in British society over time. There are other large-scale social surveys that are conducted internationally and allow researchers to compare different societies. There is a [Wikipedia article](https://en.wikipedia.org/wiki/List_of_comparative_social_surveys) that lists many such surveys. Some of the most generally relevant to social scientists are:
+
+- [The European Social Survey (ESS)](https://www.europeansocialsurvey.org/about/)
+
+- [The European Values Study (EVS)](https://europeanvaluesstudy.eu/about-evs/) and its twin sister [The World Values Survey (WVS)](https://www.worldvaluessurvey.org/WVSContents.jsp)
+
+- [The International Social Survey Programme(ISSP)](https://issp.org/about-issp/)
+
+Have a quick look at the description pages linked above to gain a sense of what these surveys are about. 
+
+# Outro
+
+We have now seen some examples of social science data and have learnt how to find out more about them and how to access them. Thinking ahead to your third-year dissertation, you may want to register for a free user account on the UKDS or some of the international comparative surveys. The UKDS provides some great [resources and advice on using their data for undergraduate dissertations](https://ukdataservice.ac.uk/learning-hub/new-to-using-data/students/resources-for-dissertations/) and there's also an annual [Dissertation Award!](https://ukdataservice.ac.uk/learning-hub/new-to-using-data/students/dissertation-award/) So, keep this great option in mind.
+
+Next week we will be thinking more closely about designing a research project starting from a relevant research question (another step in the process of "taming information"), sampling considerations, case selection, data collection methods and so on.
+
+
+
+
+
+
+

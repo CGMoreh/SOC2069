@@ -4,6 +4,9 @@ description: |
   Researching Social Life 1
 output_dir: "."
 navbar:
+  logo:
+    image: ./pics/ncl_coa_soc2069.svg
+    href: https://ncl.instructure.com/courses/48074
   left:
     # - text: "Slides"
     #   menu:
@@ -33,57 +36,42 @@ navbar:
     #     - text: "Lecture notes 9"
     #     - text: "Lecture notes 10"
     #     - text: "Lecture notes 11"
-    - text: "Materials"
+    - text: "Lab worksheets"
       menu:
         - text: "Worksheet 1"
-          href: "./1_information/1-Lab_worksheet.html"
+          href: "./Worksheets/Lab1.html"
         - text: "Worksheet 2"
-          href: "/1_information/Lab2.html"
+          href: "./Worksheets/Lab2.html"
         - text: "Worksheet 3"
-          href: "./1_information/Lab3.html"
-    #     - text: "Worksheet 2"
-    #     - text: "Worksheet 3"
-    #     - text: "Worksheet 4"
-    #     - text: "Worksheet 5"
-    #     - text: "Worksheet 6"
-    #     - text: "Worksheet 7"
-    #     - text: "Worksheet 8"
-    #     - text: "Worksheet 9"
-    #     - text: "Worksheet 10"
-    #     - text: "Worksheet 11"
+          href: "./Worksheets/Lab3.html"
+          
+    - text: "Topics and readings"
+      href: "./Topics/index.qmd"
+
     # - text: "Data"
     #   href: "./data/data-documentation.html"
 
-  right:
-    - icon: fab fa-github
-      href: "https://github.com/CGMoreh/SSC7001M"
+  # right:
+  #   - icon: fab fa-github
+  #     href: "https://github.com/CGMoreh/SOC2069"
 
 sidebar:
-  - title: "Materials"
+  - title: "Topics"
     style: "docked"
     search: false
     background: dark
     contents:
-      - section: "Overview"
-        contents:
-          - materials/index.qmd
-      - section: "Course Materials"
-        contents:
-          - text: "0: Introduction to Gov 50"
-            file: materials/01_intro.qmd
-          - text: "1: R, RMarkdown and Data Visualization"
-            file: materials/02_r_data_viz.qmd
-          - text: "2: Data Wrangling"
-            file: materials/03_data_wrangling.qmd
-          - text: "3: Causality"
-            file: materials/04_causality.qmd
-          - text: "4: Summarizing and Measurement"
-            file: materials/05_measurement.qmd
-          - text: "5: Relationships, Functions, and Importing/Tidying Data"
-            file: materials/06_bivariate_tidying.qmd
-          - text: "6: Prediction and Regression"
-            file: materials/07_prediction.qmd
-  
+        - text: "1 (TW 5): Taming information"
+          file: Topics/
+        - text: "2 (TW 6): Designing social research"
+          file: materials/02_r_data_viz.qmd
+        - text: "3 (TW 7): Designing and using research instruments"
+          file: Topics/03_instruments.qmd
+        - text: "4 (TW 8): Working with texts and documents"
+          file: materials/04_causality.qmd
+        - text: " 5 (TW 9): Analysing qualitative data"
+          file: materials/05_measurement.qmd
+
 output: 
   distill::distill_article:
     css: custom2.css

@@ -1,0 +1,167 @@
+---
+title: "Worksheet 3"
+output:
+  html_document:
+    theme: lumen
+    toc: yes
+    toc_float: yes
+    toc_highlight: no
+    tabset: yes
+    number_sections: no
+    anchor_sections: no
+    self_contained: no
+    code_download: no
+    css: labcss.css
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  comment = ""
+)
+```
+
+------------------------------------------------------------------------
+
+    Timetable week: 7
+    Topic: "Designing and using research instruments"
+
+------------------------------------------------------------------------
+
+# Intro
+
+Last week we thought about our sociological interests and practised formulating research questions and searching for existing academic literature related to our topic of interest. This week we will explore some of the practicalities involved in designing tool, instruments for collecting data that could answer our research questions. Such *tools* can be of various type, and we'll cover some of the most commonly employed ones:
+
+-   survey questionnaires (for collecting primary *quantitative*, but also some *qualitative* data)
+-   interview and focus group guides (for collecting conversational data through qualitative, *depth* interviewing but also reflecting on what alterations are necessary when interviewing more than one person at the same time)
+-   
+-   
+
+This week we begin to think about steps in the process of designing a research project. Continuing from the previous week,
+
+# Readings
+
+There are no set readings for this week, just the general assigned core and secondary readings.
+
+Core readings:
+
+-   Luker (2008): Chapters 4, 5 and 6 (pp. 51--128)
+
+Secondary readings:
+
+-   Ragin and Amoroso (2011): Chapters 3, 4 and 5 (pp. 57--134)
+
+-   Gerson and Damaske (2020): Chapters 1, 2 and 3 (pp. 1--65)
+
+-   Kara (2015): Chapters 1, 2, 3 and 4 (pp. 1--76)
+
+-   Neuman (2014): Chapter 5 and 8 (pp. 125--164; 245--280)
+
+# Exercise 1: Finding your *research interests*
+
+`About 15 minutes`
+
+------------------------------------------------------------------------
+
+In the core reading for today, Luker (2008: 51) tells us to pay attention to the difference between a *research interest* and a *research question*. We can have a general interest in a topic, but to be able to study it "scientifically" (*sociologically*, that is), we must focus it down to a particular research question or a set of questions.
+
+Research *questions* are more strictly a methodological matter, but first one must develop an interest in a broader topic of sociological interest. We will start with a discussion about this.
+
+```{block , type = 'discussion-10'}
+**Discussion (groups of three)**
+
+- What topic(s), issue(s), social problem(s) are you interested in? Why?
+- Do you already have an idea what topic you would be interested in researching for your third-year dissertation?
+- Do you already know about social scientists working on that broad topic?
+- What specific *research questions* can you think of in relation to your topic of interest?
+```
+
+# Exercise 2: *Identifying* and *researching* a research question
+
+`About 25 minutes + 5 minutes discussion`
+
+------------------------------------------------------------------------
+
+Now that you have had the opportunity to think about your sociological interests - and maybe even come up with some more specific research questions - it's time to explore what sociological knowledge already exists on that topic. In this exercise, we will attempt a brief literature review and will explore some of the research questions that professional sociologists with similar interests to ours have raised.
+
+```{block Question 1, type = 'questionblock'}
+
+**Question 1**
+
+What does Luker (2008: 52) mean when she writes:
+
+> "... a good research question, properly answered, advances the state of play in one or more intellectual conversations that are already going on in some part of the scholarly world that matters to you."
+
+```
+
+## Library search
+
+Let's go to [the library's search page](https://libsearch.ncl.ac.uk/) and explore publications related to our research interests. 1. On the main page, **log into your library account** using your username and password, so you can save any literature of interest for later. 2. Now change the search setting from *Everything except articles* to *Everything*. 3. Come up with a few keywords that describe your tentative research interest/questions (think about Luker's "bedraggled daisy" (Chapter 5) here) and performs a search (e.g. something like: "students" AND "work" AND "gender", for research topic related to the gendered aspects of student work)
+
+You may get too many or too few results. But it's a start, and you can begin refining your search. Browse through the list and save a few titles that you think are closest to what you were looking for.
+
+## Google scholar and journal search
+
+You can do a similar search on ["Google Scholar"](https://scholar.google.com/) or specific sociology journals, such as [Sociology](https://journals.sagepub.com/home/soc), [The British Journal of Sociology](https://onlinelibrary.wiley.com/journal/14684446), the [European Sociological Review](https://academic.oup.com/esr?login=true), or a great number of other sociology journals ([see a list here](https://ooir.org/journals.php?category=sociology)). Spend some more time searching for your topic, refining your search words as needed, and find **three journal articles** that are closest in their topic to your search, and which you can access freely via the university's subscription.
+
+```{block , type = 'discussion'}
+**Discussion**
+
+Share what you have found with the group.
+- Did your search provide too many or too few results?
+- Did you have to change or adjust your keywords? If so, how?
+- What does this search tell you about your chosen topic/question?
+
+```
+
+# Exercise 3: *Specifying* research questions
+
+`About 15 minutes`
+
+------------------------------------------------------------------------
+
+Work with the **three articles** that you have selected based on your search. Read their *abstract* and if needed skim through the introduction/methodology sections to identify where and how the author(s) state(s) their research question. Make a note of the relevant statements.
+
+```{block Question 2, type = 'questionblock'}
+
+**Question 2**
+
+What were the research questions as stated by the author(s)?
+```
+
+# Exercise 4: *Sampling* and case selection
+
+`About 15 minutes + 10-minute discussion`
+
+------------------------------------------------------------------------
+
+You will notice that statements about the research question are usually closely followed by some description of what *data* was used to answer the question(s) posed. This is often detailed in a dedicated *methodology* section. Spend some more time skimming through the articles and briefly note down any relevant information about:
+
+-   selection of cases/case studies
+-   research participants
+-   sample selection
+-   anything else that describes what groups, geographical locations, *units of analysis* the author(s) focused on to address their research question(s)
+
+```{block , type = 'discussion-10'}
+**Discussion**
+
+Based on the readings for this week, what *sampling* methods were adopted by the three studies you have looked at?
+Were there any *ethical* challenges mentioned by the authors?
+How convincing were the authors in explaining their choice of cases?
+
+```
+
+# Exercise 5: Making *sampling* decisions
+
+`About 15 minutes + discussion`
+
+In groups of three, discuss with your peers about how **you** would approach your research question.
+
+-   Ask each other questions about your sampling decision: what data would you collect; who would be your participants; what are your *cases*, etc. Try to identify the strengths and weaknesses of these decisions
+-   Can you already think about any *ethical* challenges that your proposed research mights involve? (you can read through the [British Sociological Association's Statement of Ethical Practice](https://www.britsoc.co.uk/media/24310/bsa_statement_of_ethical_practice.pdf) to guide this discussion )
+
+```{block , type = 'discussion'}
+**Discussion (groups of three)**
+
+Share some of your reflections with the wider group.
+
+```
