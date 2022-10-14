@@ -47,6 +47,8 @@ navbar:
     #     - text: "Worksheet 9"
     #     - text: "Worksheet 10"
     #     - text: "Worksheet 11"
+        - text: "Materials"
+          file: materials/index.qmd
     # - text: "Data"
     #   href: "./data/data-documentation.html"
     # - text: "Notes"
