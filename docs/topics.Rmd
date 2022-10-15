@@ -1,0 +1,6 @@
+---
+title: "Topic outline and readings"
+output: distill::distill_article
+---
+
+#### [3 (TW 7): Designing and using research instruments](./Topics/03_instruments.html)

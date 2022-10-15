@@ -46,7 +46,7 @@ navbar:
           href: "./Worksheets/Lab3.html"
           
     - text: "Topics and readings"
-      href: "./Topics/index.qmd"
+      href: "./topics.html"
 
     # - text: "Data"
     #   href: "./data/data-documentation.html"
@@ -74,4 +74,8 @@ sidebar:
 
 output: 
   distill::distill_article:
-    css: custom2.css
+    toc: true
+    number_sections: true
+    toc_depth: 4
+    code_folding: true
+    css: ./my_themes/custom2.css

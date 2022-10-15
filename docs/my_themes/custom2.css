@@ -67,7 +67,7 @@ d-appendix {
 }
 
 .distill-site-header {
-    height: 50px;                               /* CM edited */
+    height: 70px;                               /* CM edited */
 }
 
 .distill-site-footer {
@@ -111,5 +111,5 @@ div.main-container {
 .distill-site-header .logo img {
    max-height: 60px;
    width: auto;
-   margin-top: 10px;
+   margin-top: 5px;
 }

@@ -1,24 +1,6 @@
 ---
-title: "Module description"
+title: "SOC2069"
 description: |
   A  research methods module for 2nd-year undergraduate Sociology / Politics & Sociology students at Newcastle University (UK)
 output: distill::distill_article
 ---
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
-
-# Learn more about creating websites with Distill at:
-# https://rstudio.github.io/distill/website.html
-
-# Learn more about publishing to GitHub Pages at:
-# https://rstudio.github.io/distill/publish_website.html#github-pages
-
-```
-
-```{css}
-d-title {
-    display: none;
-}
-```
-
