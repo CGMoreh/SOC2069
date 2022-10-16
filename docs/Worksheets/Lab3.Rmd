@@ -135,6 +135,10 @@ Now that we have looked at some examples of questionnaires and interview guides 
 -   Then work together to design a brief questionnaire containing a minimum number of questions that you think are necessary to answer the research question. Spend about ten minutes on this, but don't make it too complex. Instead, think carefully about how you translate your core 'concept(s)' you are investigating into efficient survey questions
 -   Once you're done exchange your draft questionnaire with another team; read through the other team's draft and note down what you consider the strengths and shortcomings of their questionnaire. Once you are done, get together with the other team and exchange your comments/criticisms/praises.
 
+When designing your questionnaire and assessing the other team's draft, keep in mind some of the things to avoid in questionnaire design described by Neuman (2014), and some possible improvements (see the table below taken from page 326):
+
+![](images/Neuman_table_10.1.png)
+
 # Exercise 4: Design your own interview guide
 
 `About 20 minutes + 5 minutes peer feedback; work in pairs`
