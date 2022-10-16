@@ -5,7 +5,7 @@ description: |
 output_dir: "."
 navbar:
   logo:
-    image: ./pics/ncl_coa_soc2069.svg
+    image: ./pics/Res_Soc_life_logo.png
     href: https://ncl.instructure.com/courses/48074
   left:
     # - text: "Slides"

@@ -11,7 +11,7 @@ output:
     anchor_sections: no
     self_contained: yes
     code_download: no
-    css: labcss.css
+    css: ./../my_themes/labcss.css
 ---
 
 ```{r setup, include = FALSE}
@@ -29,139 +29,130 @@ knitr::opts_chunk$set(
 
 # Intro
 
-Last week we thought about our sociological interests and practised formulating research questions and searching for existing academic literature related to our topic of interest. This week we will explore some of the practicalities involved in designing tool, instruments for collecting data that could answer our research questions. Such *tools* can be of various type, and we'll cover some of the most commonly employed ones:
+Last week we thought about our sociological interests and practised formulating research questions and searching for existing academic literature related to our topic of interest. This week we will explore some of the practicalities involved in designing tools, instruments for collecting data that could answer our research questions. Such *tools* can be of various type, and we'll look at some of the most commonly employed ones, in particular:
 
--   survey questionnaires (for collecting primary *quantitative*, but also some *qualitative* data)
--   interview and focus group guides (for collecting conversational data through qualitative, *depth* interviewing but also reflecting on what alterations are necessary when interviewing more than one person at the same time)
--   
--   
+-   survey questionnaires (for collecting primary *quantitative*, but also some *qualitative* data), and
+-   interview guides/protocols (for collecting conversational data through qualitative, *depth* interviewing);
 
-This week we begin to think about steps in the process of designing a research project. Continuing from the previous week,
+But we'll also think about some other tools, such as:
+
+-   focus group guides/protocols (we'll be reflecting on what alterations are necessary to an interview guide when interviewing more than one person at the same time), and
+-   various other 'creative' tools (relying primarily on the reading from Kara (2015)
 
 # Readings
 
-There are no set readings for this week, just the general assigned core and secondary readings.
-
 Core readings:
 
--   Luker (2008): Chapters 4, 5 and 6 (pp. 51--128)
+-   Luker (2008): Chapters 7 and 8 (pp. 129--189)
 
 Secondary readings:
 
--   Ragin and Amoroso (2011): Chapters 3, 4 and 5 (pp. 57--134)
+-   Gerson and Damaske (2020): Chapters 4 and 5 (pp. 66--142) + Appendices
+-   Emerson et al. (2011): Chapters 1 and 2 (pp. 1--44)
+-   Kara (2015): Chapter 5 (pp. 77--97)
+-   Neuman (2014): Chapters 10 and 13 (pp. 315--366; 431--476)
 
--   Gerson and Damaske (2020): Chapters 1, 2 and 3 (pp. 1--65)
+# Exercise 1: Example questionnaires
 
--   Kara (2015): Chapters 1, 2, 3 and 4 (pp. 1--76)
-
--   Neuman (2014): Chapter 5 and 8 (pp. 125--164; 245--280)
-
-# Exercise 1: Finding your *research interests*
-
-`About 15 minutes`
+`About 20 minutes + 5 minutes discussion`
 
 ------------------------------------------------------------------------
 
-In the core reading for today, Luker (2008: 51) tells us to pay attention to the difference between a *research interest* and a *research question*. We can have a general interest in a topic, but to be able to study it "scientifically" (*sociologically*, that is), we must focus it down to a particular research question or a set of questions.
+In the first week we have explored some studies that have used a variety of different methods. We read through some of the materials made available online about those studies, but we focused mainly on the aims of the study and general methodological principles. Outside class, we can go back to that worksheet and the studies references there and go through their documentation materials (these are usually available without registration, even if the actual collected data may require free registration with the UKDA).
 
-Research *questions* are more strictly a methodological matter, but first one must develop an interest in a broader topic of sociological interest. We will start with a discussion about this.
+In this session, however, we'll start by looking at another study that used a variety of different methods and for which the authors have made their documentation available. So, before we start thinking about designing our own data collection tools based on the methodological readings assigned for this week, let's explore how these may look like in practice.
 
-```{block , type = 'discussion-10'}
-**Discussion (groups of three)**
+Let's have a look at a study undertake at the London School of Economics called "EU Kids Online" (associated with a larger project "Global Kids Online"). The details of the project can be accessed at this site: <https://www.lse.ac.uk/media-and-communications/research/research-projects/eu-kids-online>.
 
-- What topic(s), issue(s), social problem(s) are you interested in? Why?
-- Do you already have an idea what topic you would be interested in researching for your third-year dissertation?
-- Do you already know about social scientists working on that broad topic?
-- What specific *research questions* can you think of in relation to your topic of interest?
-```
+The project description states that:
 
-# Exercise 2: *Identifying* and *researching* a research question
+>
+> "EU Kids Online is a multinational research network. It seeks to enhance knowledge of European children's online opportunities, risks and safety. It uses multiple methods to map children's and parents' experience of the internet, in dialogue with national and European policy stakeholders."
 
-`About 25 minutes + 5 minutes discussion`
+The technical report to the most recent wave of the project further details:
 
-------------------------------------------------------------------------
+> In the fourth wave, EU Kids Online IV, from 2017 to 2019, the network designed a second representative survey of children and online risks and opportunities. The survey was conducted in 19 European countries and targeted children aged 9--17 who use the internet.
 
-Now that you have had the opportunity to think about your sociological interests - and maybe even come up with some more specific research questions - it's time to explore what sociological knowledge already exists on that topic. In this exercise, we will attempt a brief literature review and will explore some of the research questions that professional sociologists with similar interests to ours have raised.
+Previous waves of data collection also included interviews and focus groups. We'll look at all of these tools to think about their design choices. The authors provide a lot of information in a research toolkit section: <https://www.lse.ac.uk/media-and-communications/research/research-projects/eu-kids-online/toolkit>
+
+## Task 1: Explore the questionnaires
+
+The survey consisted of a *core questionnaire* and non-mandatory topic *modules*. Start by skimming through the [brief description of the development of the questionnaire and its basic structure in the technical report (pages. 7-10)](https://www.lse.ac.uk/media-and-communications/assets/documents/research/eu-kids-online/reports/Technical-report-EUKOIV-22-06-2020.pdf). Then look under the **quantitative (survey) toolkit** section and open the [Core questionnaire](https://www.lse.ac.uk/media-and-communications/assets/documents/research/eu-kids-online/toolkit/Questionnaire-core-EUKO-2017.pdf "Questionnaire_core_EUKO-2017") and the [Optional questionnaire modules](https://www.lse.ac.uk/media-and-communications/assets/documents/research/eu-kids-online/toolkit/Questionnaire-modules-EUKO-2017.pdf "Questionnaire_modules_EUKO_2017"). You should also download the [EU Kids Online IV Data Dictionary](https://www.lse.ac.uk/media-and-communications/assets/documents/research/eu-kids-online/toolkit/Data-dictionary-EUKOIV-22-06-2020.xlsx "Data_dictionary_EUKOIV_22_06_2020") file, which is an Excel document listing the variables coded from the questionnaire questions and some additional information.
+
+Spend some time skimming through the two questionnaires and note down some of your observations.
 
 ```{block Question 1, type = 'questionblock'}
 
-**Question 1**
+**Questions**
 
-What does Luker (2008: 52) mean when she writes:
+When reading through the questionnaire, refer back to the reading from Neuman (2014), particularly pages 331-337 (the reading is in the reading pack, read through it now if needed), and try to answer these questions:
 
-> "... a good research question, properly answered, advances the state of play in one or more intellectual conversations that are already going on in some part of the scholarly world that matters to you."
-
+- How many different types of survey questions did you identify in the questionnaires? 
+- What is an example of a *matrix question* that you encountered?
+- Have you encountered any *open-ended questions* in the questionnaire? Can you give one or two examples?
+- Can you think of an example of a *contingency question* from the questionnaires? 
 ```
 
-## Library search
+## Task 2: From questionnaire questions to variables and concepts
 
-Let's go to [the library's search page](https://libsearch.ncl.ac.uk/) and explore publications related to our research interests. 1. On the main page, **log into your library account** using your username and password, so you can save any literature of interest for later. 2. Now change the search setting from *Everything except articles* to *Everything*. 3. Come up with a few keywords that describe your tentative research interest/questions (think about Luker's "bedraggled daisy" (Chapter 5) here) and performs a search (e.g. something like: "students" AND "work" AND "gender", for research topic related to the gendered aspects of student work)
-
-You may get too many or too few results. But it's a start, and you can begin refining your search. Browse through the list and save a few titles that you think are closest to what you were looking for.
-
-## Google scholar and journal search
-
-You can do a similar search on ["Google Scholar"](https://scholar.google.com/) or specific sociology journals, such as [Sociology](https://journals.sagepub.com/home/soc), [The British Journal of Sociology](https://onlinelibrary.wiley.com/journal/14684446), the [European Sociological Review](https://academic.oup.com/esr?login=true), or a great number of other sociology journals ([see a list here](https://ooir.org/journals.php?category=sociology)). Spend some more time searching for your topic, refining your search words as needed, and find **three journal articles** that are closest in their topic to your search, and which you can access freely via the university's subscription.
+Survey questionnaire questions need to be carefully designed so that they can measure more abstract, theoretical **concepts**, and they results in **variables** that can be efficiently used in statistical analysis. Data dictionaries are tools that help researchers keep track of how the theoretical concepts operationalised in the research through research questions translate into variables that will be used in later analysis. Have a look at the [EU Kids Online IV Data Dictionary](https://www.lse.ac.uk/media-and-communications/assets/documents/research/eu-kids-online/toolkit/Data-dictionary-EUKOIV-22-06-2020.xlsx "Data_dictionary_EUKOIV_22_06_2020") file for an example of how this may look like, and spend some time on the *Concepts & references* sheet.
 
 ```{block , type = 'discussion'}
 **Discussion**
 
-Share what you have found with the group.
-- Did your search provide too many or too few results?
-- Did you have to change or adjust your keywords? If so, how?
-- What does this search tell you about your chosen topic/question?
+The F column in the *Concepts & references* sheet lists how the questions asked in the questionnaire relate to the broader theoretical concepts that the research aims to measure. We find that some concepts are operationalised through a simple direct survey question (e.g. "Age" or "Online interaction with unknown people"), while other concepts require a number of survey questions. Look at a few complex concepts and discuss what you think are the positives and negatives of how they have been operationalised in the questionnaire.
 
 ```
 
-# Exercise 3: *Specifying* research questions
+# Exercise 2: Example interview guides
 
-`About 15 minutes`
-
-------------------------------------------------------------------------
-
-Work with the **three articles** that you have selected based on your search. Read their *abstract* and if needed skim through the introduction/methodology sections to identify where and how the author(s) state(s) their research question. Make a note of the relevant statements.
-
-```{block Question 2, type = 'questionblock'}
-
-**Question 2**
-
-What were the research questions as stated by the author(s)?
-```
-
-# Exercise 4: *Sampling* and case selection
-
-`About 15 minutes + 10-minute discussion`
+`About 15 minutes + 10 minutes discussion`
 
 ------------------------------------------------------------------------
 
-You will notice that statements about the research question are usually closely followed by some description of what *data* was used to answer the question(s) posed. This is often detailed in a dedicated *methodology* section. Spend some more time skimming through the articles and briefly note down any relevant information about:
-
--   selection of cases/case studies
--   research participants
--   sample selection
--   anything else that describes what groups, geographical locations, *units of analysis* the author(s) focused on to address their research question(s)
+We stay with the "EU Kids Online" project to look at their interview guides available in the project's qualitative toolkit: <https://www.lse.ac.uk/media-and-communications/research/research-projects/eu-kids-online/toolkit/qualitative-research>. The page contains a lot of valuable material that you are advised to look over outside class (such as the ethics form, consent forms, invitations to participate; the coding guides and examples are something we'll be looking at together in lab in a following week). But for this exercise, open the [Individual interview topic guide](https://www.lse.ac.uk/media-and-communications/assets/documents/research/eu-kids-online/toolkit/qualitative-research/Individual-interview-topic-guide.pdf "Individual_interview_topic_guide") and the [Focus group topic guide](https://www.lse.ac.uk/media-and-communications/assets/documents/research/eu-kids-online/toolkit/qualitative-research/Focus-group-topic-guide.pdf "Focus_group_topic_guide"). Read through them and take a few notes of your observations.
 
 ```{block , type = 'discussion-10'}
 **Discussion**
 
-Based on the readings for this week, what *sampling* methods were adopted by the three studies you have looked at?
-Were there any *ethical* challenges mentioned by the authors?
-How convincing were the authors in explaining their choice of cases?
+Relying on the readings from today, discuss how the interview and focus group guides achieve the aims of the research project. 
+- What are the main differences that you notice between a survey questionaire and an 'in-depth interview' guide?
+- What do these differences tell you about the different aims of the two tools?
+- What do these differences tell you about the different approaches to analysing the data?
+- What special considerations do we need to keep in mind when designing a focus group guide as opposed to a 'depth' interview?
 
 ```
 
-# Exercise 5: Making *sampling* decisions
+# Exercise 3: Design your own questionnaire
 
-`About 15 minutes + discussion`
+`About 20 minutes + 5 minutes peer feedback; work in pairs`
 
-In groups of three, discuss with your peers about how **you** would approach your research question.
+------------------------------------------------------------------------
 
--   Ask each other questions about your sampling decision: what data would you collect; who would be your participants; what are your *cases*, etc. Try to identify the strengths and weaknesses of these decisions
--   Can you already think about any *ethical* challenges that your proposed research mights involve? (you can read through the [British Sociological Association's Statement of Ethical Practice](https://www.britsoc.co.uk/media/24310/bsa_statement_of_ethical_practice.pdf) to guide this discussion )
+Now that we have looked at some examples of questionnaires and interview guides from a real research project, let's start to design your own. First, think back to the research interests and questions that you came up with last week.
 
-```{block , type = 'discussion'}
-**Discussion (groups of three)**
+-   Working together with one other colleague, briefly discuss which one of your project ideas/research questions are easier to phrase (or rephrase, at lest for the purposes of this exercise) as one that can be approached using a quantitative survey method.
+-   Then work together to design a brief questionnaire containing a minimum number of questions that you think are necessary to answer the research question. Spend about ten minutes on this, but don't make it too complex. Instead, think carefully about how you translate your core 'concept(s)' you are investigating into efficient survey questions
+-   Once you're done exchange your draft questionnaire with another team; read through the other team's draft and note down what you consider the strengths and shortcomings of their questionnaire. Once you are done, get together with the other team and exchange your comments/criticisms/praises.
 
-Share some of your reflections with the wider group.
+# Exercise 4: Design your own interview guide
 
-```
+`About 20 minutes + 5 minutes peer feedback; work in pairs`
+
+------------------------------------------------------------------------
+
+Work in the same pairs as before, but this time develop the other colleague's research question into one that can be answered through an individual interview or a focus-group. Working together, develop a draft interview guide and follow the same steps as in the previous exercises, exchanging and discussing drafts with another team (you can get together with a different team than in the previous exercise, if you wish).
+
+-   This time, when designing your guides and commenting on that of the other team, consider in more depth issues concerning difficult questions, ethics, special considerations of your participants and managing the discussion.
+
+# Exercise 5: Think about some other 'creative' methods that could benefit your research question(s)
+
+`About 15 minutes`
+
+In the reading from Kara (2015, pp. 77--97) we find some interesting ideas on how we might enhance our research through other 'creative' methods. While being 'creative' with our methods is secondary to obtaining robust data that can reliably answer our research questions, in many contexts being more 'creative' can actually enhance the reliability of our data and findings. For example, Kara (2015: 83) describes some difficulties that Catrien Notermans and Heleen Kommers have encountered while interviewing for their ethnographic study of religion and the solution they came up with:
+
+> In their ethnographic study of religion, Catrien Notermans and Heleen Kommers, from the Netherlands, found that interviews based on verbal stimuli were hampered by participants' emotions, which could make it hard for them to communicate with researchers. Notermans and Kommers were working with pilgrims travelling from the Netherlands to Lourdes in France, a sacred site focusing on Mary, the mother of Jesus. The researchers collected approximately 30 cards with different visual representations of Mary and used them as a basis for in-depth follow-up interviews two years after the pilgrimage. 'The icons helped ... to elicit the stories that otherwise would probably not have been told' (Notermans and Kommers 2012: 615).
+
+Kara mentions many other ways in which including photography, video, diaries, mapping exercises, drawings, vignettes etc. can provide very valuable data that otherwise would not be elicited through the more 'conventional' research instruments.
+
+For this final exercise, discuss with your colleague what - if any - other methods of data collections could enhance your project and help better answer your research question(s).
