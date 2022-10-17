@@ -12,11 +12,6 @@ Before I briefly introduce the module and the semester, here's a reminder that y
 
 ## Taming information
 
-rr we  njwren wnrennb wnbnb tno n nowtrbnotnb onb ionb operjgp jigbpit ppjpj in iono no n n on onwbgoin nnono niono inin in ininin in  ninin in ini in in ininin in in in in i ni ni ni n in i i ion oi no n on on on oin o noi no in oih ouih oun o no oi n oin on oi no no in oin o no noi n oin oi noi nio no in ion i nio n oi noi n oi noi h oin oi noi n oi nio nio no in
-
-
-
-
 
 
 
