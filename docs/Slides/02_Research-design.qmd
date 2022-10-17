@@ -19,6 +19,8 @@ format:
     #  data-background-image: ../pics/chord.gif
       data-background-opacity: "0.2"
       data-background-size: 100vh
+      data-transition: "slide-out"
+      data-background-transition: "fade"
   # self-contained: true   
     controls: true
    #controls-layout: edges
@@ -39,20 +41,34 @@ bibliography: references.bib
 csl: ../../american-sociological-association.csl
 ---
 
-# Outline
+## Outline {background-iframe="https://lab.hakim.se/particles/01/" background-opacity="0.2" transition="slide"}
 
-  1. Information and data
-  2. Research interests and research questions
-  3. Casing and sampling
-  4. Methods
+::: {.outlineslide .nonincremental}
+1.  Information and data
+2.  Research interests and research questions
+3.  Casing and sampling
+4.  Methods
+:::
 
-## Data: taming social information
+# Data: taming social information {background-iframe="https://lab.hakim.se/particles/01/" background-opacity="0.2" transition="slide-in fade-out"}
+
+::: sectionhead
+1 [2 3 4]{style="opacity:0.25"}
+:::
+
+## Information
+
+::: slidehead
+1 [2 3 4]{style="opacity:0.25"}
+:::
 
 -   the question of how to capture informatiion in an efficient way for sociological analysis
 
 -   the 'map and the territory'' qoestion
 
-> "Even if it were possible to observe people closely as their lives proceeded, we could not guarantee that this strategy would collect "truer" information, especially about such unobservable matters as motivations, perceptions, and views " @gerson2020
+. . .
+
+> "Even if it were possible to observe people closely as their lives proceeded, we could not guarantee that this strategy would collect"truer" information, especially about such unobservable matters as motivations, perceptions, and views " @gerson2020
 
 -   also the question of 'stories'; for this, see also @byrne2002
 
