@@ -66,7 +66,6 @@ Let's have a look at a study undertake at the London School of Economics called 
 
 The project description states that:
 
->
 > "EU Kids Online is a multinational research network. It seeks to enhance knowledge of European children's online opportunities, risks and safety. It uses multiple methods to map children's and parents' experience of the internet, in dialogue with national and European policy stakeholders."
 
 The technical report to the most recent wave of the project further details:
