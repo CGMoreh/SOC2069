@@ -20,7 +20,7 @@ $presentation-heading-font: Arial, serif !default;
 $presentation-font-size-root:	30px;
 $presentation-font-smaller:	0.7;
 $presentation-line-height:	1.1;
-$body-bg:	#fff;
+$body-bg:	#ffffff;
 $body-color:	#222;
 $text-muted:	lighten($body-color, 50%);
 $link-color:	rgba(204, 122, 0, 1);
@@ -132,22 +132,23 @@ $dark-bg-code-color:	#ffa07a;
 }
 
 .outlineslide {
-  color:grey;
+  color: #fff;
   font-weight: 900;
   font-size: 1.4em;
   line-height: 220%;
 }
 
+.opq { /* opacity for .sectionhead */
+  opacity: 0.25;
+}
+
 /*-- scss:rules --*/
 
-/*
+
 .reveal .slide blockquote {
   border-left: 3px solid $text-muted;
   padding-left: 0.5em;
 }
-*/
-
-
 
 .reveal .progress {
     background: rgba(0,0,0,0);
@@ -161,7 +162,7 @@ $dark-bg-code-color:	#ffa07a;
 }
 
 .reveal .footer a {
-    color: rgba(5,80,153,.4);
+  color: rgba(5,80,153,.4);
 	font-weight: none;
 	bottom: 0;
 }

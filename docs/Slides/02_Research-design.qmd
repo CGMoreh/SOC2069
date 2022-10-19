@@ -4,7 +4,6 @@ title: |
   | Researching Social Life 1
 subtitle: <br><br>Designing social research
 author: <br><br><br> <b>Dr. Chris Moreh</b>
-# institute: "Newcastle University - Geography, Politics and Sociology"
 format: 
   revealjs:
     history: false
@@ -16,26 +15,18 @@ format:
       data-background-color: "white"
       data-background-iframe: "https://lab.hakim.se/particles/01/"
       data-background-interactive: true
-    #  data-background-image: ../pics/chord.gif
       data-background-opacity: "0.2"
       data-background-size: 100vh
       data-transition: "slide-out"
       data-background-transition: "fade"
-  # self-contained: true   
     controls: true
    #controls-layout: edges
     controls-back-arrows: faded
     slide-number: false
     preview-links: true
     theme: ../my_themes/cgm.scss
-    #css: ../custon.css
-    # reveal-js-url: "D:/MyGitHub/webslides/PASS2022/SocialSurveys/2022-SocialSurveys_files/libs/revealjs"
     logo:  "../pics/Res_Soc_Life_logo.png"
-    #css: ../my_themes/
-    #footer: "[chrismoreh.com](https://chrismoreh.com) | [chris.moreh@newcastle.ac.uk](mailto: chris.moreh@newcastle.ac.uk)"
     incremental: true
-   # background-image: "https://www.ucl.ac.uk/epidemiology-health-care/sites/epidemiology_health_care/files/CeLSIUS_button.jpg" 
-    # background-opacity: 0.2
     self-contained: true
 bibliography: references.bib
 csl: ../../american-sociological-association.csl
@@ -45,21 +36,21 @@ csl: ../../american-sociological-association.csl
 
 ::: {.outlineslide .nonincremental}
 1.  Information and data
-2.  Research interests and research questions
+2.  Interests and questions
 3.  Casing and sampling
-4.  Methods
+4.  Methods and ethics
 :::
 
 # Data: taming social information {background-iframe="https://lab.hakim.se/particles/01/" background-opacity="0.2" transition="slide-in fade-out"}
 
 ::: sectionhead
-1 [2 3 4]{style="opacity:0.25"}
+1 [2 3 4]{.opq}
 :::
 
 ## Information
 
 ::: slidehead
-1 [2 3 4]{style="opacity:0.25"}
+1 [2 3 4]{.opq}
 :::
 
 -   the question of how to capture informatiion in an efficient way for sociological analysis
@@ -68,7 +59,7 @@ csl: ../../american-sociological-association.csl
 
 . . .
 
-> "Even if it were possible to observe people closely as their lives proceeded, we could not guarantee that this strategy would collect"truer" information, especially about such unobservable matters as motivations, perceptions, and views " @gerson2020
+> "Even if it were possible to observe people closely as their lives proceeded, we could not guarantee that this strategy would collect"truer" information, especially about such unobservable matters as motivations, perceptions, and views " [@gerson2020, pp.20?]
 
 -   also the question of 'stories'; for this, see also @byrne2002
 
@@ -102,4 +93,4 @@ csl: ../../american-sociological-association.csl
 
 [@goldthorpe2007; @hacking1990; @halsey2004, p. 23]
 
-## References and further readings
+## References and further readings {background-color=#e3e5e8}
