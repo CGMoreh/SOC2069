@@ -23,17 +23,14 @@ An LSE study called "EU Kids Online" (associated with a larger project "Global K
 
 In their [Qualitative toolkit](https://www.lse.ac.uk/media-and-communications/research/research-projects/eu-kids-online/toolkit/qualitative-research) we can find both **individual interview and focus group guides** and examples of **first-level and second-level coding**. In the quantitative kit they provide survey questionnaires along with codebooks etc.
 
-
 ## Various
 
 ### Text mining
 
-- Carsten Koch: [https://carstenknoch.com/2020/02/qualitative-data-analysis-with-microsoft-word-comments-python-updated/](https://carstenknoch.com/2020/02/qualitative-data-analysis-with-microsoft-word-comments-python-updated/). Shows **first-level thematically coded text** and presents a Python script for grabbing and working with these codes. The script grabs first-level codes done in Words and puts them into an Excel sheet, thus automating the process of code extraction. For some potentially similar functionality, see the `docxtractr` R package.
+-   Carsten Koch: <https://carstenknoch.com/2020/02/qualitative-data-analysis-with-microsoft-word-comments-python-updated/>. Shows **first-level thematically coded text** and presents a Python script for grabbing and working with these codes. The script grabs first-level codes done in Words and puts them into an Excel sheet, thus automating the process of code extraction. For some potentially similar functionality, see the `docxtractr` R package.
 
-- David Robinson's analysis on ["Text analysis of Trump's tweets confirms he writes only the (angrier) Android half"](http://varianceexplained.org/r/trump-tweets/)
+-   David Robinson's analysis on ["Text analysis of Trump's tweets confirms he writes only the (angrier) Android half"](http://varianceexplained.org/r/trump-tweets/)
 
 ### R and RStudio
 
-- Ilya Kashnitsky on [changing the RStudio layout to better fit your working style](https://ikashnitsky.github.io/2018/perfect-rstudio-layout/#:~:text=Just%20go%20to%20%E2%80%9CTools%E2%80%9D%20%E2%80%93,your%20improved%20RStudio%2C%20the%20program)
-
-
+-   Ilya Kashnitsky on [changing the RStudio layout to better fit your working style](https://ikashnitsky.github.io/2018/perfect-rstudio-layout/#:~:text=Just%20go%20to%20%E2%80%9CTools%E2%80%9D%20%E2%80%93,your%20improved%20RStudio%2C%20the%20program)
