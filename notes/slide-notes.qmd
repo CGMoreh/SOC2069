@@ -13,16 +13,20 @@ You probably still remember me form last year's Knowing in Sociology, where in t
 Before I briefly introduce the module and the semester, here's a reminder that you can contact me at my e-mail address and you can see me at the advertised office hours during the course of the module.
 
 
-## Research design
+## Information
 
 Even before we begin thinking about how to collect, process, analyse, interpret and present information as social scientists, it is useful to take a big step back and acknowledge, explicitly, some fundamental aspects of our human condition.
 For better of worse, we are humans. That means that we have an innate capacity to perceive and process information through our senses, nervous system, brains. 
 We are overall well equipped by nature, but not outstanding in any single aspect compared to other non-human animals; some other species have much better vision, or smell, or hearing, and so on.
-So we are also limited by nature in our capacity to perceive and decode information. We often make mistakes, like when we misunderstand what is being said, or when our senses are simply playing tricks on us.
-(Just in case you haven't seen these images before: the lines are actually straight, not sloping; and an elephant has four legs)
-In everyday life, such errors in perception can be fun or just annoying. And we correct or adjust them in different ways, with more or less success. For instance, we may never be able to convince our brains that the lines in this picture are straight, no matter how much we stare at it. We're just not well equipped by nature to process this visual information accurately. On the other hand, we know from different sources - having seen an elephant before, either in real life or depiction; having read about its anatomy in a book, etc. - that an elephant has four legs. That's part of our common-sense knowledge. We are simply unwilling to let our brain convince us otherwise, and we would hardly update our common-sense knowledge and become coninced that an elephant in fact has five legs, no matter how long we stare at this photo.
+So we are also limited by nature in our capacity to perceive and decode information. We often make mistakes, like when we misunderstand what is being said; 
+or when our senses are simply playing tricks on us.(Just in case you haven't seen these images before: the lines in the picture at the top are actually straight, not sloping; and an elephant has four legs).
+In everyday life, such errors in perception can be fun or just plain annoying. And we correct or adjust them in different ways, with more or less success. For instance, we may never be able to convince our brains that the lines in this picture are straight, no matter how much we stare at it. We're just not well equipped to process this visual information accurately. On the other hand, we know from other sources that an elephant has four legs - we might have seen one before, either in real life or depiction; or might have read about its anatomy in a book, etc. That's part of our common-sense knowledge. We are simply unwilling to let our brain convince us otherwise, and we would hardly update our common-sense knowledge and become convinced that an elephant in fact has five legs, no matter how long we stare at this picture.
 
-We have learnt a lot about the processing power and limitations of our brains by building computers that outperform us in many tasks, but by far not all. 
+We have learnt a lot about the processing power and limitations of our brains by building artificial brains, computers, tools that outperform humans in many tasks, but by far not all. Research in artificial intelligence, psychology and philosophy has taught us a lot about which are the areas that can be and are worth enhancing with computing technology, and which are best left to humans, either because our brains are still more powerful in those areas or just for ethical reasons.
+
+Now this is all very interesting but we are most interested in learning how social scientists - sociologists - handle information about the social world. The point, however, is that sociologists are human, and the information they handle in their research is also produced and shaped by humans. So we should be very aware of the limitations of this information and of our abilities to correctly understand it and draw conclusions from it.
+
+
 
 
 

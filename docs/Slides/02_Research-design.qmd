@@ -20,7 +20,8 @@ format:
       data-background-opacity: "0.2"
       data-background-size: 100vh
       data-transition: "slide-out"
-      data-background-transition: "fade"
+      data-background-transition: "slide-out"
+    data-transition-speed: "default"
     controls: true
    #controls-layout: edges
     controls-back-arrows: faded
@@ -60,10 +61,14 @@ Information and data
 :::
 
 ::: {.column width="70%"}
--   "Are we human, or are we denser?" ^[Lyric from the 2008 song *Human* by *The Killers*]
+-   "Are we human, or are we denser?" [^1]
 :::
 
-![](../pics/info-brain.gif){.absolute right=-5% top=30% height=200}
+[^1]: Lyric from the 2008 song *Human* by *The Killers*
+
+![](../pics/info-brain.gif){.absolute right="-5%" top="30%" height="200"}
+
+
 
 ## Information
 
@@ -71,36 +76,49 @@ Information and data
 1 [2 3 4]{.opq}
 :::
 
-::: {.r-stack}
-![](../pics/info-brain.gif){.absolute right=-5% top=30% height=200}
 
-![](../pics/lines-illusion.jpg){.fragment .current-visible .absolute right=0 top=30% height=300}
 
-![](../pics/elephant-legs.jpg){.fragment .current-visible .absolute right=0 top=30% height=200}
+![](../pics/info-brain.gif){.fragment .current-visible .absolute right="-5%" top="30%" height="200"}
+
+::: {.fragment .current-visible .absolute layout-nrow="2" right="0" width="300" height="200"}
+![](../pics/lines-illusion.jpg)
+
+![](../pics/elephant-legs.jpg)
 :::
 
+
+![](../pics/brain-vs-computer.png){.fragment .current-visible .absolute right="0%" top="30%" height="80"}
 
 ::: {.column width="70%"}
--   "Are we human, or are we <s>denser</s> dancer?" ^[Lyric from the 2008 song *Human* by *The Killers*. There was some confusion about the lyrics among fans and the band's frontman clarified that he sings 'dancer', not 'denser'. "I guess it bothers people that it's not grammatically correct, but I think I'm allowed to do whatever I want", he said. Apparently, the lyric alludes to a quote from journalist Hunter S. Thompson about how "America is raising a generation of dancers, afraid to take one step out of line" [(https://www.digitalspy.com/music/a134344/flowers-clears-up-human-confusion/)](https://www.digitalspy.com/music/a134344/flowers-clears-up-human-confusion/)]
+-   "Are we human, or are we <s>denser</s> dancer?" [^2]
 :::
 
-. . . 
+[^2]: Lyric from the 2008 song *Human* by *The Killers*. There was some confusion about the lyrics among fans and the band's frontman clarified that he sings 'dancer', not 'denser'. "I guess it bothers people that it's not grammatically correct, but I think I'm allowed to do whatever I want", he said. Apparently, the lyric alludes to a quote from journalist Hunter S. Thompson about how "America is raising a generation of dancers, afraid to take one step out of line" [(https://www.digitalspy.com/music/a134344/flowers-clears-up-human-confusion/)](https://www.digitalspy.com/music/a134344/flowers-clears-up-human-confusion/)
 
-:::{.column width="70%"}
-- gggggggggggggggggggggggggg g g g g oncoin NN OSN onsoDUIN OUICN NS ONSDO NIOSDN  NSDON OINSDI NSOI NSIODN OISND OINISND IOSDNO INSODI NIOSDOIN IONSO NSODN OSDN ONSDO]
-:::
-
-![](../pics/day-data.jpg){.absolute right=-5% top=30% height=200}
-
-. . . 
-
-:::{.column width="70%"}
-- ouihnvounfdb m ipodfnjopi nmiomn iodafj iomdfo injodfi 
-:::
 . . .
 
-:::{.column width="70%"}
-- Salsa dancing or something more structured?
+::: {.column width="70%"}
+-   one point
+:::
+
+![](../pics/day-data.jpg){.absolute right="0%" top="40%" height="80"}
+
+. . .
+
+::: {.column width="70%"}
+-   another point
+:::
+
+. . .
+
+::: {.column width="70%"}
+-   another point
+:::
+
+. . .
+
+::: {.column width="70%"}
+-   Salsa dancing or something more structured?
 :::
 
 ## Contd
@@ -150,7 +168,3 @@ Information and data
 [@goldthorpe2007; @hacking1990; @halsey2004, p. 23]
 
 ## References and further readings {background-color="#e3e5e8"}
-
-[^1]: Song lyrics by *The Killers*
-
-[^2]: Song lyrics by *The Killers*
