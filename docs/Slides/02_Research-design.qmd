@@ -1,19 +1,21 @@
 ---
 title: |
   | SOC2069
-  | Researching Social Life 1
-subtitle: <br><br>Designing social research
-author: <br><br><br> <b>Dr. Chris Moreh</b>
+  | Researching 
+  | Social Life 1
+subtitle: Designing social research
+author: Dr. Chris Moreh
 format: 
   revealjs:
     history: false
-    #revealjs-plugins:
+    # revealjs-plugins:
+    #  - ../my_plugins/attribution
      # - ../my_plugins/countdown
      # - ../my_plugins/fullscreen
      # - ../my_plugins/elapsed
     title-slide-attributes:
       data-background-color: "white"
-      data-background-iframe: "https://lab.hakim.se/particles/01/"
+      data-background-iframe: "https://cgmoreh.github.io/webslides/particles-bkg/particles.html"
       data-background-interactive: true
       data-background-opacity: "0.2"
       data-background-size: 100vh
@@ -26,13 +28,13 @@ format:
     preview-links: true
     theme: ../my_themes/cgm.scss
     logo:  "../pics/Res_Soc_Life_logo.png"
-    incremental: true
+    incremental: false
     self-contained: true
 bibliography: references.bib
 csl: ../../american-sociological-association.csl
 ---
 
-## Outline {background-iframe="https://lab.hakim.se/particles/01/" background-opacity="0.2" transition="slide"}
+## Outline {background-iframe="https://cgmoreh.github.io/webslides/particles-bkg/particles.html" background-opacity="0.2" transition="slide"}
 
 ::: {.outlineslide .nonincremental}
 1.  Information and data
@@ -41,11 +43,27 @@ csl: ../../american-sociological-association.csl
 4.  Methods and ethics
 :::
 
-# Data: taming social information {background-iframe="https://lab.hakim.se/particles/01/" background-opacity="0.2" transition="slide-in fade-out"}
+##  {background-iframe="https://cgmoreh.github.io/webslides/particles-bkg/particles.html" background-opacity="0.2" transition="slide-in fade-out"}
+
+::: sectiontitle
+Information and data
+:::
 
 ::: sectionhead
 1 [2 3 4]{.opq}
 :::
+
+## Information {transition="fade-in"}
+
+::: slidehead
+1 [2 3 4]{.opq}
+:::
+
+::: {.column width="70%"}
+-   "Are we human, or are we denser?" ^[Lyric from the 2008 song *Human* by *The Killers*]
+:::
+
+![](../pics/info-brain.gif){.absolute right=-5% top=30% height=200}
 
 ## Information
 
@@ -53,9 +71,45 @@ csl: ../../american-sociological-association.csl
 1 [2 3 4]{.opq}
 :::
 
--   the question of how to capture informatiion in an efficient way for sociological analysis
+::: {.r-stack}
+![](../pics/info-brain.gif){.absolute right=-5% top=30% height=200}
 
--   the 'map and the territory'' qoestion
+![](../pics/lines-illusion.jpg){.fragment .current-visible .absolute right=0 top=30% height=300}
+
+![](../pics/elephant-legs.jpg){.fragment .current-visible .absolute right=0 top=30% height=200}
+:::
+
+
+::: {.column width="70%"}
+-   "Are we human, or are we <s>denser</s> dancer?" ^[Lyric from the 2008 song *Human* by *The Killers*. There was some confusion about the lyrics among fans and the band's frontman clarified that he sings 'dancer', not 'denser'. "I guess it bothers people that it's not grammatically correct, but I think I'm allowed to do whatever I want", he said. Apparently, the lyric alludes to a quote from journalist Hunter S. Thompson about how "America is raising a generation of dancers, afraid to take one step out of line" [(https://www.digitalspy.com/music/a134344/flowers-clears-up-human-confusion/)](https://www.digitalspy.com/music/a134344/flowers-clears-up-human-confusion/)]
+:::
+
+. . . 
+
+:::{.column width="70%"}
+- gggggggggggggggggggggggggg g g g g oncoin NN OSN onsoDUIN OUICN NS ONSDO NIOSDN  NSDON OINSDI NSOI NSIODN OISND OINISND IOSDNO INSODI NIOSDOIN IONSO NSODN OSDN ONSDO]
+:::
+
+![](../pics/day-data.jpg){.absolute right=-5% top=30% height=200}
+
+. . . 
+
+:::{.column width="70%"}
+- ouihnvounfdb m ipodfnjopi nmiomn iodafj iomdfo injodfi 
+:::
+. . .
+
+:::{.column width="70%"}
+- Salsa dancing or something more structured?
+:::
+
+## Contd
+
+-   [the question of how to capture informatiion in an efficient way for sociological analysis]{.fragment .highlight-current-blue}
+
+-   [the 'map and the territory' question]{.fragment .highlight-current-blue}
+
+-   something else
 
 . . .
 
@@ -63,11 +117,13 @@ csl: ../../american-sociological-association.csl
 
 -   also the question of 'stories'; for this, see also @byrne2002
 
--   stories about cases, individual or 'variables'
-
--   
+-   stories about cases, individual or 'variables' :::
 
 ## Topic
+
+-   a picture that needs attribution here...
+
+[Curtesy of someone who made this]{.attribution}
 
 ## 3
 
@@ -93,4 +149,8 @@ csl: ../../american-sociological-association.csl
 
 [@goldthorpe2007; @hacking1990; @halsey2004, p. 23]
 
-## References and further readings {background-color=#e3e5e8}
+## References and further readings {background-color="#e3e5e8"}
+
+[^1]: Song lyrics by *The Killers*
+
+[^2]: Song lyrics by *The Killers*

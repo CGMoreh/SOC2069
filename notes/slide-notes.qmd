@@ -15,6 +15,14 @@ Before I briefly introduce the module and the semester, here's a reminder that y
 
 ## Research design
 
+Even before we begin thinking about how to collect, process, analyse, interpret and present information as social scientists, it is useful to take a big step back and acknowledge, explicitly, some fundamental aspects of our human condition.
+For better of worse, we are humans. That means that we have an innate capacity to perceive and process information through our senses, nervous system, brains. 
+We are overall well equipped by nature, but not outstanding in any single aspect compared to other non-human animals; some other species have much better vision, or smell, or hearing, and so on.
+So we are also limited by nature in our capacity to perceive and decode information. We often make mistakes, like when we misunderstand what is being said, or when our senses are simply playing tricks on us.
+(Just in case you haven't seen these images before: the lines are actually straight, not sloping; and an elephant has four legs)
+In everyday life, such errors in perception can be fun or just annoying. And we correct or adjust them in different ways, with more or less success. For instance, we may never be able to convince our brains that the lines in this picture are straight, no matter how much we stare at it. We're just not well equipped by nature to process this visual information accurately. On the other hand, we know from different sources - having seen an elephant before, either in real life or depiction; having read about its anatomy in a book, etc. - that an elephant has four legs. That's part of our common-sense knowledge. We are simply unwilling to let our brain convince us otherwise, and we would hardly update our common-sense knowledge and become coninced that an elephant in fact has five legs, no matter how long we stare at this photo.
+
+We have learnt a lot about the processing power and limitations of our brains by building computers that outperform us in many tasks, but by far not all. 
 
 
 
