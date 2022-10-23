@@ -24,7 +24,18 @@ In everyday life, such errors in perception can be fun or just plain annoying. A
 
 We have learnt a lot about the processing power and limitations of our brains by building artificial brains, computers, tools that outperform humans in many tasks, but by far not all. Research in artificial intelligence, psychology and philosophy has taught us a lot about which are the areas that can be and are worth enhancing with computing technology, and which are best left to humans, either because our brains are still more powerful in those areas or just for ethical reasons.
 
-Now this is all very interesting but we are most interested in learning how social scientists - sociologists - handle information about the social world. The point, however, is that sociologists are human, and the information they handle in their research is also produced and shaped by humans. So we should be very aware of the limitations of this information and of our abilities to correctly understand it and draw conclusions from it.
+Now this is all very interesting but we are most interested in learning how social scientists - sociologists - handle information about the social world. The point, nevertheless, is that sociologists are human, and the information they handle in their research is also produced and shaped by humans. So we should be very aware of the limitations of this information and of our abilities to correctly understand it and draw conclusions from it.
+
+This is much more important today than it used to be back in the decades when the conventional methods of social research were devised, tested and described to students in methodology textbooks. In this module we focus mostly on such traditional methods as a foundation to understanding social research, but we should keep in mind that the mass and diversity of information available for sociological analysis today requires some new and innovative approaches.
+Mass information presents social research with great opportunities but also poses serious challenges. In the broadest possible sense, the aim of social research is to 'tame' information that lives out there in the wilderness of the social world.
+
+We often hear about *data*. Data are the bread and butter of empirical social research, and they come in many shapes and forms. But talking about data already involves a first act of 'taming'. In everyday life, we process a huge amount of information every day, every second, but we wouldn't think of it as 'data', mainly because we process it unconsciously. 'Data', however, implies some degree of consciousness and intentionality. For example, there are billions of words and sentences released every day around the word, verbally or in writing, in the online sphere as tweets, posts and messages; but these only become 'data' for a social scientist, when she decides to look at this information with the intention of finding something out about the world. What underpins this intention is some specific interest or question. So, as we'll see later, formulating a research question is one of the first acts of 'taming' information, even when the information already exists somewhere and our stated intention to exploit it as *data* for our research question hasn't altered it in any way.
+
+
+
+
+
+
 
 
 

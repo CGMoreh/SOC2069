@@ -76,18 +76,15 @@ Information and data
 1 [2 3 4]{.opq}
 :::
 
+![](../pics/info-brain.gif){.absolute right="-5%" top="30%" height="200"}
 
-
-![](../pics/info-brain.gif){.fragment .current-visible .absolute right="-5%" top="30%" height="200"}
-
-::: {.fragment .current-visible .absolute layout-nrow="2" right="0" width="300" height="200"}
+::: {.fragment .current-visible .absolute layout-nrow="2" right="-2%" top="10%" width="330" height="220"}
 ![](../pics/lines-illusion.jpg)
-
 ![](../pics/elephant-legs.jpg)
 :::
 
 
-![](../pics/brain-vs-computer.png){.fragment .current-visible .absolute right="0%" top="30%" height="80"}
+![](../pics/brain-vs-computer.png){.fragment .current-visible .absolute right="0%" top="30%" height="200"}
 
 ::: {.column width="70%"}
 -   "Are we human, or are we <s>denser</s> dancer?" [^2]
@@ -98,15 +95,17 @@ Information and data
 . . .
 
 ::: {.column width="70%"}
--   one point
+-   Social research is all about 'taming' information
 :::
 
-![](../pics/day-data.jpg){.absolute right="0%" top="40%" height="80"}
+![](../pics/day-data.jpg){.absolute right="0%" top="30%" height="200"}
+
+![](../pics/Kranzler-information-commonsense.jpg){.absolute right="0%" top="20%" width="330" height="400"}
 
 . . .
 
 ::: {.column width="70%"}
--   another point
+-   Learning research methods is a bit like learning to dance
 :::
 
 . . .
