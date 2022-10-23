@@ -44,6 +44,9 @@ navbar:
           href: "./Worksheets/Lab2.html"
         - text: "Worksheet 3"
           href: "./Worksheets/Lab3.html"
+        - text: "Worksheet 4"
+          href: "./Worksheets/Lab4.html"
+          
           
     - text: "Topics and readings"
       href: "./topics.html"
@@ -54,23 +57,6 @@ navbar:
   # right:
   #   - icon: fab fa-github
   #     href: "https://github.com/CGMoreh/SOC2069"
-
-sidebar:
-  - title: "Topics"
-    style: "docked"
-    search: false
-    background: dark
-    contents:
-        - text: "1 (TW 5): Taming information"
-          file: Topics/
-        - text: "2 (TW 6): Designing social research"
-          file: materials/02_r_data_viz.qmd
-        - text: "3 (TW 7): Designing and using research instruments"
-          file: Topics/03_instruments.qmd
-        - text: "4 (TW 8): Working with texts and documents"
-          file: materials/04_causality.qmd
-        - text: " 5 (TW 9): Analysing qualitative data"
-          file: materials/05_measurement.qmd
 
 output: 
   distill::distill_article:

@@ -1,0 +1,96 @@
+---
+title: "Worksheet 4"
+output:
+  html_document:
+    theme: lumen
+    toc: yes
+    toc_float: yes
+    toc_highlight: no
+    tabset: yes
+    number_sections: no
+    anchor_sections: no
+    self_contained: yes
+    code_download: no
+    css: ./../my_themes/labcss.css
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  comment = ""
+)
+```
+
+------------------------------------------------------------------------
+
+    Timetable week: 8
+    Topic: "Working with texts and  documents"
+    -----------------------------------------------------------------------
+
+# Intro
+
+Last week we designed research instruments for the collection of primary data. But the data that we are interested in analysing may already exist. Such data can be texts, images, videos, etc. In contrast to the secondary data that we examined in Week 1 - which also *already existed* and was ready for (re)analysis - the data types we are interested in this week are *primary* data, in the sense that they were not produced or collected for administrative or research purposes other than perhaps the aim of recording and archiving them for future reference (e.g. meeting records, political speeches, radio/television programme recordings etc.). They are more strictly part of the universe of *information* that permeates the social world. Of course, as with any classification exercise, many data that we as social researchers might be interested in analysing lie between pure *primary* and *secondary* types.
+
+In the exercises below we will explore some textual data and move towards developing techniques for analysing qualitative information.
+
+
+# Reading
+
+- Grant (2018): Chapters 2–5 and 9 (pp. 10–98; 167–182)
+
+
+# Exercise 1: 
+
+`About 20 minutes + 5 minutes discussion`
+
+------------------------------------------------------------------------
+
+
+
+```{block Question 1, type = 'questionblock'}
+
+**Questions**
+
+```
+
+## Task 1: 
+
+
+```{block , type = 'discussion'}
+**Discussion**
+
+The F column in the *Concepts & references* sheet lists how the questions asked in the questionnaire relate to the broader theoretical concepts that the research aims to measure. We find that some concepts are operationalised through a simple direct survey question (e.g. "Age" or "Online interaction with unknown people"), while other concepts require a number of survey questions. Look at a few complex concepts and discuss what you think are the positives and negatives of how they have been operationalised in the questionnaire.
+
+```
+
+# Exercise 2:
+
+`About 15 minutes + 10 minutes discussion`
+
+------------------------------------------------------------------------
+
+
+```{block , type = 'discussion-10'}
+**Discussion**
+
+
+```
+
+# Exercise 3:
+
+`About 20 minutes + 5 minutes peer feedback; work in pairs`
+
+------------------------------------------------------------------------
+
+
+
+# Exercise 4: 
+
+`About 20 minutes + 5 minutes peer feedback; work in pairs`
+
+------------------------------------------------------------------------
+
+
+# Exercise 5: 
+
+`About 15 minutes`
+
