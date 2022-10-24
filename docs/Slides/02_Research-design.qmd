@@ -64,11 +64,7 @@ Information and data
 -   "Are we human, or are we denser?" [^1]
 :::
 
-[^1]: Lyric from the 2008 song *Human* by *The Killers*
-
 ![](../pics/info-brain.gif){.absolute right="-5%" top="30%" height="200"}
-
-
 
 ## Information
 
@@ -79,18 +75,20 @@ Information and data
 ![](../pics/info-brain.gif){.absolute right="-5%" top="30%" height="200"}
 
 ::: {.fragment .current-visible .absolute layout-nrow="2" right="-2%" top="10%" width="330" height="220"}
-![](../pics/lines-illusion.jpg)
-![](../pics/elephant-legs.jpg)
+![](../pics/lines-illusion.jpg) ![](../pics/elephant-legs.jpg)
 :::
 
+::: {.fragment .current-visible}
+![](../pics/system1-system2.png){.absolute left="70%" right="-10%" top="30%" width="400"}
 
-![](../pics/brain-vs-computer.png){.fragment .current-visible .absolute right="0%" top="30%" height="200"}
+[Image source: *Internet*. Based on Daniel Kahneman's [-@Kahneman2012ThinkingFastSlow] book *Thinking Fast and Slow.*]{.attribution left=80%}
+:::
+
+![](../pics/brain-vs-computer.png){.fragment .current-visible .absolute left="70%" right="-10%" top="30%" width="400"}
 
 ::: {.column width="70%"}
 -   "Are we human, or are we <s>denser</s> dancer?" [^2]
 :::
-
-[^2]: Lyric from the 2008 song *Human* by *The Killers*. There was some confusion about the lyrics among fans and the band's frontman clarified that he sings 'dancer', not 'denser'. "I guess it bothers people that it's not grammatically correct, but I think I'm allowed to do whatever I want", he said. Apparently, the lyric alludes to a quote from journalist Hunter S. Thompson about how "America is raising a generation of dancers, afraid to take one step out of line" [(https://www.digitalspy.com/music/a134344/flowers-clears-up-human-confusion/)](https://www.digitalspy.com/music/a134344/flowers-clears-up-human-confusion/)
 
 . . .
 
@@ -98,9 +96,9 @@ Information and data
 -   Social research is all about 'taming' information
 :::
 
-![](../pics/day-data.jpg){.absolute right="0%" top="30%" height="200"}
+![](../pics/day-data.jpg){.absolute left="70%" right="-10%" top="30%" width="400"}
 
-![](../pics/Kranzler-information-commonsense.jpg){.absolute right="0%" top="20%" width="330" height="400"}
+![](../pics/Kranzler-information-commonsense.jpg){.fragment .absolute top="15%" left="70%" right="-10%" width="400"}
 
 . . .
 
@@ -122,7 +120,7 @@ Information and data
 
 ## Contd
 
--   [the question of how to capture informatiion in an efficient way for sociological analysis]{.fragment .highlight-current-blue}
+-   [the question of how to capture information in an efficient way for sociological analysis]{.fragment .highlight-current-blue}
 
 -   [the 'map and the territory' question]{.fragment .highlight-current-blue}
 
@@ -167,3 +165,7 @@ Information and data
 [@goldthorpe2007; @hacking1990; @halsey2004, p. 23]
 
 ## References and further readings {background-color="#e3e5e8"}
+
+[^1]: Lyric from the 2008 song *Human* by *The Killers*
+
+[^2]: Lyric from the 2008 song *Human* by *The Killers*. There was some confusion about the lyrics among fans and the band's frontman clarified that he sings 'dancer', not 'denser'. "I guess it bothers people that it's not grammatically correct, but I think I'm allowed to do whatever I want", he said. Apparently, the lyric alludes to a quote from journalist Hunter S. Thompson about how "America is raising a generation of dancers, afraid to take one step out of line" [(https://www.digitalspy.com/music/a134344/flowers-clears-up-human-confusion/)](https://www.digitalspy.com/music/a134344/flowers-clears-up-human-confusion/)
