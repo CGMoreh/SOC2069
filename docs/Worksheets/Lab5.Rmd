@@ -1,5 +1,5 @@
 ---
-title: "Worksheet 4"
+title: "Worksheet 5"
 output:
   html_document:
     theme: lumen
@@ -22,20 +22,56 @@ knitr::opts_chunk$set(
 
 ------------------------------------------------------------------------
 
-    Timetable week: 8
-    Topic: "Working with texts and  documents"
-    -----------------------------------------------------------------------
+    Timetable week: 9
+    Topic: "Analysing qualitative data"
+-----------------------------------------------------------------------
 
 # Intro
 
-Last week we designed research instruments for the collection of primary data. But the data that we are interested in analysing may already exist. Such data can be texts, images, videos, etc. In contrast to the secondary data that we examined in Week 1 - which also *already existed* and was ready for (re)analysis - the data types we are interested in this week are *primary* data, in the sense that they were not produced or collected for administrative or research purposes other than perhaps the aim of recording and archiving them for future reference (e.g. meeting records, political speeches, radio/television programme recordings etc.). They are more strictly part of the universe of *information* that permeates the social world. Of course, as with any classification exercise, many data that we as social researchers might be interested in analysing lie between pure *primary* and *secondary* types.
+While in the previous two weeks we practiced creating data collection instruments and finding textual data online, this week we turn to methods of analysing qualitative data collected through those instruments and techniques. Analysing qualitative data is a complex process involving organizing and categorizing the empirical materials and interpreting their meaning with reference to theories. There are many ways in which this can be done, such as the following (taken from Kara (2005: 102); see there to follow up on the references cited for each method):
 
-In the exercises below we will explore some textual data and move towards developing techniques for analysing qualitative information.
+- content analysis: a semi-quantitative technique for counting the number of instances of each category or code (Robson 2011: 349)
+- thematic analysis: identifying themes from coded data (Robson 2011: 475)
+- narrative analysis: analysing stories from primary or secondary data (Bryman 2012: 582)
+- conversation analysis: detailed analysis of the verbal and non-verbal content of everyday interactions (Bryman 2012: 527)
+- discourse analysis: analysing patterns of speech and interaction in a detailed and sometimes semi-quantitative way, for example by measuring the length of pauses (Bryman 2012: 529)
+- metaphor analysis: analysing metaphors from primary or secondary data (Fletcher 2013: 1555–6)
+- phenomenological analysis: analysing participants’ stories from, and descriptions of, their ‘life-worlds’, or individual experiences and perceptions, with a focus on meaning (Papathomas and Lavallee 2010: 357; Mayoh, Bond and Todres 2012: 28)
+- life course analysis: analysis of the ‘interaction between individual lives and
+social change’ (Brittain and Green 2012: 253).
+
+You will have read about the various stages of the qualitative data analysis process in the assigned readings, but in this workshop we will be focusing on the practicalities of data reduction and categorization. One of the most commonly applied methods for qualitative data analysis is *thematic analysis*, which relies on *thematic coding* of the data, and we will focus on this technique. We will rely here most heavily on the detailed step-by-step guidance provided in **Gerson and Damaske (2020, Chapter 6)** and the concepts described by **Neuman (2014, Chapter 14)**. If you haven't read them yet, open the books on pages 143 and 480, respectively, to have them in the background for reference.
+
+# Readings
+
+Core readings:
+
+- Luker (2008): Chapters 10 and 11 (pp. 198–228)
+
+Secondary readings:
+
+- Gerson and Damaske (2020): Chapters 6 and 7 (pp. 143–193)
+- Emerson et al. (2011): Chapters 6 and 7 (pp. 171–242)
+- Kara (2015): Chapters 6 and 7 (pp. 99–136)
+- Neuman (2014): Chapters 14 and 15 (pp. 477–546)
 
 
-# Reading
+<!-- SHIFT+CNTRL+C to comment out -->
 
-- Grant (2018): Chapters 2–5 and 9 (pp. 10–98; 167–182)
+# Videos
+
+In addition to the readings, you should watch some instructive videos on data analysis and qualitative coding, available through the library and linked in on Canvas:
+
+<!-- Watch Dr. Eric Jensen and Dr. Charles Laurie discuss "Qualitative Data Analysis": -->
+
+<!-- <iframe src="https://methods.sagepub.com/video/embed/an-introduction-to-qualitative-data-analysis?token=2ddbf48b-7ccd-45b7-b911-1ed73c454196d209ee7f7a656393413d0badd4d6bf140b29eaa8d7afd9084e621d75fcd0b75c" scrolling="no" webkitAllowFullScreen="true" mozallowfullscreen="true" allowFullScreen="true" width="650" height="400" data-external="1"></iframe> -->
+
+<!-- There are links to some other shorter videos on the Canvas page. -->
+
+- [Introduction to Qualitative Data Analysis (mid-length video)](https://ncl.instructure.com/courses/48074/modules/items/2535073){target="_blank"}
+- [Data Analysis Through Coding (short video)](https://ncl.instructure.com/courses/48074/modules/items/2535070){target="_blank"}
+- [Thematic Analysis, Constructionist Analysis (short video)](https://ncl.instructure.com/courses/48074/modules/items/2535071){target="_blank"}
+- [Example research: Researching Negative Facebook Comments on Art Galleries & Museums using Thematic Analysis (short video)](https://ncl.instructure.com/courses/48074/modules/items/2535072){target="_blank"}
 
 
 # Exercise 1: 
@@ -43,6 +79,13 @@ In the exercises below we will explore some textual data and move towards develo
 `About 20 minutes + 5 minutes discussion`
 
 ------------------------------------------------------------------------
+We return to one of the example projects we looked at on Worksheet 3: the “EU Kids Online” project and their qualitative toolkit resources: https://www.lse.ac.uk/media-and-communications/research/research-projects/eu-kids-online/toolkit/qualitative-research.
+
+You should already be familiar with the description of the project, its aims, methodology and data collection instruments from previous weeks. To remind yourself of those instruments, you can open the *Individual interview topic guide* and the *Focus group topic guide* and have a quick look through them. 
+
+In this exercise we will focus on the resources related to *coding* the primary qualitative material obtained from the interviews and focus groups. The reserach team provides a good guide on how the analysis took place, so the first task is to open their [Technical report](https://www.lse.ac.uk/media-and-communications/assets/documents/research/eu-kids-online/toolkit/qualitative-research/QualitativeMethodReport.pdf) on the qualitative research. 
+
+
 
 
 
