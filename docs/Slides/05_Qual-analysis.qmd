@@ -95,7 +95,7 @@ What is qualitative data analysis?
 
 :::
 
-## Thematic coding {background-image="../pics/user-coding1.webp" background-opacity="1"  background-size="45% 93%" background-position="top right 0px"}
+## Thematic coding {background-image="../pics/user-coding1.webp" background-opacity="1"  background-size="45% 90%" background-position="top right 0px"}
 
 :::{.attribution2}
 Source: [https://www.interaction-design.org](https://www.interaction-design.org/literature/article/how-to-do-a-thematic-analysis-of-user-interviews)
@@ -112,7 +112,7 @@ Source: [https://www.interaction-design.org](https://www.interaction-design.org/
 
 :::
 
-## Coding in practice {background-image="../pics/user-coding1.webp" background-opacity="1"  background-size="45% 93%" background-position="top right 0px"}
+## Coding in practice {background-image="../pics/user-coding1.webp" background-opacity="1"  background-size="45% 90%" background-position="top right 0px"}
 
 :::{.attribution2}
 Source: [https://www.interaction-design.org](https://www.interaction-design.org/literature/article/how-to-do-a-thematic-analysis-of-user-interviews)
@@ -142,8 +142,10 @@ Source: [https://carstenknoch.com](https://carstenknoch.com/2020/02/qualitative-
 
 ## Coding in practice 
 
-![](../pics/structured-codes1.png){.absolute left="1%"}
-![](../pics/structured-codes2.png){.absolute right="1%"}
+:::{.r-stack}
 
+![](../pics/structured-codes1.png){.absolute left="0%" width="60%"}
+![](../pics/structured-codes2.png){.fragment .absolute left="40%" top="25%" width="70%"}
+:::
 
 ## References and further readings
