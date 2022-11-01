@@ -180,7 +180,7 @@ Source: [@Byrne2022WorkedExampleBraunClarkeApproach]
 
 ![](../pics/byrne-coding5){.fragment .current-visible .absolute right="-5%" top="20%" width="500"}
 
-## Writing it up {background-image="../pics/man-writing.gif" background-opacity="1" background-size="45%" background-position="right"}
+## Writing it up {background-image="../pics/man-writing.gif" background-opacity="1" background-size="45%" background-position="right 15%"}
 
 ::: {.column width="65%"}
 -   [Coding is only one part of the analysis -- you must interpret your data]{.fragment .highlight-current-blue}
