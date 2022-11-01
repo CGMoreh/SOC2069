@@ -40,7 +40,7 @@ csl: ../../american-sociological-association.csl
 ::: {.outlineslide .nonincremental}
 1. What is qualitative data analysis?
 2. Themes and coding
-3. Software options for QDA
+3. Arguing from qualitative data
 :::
 
 ##  {background-iframe="https://cgmoreh.github.io/webslides/particles-bkg/particles.html" background-opacity="0.2" transition="slide-in fade-out"}
@@ -72,7 +72,7 @@ What is qualitative data analysis?
 :::
 
 ::: {.fragment}
-> As we contemplate that first interview, or set of field notes, or focus group experience, or day in the archives, we need to remind ourselves that our most important job today (and all subsequent days) is pattern recognition (**Luker 2008: 199**)
+> As we contemplate that first interview, or set of field notes, or focus group experience, or day in the archives, we need to remind ourselves that our most important job today (and all subsequent days) is *pattern recognition* (**Luker 2008: 199**)
 :::
 
 :::
@@ -82,6 +82,7 @@ What is qualitative data analysis?
 ::: slidehead
 1 [2 3 4]{.opq}
 :::
+
 
 ::: {.incremental .column width="50%"}
 
@@ -94,10 +95,55 @@ What is qualitative data analysis?
 
 :::
 
-## Coding {background-image="../pics/user-coding1.webp" background-opacity="1"  background-size="50% 100%" background-position="right"}
+## Thematic coding {background-image="../pics/user-coding1.webp" background-opacity="1"  background-size="45% 93%" background-position="top right 0px"}
+
+:::{.attribution2}
+Source: [https://www.interaction-design.org](https://www.interaction-design.org/literature/article/how-to-do-a-thematic-analysis-of-user-interviews)
+:::
+
+::: {.incremental .column width="50%"}
+- Categorising and labelling – nothing more complicated than that!
+- Can be deductive, inductive or (more commonly) a mixture
+- You can code as you go along, or start at the end of data collection
+- Keep your coding scheme/frame under review
+- Start descriptive but aim to be analytical
+- Record your thoughts and ideas during the process
+- Listen to your gut!
+
+:::
+
+## Coding in practice {background-image="../pics/user-coding1.webp" background-opacity="1"  background-size="45% 93%" background-position="top right 0px"}
+
+:::{.attribution2}
+Source: [https://www.interaction-design.org](https://www.interaction-design.org/literature/article/how-to-do-a-thematic-analysis-of-user-interviews)
+:::
+
+. . .
+
+![](../pics/user-coding2.webp){.absolute left="1%" top="10%" height="300"}
+
+. . .
+
+![](../pics/user-coding3.webp){.absolute left="1%" bottom="0%" height="300"}
+
+## Coding in practice 
 
 
+![](../pics/Kafkas-Metamorphosis-coded-using-Word-comments.jpg){fig-align="center"}
 
+:::{.attribution2}
+Source: [https://carstenknoch.com](https://carstenknoch.com/2020/02/qualitative-data-analysis-with-microsoft-word-comments-python-updated/)
+:::
+
+
+## Coding in practice 
+
+![](../pics/colour-codes.png){fig-align="center"}
+
+## Coding in practice 
+
+![](../pics/structured-codes1.png){.absolute left="1%"}
+![](../pics/structured-codes2.png){.absolute right="1%"}
 
 
 ## References and further readings
