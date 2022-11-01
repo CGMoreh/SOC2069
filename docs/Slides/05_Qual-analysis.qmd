@@ -1,82 +1,103 @@
 ---
 title: |
   | SOC2069
-  | Researching Social Life 1
-subtitle: <br><br>Designing social research
-author: <br><br><br> <b>Dr. Chris Moreh</b>
-# institute: "Newcastle University - Geography, Politics and Sociology"
+  | Researching 
+  | Social Life 1
+subtitle: Analysing qualitative data
+author: Dr. Chris Moreh
 format: 
   revealjs:
     history: false
-    #revealjs-plugins:
+    # revealjs-plugins:
+    #  - ../my_plugins/attribution
      # - ../my_plugins/countdown
      # - ../my_plugins/fullscreen
      # - ../my_plugins/elapsed
     title-slide-attributes:
       data-background-color: "white"
-      data-background-iframe: "https://lab.hakim.se/particles/01/"
+      data-background-iframe: "https://cgmoreh.github.io/webslides/particles-bkg/particles.html"
       data-background-interactive: true
-    #  data-background-image: ../pics/chord.gif
       data-background-opacity: "0.2"
       data-background-size: 100vh
-  # self-contained: true   
+      data-transition: "slide-out"
+      data-background-transition: "slide-out"
+    data-transition-speed: "default"
     controls: true
    #controls-layout: edges
     controls-back-arrows: faded
     slide-number: false
     preview-links: true
     theme: ../my_themes/cgm.scss
-    #css: ../custon.css
-    # reveal-js-url: "D:/MyGitHub/webslides/PASS2022/SocialSurveys/2022-SocialSurveys_files/libs/revealjs"
     logo:  "../pics/Res_Soc_Life_logo.png"
-    #css: ../my_themes/
-    #footer: "[chrismoreh.com](https://chrismoreh.com) | [chris.moreh@newcastle.ac.uk](mailto: chris.moreh@newcastle.ac.uk)"
-    incremental: true
-   # background-image: "https://www.ucl.ac.uk/epidemiology-health-care/sites/epidemiology_health_care/files/CeLSIUS_button.jpg" 
-    # background-opacity: 0.2
+    incremental: false
     self-contained: true
 bibliography: references.bib
 csl: ../../american-sociological-association.csl
 ---
 
-## Taming information
+## Outline {background-iframe="https://cgmoreh.github.io/webslides/particles-bkg/particles.html" background-opacity="0.2" transition="slide"}
 
--   the question of how to capture informatiion in an efficient way for sociological analysis
+::: {.outlineslide .nonincremental}
+1. What is qualitative data analysis?
+2. Themes and coding
+3. Software options for QDA
+:::
 
--   the 'map and the territory'' qoestion
+##  {background-iframe="https://cgmoreh.github.io/webslides/particles-bkg/particles.html" background-opacity="0.2" transition="slide-in fade-out"}
 
-> "Even if it were possible to observe people closely as their lives proceeded, we could not guarantee that this strategy would collect "truer" information, especially about such unobservable matters as motivations, perceptions, and views " @gerson2020
+::: sectiontitle
+What is qualitative data analysis?
+:::
 
--   also the question of 'stories'; for this, see also @byrne2002
+::: sectionhead
+1 [2 3 4]{.opq}
+:::
 
--   stories about cases, individual or 'variables'
+## Qualitative data analysis
 
--   
+::: slidehead
+1 [2 3 4]{.opq}
+:::
 
-## Topic
+![](../pics/meaning.jpg){.absolute right="-5%" height="auto"}
 
-## 3
+::: {.column width="60%"}
 
--   thick description
+::: {.fragment}
+> We have two tasks after we have gathered our data, namely to reduce our data to something we can manage, and to analyze our data in meaningful ways (**Luker 2008: 198-199**)
+:::
 
--   'explanatory' rather than 'predictive analysis' (Gerson and damaske 2020; 14)[@gerson2020]
+::: {.fragment}
+> Analysis involves a constant moving back and forward between the entire data set, the coded extracts of data that you are analysing, and the analysis of the data that you are producing (**Braun and Clarke**)
+:::
 
--   "what," "why," and "how" questions. - 'depth interviewing' that connect inductive approaches to theory
+::: {.fragment}
+> As we contemplate that first interview, or set of field notes, or focus group experience, or day in the archives, we need to remind ourselves that our most important job today (and all subsequent days) is pattern recognition (**Luker 2008: 199**)
+:::
 
--   what can small samples tell us?
+:::
 
--   
+## Finding themes {background-image="../pics/neuman_figure_3_analysis.png" background-opacity="1"  background-size="45% auto" background-position="right"}
 
-## Sanpling 1
+::: slidehead
+1 [2 3 4]{.opq}
+:::
 
--   setting 'sample bundaries' depth interviewing)
+::: {.incremental .column width="50%"}
 
--   
+1. Familiarize yourself with your data
+2. Assign preliminary codes to your data in order to describe the content
+3. Search for patterns or themes in your codes across the different interviews
+4. Review themes
+5. Define and name themes
+6. Produce your report
 
-## Sampling 2
+:::
 
-## Conc
+## Coding {background-image="../pics/user-coding1.webp" background-opacity="1"  background-size="50% 100%" background-position="right"}
 
-[@goldthorpe2007; @hacking1990; @halsey2004, p. 23]
+
+
+
 
 ## References and further readings
