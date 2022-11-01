@@ -892,7 +892,9 @@ How much you need to transcribe will vary depending on your project. If you are 
 Whether you transcribe it yourself or pay someone to do it for you will depend on your budget and your time. Some researchers prefer to do it themselves because they can start making sense of the data as they transcribe; others feel as though they can use their time more efficiently by reading the finished transcripts that someone else has made.
 
 2. Generating Initial Codes
-In phase 2, you assign codes to your data. A code is a brief description of what is being said in the interview; so, each time you note something interesting in your data, you write down a code. A code is a description, not an interpretation. It’s a way to start organizing your data into meaningful groups. As an example, let’s try to code a snippet from an interview about video streaming:
+In phase 2, you assign codes to your data. A code is a brief description of what is being said in the interview; so, each time you note something interesting in your data, you write down a code. A code is a description, not an interpretation. It’s a way to start organizing your data into meaningful groups. 
+
+As an example, let’s try to code a snippet from an interview about video streaming:
 
 “I: So how did you find something?
 
@@ -915,3 +917,20 @@ During phase 5, you name and describe each of the themes you identified in the p
 
 6. Producing the Report
 What the final report looks like depends on your project; you might want your final delivery to be personas or user scenarios, but there are some commonalities you should always include. When you write up your results, there should always be enough information about your project and process for the reader to evaluate the quality of your research. Given that, you should write up a clear account of what you have done—both when you carried out the research and for your analysis. You already have a description of your themes, and you can use this as a basis for your final report. When you present your themes, use quotes from what the participants said to demonstrate your findings. 
+
+
+Data extracts can be presented either illustratively, providing a surface-level description
+of what participants said, or analytically, interrogating what has been interpreted to
+be important about what participants said and contextualising this interpretation in relation
+to the available literature. If the researcher were aiming to produce a more illustrative
+write-up of the analysis, relating the results to the available literature would tend to
+be held until the ‘discussion’ section of the report. If the researcher were aiming to produce
+an analytical write-up, extracts would tend to be contextualised in relation to the
+literature as and when they are reported in the ‘results’ sectionData extracts can be presented either illustratively, providing a surface-level description
+of what participants said, or analytically, interrogating what has been interpreted to
+be important about what participants said and contextualising this interpretation in relation
+to the available literature. If the researcher were aiming to produce a more illustrative
+write-up of the analysis, relating the results to the available literature would tend to
+be held until the ‘discussion’ section of the report. If the researcher were aiming to produce
+an analytical write-up, extracts would tend to be contextualised in relation to the
+literature as and when they are reported in the ‘results’ section
