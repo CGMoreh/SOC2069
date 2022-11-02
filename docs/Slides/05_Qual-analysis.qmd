@@ -23,7 +23,7 @@ format:
       data-background-transition: "slide-out"
     data-transition-speed: "default"
     controls: true
-   #controls-layout: edges
+     #controls-layout: edges
     controls-back-arrows: faded
     slide-number: false
     preview-links: true

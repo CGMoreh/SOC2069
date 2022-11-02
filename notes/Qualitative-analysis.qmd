@@ -30,87 +30,49 @@ between inductive and deductive reasoning. And if you can't remember what that m
 And then between description and interpretation. So at some point, you need to move from describing what's in your data to exploring what that means.
 So I want to share a quote from Whyte's book, Street Corner Society.
 It was actually written in 1943. So before I was born, if you can believe that.
-But it's still relevant, I think. And it goes like this often we have the experience of being immersed in a mass of confusing data.
-We study the data carefully, bringing all our powers of logical analysis to bear upon them.
-We come up with an idea or two, but still the data do not fall in any coherent pattern.
-Then we go on living with the data and with the people until perhaps on chance.
-Occurrence casts a totally different light upon the data and we begin to see a pattern that we have not seen before.
-Once we think we see it, we must re-examine our notes and perhaps set out to gather new data in order to determine whether the
-pattern adequately represents the life we are observing was simply a product of our imagination.
+But it's still relevant, I think. And it goes like this: 
+
+> "often we have the experience of being immersed in a mass of confusing data. We study the data carefully, bringing all our powers of logical analysis to bear upon them. We come up with an idea or two, but still the data do not fall in any coherent pattern. Then we go on living with the data and with the people until perhaps on chance. Occurrence casts a totally different light upon the data and we begin to see a pattern that we have not seen before. Once we think we see it, we must re-examine our notes and perhaps set out to gather new data in order to determine whether the pattern adequately represents the life we are observing was simply a product of our imagination".
+
 So this is about how data analysis is really about living with your data until patterns emerge.
 It's very rare to read through a data set once and come up with an earth shattering, groundbreaking analysis.
 You really have to live with that data and kind of start to get to know it and start to get to know some of the patterns and themes as they come up.
 And only then will you notice what might be unexpected or what might be interesting about it.
 And then when you have noticed those things, it's kind of going back then to your notes, to your research questions, your concepts,
-4:23
 and then back into the data in order to be able to tell if this is a genuine kind of pattern that
-4:29
 you've observed coming out of your data or whether it's something that's a little bit random.
-4:36
 So data analysis is kind of it's both intuitive and systematic, and you need to be able to do both.
-4:41
 And you need to kind of be comfortable with doing both.
-4:50
 So if you take a very logical kind of almost robotic approach to it, then you will not come up with anything interesting.
-4:52
 But it's also not appropriate to just sit down with your data. And think some thoughts and write them down.
-5:00
 You have to do both. So once you've kind of had a gut feeling about the data, then you have to try to systematize it.
-5:05
 If that makes sense. So most qualitative data analysis involves identifying themes.
-5:13
 So usually we'll be doing some kind of thematic analysis before we interpret our data.
-5:24
 And then we might write it up as a case study, as a comparison,
-5:29
 as a cross-section or some of the other types of design that we talked about in week one.
-5:32
 And this type of thematic analysis is very similar to the content narrative and discourse analysis we talked about in week three.
-5:38
 So it's really about deciding what the themes or what the concepts are under which you organize your data,
-5:45
 your label it, your sort it and you compare it.
-5:52
 And this is about, as we said in week three, it's about looking at the content and the context of the data.
-5:56
 So patterns in what he said, but also paying attention to how it's said and thinking about why.
-6:04
 And from this, you can develop different types of kind of data presentation.
-6:12
 You might have a typology,
-6:18
 you might have more of a kind of a look deeper into particular cases and you can start to generate arguments from your data.
-6:19
 So data analysis can normally have several stages.
-6:26
 So the pre analysis is where you read through your data, take the time to get familiar with your material.
-6:29
 And I just want to stop for a minute here and say you should do all this when you're doing your assignment,
-6:36
 even though it's a very small piece of data analysis. I would follow some of these steps or all of these steps.
-6:41
 Indeed, when you're doing your assignment and then you kind of know that you've done it in a systematic and proper way.
-6:47
 So pre analysis as where you read through the data, take the time to get familiar with it, read it more than once.
-6:54
 Think about what said how. Maybe start thinking about why.
-7:00
 So familiarizing yourself with the data at the start of your analysis is really crucial.
-7:06
 Otherwise, you'll just kind of be groping around in the dark and plucking out things at random,
-7:11
 and you'll probably miss a lot as well if you're not familiar with your data going forward for your dissertations.
-7:15
 If you've transcribed your data yourself, you'll have a head start on this.
-7:22
 If you've done interviews or focus groups and transcribe them yourselves, this is a really good way to get to know your data.
-7:26
 But if not, as with this assignment, you're working with interview transcripts that already exist.
-7:34
 You really need to start by reading them properly and several times and then creating a coding scheme as your next kind of step.
-7:39
 And this can be done inductively deductively or most probably through a mixture of both.
-7:49
 So deductive coding schemes are generated out of your search questions and theory.
 7:57
 So you look at research questions and theory and you come up with a list of themes that you want to look
