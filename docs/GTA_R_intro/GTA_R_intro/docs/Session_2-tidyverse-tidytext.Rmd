@@ -1,0 +1,282 @@
+---
+title: "Session 2: Tidyverse and Tidytext"
+output:
+  html_notebook:
+    toc: yes
+    toc_depth: 2
+    df_print: paged
+    number_sections: true
+    toc_float:
+      collapsed: false
+---
+
+# Tidyverse functionality
+
+Tidyverse is a package, or a set of add-on tools, that you can optionally use in R to easily and clearly process and visualise your data. In the tidyverse, there are a number of included packages. You do not need to use them all, nor do you need to load them all, but for simplicity's sake, it's easier to load the whole thing and then not worry about it.
+
+```{r}
+library(tidyverse)
+library(tidytext)
+library(broom)
+```
+
+How would you write the base R function `head(quakes)`?
+
+```{r}
+
+```
+
+The verb `count()` counts how many attestations there are of each level in the specified column.
+
+How many attestations of each type of `mag` in `quakes`?
+```{r}
+
+```
+
+What does `quakes` look like?
+```{r}
+
+```
+
+
+# Processing into tables
+
+Before we start learning anything about our data and results, we need to process and organise the data.
+
+## Add columns
+
+How can you make a new column?
+```{r}
+
+```
+
+Duplicate `mag` into `magFct` for `quakes`:
+```{r}
+
+```
+
+Create a column in `quakes` that calculates the `depth` of the quake divided by the number of `stations` reporting:
+```{r}
+
+```
+
+### Case when
+
+Tidyverse tries to reduce the need for "for loops". Instead of going line by line through a dataset to determine what contingent behaviour to perform. The for-loop behaviour is time and energy intensive on large datasets. That's why `case_when` is so powerful.
+
+Here's an example of how one might create a column that translates the values in `mag` in `quakes` to a word:
+```{r}
+# == equivalent to
+# > greater than
+# < less than
+# >= greater or equal
+# <= less or equal
+# != NOT equivalent to
+# & and
+# | or
+
+quakes %>% 
+  mutate(magText = case_when(mag<"5" ~ "four",
+                             mag>="6" ~ "six",
+                             TRUE ~ "five"))
+```
+
+
+Now, how would you create a column in `quakes` that groups magnitude into "low", "medium" and "high"? What if we want a fourth category?
+```{r}
+
+```
+
+We can also use this to perform other sorts of contingent calculations.
+
+Create a column that adds 10 to `long` when it is above 175 and subtracts 10 from `long when it is below 175:
+```{r}
+quakes %>% 
+  mutate(•••  = case_when(••• ~ •••,
+                          ••• ~ •••))
+```
+
+## Filter
+
+If we only want to look at magnitudes between 4.5 and 4.9 from `quakes`, we can filter the dataset (which is like subsetting):
+```{r}
+
+```
+
+## Group and summarise
+
+What if we want to get aggregate values from our dataset, rather than looking at it as a whole?
+
+**`group_by`** is a verb that flags certain columns for operations down the line. **`summarise`** checks which columns are flagged and performs operations based on the permuations of values in those columns.
+
+What happens when we use `group_by` by itself?
+```{r}
+quakes %>% 
+  group_by(mag)
+```
+
+How many observations are there per "level" of magnitude?
+```{r}
+
+```
+
+We can use `group_by` and `summarise` to do a lot more than just count:
+```{r}
+# mean value of `stations` for `groupMag` magnitudes
+quakes %>% 
+  mutate(groupMag = case_when(mag ••• ~ "low",
+                              mag ••• ~ "medium",
+                              mag ••• ~ "high") %>%
+                    recode_factor(`low`="low",
+                                  `medium`="medium",
+                                  `high`="high")) %>% # this turns our character vector into an ordered factor
+  group_by(•••) %>% 
+  summarise(•••)
+```
+
+Let's create a table of the means, standard deviations, and standard errors for both stations reporting and depths grouped by magnitude:
+```{r}
+quakes %>%
+  group_by(•••) %>%
+  summarise(number = •••,
+            stationMean = •••,
+            stationSD = •••,
+            stationSE = •••,
+            depthMean = •••,
+            depthSD = •••,
+            depthSE = •••)
+```
+
+(This is VERY useful for graphing and creating summary statistics tables!)
+
+# Processing Text
+
+```{r}
+shake <- read.csv("../data/Shakespeare_data.csv", as.is = TRUE)
+```
+
+What is the structure of this dataset?
+```{r}
+
+```
+
+## Select and transmute
+
+Select allows you to specify which columns to keep.
+```{r}
+
+```
+
+Or which to get rid of.
+```{r}
+
+```
+
+Transmute allows you to select which to keep while also renaming them.
+```{r}
+
+```
+
+## Unite and separate (text)
+
+The column `ActSceneLine` can be split into three columns to be more useful:
+```{r}
+
+```
+
+Create a new column that combines the play's name with the act number:
+```{r}
+shake %>% 
+  separate(•••) %>% 
+  mutate(•••) %>% 
+  unite(•••)
+```
+
+More examples [here](https://tidyr.tidyverse.org/reference/separate.html).
+
+## Tidytext: Unnest
+
+`unnest_tokens` automatically creates a new row for each word from a text column:
+```{r}
+
+```
+
+Combine this with our new column structure and remove unwanted columns:
+```{r}
+
+```
+
+Filter this dataset so it's only spoken lines, no stage directions:
+```{r}
+
+```
+
+
+## Stop words
+
+Now, we can automate the process of counting how often each word occurs. But, of course, certain words are going to be extremely common, and those words are unlikely to be informative.
+
+```{r}
+shake %>%
+  unnest_tokens(input = PlayerLine, output = word) %>%
+  count(word, sort = TRUE)
+```
+
+Once we've filtered out our `stop_words`, the most frequent words look quite different.
+
+```{r}
+
+```
+
+* What is `anti_join`?
+
+However, Shakespeare uses a lot of words that aren't in our default stop-word list, so we can append our own custom list.
+
+```{r}
+bind_cols(word = c("thou","thee","thy","thine","dost","shalt","wilt","hast","hath","scene","tis","ii","iii","iv","v","vi","vii"),
+      lexicon = rep("shake",17)) %>% 
+  bind_rows(stop_words) #-> shake_stop
+```
+
+* What is `bind_cols`?
+* What is `bind_rows`?
+
+Now let's filter out our custome stop words...
+```{r}
+
+```
+
+...And summarise our corpus!
+```{r}
+
+```
+
+There's so much information, what if we only looked at the word "love"?
+```{r}
+
+```
+
+### A quick graph
+
+Here's a chunk of code you can play with to graph your summarised corpus:
+```{r}
+shake %>% 
+  ••• %>%   
+  ggplot(aes(x=reorder(Play,-n),y=n)) +
+  geom_bar(stat="identity") +
+  coord_flip()
+```
+
+## What else?
+
+```{r}
+# summarise a list of words across plays
+# mean number of words per play
+# number of characters per play
+# number of words per act
+# mean number of words per scene per play
+```
+
+# More information
+
+For more advanced ways to visualise and process corpus data like this, please see [last year's session on text mining](https://verbingnouns.github.io/AdventuresInR/docs/advanced_textmining.html) and [the TidyText online textbook](https://www.tidytextmining.com/)!

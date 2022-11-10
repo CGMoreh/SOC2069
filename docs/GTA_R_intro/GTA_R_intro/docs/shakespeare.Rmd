@@ -1,0 +1,1018 @@
+---
+title: "Processing Shakespeare"
+output:
+  html_notebook:
+    toc: yes
+    toc_depth: 2
+    code_folding: hide
+    df_print: paged
+    toc_float:
+      collapsed: false
+---
+
+```{r echo=FALSE}
+# Multiple plot function
+#
+# ggplot objects can be passed in ..., or to plotlist (as a list of ggplot objects)
+# - cols:   Number of columns in layout
+# - layout: A matrix specifying the layout. If present, 'cols' is ignored.
+#
+# If the layout is something like matrix(c(1,2,3,3), nrow=2, byrow=TRUE),
+# then plot 1 will go in the upper left, 2 will go in the upper right, and
+# 3 will go all the way across the bottom.
+#
+multiplot <- function(..., plotlist=NULL, file, cols=1, layout=NULL) {
+  library(grid)
+
+  # Make a list from the ... arguments and plotlist
+  plots <- c(list(...), plotlist)
+
+  numPlots = length(plots)
+
+  # If layout is NULL, then use 'cols' to determine layout
+  if (is.null(layout)) {
+    # Make the panel
+    # ncol: Number of columns of plots
+    # nrow: Number of rows needed, calculated from # of cols
+    layout <- matrix(seq(1, cols * ceiling(numPlots/cols)),
+                    ncol = cols, nrow = ceiling(numPlots/cols))
+  }
+
+ if (numPlots==1) {
+    print(plots[[1]])
+
+  } else {
+    # Set up the page
+    grid.newpage()
+    pushViewport(viewport(layout = grid.layout(nrow(layout), ncol(layout))))
+
+    # Make each plot, in the correct location
+    for (i in 1:numPlots) {
+      # Get the i,j matrix positions of the regions that contain this subplot
+      matchidx <- as.data.frame(which(layout == i, arr.ind = TRUE))
+
+      print(plots[[i]], vp = viewport(layout.pos.row = matchidx$row,
+                                      layout.pos.col = matchidx$col))
+    }
+  }
+}
+```
+
+
+```{r,message=FALSE}
+# install.packages("ggplot2","dplyr")
+library(ggplot2)
+library(tidyverse)
+```
+
+
+The purpose of this notebook is to demonstrate some of what is possible for visualisation of a text. Quantitative analysis is a tool that can help to answer some questions, but it is not always useful and there are many questions it cannot address. I hope to demonstrate below some of the things that can be done, and hopefully it will be more inspiring that intimidating. 
+
+# Reading in corpus
+
+First, there must be a corpus or digitized text that can be analysed computationally. For this demonstration, I've used a corpus of Shakespeare's plays and adapted some code from [a Kaggle notebook](https://www.kaggle.com/sindhuee/love-in-shakespeare?scriptVersionId=1121270).
+
+```{r,message=FALSE,collapse=TRUE}
+# R must be at least 3.3.1 for `tm` and `slam` to work.
+# install.packages("tm")
+# install.packages("SnowballC")
+library(tm)
+#system("ls ../input") # do we need this?
+```
+
+Before we get into anything fun, we have to see what the corpus looks like; that is, how the data frame is structured. These are the first six lines of the corpus. **NB: there is currently a small bug in the software that prevents the data from being shown neatly. It should be fixed soon.**
+
+```{r}
+shak<-read.csv("../data/Shakespeare_data.csv",header = TRUE, as.is = TRUE)
+#shak<-na.omit(shak)
+shak %>% group_by(Dataline)
+```
+
+Each column is labeled and the content of the column is consistent for each row (all 111396 of them!). Some of the rows may not be useful. Some contain empty cells (labeled `NA`). Some contain a lot of information and we might need to do some processing on them before we can use the information quantitatively.
+
+# Word frequency
+
+The first thing we'll look at is word frequency, or how often a string (in this case "love") occurs in the data frame. To do this, we must identify every time the word "love" appears and highlight it in a way so that it can be counted based on different properties of its environment (e.g., by play, by player, by scene, etc).
+
+Here are the first 10 rows of a data frame that contains the number of times "love" appears in each play. It's been sorted in descending order, but doesn't contain any other information about where and when the word occurs.
+
+```{r}
+# play level word frequency
+plays <- unique(shak$Play)
+loveFreq<-numeric()
+
+for (i in 1:length(plays)){
+    text <- Corpus(VectorSource(paste(shak[shak$Play==plays[i],]$PlayerLine,collapse=" ")))
+    text <- tm_map(text, removePunctuation)
+    text <- tm_map(text, PlainTextDocument)
+    text <- tm_map(text, removeWords, stopwords('english'))
+    
+    # stemming to merge all "loved", "loving" into one   
+    text <- tm_map(text, stemDocument)
+    tdm  <- TermDocumentMatrix(text)
+    
+    loveFreq[i]<-as.numeric(slam::row_sums(tdm)["love"])
+  }
+
+lPlay <- data.frame(plays,loveFreq)
+lPlay <- na.omit(lPlay)
+
+# order the plays based on the occurence of love
+lPlay<-lPlay[order(-lPlay$loveFreq),]
+
+lPlay %>% group_by(plays)
+```
+
+We can also look at which players say "love" the most over the course of their appearences. These are only the top 10 players who use the word "love" most. 
+
+```{r}
+# player level word frequency
+players <- unique(shak$Player)
+loveFreq <- numeric()
+
+for (i in 1:length(players)){
+    text <- Corpus(VectorSource(paste(shak[shak$Player==players[i],]$PlayerLine,collapse=" ")))
+    text <- tm_map(text, removePunctuation)
+    text <- tm_map(text, PlainTextDocument)
+    text <- tm_map(text, removeWords, stopwords('english'))
+    text <- tm_map(text,stemDocument)
+    
+    tdm  <- TermDocumentMatrix(text)
+    
+    loveFreq[i] <- as.numeric(slam::row_sums(tdm)["love"])
+  }
+
+lPlayer <- data.frame(players,loveFreq)
+lPlayer <- na.omit(lPlayer)
+#order
+lPlayer <- lPlayer[order(-lPlayer$loveFreq),]
+
+lPlayer %>% group_by(players)
+```
+
+We can also look at the bottom of the list. These are 10 players who only say "love" once, although there are likely many others who are also tied for last.
+
+```{r}
+lPlayer %>%
+tail(10) %>% group_by(players)
+```
+
+Is this useful to you? Can word frequency by character/player, scene, act, play, or author help to answer any of your research questions?
+
+# Visualising a corpus
+
+I think the main way quantitative analysis can be of use to the humanities is by visualising properties of the text that might not be immediately apparent from reading. Word frequency is one of these properties, since we (as humans) don't typically keep track of how often each characters says any given word. If you're interested in how different characters or different authors make use of certain words or phrases, visualising the distribution of those strings might uncover patterns that are otherwise difficult to find.
+
+For instance, maybe you are curious how the longer and shorter plays compare. Instead of hand-counting each, we can graph and order them. Based on this graph, you don't need to know exactly how long each is, but you can see that *Othello* is much longer than *Loves Labours Lost*, which can inform how you approach the comparison.
+
+```{r}
+shak %>%
+  group_by(Play) %>%
+  summarise(n = n()) %>%
+  ggplot(., aes(x=reorder(Play, n),y=n)) +
+    geom_bar(stat="identity") +
+    coord_flip() +
+    ggtitle("Length of Shakespeare's plays") +
+    theme(legend.position="none") +
+    xlab("Play") +
+    ylab("Number of lines")
+```
+
+## Perception of frequency
+
+Within a single play, maybe we want to know which characters are the chattiest. We can visualise the number of lines of text per character to get a sense of who is dominating the stage.
+
+**Obviously, it's Hamlet.**
+
+```{r}
+shak %>%
+  filter(Play == "Hamlet") %>%
+  group_by(Player) %>%
+  summarise(n = n()) %>%
+  ggplot(., aes(x=reorder(Player, n),y=n)) +
+    geom_bar(stat="identity") +
+    coord_flip() +
+    ggtitle("Speech in Hamlet") +
+    theme(legend.position="none") +
+    xlab("Player") +
+    ylab("Number of lines")
+```
+
+One property of much real-life, natural language data (and many other phenomena in human behaviour) is that frequency of different events or items tend to follow a [Zipf distribution](https://en.wikipedia.org/wiki/Zipf%27s_law). This just means that there are a very small number of incredibly frequent things, and a very large number of very infrequent things. One property of this distribution is that it can look like a very steep curve when plotted normally, but when plotted logarithmically, it looks more like a straight line.
+
+Since it appears that the number of lines per player in Hamlet follow a Zipf curve, we can easily change the scale of the x-axis (the bottom of the chart) to a logarithmic scale. This means that each unit of distance from the lower left is 10 times the value of the previous unit. The distance from 0 to 1 will appear the same as between 1 and 10, which will appear the same as between 10 and 100, and then again between 100 and 1000. This kind of scale will deemphasize the absolute differences in frequency among the most frequent things and help resolve nuanced differences among the least frequent things.
+
+When we make this change to the from above visualisation, suddenly we see a lot of nuance in the "long tail" of the data. The players with the fewest lines don't all still have the same number, and this might be useful information about who speaks when.
+
+```{r}
+shak %>%
+  filter(Play == "Hamlet") %>%
+  group_by(Player) %>%
+  summarise(n = n()) %>%
+  ggplot(., aes(x=reorder(Player, n),y=n)) +
+    geom_bar(stat="identity") +
+    coord_flip() +
+    ggtitle("Speech in Hamlet") +
+    theme(legend.position="none") +
+    xlab("Player") +
+    ylab("Number of lines (logarithmic scale)") +
+    scale_y_log10()
+```
+
+We can also look across plays for frequency. By comparing which plays have the word "love" the most often, we might be able to group them (perceptually) into plays *about love* and those that are not. Maybe?
+
+```{r}
+lPlay %>%
+  ggplot(., aes(x=reorder(plays, loveFreq),y=loveFreq)) +
+    geom_bar(aes(),stat="identity") +
+    coord_flip() +
+    ggtitle("Love in each play") +
+#    theme(legend.position="none") +
+    xlab("Play") +
+    ylab("frequency of the word 'love'") +
+    theme(legend.position = "none")
+```
+
+## Comparing across subsets
+
+```{r echo=FALSE,message=FALSE,results='hide'}
+scales::show_col(scales::hue_pal()(4))
+scales::show_col(scales::hue_pal()(2))
+```
+
+One thing that graphs can do very easily is give you a way to identify trends when you sort events (e.g., plays) into multiple different categories. For instance, the frequency graph above is interesting, but there are so many plays and as a non-expert, I can't tell you what each is about, what style it is written in, or whether I'd expect it to be about "love" or not. So, we can add another dimension of information. In the following graph, each color represents a different category (as determined by Wikipedia's [First Folio](https://en.wikipedia.org/wiki/First_Folio) page, plus information about the "late romances"). Now, we can see if there are trends for different categories to mention "love" more or less than the others.
+
+```{r}
+lPlayCat <- lPlay
+lPlayCat$category <- NA
+lPlayCat$category[lPlayCat$plays == "A Comedy of Errors" | 
+                    lPlayCat$plays == "As you like it" | 
+                    lPlayCat$plays == "Alls well that ends well" | 
+                    lPlayCat$plays == "Loves Labours Lost" | 
+                    lPlayCat$plays == "Measure for measure" | 
+                    lPlayCat$plays == "Merchant of Venice" | 
+                    lPlayCat$plays == "Merry Wives of Windsor" | 
+                    lPlayCat$plays == "A Midsummer nights dream" | 
+                    lPlayCat$plays == "Much Ado about nothing" | 
+                    lPlayCat$plays == "Taming of the Shrew" | 
+                    lPlayCat$plays == "Twelfth Night" | 
+                    lPlayCat$plays == "Two Gentlemen of Verona"] <- "comedy"
+lPlayCat$category[lPlayCat$plays == "Pericles" | 
+                    lPlayCat$plays == "Cymbeline" | 
+                    lPlayCat$plays == "A Winters Tale" | 
+                    lPlayCat$plays == "The Tempest"] <- "romance"
+lPlayCat$category[lPlayCat$plays == "King John" | 
+                    lPlayCat$plays == "Richard II" | 
+                    lPlayCat$plays == "Richard III" | 
+                    lPlayCat$plays == "Henry IV" | 
+                    lPlayCat$plays == "Henry V" | 
+                    lPlayCat$plays == "Henry VI Part 1" | 
+                    lPlayCat$plays == "Henry VI Part 2" | 
+                    lPlayCat$plays == "Henry VI Part 3" | 
+                    lPlayCat$plays == "Henry VIII" | 
+                    lPlayCat$plays == "Coriolanus" | 
+                    lPlayCat$plays == "Julius Caesar" | 
+                    lPlayCat$plays == "Antony and Cleopatra" | 
+                    lPlayCat$plays == "King Lear" | 
+                    lPlayCat$plays == "macbeth"] <- "history"
+lPlayCat$category[lPlayCat$plays == "Titus Andronicus" | 
+                    lPlayCat$plays == "Romeo and Juliet" |  
+                    lPlayCat$plays == "Hamlet" |  
+                    lPlayCat$plays == "Troilus and Cressida" |  
+                    lPlayCat$plays == "Othello" |  
+                    lPlayCat$plays == "Timon of Athens"] <- "tragedy"
+
+# sort(unique(lPlay$plays))
+
+lPlayCat %>%
+  ggplot(., aes(x=reorder(plays, loveFreq),y=loveFreq)) +
+    geom_bar(aes(fill=category),stat="identity") +
+    coord_flip() +
+    ggtitle("Love in each play") +
+#    theme(legend.position="none") +
+    xlab("Play") +
+    ylab("frequency of the word 'love'")
+```
+
+It seems to me that <span style="color:#F8766D">**comedies**</span> and <span style="color:#C77CFF">**tragedies**</span> discuss "love" the most, whereas <span style="color:#7CAE00">**histories**</span> and the late <span style="color:#00BFC4">**romances**</span> discuss it the least. Is this intuitive? Maybe. But there's a problem. *A Comedy of Errors* has the fewest mentions of "love", but it's also the shortest play, so it has the fewest words overall. What we really want to see is the proportion of "love"-frequency per play, not the raw counts. To do that, we have to add in the total length of each play to the data frame.
+
+```{r}
+playLength <- shak %>%
+  group_by(Play) %>%
+  summarise(n = n())
+lPlayCat$length <- NA
+
+for (i in 1:length(playLength$n)) {
+  lPlayCat$length[lPlayCat$plays==playLength$Play[i]] <- playLength$n[playLength$Play==playLength$Play[i]]
+}
+
+lPlayCat %>%
+  mutate(proportion = loveFreq/length) %>%
+  ggplot(., aes(x=reorder(plays, proportion),y=proportion)) +
+    geom_bar(aes(fill=category),stat="identity") +
+    coord_flip() +
+    ggtitle("Love in each play") +
+#    theme(legend.position="none") +
+    xlab("Play") +
+    ylab("proportional frequency of the word 'love'")
+
+```
+
+Not a whole lot has changed, but I think the distribution of <span style="color:#F8766D">**comedies**</span> and <span style="color:#C77CFF">**tragedies**</span> is even more pronounced. And, we have more information about *A Comedy of Errors*, which is still very close to the bottom of the graph. Not every comedy is about love, it seems.
+
+```{r echo=FALSE}
+#lPlayer %>%
+#  filter(loveFreq > 20) %>%
+#  ggplot(., aes(x=reorder(players, loveFreq),y=loveFreq)) +
+#    geom_bar(aes(fill=players),stat="identity") +
+#    coord_flip() +
+#    ggtitle("Love in each play") +
+##    theme(legend.position="none") +
+#    xlab("Play") +
+#    ylab("frequency of the word 'love'") +
+#    theme(legend.position = "none")
+```
+
+```{r echo=FALSE}
+shak$category <- NA
+shak$category[shak$Play == "A Comedy of Errors" | 
+                    shak$Play == "As you like it" | 
+                    shak$Play == "Alls well that ends well" | 
+                    shak$Play == "Loves Labours Lost" | 
+                    shak$Play == "Measure for measure" | 
+                    shak$Play == "Merchant of Venice" | 
+                    shak$Play == "Merry Wives of Windsor" | 
+                    shak$Play == "A Midsummer nights dream" | 
+                    shak$Play == "Much Ado about nothing" | 
+                    shak$Play == "Taming of the Shrew" | 
+                    shak$Play == "Twelfth Night" | 
+                    shak$Play == "Two Gentlemen of Verona"] <- "comedy"
+shak$category[shak$Play == "Pericles" | 
+                    shak$Play == "Cymbeline" | 
+                    shak$Play == "A Winters Tale" | 
+                    shak$Play == "The Tempest"] <- "romance"
+shak$category[shak$Play == "King John" | 
+                    shak$Play == "Richard II" | 
+                    shak$Play == "Richard III" | 
+                    shak$Play == "Henry IV" | 
+                    shak$Play == "Henry V" | 
+                    shak$Play == "Henry VI Part 1" | 
+                    shak$Play == "Henry VI Part 2" | 
+                    shak$Play == "Henry VI Part 3" | 
+                    shak$Play == "Henry VIII" | 
+                    shak$Play == "Coriolanus" | 
+                    shak$Play == "Julius Caesar" | 
+                    shak$Play == "Antony and Cleopatra" | 
+                    shak$Play == "King Lear" | 
+                    shak$Play == "macbeth"] <- "history"
+shak$category[shak$Play == "Titus Andronicus" | 
+                    shak$Play == "Romeo and Juliet" |  
+                    shak$Play == "Hamlet" |  
+                    shak$Play == "Troilus and Cressida" |  
+                    shak$Play == "Othello" |  
+                    shak$Play == "Timon of Athens"] <- "tragedy"
+```
+
+Finally, we can generate these same types of graphs for different subgroups, too. Here's one example, where we look at the number of lines each player has, focusing only on players who have greater than 700 lines. We can also see if there are any trends in these top speakers by play category. It seems to me that the <span style="color:#7CAE00">**histories**</span> dominate, but Hamlet and Iago dominate the scene (so to speak).
+
+```{r}
+shak %>%
+  group_by(Play,Player,category) %>%
+  summarise(n = n()) %>%
+  filter(n > 700) %>%
+  ggplot(., aes(x=reorder(Player, n),y=n)) +
+    geom_bar(aes(fill=category),stat="identity") +
+    coord_flip() +
+    ggtitle("Number of lines by character") +
+#    theme(legend.position="none") +
+    xlab("Player") +
+    ylab("Number of lines")
+```
+
+Is this because <span style="color:#7CAE00">**histories**</span> and <span style="color:#C77CFF">**tragedies**</span> tend to be longer plays, overall? Quite possibly:
+
+
+```{r}
+shak %>%
+  group_by(Play,category) %>%
+  summarise(n = n()) %>%
+  ggplot(., aes(x=reorder(Play, n),y=n)) +
+    geom_bar(aes(fill=category),stat="identity") +
+    coord_flip() +
+    ggtitle("Length of Shakespeare's plays") +
+    theme(legend.position="none") +
+    xlab("Play") +
+    ylab("Number of lines")
+```
+
+
+
+# N-grams
+
+```{r, echo=FALSE,message=FALSE}
+library(dplyr)
+#install.packages("tidytext")
+library(tidytext)
+```
+
+Single words might not be able to tell us much about the texts, which is why examining collocations is such a popular technique. What's the difference between "the king", "kill the king", and "kiss the king"? A lot, but we won't know if we only look for instances of "king". There is where **n-grams** become useful. N-grams are sets of adjacent words, calculated by assigning a number to 'n'. That is, if we want sets of two words, we talk about **bigrams**. If we want sets of three words, we talk about **trigrams**. 
+
+## Pre-processing the corpus
+
+First, we can look at the corpus as a list of words, rather than a list of lines (by act and scene).
+
+```{r}
+shak %>%
+  unnest_tokens(input = PlayerLine, output = word) %>%
+  group_by(Dataline)
+```
+
+Now, we can automate the process of counting how often each word occurs. But, of course, certain words are going to be extremely common (see Zipf's Law), and those words are unlikely to be informative.
+
+```{r}
+shak %>%
+  unnest_tokens(input = PlayerLine, output = word) %>%
+  count(word, sort = TRUE) %>%
+  group_by(word)
+```
+
+Once we've filtered out our *stop-words*, the most frequent words look quite different.
+
+```{r, message=FALSE}
+shak %>%
+  unnest_tokens(input = PlayerLine, output = word) %>%
+  anti_join(stop_words) %>%
+  count(word, sort = TRUE) %>%
+  group_by(word)
+```
+
+However, Shakespeare uses a lot of words that aren't in our default stop-word list, so we can append our own custom list.
+
+```{r}
+word <- c(NA,"thou","thee","thy","thine","dost","shalt","wilt","hast","hath","scene","tis","ii","iii","iv","v","vi","vii")
+lexicon <- rep("shakespeare",length(word))
+new_stop <- cbind(word,lexicon)
+shak_stop <- rbind(new_stop,stop_words)
+```
+
+Here is a visualisation of how stop words affect the corpus.
+
+```{r fig.width=5, fig.asp=.5, message=FALSE}
+p1 <- shak %>%
+  as_tibble(.) %>%
+  unnest_tokens(tbl=., input = PlayerLine, output = word) %>%
+  count(word, sort = TRUE) %>%
+  filter(n>800) %>%
+  ggplot(., aes(x=reorder(word,n),y=n)) +
+    geom_bar(stat="identity") +
+    coord_flip() +
+    ggtitle("No stop words")
+p2 <- shak %>%
+  as_tibble(.) %>%
+  unnest_tokens(tbl=., input = PlayerLine, output = word) %>%
+  anti_join(stop_words) %>%
+  count(word, sort = TRUE) %>%
+  filter(n>800) %>%
+  ggplot(., aes(x=reorder(word,n),y=n)) +
+    geom_bar(stat="identity") +
+    coord_flip() +
+    ggtitle("Default stop words")
+p3 <- shak %>%
+  as_tibble(.) %>%
+  unnest_tokens(tbl=., input = PlayerLine, output = word) %>%
+  anti_join(shak_stop) %>%
+  count(word, sort = TRUE) %>%
+  filter(n>800) %>%
+  ggplot(., aes(x=reorder(word,n),y=n)) +
+    geom_bar(stat="identity") +
+    coord_flip() +
+    ggtitle("Custom stop words")
+multiplot(p1,p2,p3,cols=3)
+```
+
+## Comparing across plays
+
+Before we try to compare across plays, let's see what the most common bigrams are overall (after being filtered by the custom stop words list).
+
+```{r}
+shak %>%
+  unnest_tokens(input = PlayerLine, output = bigram, token = "ngrams", n = 2) %>%
+  separate(bigram, c("word1", "word2"), sep = " ") %>% # separates bigram into two columns, one for each word
+  filter(!word1 %in% shak_stop$word) %>% # filters stop words from first column
+  filter(!word2 %in% shak_stop$word) %>% # filters stop words from second column
+  count(word1, word2, sort = TRUE) %>%
+  group_by(word1)
+```
+
+### 1-grams (just regular token frequency)
+
+If we choose a subset of words, we can look at how they are distributed across different plays. In this case, we can compare <span style="color:#F8766D">**death**</span>, <span style="color:#7CAE00">**king**</span>, <span style="color:#00BFC4">**love**</span>, and <span style="color:#C77CFF">**sweet**</span> across six plays. Unsurprisingly, *Romeo and Juliet* uses the word <span style="color:#00BFC4">**love**</span> more than any other play, although *Midsummer Night's Dream* is close. <span style="color:#7CAE00">**King**</span> is also much more common in plays about kings (surprise, surprise).
+
+```{r}
+shak[,c(2,5,6)] %>%
+  as_tibble() %>%
+  unnest_tokens(tbl=., input = PlayerLine, output = word) %>%
+  filter(word=="love" | word =="king" | word=="death" | word=="sweet") %>%
+  #add_count(Player) %>%
+  group_by(Player,Play,word) %>%
+  summarise(n=n()) %>%
+  #anti_join(stop_words) %>%
+  filter(  Play == "Hamlet" | 
+           Play == "King Lear" | 
+           Play == "A Midsummer nights dream" | 
+           Play == "Othello" | 
+           Play == "Henry V" | 
+           Play == "Romeo and Juliet") %>%
+  arrange(desc(n)) %>%
+  ggplot(., aes(x=word,y=n)) +
+    geom_bar(aes(fill=word),stat="identity") +
+#    coord_flip() +
+    facet_wrap(~Play)
+```
+
+But there are more interesting words you could compare, certainly. These are just one example.
+
+### Bigrams
+
+It's probably much more interesting to look at collocation than simple word frequency. After all, it gives more context. However, it also reduces the number of tokens substantially.
+
+Here, we can visualise three pairs of gendered noun phrases:
+
+Masculine | Feminine
+------- | -------
+<span style="color:#F8766D">**my lord**</span>    | <span style="color:#00BFC4">**my lady**</span>
+<span style="color:#F8766D">**my father**</span>  | <span style="color:#00BFC4">**my mother**</span>
+<span style="color:#F8766D">**my husband**</span> | <span style="color:#00BFC4">**my wife**</span>
+
+What kinds of information can we see in the graph?
+
+```{r fig.width=5, fig.asp=.5}
+
+shak %>%
+  as_tibble() %>%
+  unnest_tokens(input = PlayerLine, output = bigram, token = "ngrams", n = 2) %>%
+  #anti_join(stop_words) %>%
+  filter(bigram=="my lord" | bigram =="my lady" | bigram=="my mother" | bigram=="my father" | bigram=="my wife" | bigram=="my husband") %>%
+  mutate(gender = bigram) %>%
+  mutate(gender = recode_factor(gender,
+                `my lord`="masc",
+                `my father`="masc",
+                `my husband`="masc",
+                `my lady`="fem",
+                `my mother`="fem",
+                `my wife`="fem")) %>%
+  group_by(Player,Play,bigram,gender) %>%
+  summarise(n=n()) %>%
+  mutate(bigramFac = factor(bigram, levels=c("my lord", "my husband", "my father", "my lady", "my wife", "my mother"))) %>%
+  # too boring
+  filter(  Play != "Henry VI Part 1" &
+           Play != "Henry VI Part 2" &
+           Play != "Henry VI Part 3" &
+           Play != "Pericles" & 
+           Play != "Timon of Athens" & 
+           Play != "The Tempest") %>%
+  # too skewed
+  filter(  Play != "Hamlet" &
+           Play != "Troilus and Cressida" &
+           Play != "Richard III" &
+           Play != "Titus Andronicus" & 
+           Play != "Henry VIII" & 
+           Play != "Much Ado about nothing") %>%
+  arrange(desc(n)) %>%
+  ggplot(., aes(x=bigramFac,y=n)) +
+    geom_bar(aes(fill=gender),stat="identity")+#,position="dodge") +
+    scale_y_log10() +
+    coord_flip() +
+    facet_wrap(~Play,nrow=3)
+```
+
+
+## Networks
+
+```{r echo=FALSE,message=FALSE}
+#install.packages("igraph")
+#install.packages("ggraph")
+library(igraph)
+library(ggraph)
+library(grid)
+```
+
+I think the most exciting way to use n-grams is probably network graphs. These graphs show what words co-occur, and in what order. Moreover, they can encode a number of dimensions visually, which would be very difficult to calculate by hand or plot in a more standard quantitative method.
+
+### Bigrams
+
+From the list of bigrams we can generate from our corpus, we can plot a network graph in which the shade of the connection between nodes indicates the frequency of the bigram (darker means more frequent). Moreover, these connections ("edges") are directional, so we can see which order the words are occuring in.
+
+```{r}
+set.seed(814)
+a <- grid::arrow(type = "closed", angle=22.5, length = unit(.1, "inches"))
+shak %>%
+  unnest_tokens(input = PlayerLine, output = bigram, token = "ngrams", n = 2) %>%
+  separate(bigram, c("word1", "word2"), sep = " ") %>% # separates bigram into two columns, one for each word
+  filter(!word1 %in% shak_stop$word) %>% # filters stop words from first column
+  filter(!word2 %in% shak_stop$word) %>% # filters stop words from second column
+  count(word1, word2, sort = TRUE) %>%
+  filter(n > 22) %>%
+  graph_from_data_frame() %>%
+  ggraph(layout = "fr") +
+    geom_edge_link(aes(edge_alpha = n), edge_colour="darkblue", show.legend = FALSE,
+                 arrow = a, end_cap = circle(.07, 'inches')) +
+    geom_node_point(color = "lightblue", size = 5) +
+    geom_node_text(aes(label = name), repel=TRUE) + # , vjust = 1, hjust = 1) +
+    theme_void()
+```
+
+We can also use these plots to compare across plays (although token frequency begins to drop precipitously). Here, we can see that <span style="color:salmon">**Twelfth Night**</span> has notable connections between items of clothing (yellow stockings, cross gartered), whereas <span style="color:lightblue">**Hamlet**</span> and <span style="color:green2">**Romeo and Juliet**</span> have more tokens referring to people and their stage directions. <span style="color:lightblue">**Hamlet**</span> additionally has a notable number of "father's death" bigrams, while <span style="color:green2">**Romeo and Juliet**</span> mentions "county Paris" frequently.
+
+```{r}
+set.seed(814)
+a <- grid::arrow(type = "closed", angle=22.5, length = unit(.1, "inches"))
+p1 <- shak %>%
+  filter(Play=="Hamlet") %>%
+  unnest_tokens(input = PlayerLine, output = bigram, token = "ngrams", n = 2) %>%
+  separate(bigram, c("word1", "word2"), sep = " ") %>% # separates bigram into two columns, one for each word
+  filter(!word1 %in% shak_stop$word) %>% # filters stop words from first column
+  filter(!word2 %in% shak_stop$word) %>% # filters stop words from second column
+  count(word1, word2, sort = TRUE) %>%
+  filter(n > 6) %>%
+  graph_from_data_frame() %>%
+  ggraph(layout = "fr") +
+    geom_edge_link(aes(edge_alpha = n), edge_colour="darkblue", show.legend = FALSE,
+                 arrow = a, end_cap = circle(.07, 'inches')) +
+    geom_node_point(color = "lightblue", size = 5) +
+    geom_node_text(aes(label = name), repel=TRUE) + # , vjust = 1, hjust = 1) +
+    theme_void()
+
+set.seed(814)
+p2 <- shak %>%
+  filter(Play == "Twelfth Night") %>%
+  unnest_tokens(input = PlayerLine, output = bigram, token = "ngrams", n = 2) %>%
+  separate(bigram, c("word1", "word2"), sep = " ") %>% # separates bigram into two columns, one for each word
+  filter(!word1 %in% shak_stop$word) %>% # filters stop words from first column
+  filter(!word2 %in% shak_stop$word) %>% # filters stop words from second column
+  count(word1, word2, sort = TRUE) %>%
+  filter(n > 6) %>%
+  graph_from_data_frame() %>%
+  ggraph(layout = "fr") +
+    geom_edge_link(aes(edge_alpha = n), edge_colour="darkred", show.legend = FALSE,
+                 arrow = a, end_cap = circle(.07, 'inches')) +
+    geom_node_point(color = "salmon", size = 5) +
+    geom_node_text(aes(label = name), repel=TRUE) + # , vjust = 1, hjust = 1) +
+    theme_void()
+
+set.seed(814)
+p3 <- shak %>%
+  filter(Play == "Romeo and Juliet") %>%
+  unnest_tokens(input = PlayerLine, output = bigram, token = "ngrams", n = 2) %>%
+  separate(bigram, c("word1", "word2"), sep = " ") %>% # separates bigram into two columns, one for each word
+  filter(!word1 %in% shak_stop$word) %>% # filters stop words from first column
+  filter(!word2 %in% shak_stop$word) %>% # filters stop words from second column
+  count(word1, word2, sort = TRUE) %>%
+  filter(n > 6) %>%
+  graph_from_data_frame() %>%
+  ggraph(layout = "fr") +
+    geom_edge_link(aes(edge_alpha = n), edge_colour="darkgreen", show.legend = FALSE,
+                 arrow = a, end_cap = circle(.07, 'inches')) +
+    geom_node_point(color = "green2", size = 5) +
+    geom_node_text(aes(label = name), repel=TRUE) + # , vjust = 1, hjust = 1) +
+    theme_void()
+
+multiplot(p1,p2,p3,cols=3)
+```
+
+If we exclude stage directions and compare across six plays, we start to see distinct themes appear. 
+
+```{r fig.width=5, fig.asp=.5}
+set.seed(814)
+a <- grid::arrow(type = "closed", angle=22.5, length = unit(.1, "inches"))
+p1 <- shak %>%
+  filter(ActSceneLine != "") %>%
+  filter(Play=="Hamlet") %>%
+  unnest_tokens(input = PlayerLine, output = bigram, token = "ngrams", n = 2) %>%
+  separate(bigram, c("word1", "word2"), sep = " ") %>% # separates bigram into two columns, one for each word
+  filter(!word1 %in% shak_stop$word) %>% # filters stop words from first column
+  filter(!word2 %in% shak_stop$word) %>% # filters stop words from second column
+  count(word1, word2, sort = TRUE) %>%
+  filter(n > 3) %>%
+  graph_from_data_frame() %>%
+  ggraph(layout = "fr") +
+    geom_edge_link(aes(edge_alpha = n), edge_colour="darkblue", show.legend = FALSE,
+                 arrow = a, end_cap = circle(.07, 'inches')) +
+    geom_node_point(color = "lightblue", size = 5) +
+    geom_node_text(aes(label = name), repel=TRUE) + # , vjust = 1, hjust = 1) +
+    theme_void() +
+    ggtitle("Hamlet")
+
+set.seed(814)
+p2 <- shak %>%
+  filter(ActSceneLine != "") %>%
+  filter(Play == "Twelfth Night") %>%
+  unnest_tokens(input = PlayerLine, output = bigram, token = "ngrams", n = 2) %>%
+  separate(bigram, c("word1", "word2"), sep = " ") %>% # separates bigram into two columns, one for each word
+  filter(!word1 %in% shak_stop$word) %>% # filters stop words from first column
+  filter(!word2 %in% shak_stop$word) %>% # filters stop words from second column
+  count(word1, word2, sort = TRUE) %>%
+  filter(n > 3) %>%
+  graph_from_data_frame() %>%
+  ggraph(layout = "fr") +
+    geom_edge_link(aes(edge_alpha = n), edge_colour="darkred", show.legend = FALSE,
+                 arrow = a, end_cap = circle(.07, 'inches')) +
+    geom_node_point(color = "salmon", size = 5) +
+    geom_node_text(aes(label = name), repel=TRUE) + # , vjust = 1, hjust = 1) +
+    theme_void() +
+    ggtitle("Twelfth Night")
+
+set.seed(814)
+p3 <- shak %>%
+  filter(ActSceneLine != "") %>%
+  filter(Play == "Romeo and Juliet") %>%
+  unnest_tokens(input = PlayerLine, output = bigram, token = "ngrams", n = 2) %>%
+  separate(bigram, c("word1", "word2"), sep = " ") %>% # separates bigram into two columns, one for each word
+  filter(!word1 %in% shak_stop$word) %>% # filters stop words from first column
+  filter(!word2 %in% shak_stop$word) %>% # filters stop words from second column
+  count(word1, word2, sort = TRUE) %>%
+  filter(n > 3) %>%
+  graph_from_data_frame() %>%
+  ggraph(layout = "fr") +
+    geom_edge_link(aes(edge_alpha = n), edge_colour="darkgreen", show.legend = FALSE,
+                 arrow = a, end_cap = circle(.07, 'inches')) +
+    geom_node_point(color = "green2", size = 5) +
+    geom_node_text(aes(label = name), repel=TRUE) + # , vjust = 1, hjust = 1) +
+    theme_void() +
+    ggtitle("Romeo and Juliet")
+
+set.seed(814)
+p4 <- shak %>%
+  filter(ActSceneLine != "") %>%
+  filter(Play == "Othello") %>%
+  unnest_tokens(input = PlayerLine, output = bigram, token = "ngrams", n = 2) %>%
+  separate(bigram, c("word1", "word2"), sep = " ") %>% # separates bigram into two columns, one for each word
+  filter(!word1 %in% shak_stop$word) %>% # filters stop words from first column
+  filter(!word2 %in% shak_stop$word) %>% # filters stop words from second column
+  count(word1, word2, sort = TRUE) %>%
+  filter(n > 3) %>%
+  graph_from_data_frame() %>%
+  ggraph(layout = "fr") +
+    geom_edge_link(aes(edge_alpha = n), edge_colour="darkorange", show.legend = FALSE,
+                 arrow = a, end_cap = circle(.07, 'inches')) +
+    geom_node_point(color = "orange", size = 5) +
+    geom_node_text(aes(label = name), repel=TRUE) + # , vjust = 1, hjust = 1) +
+    theme_void() +
+    ggtitle("Othello")
+
+set.seed(814)
+p5 <- shak %>%
+  filter(ActSceneLine != "") %>%
+  filter(Play == "Henry IV") %>%
+  unnest_tokens(input = PlayerLine, output = bigram, token = "ngrams", n = 2) %>%
+  separate(bigram, c("word1", "word2"), sep = " ") %>% # separates bigram into two columns, one for each word
+  filter(!word1 %in% shak_stop$word) %>% # filters stop words from first column
+  filter(!word2 %in% shak_stop$word) %>% # filters stop words from second column
+  count(word1, word2, sort = TRUE) %>%
+  filter(n > 3) %>%
+  graph_from_data_frame() %>%
+  ggraph(layout = "fr") +
+    geom_edge_link(aes(edge_alpha = n), edge_colour="cadetblue4", show.legend = FALSE,
+                 arrow = a, end_cap = circle(.07, 'inches')) +
+    geom_node_point(color = "cyan", size = 5) +
+    geom_node_text(aes(label = name), repel=TRUE) + # , vjust = 1, hjust = 1) +
+    theme_void() +
+    ggtitle("Henry IV")
+
+set.seed(814)
+p6 <- shak %>%
+  filter(ActSceneLine != "") %>%
+  filter(Play == "The Tempest") %>%
+  unnest_tokens(input = PlayerLine, output = bigram, token = "ngrams", n = 2) %>%
+  separate(bigram, c("word1", "word2"), sep = " ") %>% # separates bigram into two columns, one for each word
+  filter(!word1 %in% shak_stop$word) %>% # filters stop words from first column
+  filter(!word2 %in% shak_stop$word) %>% # filters stop words from second column
+  count(word1, word2, sort = TRUE) %>%
+  filter(n > 3) %>%
+  graph_from_data_frame() %>%
+  ggraph(layout = "fr") +
+    geom_edge_link(aes(edge_alpha = n), edge_colour="violet", show.legend = FALSE,
+                 arrow = a, end_cap = circle(.07, 'inches')) +
+    geom_node_point(color = "magenta", size = 5) +
+    geom_node_text(aes(label = name), repel=TRUE) + # , vjust = 1, hjust = 1) +
+    theme_void() +
+    ggtitle("The Tempest")
+
+multiplot(p1,p2,p3,p4,p5,p6,cols=3)
+```
+
+All of these words are found directly adjacent. What about when words are slighting further apart? That is, language is not linear. How can we visualise relationships between topics that are somewhat less immediate?
+
+### Trigrams
+
+One of the simplest ways to visualise more distant connections is the include more words in each network. Here is a graph of trigrams for the entire corpus, excluding stage directions. (Actually, I think this graph may be of only the first two elements of each trigram, but I will have to sort that out later.)
+
+```{r fig.width=5, fig.asp=.5}
+set.seed(814)
+shak %>%
+  filter(ActSceneLine != "") %>%
+  unnest_tokens(input = PlayerLine, output = trigram, token = "ngrams", n = 3) %>%
+  separate(trigram, c("word1", "word2", "word3"), sep = " ") %>% # separates bigram into two columns, one for each word
+  filter(!word1 %in% shak_stop$word) %>% # filters stop words from first column
+  filter(!word2 %in% shak_stop$word) %>% # filters stop words from second column
+  filter(!word3 %in% shak_stop$word) %>% # filters stop words from third column
+  count(word1, word2, word3, sort = TRUE) %>%
+  filter(n > 2) %>%
+  graph_from_data_frame() %>%
+  ggraph(layout = "fr") +
+    geom_edge_link(aes(edge_alpha = n), edge_colour="darkblue", show.legend = FALSE,
+                 arrow = a, end_cap = circle(.07, 'inches')) +
+    geom_node_point(color = "lightblue", size = 5) +
+    geom_node_text(aes(label = name), repel=TRUE) + # , vjust = 1, hjust = 1) +
+    theme_void()
+```
+
+
+What happens if we treat the first pair and second pair of trigrams as separate bigrams and graph them as before?
+
+We should be able to visualise longer distance relations of these collocations. This is only a taste of what kinds of network graphs can be generated, since the type of graph and content will vary tremendously based on your unique research questions.
+
+```{r fig.width=5, fig.asp=.75}
+set.seed(814)
+w1w2 <- shak %>%
+  filter(ActSceneLine != "") %>%
+  unnest_tokens(input = PlayerLine, output = trigram, token = "ngrams", n = 3) %>%
+  separate(trigram, c("word1", "word2", "word3"), sep = " ") %>% # separates bigram into two columns, one for each word
+  filter(!word1 %in% shak_stop$word) %>% # filters stop words from first column
+  filter(!word2 %in% shak_stop$word) %>% # filters stop words from second column
+  filter(!word3 %in% shak_stop$word) %>% # filters stop words from third column
+  count(word1, word2, word3, sort = TRUE) %>%
+  mutate(set = 1) %>%
+  transmute(word1=word1,word2=word2,n=n,set=set)
+w2w3 <- shak %>%
+  filter(ActSceneLine != "") %>%
+  unnest_tokens(input = PlayerLine, output = trigram, token = "ngrams", n = 3) %>%
+  separate(trigram, c("word1", "word2", "word3"), sep = " ") %>% # separates bigram into two columns, one for each word
+  filter(!word1 %in% shak_stop$word) %>% # filters stop words from first column
+  filter(!word2 %in% shak_stop$word) %>% # filters stop words from second column
+  filter(!word3 %in% shak_stop$word) %>% # filters stop words from third column
+  count(word1, word2, word3, sort = TRUE) %>%
+  mutate(set = 2) %>%
+  transmute(word1=word2,word2=word3,n=n,set=set)
+wXwY <- bind_rows(w1w2,w2w3)
+
+wXwY %>%
+  filter(n>=3) %>%
+  graph_from_data_frame() %>%
+  ggraph(layout = "fr") +
+    geom_node_point(color = "lightblue", size = 5) +
+    geom_edge_link(aes(edge_alpha = n), edge_colour="darkblue", show.legend = TRUE,
+                 arrow = a, end_cap = circle(.07, 'inches')) +
+    geom_node_text(aes(label = name), alpha=.75, repel=TRUE) + # , vjust = 1, hjust = 1) +
+    theme_void()
+```
+
+# Heatmaps
+
+Another visualisation tool that can be very helpful for showing distributions of events across a structure is the heatmap. A heatmap is a complex histogram, which allows multiple subsets of the data to be compared side-to-side.
+
+
+In this example, we can look at the variability of length of subsections (acts and scenes) as determined by number of words. First, let's take a look at the numbers. Since there are so many acts and scenes across all the plays, it is unweildy to look at such a table.
+
+```{r}
+shak %>%
+  #filter(Play == "Hamlet" | Play == "Loves Labours Lost" | Play == "A Winters Tale") %>%
+  filter(ActSceneLine != "") %>%
+  mutate(ActSceneLine2 = ActSceneLine) %>%
+  separate(ActSceneLine2, c("act", "scene", "line")) %>%
+  count(Play,act,scene, sort=TRUE) %>%
+  transmute(play=Play, act=as.numeric(act), scene=as.numeric(scene), n=n) %>%
+  group_by(play)
+```
+
+We could look at a series of histograms to see how plays vary in their distribution…
+
+```{r, message=FALSE, results='hide'}
+shak %>%
+  #filter(Play == "Hamlet" | Play == "King John" | Play == "The Tempest") %>% 
+  filter(ActSceneLine != "") %>%
+  mutate(ActSceneLine2 = ActSceneLine) %>%
+  separate(ActSceneLine2, c("act", "scene", "line")) %>%
+  count(Play,act, sort=TRUE) %>%
+  transmute(play=Play, act=as.integer(act), n=n) %>%
+  ggplot(aes(x=act)) + 
+    geom_histogram(aes(y = n), stat="identity") + facet_wrap(~play)
+```
+
+
+However, it is much easier and quicker to extract this information from a heatmap (although the precise numbers are lost in this version).
+
+```{r fig.width=3, fig.asp=.75}
+shak %>%
+  filter(ActSceneLine != "") %>%
+  mutate(ActSceneLine2 = ActSceneLine) %>%
+  separate(ActSceneLine2, c("act", "scene", "line")) %>%
+  count(Play,act, sort=TRUE) %>%
+  transmute(play=Play, act=as.integer(act), n=n) %>%
+  ggplot(aes(x=act,y=reorder(play, n))) + 
+    geom_tile(aes(fill = n), colour = "white") + scale_fill_gradient(low = "white", high = "steelblue")
+```
+
+Let's focus in on a subset of plays in order to simplify the visualisation. From a simple visual inspection, it appears that **Act V** tends to be the lightest on words, with the very notable exception of *Love's Labour's Lost*. Otherwise, **Act I** is generally fairly heavy on words, and **Act II** tends to be a bit lighter. Armed with that (superficial) observation, we might be able to check whether our eyes deceive us or whether there's something to it. (But I'll leave that exploration for another time.)
+
+```{r}
+shak %>%
+  filter(Play == "Hamlet" | Play == "King John" | Play == "The Tempest" | 
+           Play == "Cymbeline" | Play == "Measure for measure" | Play == "Timon of Athens" | 
+           Play == "Richard III" | Play == "Loves Labours Lost" | Play == "A Winters Tale" | 
+           Play == "Othello" | Play == "Romeo and Juliet" | Play == "Henry V") %>% 
+  filter(ActSceneLine != "") %>%
+  mutate(ActSceneLine2 = ActSceneLine) %>%
+  separate(ActSceneLine2, c("act", "scene", "line")) %>%
+  count(Play,act, sort=TRUE) %>%
+  transmute(play=Play, act=as.integer(act), n=n) %>%
+  ggplot(aes(x=act,y=reorder(play, n))) + 
+    geom_tile(aes(fill = n), colour = "white") + scale_fill_gradient(low = "white", high = "steelblue")
+```
+
+The number of scenes per act tends for vary, as does the number of words per scene. Maybe there is some pattern we can detect by plotting the number of words by scene, by act, and by play. This figure is able to communicate a tremendous amount of information in a very small space. Of course, one must still be walked through it to get the full gist of what is shown. The two wordiest scenes in this subset of the corpus are in *Love's Labour's Lost* **Act V, Scene II** (the very last scene in the play) and *A Winter's Tale* **Act IV, Scene IV**. I don't know what happens in these two scenes, but maybe someone who is familiar with the content could identify what makes these two scenes stand out.
+
+```{r fig.width=5, fig.asp=.35}
+shak %>%
+  filter(Play == "Hamlet" | Play == "King John" | Play == "The Tempest" | 
+           Play == "Cymbeline" | Play == "Measure for measure" | Play == "Timon of Athens" | 
+           Play == "Richard III" | Play == "Loves Labours Lost" | Play == "A Winters Tale" | 
+           Play == "Othello" | Play == "Romeo and Juliet") %>% 
+  filter(ActSceneLine != "") %>%
+  mutate(ActSceneLine2 = ActSceneLine) %>%
+  separate(ActSceneLine2, c("act", "scene", "line")) %>%
+  count(Play,act,scene, sort=TRUE) %>%
+  transmute(play=Play, act=as.integer(act), scene=as.integer(scene), n=n) %>%
+  ggplot(aes(x=scene,y=play)) + 
+    geom_tile(aes(fill = n), colour = "white") + 
+    scale_fill_gradient(low = "white", high = "red2") +
+    scale_x_continuous(breaks=c(0:8)) +
+    theme_dark() + 
+    facet_wrap(~act, ncol = 5)
+```
+
+A similar style figure could also illustrate where each character has the bulk of their lines. Here, we can see Hamlet is positively verbose in **Scene II** in **Acts II, III, V**, but otherwise only marginally wordier than the other players. Moreover, there seems to be the most even distribution of lines (neither very dark nor entirely pale, as colour-coded) in **Act I**, whereas the other acts are quite skewed toward the few main players.
+
+```{r fig.width=5, fig.asp=.5}
+shak %>%
+  filter(Play == "Hamlet") %>% 
+  #filter(Player != "HAMLET" & Player != "LORD POLONIUS" & Player != "KING CLAUDIUS") %>% 
+  filter(ActSceneLine != "") %>%
+  mutate(ActSceneLine2 = ActSceneLine) %>%
+  separate(ActSceneLine2, c("act", "scene", "line")) %>%
+  count(Player,act,scene, sort=TRUE) %>%
+  transmute(player=Player, act=as.integer(act), scene=as.integer(scene), n=n) %>%
+  ggplot(aes(x=scene,y=reorder(player,n))) + 
+    geom_tile(aes(fill = n), colour = "white") + 
+    scale_fill_gradient(low = "white", high = "red2") +
+    scale_x_continuous(breaks=c(0:8)) +
+    theme_dark() + 
+    facet_wrap(~act, ncol = 5)
+```
+
+The same type of plot can be used to examine *Twelfth Night*, which is shorter, more evenly distributed, and much less soliloquy-driven. 
+
+```{r fig.width=5, fig.asp=.5}
+shak %>%
+  filter(Play == "Twelfth Night") %>% 
+  #filter(Player != "HAMLET" & Player != "LORD POLONIUS" & Player != "KING CLAUDIUS") %>% 
+  filter(ActSceneLine != "") %>%
+  mutate(ActSceneLine2 = ActSceneLine) %>%
+  separate(ActSceneLine2, c("act", "scene", "line")) %>%
+  count(Player,act,scene, sort=TRUE) %>%
+  transmute(player=Player, act=as.integer(act), scene=as.integer(scene), n=n) %>%
+  ggplot(aes(x=scene,y=reorder(player,n))) + 
+    geom_tile(aes(fill = n), colour = "white") + 
+    scale_fill_gradient(low = "white", high = "red2") +
+    scale_x_continuous(breaks=c(0:8)) +
+    theme_dark() + 
+    facet_wrap(~act, ncol = 5)
+```
+
+# Wrap up
+
+What this all seems to tell us is that we can visualise the structure of the play, separate from their content. Is this useful to you? It will depend on what kinds of research questions you are interested in. However, if any of your questions involve counting things (words, lines, appearances, collocations, ngrams, etc), then it is possible and even likely that visualisations can help communicate that information in a succinct and easily read way.
+
+Of course, counting things is only going to be helpful for some possible questions. But, it's important to know that not everything that can be counted is a simple number. There are relative frequencies, collocations and n-grams, and changes over "time" (i.e., in different acts, scenes, chapters, by publication year, etc). We can use these relations between numbers to create elegant figures that might or might not communicate numbers specifically (i.e., network graphs). We can then use the figures to explore properties of the text that might not be immediately apparent from close reading.
+
+As a quick (visual) summary of what's been covered, here is a table of plot types and their (best) uses:
+
+Plot | Uses
+---|----------
+Bar plot | Frequency (relative or absolute)
+Histogram | Frequency distribution across a scale
+Heatmap | Frequency/attestation across multiple dimensions
+Network graph | Collocation (with or without directionality)
+
+
+Other Plots | Uses
+---|----------
+Flow chart | Temporal order/branching without regard to spacial orientation
+Chord diagram | Connect concepts by frequency but can be busy or confusing
+Choropleth map | Map or diagram that uses shading/color to indicate value
+Word cloud | *CAUTION:* Pretty but difficult to compare relative sizes  
+Pie chart | **DO NOT USE**: Difficult to compare relative size of slices
+
+
+If you have any questions about how to get started or how I generated these figures, please send me an email at:  
+`lauren [DOT] ackerman [AT] ncl.ac.uk`

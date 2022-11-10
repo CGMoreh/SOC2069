@@ -1,0 +1,478 @@
+---
+title: "Session 2: Tidyverse"
+output:
+  html_document:
+    toc: yes
+    toc_depth: 3
+    df_print: paged
+    number_sections: true
+    toc_float:
+      collapsed: false
+---
+
+[Return to main page](https://verbingnouns.github.io/AdventuresInR/)
+
+# Tidyverse functionality
+
+Tidyverse is a package, or a set of add-on tools, that you can optionally use in R to easily and clearly process and visualise your data. In the tidyverse, there are a number of included packages. You do not need to use them all, nor do you need to load them all, but for simplicity's sake, it's easier to load the whole thing and then not worry about it.
+
+```{r setup}
+## Packages required for this lesson:
+#install.packages(c("tidyverse","palmerpenguins"))
+library(tidyverse) # Rstudio should prompt you if a package is required to run a notebook but isn't installed.
+library(palmerpenguins)
+options(dplyr.summarise.inform = FALSE,
+        message = FALSE,
+        warning = FALSE)
+```
+
+## Quick recap
+
+- `%>%` is called a "pipe"  
+- It passes the previous line into the `data` argument of the next line  
+- It **does not save any changes** after output  
+
+For our examples for now, we'll use built-in datasets called `penguins` and `penguins_raw`.
+
+```{r comparison_example}
+# An example as a reminder
+str(penguins) # base R code
+
+penguins %>% str() # tidy R code
+```
+
+
+How would you write the base R function `head(penguins_raw)` using `tidyverse`?
+
+```{r quick_response}
+# Check it here, then type your answer into the chat!
+penguins_raw %>% head()
+```
+
+# Processing data
+
+Before we start learning anything about the shape of our data and statistical results, we often need to process and organise the data.
+
+## Logical operators
+
+These will be useful throughout your work in R, but also pretty much any other programming language you encounter. They return values of TRUE or FALSE when evaluated. This type of value is called a `boolean` value generally, but R specifically calls it a `logical` value (abbreviated `lgl`).
+
+- `==` equivalent to 
+- `>` greater than  
+- `<` less than  
+- `>=` greater than or equal to  
+- `<=` less than or equal to  
+- `!=` NOT equivalent to ("bang-equals")  
+- `&` and (conjunction)
+- `|` or (disjunction)
+
+```{r logical_class}
+class(1==1)
+```
+
+## Filter
+
+If we only want to look at measures taken between 2008-11-01 and 2008-11-09 from `penguins_raw`, we can filter the dataset (which is like subsetting):
+```{r filter}
+penguins_raw %>% 
+  filter(`Date Egg` >= "2008-11-01", # list in a logical (&) order
+         `Date Egg` <  "2008-11-09")
+```
+
+## Add columns
+
+How can you make a new column?
+```{r new_column}
+# `mutate` just means "create"
+penguins %>% 
+  # formula for area of a triangle is: base * height / 2
+  mutate(bill_area_mm2 = bill_depth_mm * bill_length_mm / 2) 
+```
+
+### Activity on your own
+
+Pipe the dataset `penguins` into a `mutate` function that creates a new column called `year_fctr`. This column should contain the exact same content as the the column `year`, but instead of being of class `int` (an integer, or numeric value), turn it into a value of class `fctr` (a factor, or categorical value) using the function `as.factor()`. You may need to search for examples in the Help documentation or online:
+```{r duplicate_column}
+# duplicate the `year` column but change the class from int to fctr
+penguins %>% 
+  mutate(year_fctr = year %>% as.factor()) -> new_penguins
+
+new_penguins %>% 
+  select(-year) -> new_penguins
+
+write_csv(new_penguins, "newpenguins.csv")
+
+# save() # save a complex mode
+# load() # load it back in so you don't need to rerun it
+```
+
+## Case when
+
+Tidyverse reduces the need for "for loops". Instead of going line by line through a dataset to determine what contingent behaviour to perform, `case_when` simplifies this. The for-loop behaviour is time and energy intensive on large datasets. That's why `case_when` is so simple and yet so powerful.
+
+Here's an example of how one might create a column that translates the values in `body_mass_g` in `penguins` to a word:
+```{r case_when_example}
+penguins %>% 
+  mutate(birdsize = case_when(body_mass_g <  3500 ~ "small", # choose first category to label
+                              # choose another easy-to-delimit category to label
+                              body_mass_g >= 4800 ~ "large",
+                              is.na(body_mass_g) ~ as.character(body_mass_g),
+                              # label all other cases, especially if they're harder to delimit
+                              TRUE ~ "medium"))
+```
+
+### Activity on your own
+
+Now, how would you create a column in `penguins` that groups flipper length (`flipper_length_mm`) into "short", "medium" and "long"? You can find the range of possible values using the code provided below to get you started.
+
+```{r flipper_range}
+# find the range of flipper lengths
+penguins %>% pull(flipper_length_mm) %>% range(na.rm = TRUE)
+```
+
+
+```{r short-med-long}
+# use `mutate` and `case_when` to create a new column with contingent values
+# you can copy the code directly from the previous chunk and only change the relevant values
+penguins %>% 
+  mutate(widesize = case_when(flipper_length_mm <=  180 ~ "short", 
+                              flipper_length_mm > 181 ~ "long",
+                              is.na(flipper_length_mm) ~ as.character(flipper_length_mm),
+                              TRUE ~ "medium"))
+```
+
+What if we want a fourth category, so that we end up with "short", "medium-short", "medium-long" and "long"? You'll have to use more complex logical operations (such as `&`) rather than just listing each term on its own line.
+
+```{r four_length_categories}
+# try creating four categories of flipper length
+penguins %>% 
+  mutate(wingsize = case_when(flipper_length_mm <=  180 ~ "short", 
+                              flipper_length_mm > 180 & flipper_length_mm <= 195 ~ "medium-short",
+                              flipper_length_mm > 213 ~ "long",
+                              is.na(flipper_length_mm) ~ as.character(flipper_length_mm),
+                              TRUE ~ "medium-long"))
+
+
+list_of_words <- c("cat", "dog", "pear", "banana", "car")
+peanut <- "peanut"
+cat <- "cat"
+
+cat %in% list_of_words
+peanut %in% list_of_words
+
+```
+
+
+## Group and summarise
+
+What if we want to get aggregate values from our dataset, rather than looking at it as a whole?
+
+**`group_by`** is a function that flags certain columns for operations applied by category. **`summarise`** checks which columns are flagged and performs operations based on the combination of values in those columns.
+
+Nothing appears to happen when we use `group_by` by itself:
+```{r group_by}
+# look at each step of the code by itself to understand what it is doing
+penguins %>% 
+  group_by(species,year)
+```
+
+How many observations are there per "species" and "year"? What are the mean body masses per year?
+
+```{r summarise_example}
+# using `summarise()`
+penguins %>% 
+  group_by(species, year) %>% 
+  summarise(counts = n(),
+            massPerYear = mean(body_mass_g, na.rm=TRUE))
+```
+
+### Activity on your own
+
+We can use `group_by` and `summarise` to do a lot more than just count. Using `penguins`, group the dataset by species and summarise over species to find the mean (`mean()`) and standard deviation (`sd()`) of body mass for each species:
+
+```{r fill_in_the_blanks_together}
+# calculate mean and st dev values of `body_mass_g` for `species` values
+# remember to specify that NAs should be removed using the argument demonstrated above
+penguins %>% 
+  group_by(species) %>% 
+  summarise(body_mass_mean = mean(body_mass_g, na.rm = TRUE),
+            body_mass_sd = sd(body_mass_g, na.rm = TRUE))
+
+penguins %>% 
+  filter(!is.na(body_mass_g)) %>% 
+  group_by(species) %>% 
+  summarise(body_mass_mean = mean(body_mass_g),
+            body_mass_sd = sd(body_mass_g))
+
+penguins_raw
+```
+
+(This is VERY useful for graphing and creating summary statistics tables!)
+
+## Join and reshape
+
+Due to constraints on time, read through this section on your own.
+
+One type of data processing that can be a huge hassle without a programming language is merging or joining datasets.
+
+In order to illustrate this, I will create two small datasets that imitate a survey.
+
+Here is the demographic data:
+```{r demographic data}
+participant <- c("John", "Simone", "Aaliyah", "Marcus")
+gender <- c("m", "f", "f", "m")
+age <- c(24, 18, 38, NA)
+
+demographics <- tibble(participant, gender, age)
+
+demographics # to view the table below
+```
+
+Here is some quantitative survey data that also has some more qualitative responses:
+
+```{r survey questions}
+q1 <- c("yes", "yes", "yes", "no") %>% as.factor()
+q2 <- c(4, 3, 4, 5) %>% as.factor()
+q3 <- c(1, 4, 5, 2) %>% as.factor()
+q4 <- c("rarely", "often", "always", "sometimes") %>% as.factor()
+q5 <- c(1, 2, 1, 1) %>% as.factor()
+q6 <- c(3, 1, 5, 5) %>% as.factor()
+
+survey <- tibble(participant, q1, q2, q3, q4, q5, q6)
+
+survey # to view the table below
+```
+
+Combine the two datasets using the column they have in common:
+```{r full_join}
+# save it as `mySurvey`
+full_join(demographics, survey, by = "participant") -> mySurvey
+
+mySurvey # to view the table below
+```
+
+Switch the rows and columns for only numeric survey questions:
+
+```{r pivot_longer}
+# save it as `mySurvey_long` with two new columns: `questions` and `responses`
+mySurvey %>% 
+  pivot_longer(cols = c("q2", "q3", "q5", "q6"), # you can also use col indicies, e.g. 4:9
+               names_to = "questions",
+               values_to = "responses") -> mySurvey_long
+
+mySurvey_long
+```
+
+Why would you want to do this? It's not as easy for human eyes to read, but it's much easier to graph.
+
+We can also reverse the operation, if you receive long data and you prefer wide data.
+
+```{r pivot_wider}
+# `pivot_wider` is the function to reverse this, if you prefer each question to be in its own column
+mySurvey_long %>% 
+  pivot_wider(names_from = "questions",
+              values_from = "responses")
+```
+
+# Visualisation
+
+In the `tidyverse`, the package for making elegant plots is called `ggplot2`. It works a lot like how pipes work, but since it was originally designed as a separate package, it uses `+` instead of `%>%`.
+
+To begin, we need to specify what data we're using.
+```{r blank plot}
+# this will print a blank plot
+penguins %>% 
+  ggplot() + 
+  theme_bw() + # this line makes it easy to print and more accessible for visual disabilities
+  NULL # this line allows us to end each preceding content line with a + regardless of order
+```
+
+Now we have to tell it what the axes are. Make the x-axis `bill_length_mm` and the y-axis `bill_depth_mm`.
+
+```{r empty grid}
+# this will print a *mostly* blank plot...
+# ggplot(data = penguins,
+#        mapping = aes())
+
+penguins %>% 
+  ggplot(aes(x = bill_length_mm,
+             y = bill_depth_mm)) +
+  theme_bw() +
+  NULL
+```
+
+What's the difference? Why isn't the data visible?
+
+Now let's tell it what kind of plot to make. This is called the plot's "geometry", abbreviated "geom".
+
+```{r simple_scatterplot, warning=FALSE}
+# make a scatter plot
+penguins %>% 
+  ggplot(aes(x = bill_length_mm,
+             y = bill_depth_mm)) +
+  theme_bw() +
+  geom_point() +
+  NULL
+```
+
+## Lines of best fit
+
+Our eyes are not designed to find *subtle* patterns in data, and our minds will often "see" patterns and differences where none exist. Therefore, we should always confirm what we see with statistics. One way to do that is to draw a **line of best fit**. This works best with continuous data (as below), but it can also work with categorical and binomial data (in the appendix).
+
+```{r add_slope, warning=FALSE, message=FALSE}
+# add a line of best fit
+penguins %>% 
+  ggplot(aes(x = bill_length_mm,
+             y = bill_depth_mm)) +
+  theme_bw() +
+  geom_point() +
+  geom_smooth(method = "lm") + # line of best fit based on the lm() method
+  NULL
+```
+
+This line suggests that as bill length gets longer, bill depth gets smaller, overall. However, there is clearly a lot of variance in this data! Perhaps we could add another layer to the plot to figure out where that "noise" is coming from.
+
+
+```{r colour_as_a_dimension, warning=FALSE, message=FALSE}
+# fill in plot with colour contingent on species
+penguins %>% 
+  ggplot(aes(x = bill_length_mm,
+             y = bill_depth_mm,
+             colour = species)) + # add colour to the base aesthetics
+  theme_bw() +
+  geom_point() +
+  geom_smooth(method = "lm") + 
+  NULL
+```
+
+This gives a very different picture of the relationship between bill length and bill depth!
+
+```{r slope_by_species, warning=FALSE, message=FALSE}
+penguins %>% 
+  ggplot(aes(x = bill_length_mm,
+             y = bill_depth_mm,
+             colour = species)) + # add a line to plot colour contingent on a mapping
+  theme_bw() +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  NULL
+```
+
+That said, both "pictures" are correct: 
+
+```{r all_slopes, warning=FALSE, message=FALSE}
+penguins %>% 
+  ggplot(aes(x = bill_length_mm,
+             y = bill_depth_mm)) + 
+  theme_bw() +
+  geom_point(aes(colour = species)) + # colour by species for points only
+  geom_smooth(method = "lm") + # line of best fit regardless of species
+  geom_smooth(aes(colour = species), method = "lm") + # line of best fit contingent on species
+  NULL
+```
+
+These lines of best fit give us insight into what our statistical models will be telling us, when we run them.
+
+### Activity on your own
+
+We have used `geom_point()` and `geom_smooth()` to plot data. R does most of the calculations for us, so we only need to specify certain dimensions of the plot and it does the rest. Now try getting R to plot a `geom_boxplot()` box and whisker plot with `species` on the x-axis and one of the numerical columns from `penguins` on the y-axis. Add the aesthetic `fill` to colour in the boxes. Try filling the boxes by `species`, but also try `island` or `year`, to see what happens.
+
+```{r boxplot_activity, warning=FALSE}
+# you can copy much of the code from the preceding chunks and edit it to change the geometries and aesthetic mappings.
+penguins %>% 
+  mutate(year = as.factor(year)) %>% 
+  ggplot(aes(x = species,
+             y = bill_depth_mm,
+             fill = year)) + # add a line to plot colour contingent on a mapping
+  theme_bw() +
+  geom_boxplot() +
+  NULL
+
+
+penguins %>% 
+  ggplot(aes(x = bill_length_mm,
+             y = bill_depth_mm,
+             colour = year)) + # add a line to plot colour contingent on a mapping
+  theme_bw() +
+  geom_point() +
+  NULL
+```
+
+
+# Challenge activities
+
+**Work on these activities on your own or in small groups this afternoon and we will go over possible solutions together at 16:00.**
+
+Putting together the data wrangling and data visualisation sections of this lesson, we can create a bar plot. Bar plots are different from other types of plots because they require some calculation to happen between the raw data set and the plot. We can do this calculation ourselves very easily, and then specify to R that we've already done it and we just want R to plot it using the values provided. Here's how to do that:
+
+- Group `penguins` by species
+- Summarise to find the mean flipper length
+    - Remember to remove NA values!
+- Pipe the resulting summary table into `ggplot()`
+- Specify the x-axis is mapped from `species` so each bar will represent each species
+- Specify the y-axis is mapped from your summarised mean values
+- You can optionally fill the bars by `species` as well
+- Add the `geom_bar()` geometry as a new layer in your plot
+    - Within this geometry, specify that the argument `stat` is `"identity"`:
+        - `stat = "identity"`
+    - This tells R that the numbers to use are the exact ones provided
+- Optionally specify that you'd like the `theme_bw()` layer to make the plot more accessible
+
+```{r barplot_activity}
+# try it out here!
+# you can copy code from previous chunks AND from any internet searches you do
+penguins %>% 
+  group_by(species) %>% 
+  summarise(flipper_mean = mean(flipper_length_mm, na.rm=TRUE)) %>% 
+  ggplot(aes(x = species,
+             y = flipper_mean,
+             fill = species)) +
+  geom_bar(stat = "identity") +
+  theme_bw() +
+  NULL
+```
+
+
+Below is code for a really useful type of plot called an interaction plot. There is a lot going on, both in how the data are summarised and how the plot is constructed. Go through the code line by line and figure out what each piece does. Write comments to yourself so you can remember later! (`# comments start with a hash symbol`)
+
+```{r interaction_plot_activity}
+penguins %>% 
+  filter(!is.na(sex)) %>% 
+  group_by(species, sex) %>% 
+  summarise(count = n(),
+            mean_mass = mean(body_mass_g),
+            sd_mass = sd(body_mass_g),
+            standard_error = sd_mass / sqrt(count)) %>% 
+  ggplot(aes(x = sex,
+             y = mean_mass,
+             colour = species,
+             group = species)) +
+  theme_bw() +
+  geom_point() +
+  geom_path() +
+  geom_errorbar(aes( ymin = mean_mass - standard_error,
+                     ymax = mean_mass + standard_error),
+                width = .1) +
+  ggtitle("Interaction of species and sex for aggregate body mass in grams") +
+  ylab("mean body mass (g)") +
+  NULL
+  
+```
+
+
+# Further resources
+
+1. Another lesson on [Dataviz as analysis](https://verbingnouns.github.io/notebooks/reading/notebooks/20210610-dataviz.html) that I gave at a summer school recently.
+
+2. How to link dataviz to statistical analysis, specifically linear models: [(Types of) Linear Models](https://verbingnouns.github.io/notebooks/reading/notebooks/20210615-linearmodels.html), another lesson I gave at the same summer school. This will be extremely useful to prepare for Friday, if you are new to linear models or would like to understand more about how to visualise different types of data and their lines of best fit.
+
+3. [R for Data Science (R4DS)](https://r4ds.had.co.nz/) is a free book about using R and `tidyverse` to do all types of data science.
+
+    - [Data transformation chapter](https://r4ds.had.co.nz/transform.html)  
+    - [Data visualisation chapter](https://r4ds.had.co.nz/data-visualisation.html)
+
+4. [ggplot2: Elegant Graphics for Data Analysis](https://ggplot2-book.org/) is a free book about using `ggplot2` to create concise, informative, and beautiful graphics to communicate your data easily.
+
+5. [Dataviz Cheatsheet PDF](https://github.com/rstudio/cheatsheets/blob/master/data-visualization-2.1.pdf)
+
+6. [Data Wrangling Cheatsheet PDF](https://rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)
