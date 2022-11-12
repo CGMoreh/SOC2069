@@ -1,9 +1,11 @@
 ## Data prep
 
 library(tidyverse)
+#library(strengejacke)
 library(sjlabelled)
 library(summarytools)
 library(sjmisc)
+library(sjPlot)
 
 # us <- haven::read_spss("A:/OneDrive - Newcastle University/WORK Newcastle/SOC2069/h_indresp_td.sav") 
 
@@ -18,8 +20,7 @@ path_office <- "A:/OneDrive - Newcastle University/WORK Newcastle/SOC2069/Data/6
 path_hp_laptop <- "C:/Users/ncm281/OneDrive - Newcastle University/WORK Newcastle/SOC2069/Data/6614stata_5FAC8DA9C415588B7AFA54AB180477074A808CCA1CD9354267911054D02007D4_V1/UKDA-6614-stata/stata/stata13_se/ukhls/h_indresp.dta"
 
 ## Load original dataset
-us <- read_stata(path_office)
-us2 <- haven::read_dta(path_office)
+us <- read_stata(path_hp_laptop)
 
 ## Set all negative values to NA; see: https://www.understandingsociety.ac.uk/documentation/mainstage/user-guides/main-survey-user-guide/missing-values
 us2 <- us %>%  
@@ -51,42 +52,72 @@ us3 <- us2 %>% select(
   h_scghq1_dv:h_jwbs2_dv # scales
 )
 
+us3 <- us3 %>% 
+  labelled::remove_attributes("format.stata") %>% 
+  drop_labels()
+
+us4 <- us3 %>% mutate_if(is.factor , as_label)
+
+
+# us3 %>% mutate_if(is.factor , as_character) %>% write.csv(file = "docs/Data/us_csv.csv")
+
+saveRDS(us3, file = "docs/Data/ukhls-w8.rds")
 
 # Small data for testing
 
 set.seed(123)
 us_t <- us3 %>% slice_sample(n = 300)
-
-
 us3 <- us3 %>% mutate_if(is.factor , as_numeric) %>% mutate_all(as_label) 
-
 us3 <- us3 %>% mutate_if(is.factor , as_label)                         
-  
 
-us_t2 <- us_t %>% mutate(across(where(~ length(get_labels(.x))<12), as_label))
-  
-  mutate_if({length(get_labels(.)) < 10}, as_label)
+# Tabulations
 
+us4 %>% frq(h_ethn_dv)
+us4 %>% count(h_ethn_dv)
 
+us4 %>% filter(as_numeric(h_ethn_dv)==12) %>% frq(h_ethn_dv)
 
+us3 %>% filter(h_ethn_dv==12) %>% frq(h_ethn_dv)
+us4 %>% filter(h_ethn_dv=="chinese") %>% count(h_ethn_dv)
+
+us4 %>% frq(h_jwbs1_dv)
 
 # Data catalogues
 
-us %>% summarytools::dfSummary() %>% print(file = "docs/Data/us_variable_list.html")
+us3 %>% 
+  summarytools::dfSummary() %>% print(file = "docs/Data/varlist.html")
+
+us3 %>% mutate_if(is.factor , as_label) %>% 
+  summarytools::dfSummary() %>% print(file = "docs/Data/varlist_labels.html")
+
 
 summarytools::dfSummary(as_character(as_numeric(us3))) %>% print(file = "docs/Data/us3n_variable_list.html")
 
 summarytools::dfSummary(us_t2, style = "grid")
 
 
-
-# us3 %>% sjmisc::descr()
-
+descr(us_csv, out = "browser", file = "docs/Data/var_descr")
 
 
-labelled::remove_attributes("format.spss")
 
 summarytools::dfSummary(h) |> summarytools::view()
 
 h <- h |> 
   mutate(h_sex_dv = sjlabelled::as_label(h_sex_dv))
+
+# Graphs
+
+us_csv %>% ggplot() + 
+  aes( h_age_dv, 	
+       h_fimnnet_dv) + 
+  geom_point() +
+  theme_minimal()
+
+barplot(table(us_csv$h_sex))
+
+gf_boxplot(h_age_dv ~ h_sex, data = us_csv)
+
+gf_density( ~ h_age_dv, data = us_csv)
+
+gf_bar( ~ h_sex, data = us_csv) +
+  theme_minimal()
