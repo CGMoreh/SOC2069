@@ -125,6 +125,44 @@
 }
 
 
+.notebox {
+  padding: 1em 1em 1em 4em;
+  margin-bottom: 10px;
+  border: 2px solid orange;
+  border-radius: 10px;
+  background: #f5f5f5 5px center/3em no-repeat;
+}
+
+.note {
+  background-image: url("./../GTA_R_intro/images/note.png");
+}
+
+
+.taskbox {
+  padding: 1em 1em 1em 8em;
+  margin-bottom: 10px;
+  border: 2px solid #ccffcc;
+  border-radius: 10px;
+  background: #ccffcc 5px center/5em no-repeat;
+}
+
+.task {
+  background-image: url("./../GTA_R_intro/images/task.png");
+}
+
+.questionbox {
+  padding: 1em 1em 1em 8em;
+  margin-bottom: 10px;
+  border: 2px solid #F97373;
+  border-radius: 10px;
+  background: #F97373 5px center/5em no-repeat;
+}
+
+.question {
+  background-image: url("./../GTA_R_intro/images/question.png");
+}
+
+
 /* Headings and text */
 
 h1, .h1, h2, .h2, h3, .h3 {

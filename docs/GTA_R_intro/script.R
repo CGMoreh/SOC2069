@@ -5,13 +5,13 @@ five <- 1 + 1 + 3
 
 (2 + 9) / 7 # comment: result is: 1.57
 
-five + 3
+five + 4
 
 nine <- 1 + 1 + 3
 
 nine - five
 
-nine = five
+nine == five
 
 nine > five
 
