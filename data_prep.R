@@ -45,21 +45,48 @@ us <- read_stata(path_hp_laptop) %>%
     h_fimngrs_dv, h_paygl:h_paynu_dv, 
     h_age_dv, h_doby_dv, h_marstat_dv, h_ethn_dv, h_fimnnet_dv, h_country, h_urban_dv, h_agegr10_dv,
     h_nchild_dv, h_ndepchl_dv, h_hiqual_dv, h_jbft_dv, h_jbes2000, h_jbnssec8_dv:h_jbnssec3_dv,  # various personal
-    h_scghq1_dv:h_jwbs2_dv # scales
-    )  %>% 
+    h_scghq1_dv:h_jwbs2_dv, # scales
+    -c(h_ivfio, h_ioutcome, h_istrtdaty:h_istrtdatd, h_mstatsam, h_currmstat,	h_jbsect, h_jbot, h_payusl,
+       h_paytyp, 	h_paygl, h_paynl, h_payg_dv, h_fimngrs_dv, h_ndepchl_dv, h_jbft_dv, h_jbes2000, 
+       h_scghq2_dv, h_benpen1:h_benpen96 ))  %>% 
   labelled::remove_attributes("format.stata") %>% 
   drop_labels() %>% 
-  mutate_if(is.factor , as_label)
+  mutate_if(is.factor , as_label) %>% 
+  rename_all(~stringr::str_replace(.,"^h_",""))
 
-saveRDS(us, file = "docs/Data/ukhls-w8.rds")
-summarytools::dfSummary(us) %>% print(file = "docs/Data/varlist.html")
+saveRDS(us, file = "docs/Data/ukhls_w8.rds")
+
+summarytools::dfSummary(us) %>% print(file = "docs/Data/varlist.html", footnote = NA)
+
+### ADD TO <BODY>
+# <div class="container st-container">
+#   <h4>The UK Household Longitudinal Study (Understanding Society), Wave 8 (2016-17)</h4>
+#   <b>Data set name</b>: ukhls_w8
+#   <b>Dimensions</b>: 39293 x 208 <br>
+#   <b>Description</b>: This dataset is an edited version of the <b>h_indresp</b> dataset available from Understanding Society. The following changes have been done to the original dataset:
+#   <li>it has been reduced in size, keeping only <b>199</b> variables of the original <b>2152</b></li>
+#   <li>the wave prefix (<b>h_</b>) has been removed from all the variable names</li>
+#   <li>all negative-coded missing values (-21 to -1) were transformed to generic missing (NA) values</li>
+#   Keeping the above in mind, <a href="https://www.understandingsociety.ac.uk/documentation/mainstage/dataset-documentation">the variable search function </a> provided on the Understanding Society website can and should be used to gain insight into the meaning of variables beyond the description provided in the variable labels.<br>
+#   <b>Citation</b>: To cite this data, use the recommended citation to the original dataset: 
+#   <li>University of Essex, Institute for Social and Economic Research (2022) Understanding Society: Wave 8, 2016-2017. UK Data Service, SN: 6614, http://doi.org/10.5255/UKDA-SN-6614-17</li>
+#   
+# #   ...
+# 
+# ### Change the page margins
+#   .st-container {
+#     width: 100%;
+#     padding-right: 15px;
+#     padding-left: 15px;
+#     margin-right: 5px;
+#     margin-left: 5px;
+#     margin-top: 15px;
+#   }
 
 
-# Further wrangling
+# Read in data
 
-ukhls_w8 <- readRDS("C:/Users/ncm281/Documents/SOC2069/docs/Data/ukhls-w8.rds")
-
-ukhls_w8 <- ukhls_w8 %>% rename_all(~stringr::str_replace(.,"^h_",""))
+us <- readRDS("C:/Users/ncm281/Documents/SOC2069/docs/Data/ukhls_w8.rds")
 
 # Small data for testing
 
