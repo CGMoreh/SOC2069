@@ -316,7 +316,7 @@ Most work in R is done using _Functions_. These take the following generic form:
 
 ![](images/bake_function.png)
 
-It's possible to **create your own functions**. This makes R extremely powerful and extendible. We're not going to cover making your own functions in this course, but it's important to be aware of this capability. There are plenty of good resources online for learning how to do this, including [this one](https://www.statmethods.net/management/userfunctions.html)
+It's possible to **create your own functions**. This makes R extremely powerful and extendable. We're not going to cover making your own functions in this course, but it's important to be aware of this capability. There are plenty of good resources online for learning how to do this, including [this one](https://www.statmethods.net/management/userfunctions.html)
 
 # Getting help
 
@@ -426,7 +426,7 @@ The `dplyr` package is designed to make it easier to manipulate flat (2-D) data 
   * `ungroup()` remove grouping information from data frame.
   * `distinct()` remove duplicate rows. 
 
-All these functions work similarly as follow:
+All these functions work similarly as follows:
 
 - The first argument is a data frame/tibble 
 - The subsequent arguments are comma separated list of unquoted variable names and the specification of what you want to do
