@@ -75,7 +75,7 @@ Note:
 * You can make sub-folders for data, scripts, etc.  
 * All files produced by R scripts saved to the project will also save into the project folder
 
-You can try creating a new R Project, but for simplicity, you can download a folder already set up as an R Project from here: 
+You can try creating a new R Project, but for simplicity, **you can download a folder already set up as an R Project from here: https://cgmoreh.github.io/SOC2069/SOC2069-Statistical-analysis.zip**
 
 1. Download the compressed folder into a suitable location on your **OneDrive - Newcastle University** drive. This will allow you to access your files from any computer by logging into your university OneDrive account. 
 2. Once downloaded, use the *Compressed Folders Tools* to extract the contents of the compressed folder.
