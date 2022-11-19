@@ -264,3 +264,13 @@ a:hover {
 .nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
     background-color: #69b3a2;
 }
+
+
+/* ---------- klippy logo ----------- */
+
+.btn-klippy  {
+}
+
+.btn-klippy .tooltipped .tooltipped-no-delay .tooltipped-w .octicon {
+  width: 20px !important;
+}
