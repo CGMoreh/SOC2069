@@ -124,6 +124,7 @@
     margin-bottom: 100px;
 }
 
+/* Other text boxes */
 
 .notebox {
   padding: 1em 1em 1em 4em;
@@ -161,6 +162,20 @@
 .question {
   background-image: url("./../GTA_R_intro/images/question.png");
 }
+
+
+.codingtipbox {
+  padding: 1em 1em 1em 8em;
+  margin-bottom: 10px;
+  border: 2px solid #f9d873;
+  border-radius: 10px;
+  background: #f9d873 5px center/5em no-repeat;
+}
+
+.codingtip {
+  background-image: url("./../GTA_R_intro/images/coding.png");
+}
+
 
 
 /* Headings and text */
@@ -301,4 +316,13 @@ a:hover {
 
 .nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
     background-color: #69b3a2;
+}
+
+/* ---------- klippy logo - !!!!!! can't get it to work yet !!!!!!!! ----------- */
+
+.btn-klippy  {
+}
+
+.btn-klippy .tooltipped .tooltipped-no-delay .tooltipped-w .octicon {
+  width: 20px !important;
 }

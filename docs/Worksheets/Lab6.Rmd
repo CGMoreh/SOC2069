@@ -160,7 +160,7 @@ I will sometimes use this form in the worksheets to clarify what package a funct
 ### Installing some other packages
 
 ::: {.taskbox .task}
-Now that you've installed a package, write the required functions in your R scripts to install and load the following two packages that we will be using later in this session:
+Now that you've installed a package, write the required functions in your R scripts to **install** and **load** the following two packages that we will be using later in this session:
 
 -   mosaic
 -   sjmisc
@@ -225,7 +225,13 @@ Let's look, for instance, at the variable `sex`:
 data %>% sjmisc::frq(sex)
 ```
 
-Let's decipher the code above: - first, we assume that there is an object called 'data' in our Environment that contains the *ukhls_w8.rds*; unless we restarted RStudio or deleted it, the object should still be there from the first exercise; - the `%>%` operator (called a *pipe*) is a function loaded with the `tidyverse` and allows objects and functions to be fed (i.e. piped) forward to other functions. Getting into the habit of using the "pipe" workflow is particularly useful as it makes combining a series of operations/commands easier to read and follow. Here, we take our dataset and pipe it forward so that we can easily refer to variables from that dataset (such as *sex*); - the remaining code applies the `frq` function from the `{sjmisc}` package to the variable *sex*
+Let's decipher the code above: 
+
+- first, we assume that there is an object called 'data' in our Environment that contains the *ukhls_w8.rds*; unless we restarted RStudio or deleted it, the object should still be there from the first exercise; 
+
+- the `%>%` operator (called a *pipe*) is a function loaded with the `tidyverse` and allows objects and functions to be fed (i.e. piped) forward to other functions. Getting into the habit of using the "pipe" workflow is particularly useful as it makes combining a series of operations/commands easier to read and follow. Here, we take our dataset and pipe it forward so that we can easily refer to variables from that dataset (such as *sex*); 
+
+- the remaining code applies the `frq` function from the `{sjmisc}` package to the variable *sex*
 
 We could have written the following command, with the same result:
 

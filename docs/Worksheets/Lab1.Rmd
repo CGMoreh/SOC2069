@@ -69,7 +69,7 @@ Look at the information on the UKDA Data catalogue page and answer:
 taken regularly; they can be *longitudinal* or *time series*)
 - How many *studies* categorised as *UK Survey data* are there?
 
-To check whether you've found the corrent information, you can check the answers below.
+To check whether you've found the correct information, you can check the answers below.
 
 <details>
   <summary><i>Click to view answer</i></summary>
