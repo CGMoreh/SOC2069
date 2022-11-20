@@ -173,14 +173,122 @@ favstats( ~ scghq1_dv, data = ukhls)
 histogram( ~ scghq1_dv, fit = "normal", data = ukhls)
 ```
 
+In the TW11 lecture presentation you've also heard about another useful plot type that can be used to summarise numeric variables: the *boxplot*. We can make boxplots with the `bwplot` function from the `{mosaic}` package:
 
+```{r}
+bwplot( ~ scghq1_dv, data = ukhls)
+```
 
+::: {.questionbox .question}
+**Questions**
+
+Examine all the descriptive results from the tables and charts you've produced and try to answer these questions:
+
+- What is the average (mean) subjective wellbeing score of the respondents in the dataset?
+- What about the median (md) subjective wellbeing score?
+- How spread out are the subjective wellbeing scores of the respondents? (tip: the *standard deviation* (sd) is a good measure of "spread", or *variation* around the *mean*)
+- What is the *minimum* and *maximum* subjective wellbeing score of the respondents? 
+- Are there any missing values (NAs) on this variable? (i.e. What is the number of respondents for whom we don't have information on this variable for whatever reason?)
+- Are there any extreme *outliers* on the subjective wellbeing variable? (i.e. Respondents whose score is either too low or too high. **Tip**: This can be seen most obviously on the boxplot; check the TW11 presentation slides for how to interpret the elements of the boxplot)
+- **Finally, what exactly does the *scghq1_dv* variable measure?**
+:::
+
+The last question is tricky, because the dataset doesn't contain much useful information about the variable; all we know from the label is that it measures `Subjective wellbeing (GHQ): Likert`, but that's not enough information to accurately understand the variable. It's best if we check the variable directly on the UKHLS/Understanding Society website: [https://www.understandingsociety.ac.uk/documentation/mainstage/dataset-documentation/variable/**scghq1_dv**](https://www.understandingsociety.ac.uk/documentation/mainstage/dataset-documentation/variable/scghq1_dv){target="_blank"}. There, we find the following description about the variable:
+
+> This measure converts valid answers to 12 questions of the General Health Questionnaire (GHQ) to a single scale by recoding so that the scale for individual variables runs from 0 to 3 instead of 1 to 4, and then summing, **giving a scale running from 0 (the least distressed) to 36 (the most distressed)**. See Cox, B.D et al, The Health and Lifestyle Survey. (London: Health Promotion Research Trust, 1987).
+
+This is very useful. We know understand where the 0-36 scale (min-max values) we saw in the descriptive statistics comes from and, crucially, that the higher up one scores on this scale the **more distressed** that person is; in other words: higher scores on the **scghq1_dv** variable means lower levels of *subjective wellbeing*.
+
+As long as we understand what the variable measure and how it measures it, we can used it in our analyses. However, it may make the interpretation of the results logically easier if we modified the **scghq1_dv** variable so that *higher* values mean *higher* subjective wellbeing. This is just to avoid any confusion in our minds about what the scale is telling us.
 
 ## Step 2: **Modify** your variables (if needed)
 
+If we decide that some variables would benefit from modifying in any way, we can do that. In our case, let's recode the values on the **scghq1_dv** variable so that *higher* values would equate *higher* subjective wellbeing.
+
+There are various ways to do that in `R`, but given that our variable is numeric and we don't need to worry about value labels, we can easily do it manually. We have all the information we need to do this. If the scale we want to inverse runs from `0` to `36`, then if we subtract each score from the maximum value on that scale (i.e. **36**), then we will have an inversed scale (because `36-0=36`, `36-1=35`, `36-36=0` and so on). It's also important not to overwrite the original variable in the dataset, in case we make a mistake; so we will create a new variable and give it an easy name to work with (**but make sure that the name doesn't already exist in the dataset, otherwise you are overwriting that variable!**). The `mutate` function (from `{tidyverse}`) makes it easy to create, modify and delete variables from a dataset. The code could be the following:
+
+```{r}
+ukhls <- ukhls %>% 
+  mutate(wellbeing = 36-scghq1_dv)
+```
+
+In the above code, we first assign the dataset **ukhls** to an object of the same name (i.e. we are **overwriting** the dataset); then the create a new variable in the dataset called **wellbeing**, and we specify that the values of this variable should be calculated by subtracting the values of the existing **scghq1_dv** from the number **36**.
+
+::: {.codingtipbox .codingtip}
+**Coding tip: `max()` and `na.rm = TRUE`**
+<details>
+  <summary><i>Click to view</i></summary>
+
+The above code works well, but in order to make our commands more resilient and less error-prone, instead of typing by hand the *maximum* value of the scale, we could use a function to extract it from the data. There is a function for this purpose in both base `R` and the `{mosaic}` package and in both cases it's called `max()`. They both do the same thing, the only difference being that the base `R` function requires using the `$` selector to refer to a variable within a dataset (e.g. `ukhls**$**scghq1_dv`) whereas the `{mosaic}` function allows the formuala-style notation (e.g. `~ scghq1_dv, data = ukhls` ). So the commands below will produce equivalent results:
+
+```{r}
+base::max(ukhls$scghq1_dv)
+mosaic::max( ~ scghq1_dv, data = ukhls)
+```
+
+While indeed the same, the result is not what we would expect. We know that the maximum value of the **scghq1_dv** scale is **36**, but here we are getting `NA`. Why? And how to fix it?
+
+When this happens, we should make sure to exclude all the missing values first by adding the additional argument `na.rm = TRUE` to the command. The argument **r**e**m**oves **na** values (i.e. missing responses) in a variety of different functions, so it's good to know about. It's very useful because many functions fail if there are missing values in the data. In our case, without specifying `na.rm = TRUE` the `max` function takes values coded as `NA` to be above the highest numeric values and prints those as the *maximum* value in the variable. If we exclude the `NA` (i.e. missing) values, then we get the expected *maximum* value of the `scghq1_dv` variable:
+
+```{r}
+max(ukhls$scghq1_dv, na.rm = TRUE)
+mosaic::max( ~ scghq1_dv, data = ukhls, na.rm = TRUE)
+```
+
+We can now rewrite the command creating the new `wellbeing` variable using the `max()` function to first extract the highest value to an object (let's call it "maxvalue" and print it to the console to check if it's correct) and use that as input in the `mutate()` command:
+
+```{r eval=FALSE}
+maxvalue <- max(ukhls$scghq1_dv, na.rm = TRUE)    # extract the highest value
+
+print(maxvalue)                                   # print `maxvalue` to the console to check it
+
+ukhls <- ukhls %>% 
+  mutate(wellbeing2 = maxvalue-scghq1_dv)          # use `maxvalue` instead of 36
+```
+
+</details>
+:::
+
+We should compare the `scghq1_dv` and `wellbeing` variables now to make sure we mutated it correctly:
+
+```{r results='hold'}
+favstats( ~ scghq1_dv, data = ukhls)
+favstats( ~ wellbeing, data = ukhls)
+```
+
+::: {.codingtipbox .codingtip}
+**Coding tip: `select()` and `summary()`**
+<details>
+  <summary><i>Click to view</i></summary>
+
+The `summary()` function allows for entire datasets to be summarised (i.e. all the columns/variables in the dataset). So we could select the variables we are interested in using the `select()` function from `{tidyverse}` and then do a `summary()` on this selected data. This has the advantage of allowing a pipeline workflow and the summary statistics are printed in columns, which may be easier to compare. The disadvantage is that we only have the descriptive statistics offered by `summary()` (e.f. we are missing the *standard deviation* (sd) that `favstats()` prints by default)
+
+```{r}
+ukhls %>% 
+  select(scghq1_dv, wellbeing) %>% 
+  summary()
+```
+
+</details>
+:::
+
+Does it look okay? We see that the *minimum*, *maximum* and *standard deviation* values haven't changed, which is what we would expect. The other values have changed as we would expect as well, given thet the scale was reversed (i.e. mirrored).
 
 ## Step 3: **Describe** the relationship between your variables
 
+We can now start to explore the relationship between the two variables. The best plot type to represent the relationship between two numeric variables is a **scatterplot**. We will use the `xyplot()` function from the `{mosaic}` package for this. We keep in mind that our *outcome* variable is *subjective wellbeing* and the *predictor* is *age*. So it is customary to place the *outcome* on the *y* axis and the *predictor* on the *x* axis, in line with the general formula notation **_y_ ~ _x_**. The command is the following:
+
+```{r}
+xyplot(wellbeing ~ age_dv, data = ukhls)
+```
+
+The figure doesn't look too informative, but that's because we have too many cases (respondents) in the dataset - represented by the dots in this plot - and the correlation between the two variables doesn't seem to be very strong.
+
+One addition to the plot that we can make is to add a *fit line* that expresses the linear relationship between the variables. We do this by adding the optional argument `type = c("p", "r")` to the function (here we are *c*ombining (with the `c()` function) two different plot types into one graph: a _**p**oint_ plot and a _**r**egression plot_). 
+
+```{r}
+xyplot(wellbeing ~ age_dv, type = c("p", "r"), data = ukhls)
+```
 
 
 ## Step 4: **Model** the relationship between your variables
