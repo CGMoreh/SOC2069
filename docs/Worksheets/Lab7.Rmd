@@ -14,10 +14,14 @@ output:
     css: ./../my_themes/labcss.css
 ---
 
-```{r setup, include = FALSE, purl=FALSE}
-knitr::knit_hooks$set(purl = knitr::hook_purl)
+```{r, include=FALSE}
+### ---- Lab 7 script ---- ###
+```
 
-knitr::opts_chunk$set(error = FALSE, warning=FALSE, comment="", prompt=FALSE, message = F, strip.white = F, fig.width=6, fig.asp = 0.618, fig.show = 'hold')
+```{r setup, include = FALSE, purl=FALSE}
+# knitr::knit_hooks$set(purl = knitr::hook_purl)
+
+knitr::opts_chunk$set(error = FALSE, warning=FALSE, comment="", prompt=FALSE, message = F, strip.white = F, fig.width=6, fig.asp = 0.618, fig.show = 'hold', documentation = 0)
 ```
 
 ```{r klippy, echo=FALSE, include=TRUE, purl=FALSE}
@@ -86,9 +90,13 @@ knitr::include_graphics("images/new_script_2.jpg")
 3.  **Load user-written `R` packages** we commonly use with the `library()` function
 
     `r fontawesome::fa("wrench")`   Check *Exercise 1, Task 4* of [*Lab6*](https://cgmoreh.github.io/SOC2069/Worksheets/Lab6) if you need help with this. **Tip:** You may need to first install the package with the `install.packages()` function if it's not yet installed
+```{r include=FALSE}
+##### Load packages ----------
+```
 
     ```{r}
-    # install.packages(c("tidyverse", "mosaic", "sjmisc")) # If you need to first install the packages, remove the hashtag from in front of the `install.packages()` command to un-comment the command and make it executable in R
+# install.packages(c("tidyverse", "mosaic", "sjmisc")) 
+# If you need to first install the packages, remove the hashtag from in front of the `install.packages()` command to un-comment the command and make it executable in R
     
     library(tidyverse)
     library(mosaic)
@@ -98,15 +106,17 @@ knitr::include_graphics("images/new_script_2.jpg")
 4.  **Load the *ukhls_w8.rds* dataset** to an object in the session Environment; let's call that object "ukhls" this time
 
     `r fontawesome::fa("wrench")`   Check *Exercise 1, Task 4* of [*Lab6*](https://cgmoreh.github.io/SOC2069/Worksheets/Lab6)) if you need help with this. **Tip:** Specifying only the file name without a path assumes that you have followed Step 1 above correctly and your working directory is the RProject. If not, go back to Step 1.
+
+```{r include=FALSE}
+##### Read in data ----------
+```
     ```{r eval=FALSE}
     ukhls <- readRDS("ukhls_w8.rds")
     ```
 
 ```{r include=FALSE, purl=FALSE}
-ukhls <- readRDS("./../Data/ukhls_w8.rds")
+ukhls <- readRDS(url("https://cgmoreh.github.io/SOC2069/Data/ukhls_w8.rds"))
 ```
-
-
 
 # Exercise 1: Predicting *subjective wellbeing* from *age*
 
@@ -166,6 +176,9 @@ mosaic::favstats( ~ x, data = my_data)
 
 If you've managed Task 1, you should have produced the outputs below (or similar)(**Tip**: the command code is also shown so you can check against your own and copy it if you want):
 
+```{r include=FALSE}
+##### Descriptive stats ----------
+```
 ```{r echo=TRUE, fig.show='asis'}
 favstats( ~ age_dv, data = ukhls)
 histogram( ~ age_dv, fit = "normal", data = ukhls)
@@ -206,7 +219,9 @@ As long as we understand what the variable measure and how it measures it, we ca
 If we decide that some variables would benefit from modifying in any way, we can do that. In our case, let's recode the values on the **scghq1_dv** variable so that *higher* values would equate *higher* subjective wellbeing.
 
 There are various ways to do that in `R`, but given that our variable is numeric and we don't need to worry about value labels, we can easily do it manually. We have all the information we need to do this. If the scale we want to inverse runs from `0` to `36`, then if we subtract each score from the maximum value on that scale (i.e. **36**), then we will have an inversed scale (because `36-0=36`, `36-1=35`, `36-36=0` and so on). It's also important not to overwrite the original variable in the dataset, in case we make a mistake; so we will create a new variable and give it an easy name to work with (**but make sure that the name doesn't already exist in the dataset, otherwise you are overwriting that variable!**). The `mutate` function (from `{tidyverse}`) makes it easy to create, modify and delete variables from a dataset. The code could be the following:
-
+```{r include=FALSE}
+##### Data transformation ----------
+```
 ```{r}
 ukhls <- ukhls %>% 
   mutate(wellbeing = 36-scghq1_dv)
@@ -237,7 +252,7 @@ mosaic::max( ~ scghq1_dv, data = ukhls, na.rm = TRUE)
 
 We can now rewrite the command creating the new `wellbeing` variable using the `max()` function to first extract the highest value to an object (let's call it "maxvalue" and print it to the console to check if it's correct) and use that as input in the `mutate()` command:
 
-```{r eval=FALSE}
+```{r}
 maxvalue <- max(ukhls$scghq1_dv, na.rm = TRUE)    # extract the highest value
 
 print(maxvalue)                                   # print `maxvalue` to the console to check it
@@ -275,6 +290,9 @@ ukhls %>%
 Does it look okay? We see that the *minimum*, *maximum* and *standard deviation* values haven't changed, which is what we would expect. The other values have changed as we would expect as well, given thet the scale was reversed (i.e. mirrored).
 
 ## Step 3: **Describe** the relationship between your variables
+```{r include=FALSE}
+##### Step 3: Bivariate relationships ----------
+```
 
 We can now start to explore the relationship between the two variables. The best plot type to represent the relationship between two numeric variables is a **scatterplot**. We will use the `xyplot()` function from the `{mosaic}` package for this. We keep in mind that our *outcome* variable is *subjective wellbeing* and the *predictor* is *age*. So it is customary to place the *outcome* on the *y* axis and the *predictor* on the *x* axis, in line with the general formula notation **_y_ ~ _x_**. The command is the following:
 
@@ -317,9 +335,14 @@ If we are interested in obtaining the Pearson correlation coefficient value (see
 ```{r}
 cor.test(wellbeing ~ age_dv, data = ukhls)
 ```
+
 The last statistic ("cor") is the correlation coefficient *r*: 0.036. Knowing this figure, how would you answer the questions above? (**tip**: have a look in **Agresti 2018: 260-263** for the interpretation of the correlation coefficient).
 
 ## Step 4: **Model** the relationship between your variables
+
+```{r include=FALSE}
+##### Step 4: Linear modeling ----------
+```
 
 After getting a sense of the relationship between our two variables, we are ready to fit a linear regression model. We will use the `lm()` function for this. It is best to save the results to a new object that stores a variety of information from the model results that we can then use for further analysis. Let's give this object the name "model1" for simplicity:
 
@@ -336,11 +359,12 @@ The `lm()` formula echoes the mathematical equation we are fitting:
 
 $$
 \begin{aligned}
-  \color{Blue}{\widehat{subjective\:wellbeing}} &\color{Lightgrey}{=} \color{Red}{a} \color{Lightgrey}{+} \color{Red}{b}\color{Lightgrey}{\times}\color{Blue}{age} \\
+  \color{Blue}{\widehat{subjective\:wellbeing}} &\color{Grey}{=} \color{Red}{a} \color{Grey}{+} \color{Red}{b}\color{Grey}{\times}\color{Blue}{age} \\
   
-  \color{Blue}{wellbeing} &\color{Lightgrey}{\sim} \color{Red}{1} \color{Lightgrey}{+} \color{Red}{b}\color{Lightgrey}{\times}\color{Blue}{\text{age_dv}}
+  \color{Blue}{wellbeing} &\color{Grey}{\sim} \color{Red}{1} \color{Grey}{+} \color{Red}{b}\color{Grey}{\times}\color{Blue}{\text{age_dv}}
 \end{aligned}
 $$
+
 We have data on the blue components (our two variables) and we are searching for the corresponding coefficients for the red components. The $a$ is called the "**intercept**", referring to the point where the regression fit line we plotted earlier on the scatterplot *intercepts* the $y$ (wellbeing) axis **when the $x$ (age) axis equals 0**. The $b$ is called the *slope* (visually, it's the angle between a completely flat horizontal line and the regression fit line) and it equals the change in $subjective\;wellbeing$ for a one-unit increase in $age$.
 
 The *intercept* is included in the `lm()` function by default, so we don't need to explicitly write it. We also don't have to explicitly write `data =`, we can simply write just the name of the dataset. Our function call could be simplified to:
@@ -391,11 +415,21 @@ Another approach would be to centre age around the *median*, which is 49. That's
 
 ## Back to Step 2: *centring* the predictor variable
 
+```{r include=FALSE}
+##### Back to Step 2: Centring the predictor ----------
+```
+
 ::: {.taskbox .task}
 
 Following the example in Step 2, mutate the `age_dv` variable into a new variable called `age_median_centred` that is equal to the `age_dv` variable minus its median. **Tip**: you can get the median value of a variable using the `median()` function. Here's some code scaffolding to get you going:
 
-```{r, eval=FALSE}
+```{r include=FALSE}
+#### Student task ----------
+```
+
+```{r, eval=FALSE, purl=FALSE}
+### Complete the code below
+
 # First, extract the median age value from the data using the `median()` function:
 
 medianAge <- median( ??? )
@@ -408,22 +442,33 @@ medianAge <- median( ??? )
 
 ???
 ```
+```{r include=F}
 
-If you've done it correctly, the new variable should look like this:
+# First, extract the median age value from the data using the `median()` function:
 
-```{r echo=F}
 medianAge <- median( ~ age_dv, data = ukhls, na.rm = TRUE)
+
+# Then `print` the median to check it and see if it's correct
+
+medianAge
+
+# Then use the `mutate` function to create the new variables called "age_median_centred" by subtracting the median age from all values of `age_dv`
 
 ukhls <- ukhls %>% 
   mutate(age_median_centred = age_dv - medianAge)
 ```
+
+If you've done it correctly, the new variable should look like this:
+
 ```{r}
 favstats( ~ age_median_centred, data = ukhls)
 ```
 
 Now we can refit the model with the new centred *age* variable. Let's save the model results with the ingenious name `model2` and print the *coefficients* as we have done with *model 1*:
 
-```{r eval=FALSE}
+```{r eval=FALSE, purl=FALSE}
+### Complete the code below
+
 # Complete the lm() command
 
 model2 <- ????
@@ -437,6 +482,7 @@ If you've done it well, these are the coefficients that you should expect:
 
 ```{r echo=FALSE}
 model2 <- lm(wellbeing ~ age_median_centred, ukhls)
+
 coef(model2)
 ```
 :::
@@ -454,6 +500,10 @@ coef(model2)
 
 
 ## Step 5: **Present** and **interpret** your findings
+
+```{r include=FALSE}
+##### Step 5 ----------
+```
 
 The *coefficients* are only one part of the model output that we need to interpret. We can get a more comprehensive summary of the model using the same `summary()` function we are already familiar with:
 
@@ -512,3 +562,9 @@ There aren't too many useful numeric variables in the UKHLS dataset, so you'll h
 This is also what you'll be required to do in Assignment 2, so your time and effort will not be wasted!
 
 :::
+
+
+```{r eval=FALSE, include=F, purl=FALSE}
+knitr::purl("Lab7.Rmd", "Lab7.R", documentation=0)
+```
+
