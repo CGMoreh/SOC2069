@@ -154,9 +154,7 @@
 .questionbox {
   padding: 1em 1em 1em 8em;
   margin-bottom: 10px;
-  border: 2px solid #fca9a9;
-  border-radius: 10px;
-  background: #fca9a9 5px center/5em no-repeat;
+  background: #97dcfd 5px center/5em no-repeat;
 }
 
 .question {
@@ -164,7 +162,7 @@
 }
 
 
-.codingtipbox {
+.codebox {
   padding: 1em 1em 1em 8em;
   margin-bottom: 10px;
   border: 2px solid #f9d873;
@@ -172,19 +170,20 @@
   background: #f9d873 5px center/5em no-repeat;
 }
 
-.codingtip {
+.code {
   background-image: url("./../GTA_R_intro/images/coding.png");
 }
 
-.usefulbox {
-  padding: 1em 1em 1em 4em;
-  background: #fff 5px center/5em no-repeat;
+.importantbox {
+  padding: 1em 1em 1em 8em;
+  margin-bottom: 10px;
+  border: 2px solid #fcc7c7;
+  border-radius: 10px;
+  background: #fcc7c7 5px center/5em no-repeat;
 }
 
-.useful {
-  background-image: url("./../GTA_R_intro/images/useful.png");
-  background-size: 5%;
-  margin-left: 10px;
+.important {
+  background-image: url("./../GTA_R_intro/images/important.png");
 }
 
 

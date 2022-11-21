@@ -146,7 +146,7 @@ You can check your `Lab6.R` script file for the commands to use.
 **Tip**: remember that we called our data object in RStudio as "ukhls" today, not "data" as we did in Lab6.
 ::::
 
-:::: {.codingtipbox .codingtip}
+:::: {.codebox .code}
 **Coding tip**
 <details>
   <summary><i>Click to view</i></summary>
@@ -214,7 +214,7 @@ ukhls <- ukhls %>%
 
 In the above code, we first assign the dataset **ukhls** to an object of the same name (i.e. we are **overwriting** the dataset); then the create a new variable in the dataset called **wellbeing**, and we specify that the values of this variable should be calculated by subtracting the values of the existing **scghq1_dv** from the number **36**.
 
-::: {.codingtipbox .codingtip}
+::: {.codebox .code}
 **Coding tip: `max()` and `na.rm = TRUE`**
 <details>
   <summary><i>Click to view</i></summary>
@@ -243,7 +243,7 @@ maxvalue <- max(ukhls$scghq1_dv, na.rm = TRUE)    # extract the highest value
 print(maxvalue)                                   # print `maxvalue` to the console to check it
 
 ukhls <- ukhls %>% 
-  mutate(wellbeing2 = maxvalue-scghq1_dv)          # use `maxvalue` instead of 36
+  mutate(wellbeing = maxvalue-scghq1_dv)          # use `maxvalue` instead of 36
 ```
 
 </details>
@@ -256,7 +256,7 @@ favstats( ~ scghq1_dv, data = ukhls)
 favstats( ~ wellbeing, data = ukhls)
 ```
 
-::: {.codingtipbox .codingtip}
+::: {.codebox .code}
 **Coding tip: `select()` and `summary()`**
 <details>
   <summary><i>Click to view</i></summary>
@@ -284,32 +284,231 @@ xyplot(wellbeing ~ age_dv, data = ukhls)
 
 The figure doesn't look too informative, but that's because we have too many cases (respondents) in the dataset - represented by the dots in this plot - and the correlation between the two variables doesn't seem to be very strong.
 
-One addition to the plot that we can make is to add a *fit line* that expresses the linear relationship between the variables. We do this by adding the optional argument `type = c("p", "r")` to the function (here we are *c*ombining (with the `c()` function) two different plot types into one graph: a _**p**oint_ plot and a _**r**egression plot_). 
+One addition to the plot that we can make is to add a *fit line* that expresses the linear relationship between the variables. We do this by adding the optional argument `type = c("p", "r")` to the function (here we are *c*ombining (using the `c()` function) two different plot types into one: a _**p**oint_ plot and a _**r**egression line_ plot):
 
 ```{r}
 xyplot(wellbeing ~ age_dv, type = c("p", "r"), data = ukhls)
 ```
 
+The straight line we plotted is a *regression line* that visualises the linear model $\hat{y} = a + bx$ (see **Agresti 2018: 250-252**; **Gelman et al. 2020: 37-38, 82-95**). In Step 4 we will fit this model statistically to obtain the values for the $a$ and $b$ coefficients so we can interpret the regression line more efficiently. For the moment, let's rely on our eyes.
+
+If we find that the line blends in too much with the points, we can add another option to change the colour of the line to, say, red with `col.line = "red"`:
+
+```{r}
+xyplot(wellbeing ~ age_dv, 
+       type = c("p", "r"), 
+       col.line = "red", 
+       data = ukhls)
+```
+
+There are various additional options to customize the plot, but we're only using it to get a sense of our variables, so we won't go into details. Charts prepared for presentaiton or publication should be more refined. For our purposes, this is enough for now. What's worth paying attention to is that when adding additional option arguments, we should not forget to separate them with a comma, and it's easier to read if we write them in separate lines, like in the example above; even if the command is spread across multiple lines, `R` will recognise that it's one command all the way until the first opening bracket is closed.
+
+::: {.questionbox .question}
+**Questions**
+
+We can see that the line is not completely horizontal, but it's slightly increasing as *age* increases. What does this tell us?
+
+- Does the line show a *negative* or *positive* correlation?
+- Does the line show a *strong* or *weak* correlation?
+:::
+
+If we are interested in obtaining the Pearson correlation coefficient value (see **Agresti 2018: 260-263**) to assess the *direction* and *strength* of the correlation we observe on the plot, we can use the `cor.test()` function from `{mosaic}`:
+
+```{r}
+cor.test(wellbeing ~ age_dv, data = ukhls)
+```
+The last statistic ("cor") is the correlation coefficient *r*: 0.036. Knowing this figure, how would you answer the questions above? (**tip**: have a look in **Agresti 2018: 260-263** for the interpretation of the correlation coefficient).
 
 ## Step 4: **Model** the relationship between your variables
 
+After getting a sense of the relationship between our two variables, we are ready to fit a linear regression model. We will use the `lm()` function for this. It is best to save the results to a new object that stores a variety of information from the model results that we can then use for further analysis. Let's give this object the name "model1" for simplicity:
+
+```{r}
+model1 <- lm(wellbeing ~ 1 + age_dv, data = ukhls)
+```
+
+::: {.codebox .code}
+**Coding tip: Understand and simplify the formula**
+<details>
+  <summary><i>Click to view</i></summary>
+
+The `lm()` formula echoes the mathematical equation we are fitting:
+
+$$
+\begin{aligned}
+  \color{Blue}{\widehat{subjective\:wellbeing}} &\color{Lightgrey}{=} \color{Red}{a} \color{Lightgrey}{+} \color{Red}{b}\color{Lightgrey}{\times}\color{Blue}{age} \\
+  
+  \color{Blue}{wellbeing} &\color{Lightgrey}{\sim} \color{Red}{1} \color{Lightgrey}{+} \color{Red}{b}\color{Lightgrey}{\times}\color{Blue}{\text{age_dv}}
+\end{aligned}
+$$
+We have data on the blue components (our two variables) and we are searching for the corresponding coefficients for the red components. The $a$ is called the "**intercept**", referring to the point where the regression fit line we plotted earlier on the scatterplot *intercepts* the $y$ (wellbeing) axis **when the $x$ (age) axis equals 0**. The $b$ is called the *slope* (visually, it's the angle between a completely flat horizontal line and the regression fit line) and it equals the change in $subjective\;wellbeing$ for a one-unit increase in $age$.
+
+The *intercept* is included in the `lm()` function by default, so we don't need to explicitly write it. We also don't have to explicitly write `data =`, we can simply write just the name of the dataset. Our function call could be simplified to:
+
+```{r eval=FALSE}
+model1 <- lm(wellbeing ~ age_dv, ukhls)
+```
+
+However, leaving out `data =` does not work for all the other formula-style functions that we have used from the `{mosaic}` package, so until you become very used to writing these commands, it's better to spell out more than the strictly necessary. Also, remember that it's more important to be accurate and to make it easy for yourself and others to understand your code easily.
+
+</details>
+:::
+
+We can see that the object "model1" now appears in the Environment pane, and if we expand it we see a list of different elements ("coefficients", "residuals", "effects", etc.). The "coefficients" are the most elementary and most imporatnt elements. We can print them by using the `coefficients()` function or simply `coef()`:
+
+```{r}
+coef(model1)
+```
+
+As noted in the *Coding tip* above, the two *coefficients* that we see here for `(Intercept)` and `age_dv` are the corresponding values for $a$ and $b$, respectively, in the $\hat{y} = a + bx$ equation. We can substitute them - rounding down to two decimal places for simplicity - to obtain the equation: $\widehat{wellbeing} = 24.35 + 0.0109\times age$. So what does this mean? 
+
+We said at the start that the aim of a linear regression model is to help us predict the value of *subjective wellbeing* from one's *age*; i.e. what would our best guess concerning someone's *subjective wellbeing* score be if the only information we had about that person was their age? Knowing someone's *age* is already more information than **_not_** knowing anything. Without knowing one's *age* our best guess would be simply the overall **_mean_** (i.e. **_average_**) subjective wellbeing score for the entire dataset. If we remember from the descriptive statistics we've done earlier in the exercise, the **mean** of the `wellbeing` variable was 24.87867. 
+
+We can actually obtain the mean of a numeric variable also by using the `lm()` function without any predictors specified. Let's check the mean wellbeing score using this method and compare it with what we get from the `mean()` function of the `{mosaic}` package:
+
+```{r}
+lm(wellbeing ~ 1, data = ukhls) %>% coef()
+
+mean( ~ wellbeing, data = ukhls, na.rm = TRUE)
+```
+The two numbers are exactly the same, and they are the same as the mean we know from the descriptive statistics we did in earlier steps. 
+So, without knowledge of one's age or any other further information, our safest guess for one's *subjective wellbeing* score, were we to randomly select respondents from our dataset, would be 24.88 (on the 0-36 scale). 
+However, in knowledge of one's *age*, the slope ($b$) coefficients we got from the regression tell us that the best guess is the *intercept* (24.3470) **plus** 0.0109 **times** one's age. For example, our best gues for the *subjective wellbeing* score of someone aged 21 in our dataset would be:
+```{r}
+24.3470 + (0.0109 * 21)
+```
+
+More generally, the model tells us that a 1-unit (i.e. one year) difference in *age* is associated with a 0.01-unit difference in *subjective wellbeing* as measured here. 
+
+::: {.importantbox .important}
+
+Remember how we said earlier that the *Intercept* is the point where the regression fit line intercepts the $y$ axis when the $x$ axis is 0? This may sound okay visually, but noe that in the case of our variables this means that the *Intercept* refers to the value of *wellbeing* when the *age* variables is equal to **0**. Mathematically, there's nothing wrong with this, but in practice we don't have people aged "0" in our dataset (the youngest respondents are aged 16), and at any rate, it would be impossible to measure the *subjective wellbeing* of someone aged "0" using our scale instrument. In other words: the interpretation of the *Intercept* value is meaningless in our case. That doesn't affect the *slope* coefficient, so our regression equation is useful for predicting from, but we should not interpret the *Intercept* as it is.
+
+In order to make the *Intercept* more meaningful, one common approach is to **mean-centre** the predictor variable(s). In our case, we would shift the *age* scale so that the average (i.e. mean) age takes the value of 0. The mean age in the dataset is 48.77 years, so using the mean-centred age variable in the regression would make the *Intercept* refer to the value of *wellbeing* for those of average age (i.e. those aged 48.77). One remainin issue would be that the `age_dv` variable measures age on a *discreet* scale recording only full years; so a fraction such as 48.77 is a fiction.
+
+Another approach would be to centre age around the *median*, which is 49. That's an actually existing value in the dataset, so it makes the interpretation of the *Intercept* more realistic. At this point, we would go back to Step 2 and modify the *age* variable, then refit the model. Creating the new centred age variable follows a similar logic to the recoding that we've already done to `wellbeing`, but in this case, what we want is to subtract the *median* age from the values of `age_dv`, making the new *median* equal to 0. 
+:::
+
+## Back to Step 2: *centring* the predictor variable
+
+::: {.taskbox .task}
+
+Following the example in Step 2, mutate the `age_dv` variable into a new variable called `age_median_centred` that is equal to the `age_dv` variable minus its median. **Tip**: you can get the median value of a variable using the `median()` function. Here's some code scaffolding to get you going:
+
+```{r, eval=FALSE}
+# First, extract the median age value from the data using the `median()` function:
+
+medianAge <- median( ??? )
+
+# Then `print` the median to check it and see if it's correct
+
+???
+
+# Then use the `mutate` function to create the new variables called "age_median_centred" by subtracting the median age from all values of `age_dv`
+
+???
+```
+
+If you've done it correctly, the new variable should look like this:
+
+```{r echo=F}
+medianAge <- median( ~ age_dv, data = ukhls, na.rm = TRUE)
+
+ukhls <- ukhls %>% 
+  mutate(age_median_centred = age_dv - medianAge)
+```
+```{r}
+favstats( ~ age_median_centred, data = ukhls)
+```
+
+Now we can refit the model with the new centred *age* variable. Let's save the model results with the ingenious name `model2` and print the *coefficients* as we have done with *model 1*:
+
+```{r eval=FALSE}
+# Complete the lm() command
+
+model2 <- ????
+  
+# Then print the coefficients from model2
+  
+  
+```
+
+If you've done it well, these are the coefficients that you should expect:
+
+```{r echo=FALSE}
+model2 <- lm(wellbeing ~ age_median_centred, ukhls)
+coef(model2)
+```
+:::
+
+::: {.questionbox .question}
+**Questions**
+
+- How has the coefficient for the *Intercept* changed using the median-centred age variable?
+- How has the coefficient for the *age* variable change?
+- What is the expected *subjective wellbeing* score of someone aged 49?
+- What is the expected *subjective wellbeing* score of someone who has a value of -13 on the `age_median_centred` variable?
+- What is the real age in years of someone whose value on the `age_median_centred` variable is -29?
+
+:::
 
 
 ## Step 5: **Present** and **interpret** your findings
 
+The *coefficients* are only one part of the model output that we need to interpret. We can get a more comprehensive summary of the model using the same `summary()` function we are already familiar with:
+
+```{r}
+summary(model2)
+```
+There is a lot of information on this output. The "Call" block simply prints the function we called. The "Residuals" block shows descriptive statistics for the *residuals*, which are the distances between each individual score and the straight regression line (see the scatter-plot). The bottom block provides some statistics for the overall model - this is more important for more complex models where we have more than one predictor. 
+
+For instance, the **R-squared** value is a measure of overall model fit. It explains how much of the *variance* in the outcome variable can be explained by the predictor variable(s). In theory, the R-squared values can range from 0 to 1. An R-squared value of 0 means that the predictor variable(s) do not explain any (0%) of the variance of the outcome variable, and a value of 1 signifies that the independent variable(s) explain all (100%) the variance in the dependent variable. In our example, the R-squared value of 0.001 implies that the predictor variable (*age*) explains 0.1% (0.001 x 100) of the variance in the outcome variable (*subjective wellbeing*). So not a lot. Variation in *subjective wellbeing* is determined by various other factors. If we develop this basic model by including some other variables that we think potentially affect *subjective wellbeing*, we expect to see the R-squared statistic increase.
+
+::: {.questionbox .question}
+**Question**
+
+Do you remember the *correlation coefficient* (Pearson's *r*) we computed in Step 3? What do you think the relationship is between that correlation coefficient (r) and the r-squared value? **Tip**: check the results below:
+```{r}
+summary(model2) %>% rsquared %>% sqrt()
+
+cor.test(wellbeing ~ age_median_centred, data = ukhls)$estimate
+```
+:::
+
+The adjusted R-squared can help us compare different models because it is a standardisation of the R-squared based on the number of cases and independent variables in the model. The best fitting model is always the model with the highest possible adjusted R-squared (not the model with the highest R-squared). But we won't be comparing models in this way on this module.
+
+We can find the *coefficients* in the third block, where the *point estimates* we examined thus far are shown under the column titled "Estimate". The other three columns ("Std. Error", "t value" and "Pr(>|t|)") refer to inferential statistics that allow us to assess the degree to which the associations we observe in our data can be taken to represent *real* associations in the wider population from which our representative sample was drawn (i.e. the UK population in this case). The most commonly cited statistic among these is the **p-value** (under the column "Pr(>|t|)", i.e. the "probability" of the t-value under the null hypothesis). In the case of our model, because we only have one predictor variable, the *p-value* associated with the *age* predictor is the same as the *p_value* for the entire model shown at the very bottom of the output.
+
+:::{.importantbox .important}
+
+If the values are too small or two large, then `R` will display them in *scientific notation*. The *p-values* are often very small, with many decimals. In scientific notation, the letter *e* is used to mean "10 to the power of". The scientific notation tells us to move the decimal point to the left (if there's a minus sign after *e*) or to the right (if there's a plus sign after *e*) by the number of spaces shown after the -/+ sign. We don't need to know precise numbers here, so a quick glance at the number in scientific notation can tell us whether the value is really small or really big. In respect to *p-values*, we are interested in how close they are to 0 to about three decimals, so if we see something ending in e-4 or greater then we know that the value is very small.
+
+You will eventually get used to scientific notation, but if you find it very frustrating, you can turn it off in `R` by running the following command in your script:
+```{r eval=F}
+options(scipen = 999)
+```
+
+Now, however, you'll need to bear with very long fractional numbers. We find out, for example, that the p-value for the *age* coefficient is 0.0000000000055. The three stars next to it are explained under the bloc in the line called "Signif. codes": values marked with *** are lower than 0.001, those marked with ** are loser than 0.01, and those marked with * are under 0.05.
+
+:::
+
+As conclusion, try to write down your interpretation of the results. Check closely what each statistic means, guided by **Agresti (2018: 263-277)**.
 
 
+Think about whether the results are *statistically significant* and what that means. Read and reflect on **Gelman et al. (2020: 57-63)** in particular for this.
 
-# Exercise 2: Explore the Understanding Society Wave 8 dataset
 
-`About 15 minutes`
+# Exercise 2: On your own
 
 ------------------------------------------------------------------------
 
-# Exercise 3: Basic descriptive statistics
+::: {.taskbox .task}
+**Task**
 
-`About 30 minutes`
+Find some other numeric variables whose relationship can be modelled using a linear regression and undertake a complete analysis like the one in Exercise 1. 
 
-------------------------------------------------------------------------
+There aren't too many useful numeric variables in the UKHLS dataset, so you'll have to work with what you have to come up with interesting "research questions" to answer. 
 
-# Exercise 4: On your own
+This is also what you'll be required to do in Assignment 2, so your time and effort will not be wasted!
+
+:::
