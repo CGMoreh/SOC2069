@@ -28,26 +28,49 @@ klippy::klippy(position = c('right'))
 ------------------------------------------------------------------------
 
     Timetable week: 13
-    Topic: 
-    New `R` commands:
+    Topic: "Modelling numeric outcomes 2: multiple predictors"
+    New `R` packages/commands: `jtools::summ()`
 
 ------------------------------------------------------------------------
 
 ```{r, include=FALSE}
-### ---- Lab 7 script ---- ###
+### ---- Lab 8 script ---- ###
 ```
 
 
 
 # Intro
+
+Last week we've learnt how to write a simple linear regression model to assess the statistical relationship between two ***numeric*** (***continuous***) variables. The aim of the **simple linear regression model** is to predict the expected values of one ***continuous*** (***numeric***) variable (e.g. a child's *age*) from another ***continuous*** (***numeric***) variable (e.g. the child's *height)*. This week we begin expanding this basic approach into more complex models by considering some changes to the *predictor* (*independent*) variable. **First**, we look at what happens if our aim is to model variation in a *numeric* outcome variable from a *dichotomous* (*binary*) predictor variable (e.g. **yes**/**no** answers, a binary *sex* variable, etc.); **Then**, we look at examples where the *predictor* variable is *categorical*, with more than just two categories; **Finally**, we add several *pradictor* variables into the model to account for the combined effect of those several factors on our *outcome* of interest.
+
+For continuity, we will make use of some of the variables from previous weeks, from the same data from Wave 8 (2016-2017) of the [UK Household Longitudinal Study (UKHLS/Understanding Society) Main Survey](https://www.understandingsociety.ac.uk/documentation/mainstage).
+
 # Readings
+
+Core readings:
+
+- Gelman et al. (2020): Chapter 10 and Appendix B (pp. 131–150; 493–496)
+ 
+
+Secondary readings:
+
+- Agresti (2018): Chapters 10–11 (pp. 287–337)
+ 
+
+Further readings:
+
+- Gelman et al. (2020): Chapters 11 and 12 (pp. 153–211)
+- Agresti (2018): Chapters 12–14 (pp. 351–450)
+
+`r fontawesome::fa("save")` [**Download the module reading pack from here (.zip 47MB)**](https://github.com/CGMoreh/SOC2069/raw/main/readings/soc2069-reading-pack.zip)
+
 # Exercise 0: Setup
 
 1.  **Open the `R Studio` interface** by clicking on the *SOC2069-Statistical-analysis**.Rproj*** file included in the **_SOC2069-Statistical-analysis_** project folder that you downloaded from Canvas in Lab6. The folder should be stored on your Newcastle University **OneDrive** and accessible from any computer
 
     `r fontawesome::fa("wrench")`   If you haven't yet downloaded the project folder in TW11 (Lab6), then [download it from Canvas](https://ncl.instructure.com/courses/48074/pages/data-access-and-description?module_item_id=2544656). **Tip:** If you haven't completed the Lab6 worksheet, it will be difficult to follow the next steps; please go through *Exercise 1* and *2* of [Lab6](https://cgmoreh.github.io/SOC2069/Worksheets/Lab6)).
 
-2.  **Create a new blank `R` script** for this lab session and call it *Lab7.R*
+2.  **Create a new blank `R` script** for this lab session and call it *Lab8.R*
 
     `r fontawesome::fa("wrench")` Check *Exercise 1, Task 2* of [*Lab6*](https://cgmoreh.github.io/SOC2069/Worksheets/Lab6)) if you need help with this. **Tip:**
 ```{r, echo=F, purl=FALSE}
@@ -63,7 +86,7 @@ knitr::include_graphics("images/new_script_2.jpg")
 ```
 
 
-3. **Write a comment line** at the top of the new script to briefly detail what the script is about (e.g. *\# Script for Lab x, Week y*). **Tip:** in `R` scripts the hashtag (\#) denotes that the text following it on the same line is just a comment, not a programming command.
+3. **Write a comment line** at the top of the new script to briefly detail what the script is about (e.g. *\# Script for Lab x, Week y*). **Tip:** in `R` scripts the hashtag (*\#*) denotes that the text following it on the same line is just a comment, not a programming command.
 
 
 3.  **Load user-written `R` packages** we commonly use with the `library()` function
@@ -77,14 +100,18 @@ knitr::include_graphics("images/new_script_2.jpg")
 # install.packages(c("tidyverse", "mosaic", "sjmisc")) 
 # If you need to first install the packages, remove the hashtag from in front of the `install.packages()` command to un-comment the command and make it executable in R
     
+    install.packages("jtools")  # A new package for better summaries of regression models
+    
     library(tidyverse)
     library(mosaic)
     library(sjmisc)
+    library(jtools)
     ```
 
 4.  **Load the *ukhls_w8.rds* dataset** to an object in the session Environment; let's call that object "ukhls" this time
 
     `r fontawesome::fa("wrench")`   Check *Exercise 1, Task 4* of [*Lab6*](https://cgmoreh.github.io/SOC2069/Worksheets/Lab6)) if you need help with this. **Tip:** Specifying only the file name without a path assumes that you have followed Step 1 above correctly and your working directory is the RProject. If not, go back to Step 1.
+    <span style="color:red">`r fontawesome::fa("wrench")`   As you manipulate the dataset downloaded with the project folder, you may accidentally overwrite it with incorrect transformations. To avoid this, it's a good idea to replace the dataset in your folder with one in its original state, which you can download from here: </span> **[https://cgmoreh.github.io/SOC2069/SOC2069-Statistical-analysis/ukhls_w8.rds](https://cgmoreh.github.io/SOC2069/SOC2069-Statistical-analysis/ukhls_w8.rds)**
 
 ```{r include=FALSE}
 ##### Read in data ----------
@@ -151,4 +178,23 @@ This is also what you'll be required to do in Assignment 2, so your time and eff
 ```{r eval=FALSE, include=F, purl=FALSE}
 knitr::purl("", "", documentation=0)
 ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
