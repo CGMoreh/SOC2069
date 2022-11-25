@@ -20,7 +20,7 @@ path_office <- "A:/OneDrive - Newcastle University/WORK Newcastle/SOC2069/Data/6
 path_hp_laptop <- "C:/Users/ncm281/OneDrive - Newcastle University/WORK Newcastle/SOC2069/Data/6614stata_5FAC8DA9C415588B7AFA54AB180477074A808CCA1CD9354267911054D02007D4_V1/UKDA-6614-stata/stata/stata13_se/ukhls/h_indresp.dta"
 
 ## Load original dataset
-us <- read_stata(path_hp_laptop) %>% 
+us <- read_stata(path_office) %>% 
   set_na(na = c(-1:-21)) %>%                 # Set negative coded missing values to NA  
   select(where(~mean(is.na(.)) < 0.6)) %>%   # Remove columns with more than 40% missing
   select(
@@ -54,7 +54,9 @@ us <- read_stata(path_hp_laptop) %>%
   mutate_if(is.factor , as_label) %>% 
   rename_all(~stringr::str_replace(.,"^h_",""))
 
-saveRDS(us, file = "docs/Data/ukhls_w8.rds")
+
+sjlabelled::write_stata(us, "docs/Data/ukhls_w8.dta")  # Stata .dta
+saveRDS(us, file = "docs/Data/ukhls_w8.rds")           # gz compressed .rds
 
 summarytools::dfSummary(us) %>% print(file = "docs/Data/varlist.html", footnote = NA)
 
