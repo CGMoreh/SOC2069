@@ -22,7 +22,7 @@ knitr::opts_chunk$set(error = FALSE, warning=FALSE, comment="", prompt=FALSE, me
 ```
 
 ```{r klippy, echo=FALSE, include=TRUE, purl=FALSE}
-klippy::klippy(position = c('right'))
+pacman::p_load_gh("rlesur/klippy"); klippy(position = c('right'))
 ```
 
 ------------------------------------------------------------------------
