@@ -176,7 +176,7 @@ This is also what you'll be required to do in Assignment 2, so your time and eff
 
 
 ```{r eval=FALSE, include=F, purl=FALSE}
-knitr::purl("", "", documentation=0)
+knitr::purl(knitr::current_input(), documentation=0)
 ```
 
 
