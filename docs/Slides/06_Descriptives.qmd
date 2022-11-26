@@ -72,18 +72,13 @@ Variables
 
 ![](images/datatype2.jpg){fig-align="center" width="1441"}
 
-
 ## Measurement scales
 
 ![](images/datatype3.jpg){fig-align="center" width="1441"}
 
 . . .
 
-The position of ordinal scales on the quantitative–qualitative classification is fuzzy. 
-Because their scale is a set of categories, they are often analyzed using the same methods as nominal scales. But in many respects, ordinal scales more closely resemble interval scales. 
-They possess an important quantitative feature: *each level has a greater or smaller magnitude than another level*
-
-
+The position of ordinal scales on the quantitative--qualitative classification is fuzzy. Because their scale is a set of categories, they are often analyzed using the same methods as nominal scales. But in many respects, ordinal scales more closely resemble interval scales. They possess an important quantitative feature: *each level has a greater or smaller magnitude than another level*
 
 ## Measurement scales
 
@@ -97,20 +92,16 @@ They are **continuous** if it can take an infinite continuum of possible real nu
 
 ![](images/type-check2.png){fig-align="center"}
 
-
 ## Where do *variables* come from?
 
-:::{.incremental}
-- Data collection: Observation, interviewing, experiments...
-- The data we use in this module comes from **Wave 8** of the [**UK Household Longitudinal Study (Understanding Society) Main Survey**](https://www.understandingsociety.ac.uk/documentation/mainstage):
+::: incremental
+-   Data collection: Observation, interviewing, experiments...
+-   The data we use in this module comes from **Wave 8** of the [**UK Household Longitudinal Study (Understanding Society) Main Survey**](https://www.understandingsociety.ac.uk/documentation/mainstage):
 :::
 
 . . .
 
 ![](images/canvas1.gif)
-
-
-
 
 ##  {background-iframe="https://cgmoreh.github.io/webslides/particles-bkg/particles.html" background-opacity="0.2" transition="slide-in fade-out"}
 
@@ -120,25 +111,22 @@ Descriptive statistics
 
 ## Describing categorical variables
 
-
-:::{.column width=50%}
-- [Categorical data are characterized by a **frequency distribution**]{.fragment .highlight-current-blue}
-- [A frequency table is a listing of possible values for a variable, together with the **number of observations** (n) at each value]{.fragment .highlight-current-blue}
-- [When the table shows the **proportions** or **percentages** instead of the numbers, it is called a -**relative**- **frequency distribution**]{.fragment .highlight-current-blue}
-- Frequency distributions can also be visualised with a **bar graph**
+::: {.column width="50%"}
+-   [Categorical data are characterized by a **frequency distribution**]{.fragment .highlight-current-blue}
+-   [A frequency table is a listing of possible values for a variable, together with the **number of observations** (n) at each value]{.fragment .highlight-current-blue}
+-   [When the table shows the **proportions** or **percentages** instead of the numbers, it is called a -**relative**- **frequency distribution**]{.fragment .highlight-current-blue}
+-   Frequency distributions can also be visualised with a **bar graph**
 :::
 
 ![](images/family-frequency.png){.absolute right="0%" top="30%" height="170"}
 
-
 ## Describing *categorical* variables
 
-
-:::{.column width=50%}
-- Categorical data are characterized by a **frequency distribution**
-- A frequency table is a listing of possible values for a variable, together with the **number of observations** (n) at each value
-- When the table shows the **proportions** or **percentages** instead of the numbers, it is called a -**relative**- **frequency distribution**
-- [Frequency distributions can also be visualised with a **bar graph**]{.d-red}
+::: {.column width="50%"}
+-   Categorical data are characterized by a **frequency distribution**
+-   A frequency table is a listing of possible values for a variable, together with the **number of observations** (n) at each value
+-   When the table shows the **proportions** or **percentages** instead of the numbers, it is called a -**relative**- **frequency distribution**
+-   [Frequency distributions can also be visualised with a **bar graph**]{.d-red}
 :::
 
 ![](images/family-bars.png){.absolute right="0%" top="30%" height="300"}
@@ -157,36 +145,32 @@ Quantitative variables can be summarised by measures of **central tendency** and
 
 ![](images/central1.png){fig-align="center"}
 
-
 . . .
 
-
 ![](images/central2.png){fig-align="center"}
-
 
 ## Describing *numeric* variables
 
 Quantitative variables can be summarised by measures of **central tendency** and **variation** (spread)
-
 
 <br>
 
 ### Central tendency
 
-
 ![](images/central1.png){fig-align="center"}
-
 
 ![](images/central3.png){fig-align="center"}
 
 . . .
 
-![](images/mean-formula.png){fig-align="center" width=30%}
+![](images/mean-formula.png){fig-align="center" width="30%"}
+
+
+
 
 ## Describing *numeric* variables
 
 Quantitative variables can be summarised by measures of **central tendency** and **variation** (spread)
-
 
 <br>
 
@@ -198,10 +182,9 @@ Quantitative variables can be summarised by measures of **central tendency** and
 
 
 
-## Describing *numeric* variables
+## Describing *numeric* variables {.scrollable}
 
 Quantitative variables can be summarised by measures of **central tendency** and **variation** (spread)
-
 
 <br>
 
@@ -215,10 +198,11 @@ Quantitative variables can be summarised by measures of **central tendency** and
 
 The **mode** also applies to *categorical* variables - it's more useful for describing the category with the highest frequency
 
+
+
 ## Describing *numeric* variables
 
 Quantitative variables can be summarised by measures of **central tendency** and **variation** (spread)
-
 
 <br>
 
@@ -232,6 +216,15 @@ Quantitative variables can be summarised by measures of **central tendency** and
 
 ![](images/min-max-range.png){fig-align="center"}
 
+## Describing *numeric* variables
+
+Quantitative variables can be summarised by measures of **central tendency** and **variation** (spread)
+
+<br>
+
+### Variation (spread)
+
+![](images/spread.png){fig-align="center"} ![](images/min.png){fig-align="center"}
 
 ## Describing *numeric* variables
 
@@ -241,8 +234,7 @@ Quantitative variables can be summarised by measures of **central tendency** and
 
 ### Variation (spread)
 
-![](images/spread.png){fig-align="center"}
-![](images/min.png){fig-align="center"}
+![](images/spread.png){fig-align="center"} ![](images/max.png){fig-align="center"}
 
 ## Describing *numeric* variables
 
@@ -252,9 +244,7 @@ Quantitative variables can be summarised by measures of **central tendency** and
 
 ### Variation (spread)
 
-![](images/spread.png){fig-align="center"}
-![](images/max.png){fig-align="center"}
-
+![](images/spread.png){fig-align="center"} ![](images/range.png){fig-align="center"}
 
 ## Describing *numeric* variables
 
@@ -264,20 +254,9 @@ Quantitative variables can be summarised by measures of **central tendency** and
 
 ### Variation (spread)
 
-![](images/spread.png){fig-align="center"}
-![](images/range.png){fig-align="center"}
+![](images/spread.png){fig-align="center"} ![](images/sd-var-formula.png){fig-align="center" width="50%"}
 
 
-## Describing *numeric* variables
-
-Quantitative variables can be summarised by measures of **central tendency** and **variation** (spread)
-
-<br>
-
-### Variation (spread)
-
-![](images/spread.png){fig-align="center"}
-![](images/sd-var-formula.png){fig-align="center" width=70%}
 
 ## Describing *numeric* variables
 
@@ -285,7 +264,8 @@ Quantitative variables can be visualised with a **histogram** (a special *freque
 
 . . .
 
-![](images/height-hist.png){fig-align="center" width=70%}
+![](images/height-hist.png){fig-align="center" width="60%"}
+
 
 
 ## Describing *numeric* variables
@@ -296,13 +276,18 @@ Quantitative variables can be visualised with a **histogram** (a special *freque
 
 ![](images/hist-samples.png){fig-align="center"}
 
+
+
 ## The *normal* distribution
 
 ![](images/normal-sd.png){fig-align="center"}
 
+
+
 ## The *normal* distribution
 
 ![](images/sd-rule1.png){fig-align="center"}
+
 
 
 ## The *normal* distribution
@@ -310,9 +295,12 @@ Quantitative variables can be visualised with a **histogram** (a special *freque
 ![](images/sd-rule2.png){fig-align="center"}
 
 
+
 ## The *normal* distribution
 
 ![](images/sd-rule3.png){fig-align="center"}
+
+
 
 
 ## Skewed distribution
@@ -320,27 +308,53 @@ Quantitative variables can be visualised with a **histogram** (a special *freque
 ![](images/skew.png){fig-align="center"}
 
 
-## Quartiles and outliers
 
-![](images/quartile-iqr.png){fig-align="center" width=40%}
+## Quartiles and outliers {.smaller}
 
-. . .
+::: {.columns}
 
-### Boxplot:
+::: {.column width="55%"}
 
-![](images/boxplot.png){fig-align="center" width=50%}
+Box plots are useful as they provide a visual summary of the data enabling researchers to quickly identify central values, the dispersion of the data set, and signs of skewness.
+
+- *Minimum*
+
+  The lowest score, excluding outliers (shown at the end of the left whisker).
+
+- *Lower Quartile*
+
+  Twenty-five percent of scores fall below the lower quartile value (also known as the first quartile).
+
+- *Median*
+
+  The median marks the mid-point of the data and is shown by the line that divides the box into two parts (sometimes known as the second quartile). Half the scores are greater than or equal to this value and half are less.
+
+- *Upper Quartile*
+
+  Seventy-five percent of the scores fall below the upper quartile value (also known as the third quartile). Thus, 25% of data are above this value.
+
+- *Maximum*
+
+  The highest score, excluding outliers (shown at the end of the right whisker).
+
+- *Whiskers*
+
+  The upper and lower whiskers represent scores outside the middle 50% (i.e. the lower 25% of scores and the upper 25% of scores).
+
+- *The Interquartile Range (or IQR)*
+
+  This is the box plot showing the middle 50% of scores (i.e., the range between the 25th and 75th percentile).
+
+:::
 
 
+::: {.column width="45%"}
 
+![](images/quartile-iqr.png){fig-align="left" width=70%}
 
+Boxplot:
 
+![](images/boxplot.png "A boxplot"){fig-align="left" width=70%}
+:::
 
-
-
-
-
-
-
-
-
-
+:::

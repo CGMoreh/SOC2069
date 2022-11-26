@@ -14,6 +14,10 @@ output:
     css: ./../my_themes/labcss.css
 ---
 
+```{r, include=FALSE, purl=FALSE}
+options(repos = list(CRAN="http://cran.rstudio.com/"))
+```
+
 
 ```{r setup, include = FALSE, purl=FALSE}
 # knitr::knit_hooks$set(purl = knitr::hook_purl)
@@ -97,57 +101,181 @@ knitr::include_graphics("images/new_script_2.jpg")
 ```
 
     ```{r}
-# install.packages(c("tidyverse", "mosaic", "sjmisc")) 
-# If you need to first install the packages, remove the hashtag from in front of the `install.packages()` command to un-comment the command and make it executable in R
-    
-    install.packages("jtools")  # A new package for better summaries of regression models
+# If you need to first install the packages, remove the hashtag 
+#   from in front of the `install.packages()` command to un-comment it 
+#   and run it
+
+# install.packages(c("tidyverse", "mosaic", "sjmisc"))     
     
     library(tidyverse)
     library(mosaic)
     library(sjmisc)
-    library(jtools)
+    ```
+    
+    ```{r eval=F}
+# We'll also install a new package that contains some nice functions 
+#   for better formatted table outputs and graphing of regression models   
+
+install.packages("jtools")
+library(jtools)
     ```
 
-4.  **Load the *ukhls_w8.rds* dataset** to an object in the session Environment; let's call that object "ukhls" this time
 
-    `r fontawesome::fa("wrench")`   Check *Exercise 1, Task 4* of [*Lab6*](https://cgmoreh.github.io/SOC2069/Worksheets/Lab6)) if you need help with this. **Tip:** Specifying only the file name without a path assumes that you have followed Step 1 above correctly and your working directory is the RProject. If not, go back to Step 1.
-    <span style="color:red">`r fontawesome::fa("wrench")`   As you manipulate the dataset downloaded with the project folder, you may accidentally overwrite it with incorrect transformations. To avoid this, it's a good idea to replace the dataset in your folder with one in its original state, which you can download from here: </span> **[https://cgmoreh.github.io/SOC2069/SOC2069-Statistical-analysis/ukhls_w8.rds](https://cgmoreh.github.io/SOC2069/SOC2069-Statistical-analysis/ukhls_w8.rds)**
-
+4.  **Load the *ukhls_w8.rds* dataset** to an object in the session Environment; let's call that object "ukhls":
 ```{r include=FALSE}
 ##### Read in data ----------
 ```
     ```{r eval=FALSE}
     ukhls <- readRDS("ukhls_w8.rds")
     ```
+    `r fontawesome::fa("wrench")`   Check *Exercise 1, Task 4* of [*Lab6*](https://cgmoreh.github.io/SOC2069/Worksheets/Lab6)) if you need help with this. **Tip:** Specifying only the file name without a path assumes that you have followed Step 1 above correctly and your working directory is the RProject. If not, go back to Step 1.
+    
+    <span style="color:red">`r fontawesome::fa("wrench")`   If you have accidentally overwritten the original dataset with incorrect transformations to variables, you can download the original dataset again from here: </span> **[https://cgmoreh.github.io/SOC2069/SOC2069-Statistical-analysis/ukhls_w8.rds](https://cgmoreh.github.io/SOC2069/SOC2069-Statistical-analysis/ukhls_w8.rds)**. <span style="color:red">Save it to the project folder, replacing the old dataset.</span>
+
 
 ```{r include=FALSE, purl=FALSE}
 ukhls <- readRDS(url("https://cgmoreh.github.io/SOC2069/SOC2069-Statistical-analysis/ukhls_w8.rds"))
 ```
 
-# Exercise 1: 
+# Exercise 1: The effect of *gender* on *subjective wellbeing*
 
 `About 60  minutes`
 
 ------------------------------------------------------------------------
 
-For all data analysis tasks, we will follow a "0 + 5"-step workflow. First (**"Step 0"**, because it's not really a separate analytical step), state the research question you are attempting to answer; then (**Step 1**) find and understand variables (data) that help you answer that question; then (**Step 2**) modify (wrangle) any variables that need to be adjusted to help the analysis and interpretation; then (**Step 3**) describe how your *outcome* variables and main *predictor* variable(s) are related. This will help with the interpretation of the statistical results and with identifying any further changes to the variables that may be needed (returning to Step 2 again). You may also wish to check the relationship between your predictor variables if you have more than one (but we're not using multiple predictors yet); then (**Step 4**) apply the statistical model that is most appropriate to answer the "research question"; and finally (**Step 5**) summarise the results from your analysis using tables, figures and your own words. In each exercise, we'll go step-by-step.
+We will follow the same "0 + 5"-step workflow as in **Lab7**. First (**"Step 0"**), state the research question; then (**Step 1**) find and understand variables (data) that help you answer that question; then (**Step 2**) modify (wrangle) any variables that need to be adjusted to help the analysis and interpretation; then (**Step 3**) describe how your *outcome* variables and main *predictor* variable(s) are related. This will help with the interpretation of the statistical results and with identifying any further changes to the variables that may be needed (returning to Step 2 again). You may also wish to check the relationship between your predictor variables if you have more than one; then (**Step 4**) apply the statistical model that is most appropriate to answer the "research question"; and finally (**Step 5**) summarise the results from your analysis using tables, figures and your own words. In each exercise, we'll go step-by-step.
 
 
-## Step 0: Formulate your **"analysis research question"** 
+## Step 0: Formulate your **"research question"** 
 
-```{r include=FALSE}
-##### Step x ----------
-```
+The title of the exercise is almost a reasonable sounding research question. We want to understand: _"Does *gender* have an effect on *subjective wellbeing*"? Or, formulated differently: "Are there any *gender*-based differences in *subjective wellbeing*? Or: "Are *women* happier than men?".
+
+All of these are similar in their aim and the methods required to answer then, but choosing one over the other means that we need to pay attention to how we interpret our results and formulate our answers later on.
 
 ## Step 1: **Find, describe and understand** your variables
+```{r include=FALSE}
+##### Step 1: Selecting variables ----------
+```
+
+Last week (see **Lab7**) we got to know how *subjective wellbeing* is defined and operationalised, and which variable in our UKHLS dataset measures it: **scghq1_dv**. 
+
+The other variable we need to answer our question is one that measures respondents' *gender*. We have a variable in the dataset called **sex** that best approximates this (we'll disregard conceptual differences between *sex* and *gender* here; we could have used *sex* instead of *gender* in our research question to be more precise, but that would have sounded a bit awkward and probably changed its meaning completely `r fontawesome::fa("face-smile")`).
+
+We have already looked at the **sex** variable in **Lab6, Task 3.1**. So there's nothing new that we need to do here, but let's look again at some descriptive statistics for these two variables:
+
+:::: {.notebox .note}
+**Note**
+
+You have already loaded the UKHLS dataset into your RStudio Environment in *Exercise 0* above. You can check the Environment pane in RStudio to make sure that the data is there (recall, we gave it the name "ukhls").
+
+Remember, you can check the list of variables in the dataset on this page: [https://cgmoreh.github.io/SOC2069/Data/ukhls_w8](https://cgmoreh.github.io/SOC2069/Data/ukhls_w8){target="_blank"}. (**Tip**: you can search for keywords in the usual way: `ctrl+F` on Windows / `command+F` on Mac, and search for "wellbeing").
+::::
+
+:::: {.taskbox .task}
+```{r eval=F, purl=FALSE}
+### Complete the code below
+
+# Descriptive statistics for 'scghq1_dv':
+
+...
+
+# Descriptive statistics for 'sex':
+
+...
+
+```
+```{r include=FALSE, fig.show='asis'}
+##### Student task: descriptive stats ----------
+
+# Any of the commands below, with or without the 'package::' call becasue the packages should already be loaded
+
+summary(ukhls$scghq1_dv)
+ # or #
+mosaic::favstats( ~ scghq1_dv, data = ukhls)
+ # or #
+ukhls %>% sjmisc::descr(scghq1_dv)
+
+histogram( ~ scghq1_dv, data = ukhls)
+histogram( ~ scghq1_dv, fit = "normal", data = ukhls) # with a normal distribution superimposed
+
+sjmisc::frq(ukhls$sex)
+  # or #
+ukhls %>% sjmisc::frq(sex)
+
+# or in base R; but with much less useful information without additional arguments; just in case there are errors loading packages #
+summary(ukhls$sex)
+summary(ukhls$sex) %>% prop.table()
+```
+::::
+
+::: {.questionbox .question}
+**Questions**
+
+Examine the descriptive results from the tables and charts you've produced and answer:
+
+- What is the average (mean) subjective wellbeing score of the respondents in the dataset?
+- What does it mean to have a score of 32 on the *scghq1_dv* scale? **Tip:** In Lab7 we checked what exactly the *scghq1_dv* variable measures by cross-checking on [the UKHLS/Understanding Society website](https://www.understandingsociety.ac.uk/documentation/mainstage/dataset-documentation/variable/scghq1_dv){target="_blank"}.
+- Are there more women or men in the dataset?
+- What is the percentage of women in the dataset?
+- Do we need to transform/recode any of the variables? If so, why and how?
+:::
+
 ## Step 2: **Modify** your variables (if needed)
 
-```{r include=FALSE}
+In Lab7 we recoded the values on the **scghq1_dv** variable so that *higher* values would equate *higher* subjective wellbeing. This just makes the interpretation of the variable more logical. We also renamed it to **wellbeing** just becasue the original variable name is ugly and a bother to type. We can quickly do that again here (**tip**: check *Lab7, Ex1, Step2* for more explanation):
+```{r}
+# extract the highest value (check in the Environment if the extracted value is correct)
+maxvalue <- max(ukhls$scghq1_dv, na.rm = TRUE)    
 
+# reverse the scale
+ukhls <- ukhls %>% 
+  mutate(wellbeing = maxvalue - scghq1_dv)  
+
+# quickly compare the two variables to make sure the recoding was correct
+ukhls %>% 
+  select(scghq1_dv, wellbeing) %>% 
+  summary() 
+
+# We should get this output:
 ```
 
 
 ## Step 3: **Describe** the relationship between your variables
+
+In this step we'll learn something (relatively) new. When we described the relationship between two numeric variables (*wellbeing* and *age*) in Lab7, we did it using a *scatterplot* to which we added a *linear regression fit line* (a.k.a. a *line of best fit*, *least squares line*; see **Agresti (2018: 250-255)**, **Gelman et al.(2020: 86-87**)). 
+
+Using a *scatterplot* to visualise the linear relationship between a **dichotomous**(**binary**) variable (**sex**) and the **numeric** variable **wellbeing** is not the best approach, but it can be done. 
+
+### *Scatterplots* with fit line
+
+```{r}
+xyplot(wellbeing ~ sex, type = c("p", "r"), data = ukhls)
+```
+
+As with the *wellbeing* by *age* scatterplot in Lab7, the reason why it doesn't look great is that the *wellbeing* scale is rather small (0-36 )
+
+
+### Comparative *boxplots*
+
+```{r}
+boxplot(wellbeing ~ sex, data = ukhls, horizontal = T)
+bwplot(wellbeing ~ sex, data = ukhls, pch = "|")
+```
+
+:::{.notebox .note}
+**Note:**
+
+In a `bwplot` if we inverse the order of the variables and place our categorical (factor, dichotomous) variable first, we get a horizontal graph; sometimes it make the visual comparison of the variables easier:
+
+```{r}
+bwplot(sex ~ wellbeing, data = ukhls, pch = "|")
+
+boxplot(sex ~ wellbeing, data = ukhls, horizontal = T)
+
+```
+
+:::
+
 ```{r include=FALSE}
 ##### Step x ----------
 ```
@@ -176,7 +304,8 @@ This is also what you'll be required to do in Assignment 2, so your time and eff
 
 
 ```{r eval=FALSE, include=F, purl=FALSE}
-knitr::purl(knitr::current_input(), documentation=0)
+# Just run this chunk manually at the end...
+knitr::purl("Lab8.Rmd", documentation = 0)
 ```
 
 
