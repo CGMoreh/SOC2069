@@ -596,14 +596,19 @@ ukhls <- ukhls %>%
 # All other variables are already prepared; fit the model:
 
 ```
+```{r, eval=FALSE}
 
+model_ex3 <- lm(wellbeing ~ age_median_centred + as.factor(sex) + as.factor(hiqual_dv), data = ukhls)
 
-```{r}
+jtools::summ(model_ex3, digits = 3, confint = TRUE)
+```
+```{r, echo=FALSE}
 
 model_ex3 <- lm(wellbeing ~ age_median_centred + as.factor(sex) + as.factor(hiqual_dv), data = ukhls)
 
 jtools::summ(model_ex3, digits = 3, confint = TRUE) %>% knitr::normal_print()
 ```
+
 
 :::
 

@@ -2646,7 +2646,7 @@ model then should look like this:</p>
 <pre class="r"><code>
 model_ex3 &lt;- lm(wellbeing ~ age_median_centred + as.factor(sex) + as.factor(hiqual_dv), data = ukhls)
 
-jtools::summ(model_ex3, digits = 3, confint = TRUE) %&gt;% knitr::normal_print()</code></pre>
+jtools::summ(model_ex3, digits = 3, confint = TRUE)</code></pre>
 <pre class="outputbox"><code>MODEL INFO:
 Observations: 35267 (4026 missing obs. deleted)
 Dependent Variable: wellbeing
