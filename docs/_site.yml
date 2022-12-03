@@ -65,3 +65,5 @@ output:
     toc_depth: 4
     code_folding: true
     css: ./my_themes/custom2.css
+    include:
+      after_body: external-links.js
