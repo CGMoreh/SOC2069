@@ -1979,91 +1979,390 @@ variables</h2>
 useful comparisons. What we are interested in is how our predictor
 variables relate to our outcome variable,
 <strong><em>smoker</em></strong>.</p>
-<pre class="r"><code>sjmisc::flat_table(smoker, sex, data = ukhls)  %&gt;% chisq.test()</code></pre>
-<pre class="outputbox"><code>
-    Pearson&#39;s Chi-squared test with Yates&#39; continuity correction
-
-data:  .
-X-squared = 50.649, df = 1, p-value = 1.105e-12</code></pre>
-<pre class="r"><code>
-sjmisc::flat_table(smoker, sex, margin=&quot;row&quot;, data = ukhls)  %&gt;% chisq.test()</code></pre>
-<pre class="outputbox"><code>
-    Pearson&#39;s Chi-squared test with Yates&#39; continuity correction
-
-data:  .
-X-squared = 0.34955, df = 1, p-value = 0.5544</code></pre>
-<pre class="r"><code>
-sjPlot::tab_xtab(ukhls$smoker, ukhls$sex, show.summary = TRUE)</code></pre>
-<table style="border-collapse:collapse; border:none;">
-<tr>
-<th style="border-top:double; text-align:center; font-style:italic; font-weight:normal; border-bottom:1px solid;" rowspan="2">
-Smoker
-</th>
-<th style="border-top:double; text-align:center; font-style:italic; font-weight:normal;" colspan="2">
-sex
-</th>
-<th style="border-top:double; text-align:center; font-style:italic; font-weight:normal; font-weight:bolder; font-style:italic; border-bottom:1px solid; " rowspan="2">
-Total
-</th>
-</tr>
-<tr>
-<td style="border-bottom:1px solid; text-align:center; padding:0.2cm;">
-male
-</td>
-<td style="border-bottom:1px solid; text-align:center; padding:0.2cm;">
-female
-</td>
-</tr>
-<tr>
-<td style="padding:0.2cm;  text-align:left; vertical-align:middle;">
-Yes
-</td>
-<td style="padding:0.2cm; text-align:center; ">
-<span style="color:black;">2706</span>
-</td>
-<td style="padding:0.2cm; text-align:center; ">
-<span style="color:black;">2813</span>
-</td>
-<td style="padding:0.2cm; text-align:center;  ">
-<span style="color:black;">5519</span>
-</td>
-</tr>
-<tr>
-<td style="padding:0.2cm;  text-align:left; vertical-align:middle;">
-No
-</td>
-<td style="padding:0.2cm; text-align:center; ">
-<span style="color:black;">14062</span>
-</td>
-<td style="padding:0.2cm; text-align:center; ">
-<span style="color:black;">17996</span>
-</td>
-<td style="padding:0.2cm; text-align:center;  ">
-<span style="color:black;">32058</span>
-</td>
-</tr>
-<tr>
-<td style="padding:0.2cm;  border-bottom:double; font-weight:bolder; font-style:italic; text-align:left; vertical-align:middle;">
-Total
-</td>
-<td style="padding:0.2cm; text-align:center;   border-bottom:double;">
-<span style="color:black;">16768</span>
-</td>
-<td style="padding:0.2cm; text-align:center;   border-bottom:double;">
-<span style="color:black;">20809</span>
-</td>
-<td style="padding:0.2cm; text-align:center;   border-bottom:double;">
-<span style="color:black;">37577</span>
-</td>
-</tr>
-<td style="text-align:right; font-size:0.9em; font-style:italic; padding:0.2cm;" colspan="4">
-χ<sup>2</sup>=50.649 · df=1 · φ=0.037 · p=0.000
-</td>
-</tr>
-</table>
 <div id="boxplots-to-compare-group-medians" class="section level3">
 <h3><em>Boxplots</em> to compare group medians</h3>
+<p>We have already practiced describing the relationship between
+<em>numeric</em> and <em>categorical</em> variables visually using
+box-plots, and we can apply the same here to compare the median ages of
+<em>smokers</em> and <em>non-smokers</em> in our dataset:</p>
+<pre class="r"><code>boxplot(age_dv ~ smoker, data = ukhls)</code></pre>
+<p><img src="data:image/png;base64,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" width="480" style="display: block; margin: auto;" /></p>
+<div class="questionbox question">
+<p><strong>Questions</strong></p>
+<ul>
+<li>Is the median age of smokers higher than that of non-smokers?</li>
+<li>Are there any extreme outliers?</li>
+</ul>
 </div>
+<p>To describe the relationship between two <em>categorical</em>
+variables, we need to a method we haven’t practiced before: a
+<strong>cross-tabulation</strong> or <strong>contingency</strong> table.
+You should be very familiar with these types of tables. They show the
+distribution of a categorical variable
+<strong><em>contingent</em></strong> on another categorical
+variable.</p>
+<p>Again, there are several ways to get simple contingency tables and
+there are numerous functions is various packages that make more complex
+or nicely formatted contingency tables. For simplicity, we’ll only look
+at the options available using base-R and the packages we are already
+familiar with.</p>
+</div>
+<div id="crosstabulations-the-xtabs-function" class="section level3">
+<h3>Crosstabulations: the <code>xtabs()</code> function</h3>
+<p>Using the base-R function <code>xtabs()</code> we can write:</p>
+<pre class="r"><code>xtabs( ~ smoker + sex, data = ukhls)</code></pre>
+<pre class="outputbox"><code>      sex
+smoker  male female
+   Yes  2706   2813
+   No  14062  17996</code></pre>
+<p>This shows us the frequency distribution of the <em>smoker</em>
+variable by each category of the <em>sex</em> variable, and vice-versa,
+depending on whether we read it row-wise or column-wise. If we want to
+also see the marginal totals (for columns and rows), we can pipe on the
+table to the <code>addmargins()</code> function:</p>
+<pre class="r"><code>xtabs( ~ smoker + sex, data = ukhls) %&gt;% addmargins()</code></pre>
+<pre class="outputbox"><code>      sex
+smoker  male female   Sum
+   Yes  2706   2813  5519
+   No  14062  17996 32058
+   Sum 16768  20809 37577</code></pre>
+<p>If instead of frequencies we would like to see the proportions
+(percentages), we can pass the <code>xtabs</code> table on to the
+<code>prop.table()</code> function, where we should also select whether
+we are interested in <em>row</em> or <em>column</em> percentages using
+the <code>margin =</code> option (where <strong>1 stands for
+rows</strong> and <strong>2 for columns</strong>). It’s up to us to
+decide which option is best for our analysis. We can do both in turn,
+because they help us answer different questions.</p>
+<p>In general, if we have a clear <em>outcome</em> variable - like
+<strong>smoker</strong> in our case - then we would want to place its
+categories in the rows and show the values of the predictor
+(<strong>sex</strong> in our case) in the columns. If so, then
+<em>column</em> proportions would tell us the ratio of smokers and
+non-smokers among women and men, while <em>row</em> percentages would
+tell us the ratio of men/women among the smokers or non-smokers:</p>
+<pre class="r"><code>
+# row proportions:
+
+xtabs( ~ smoker + sex, data = ukhls) %&gt;% prop.table(margin = 1)</code></pre>
+<pre class="outputbox"><code>      sex
+smoker      male    female
+   Yes 0.4903062 0.5096938
+   No  0.4386425 0.5613575</code></pre>
+<pre class="r"><code>
+# column proportions:
+
+xtabs( ~ smoker + sex, data = ukhls) %&gt;% prop.table(margin = 2)</code></pre>
+<pre class="outputbox"><code>      sex
+smoker      male    female
+   Yes 0.1613788 0.1351819
+   No  0.8386212 0.8648181</code></pre>
+<p>If we’re annoyed by the many decimals and want to see a cleaner table
+rounded down to two decimal places, we can pass the
+<code>prop.table</code> further to a <code>round()</code> function,
+where we also specify the desired number of decimal places. Let’s say we
+want to show only 2 decimals (we can also simplify the previous command
+by not spelling out “margins =” in the command and simply giving it’s
+value):</p>
+<pre class="r"><code>xtabs( ~ smoker + sex, data = ukhls) %&gt;% 
+  prop.table(1) %&gt;% 
+  round(2)</code></pre>
+<pre class="outputbox"><code>      sex
+smoker male female
+   Yes 0.49   0.51
+   No  0.44   0.56</code></pre>
+<pre class="r"><code>
+xtabs( ~ smoker + sex, data = ukhls) %&gt;% 
+  prop.table(2) %&gt;% 
+  round(2)</code></pre>
+<pre class="outputbox"><code>      sex
+smoker male female
+   Yes 0.16   0.14
+   No  0.84   0.86</code></pre>
+<p>If we have row proportions, the values across rows should add up to 1
+(i.e. 100%); if we have column proportins, then they should add up to 1
+vertically, across columns; if they don’t, then we’ve done something
+wrong. For example, if we do not specify a <code>margin =</code>, then
+by default the proportions will be calculated per cell (rather than by
+row or column) respective to the total number of respondents.</p>
+<p>If we prefer to convert the proportions to percentages, we can simply
+multiply the <code>prop.table</code> by 100:</p>
+<pre class="r"><code># row proportions
+
+xtabs( ~ smoker + sex, data = ukhls) %&gt;% 
+  prop.table(1) * 100</code></pre>
+<pre class="outputbox"><code>      sex
+smoker     male   female
+   Yes 49.03062 50.96938
+   No  43.86425 56.13575</code></pre>
+<pre class="r"><code>
+# column proportions
+
+xtabs( ~ smoker + sex, data = ukhls) %&gt;% 
+  prop.table(2) * 100</code></pre>
+<pre class="outputbox"><code>      sex
+smoker     male   female
+   Yes 16.13788 13.51819
+   No  83.86212 86.48181</code></pre>
+</div>
+<div id="crosstabulations-the-flat_table-function-from-sjmisc" class="section level3">
+<h3>Crosstabulations: the <code>flat_table()</code> function from
+<code>{sjmisc}</code></h3>
+<p>We’ve already used the <code>{sjmisc}</code> package, and it contains
+another function that may be useful for crosstabulations:
+<code>flat_table()&#39;. It gives similar results to those above, but the code may be a bit more simple. We just need to list the variables we want to cross-tabulate, separated by commas; to show proportions, we can add an additional argument</code>margin
+= ` and choose either “row” or “col” as a value. The results are shown
+directly as percentages (i.e. proportions * 100) rounded down to two
+decimals:</p>
+<pre class="r"><code>sjmisc::flat_table(smoker, sex, data = ukhls)</code></pre>
+<pre class="outputbox"><code>       sex  male female
+smoker                 
+Yes         2706   2813
+No         14062  17996</code></pre>
+<pre class="r"><code>
+# or as row percentages:
+
+sjmisc::flat_table(smoker, sex, data = ukhls , margin = &quot;row&quot;)</code></pre>
+<pre class="outputbox"><code>       sex  male female
+smoker                 
+Yes        49.03  50.97
+No         43.86  56.14</code></pre>
+<pre class="r"><code>
+# or as column percentages:
+
+sjmisc::flat_table(smoker, sex, data = ukhls , margin = &quot;col&quot;)</code></pre>
+<pre class="outputbox"><code>       sex  male female
+smoker                 
+Yes        16.14  13.52
+No         83.86  86.48</code></pre>
+<p><strong>The issue</strong> with this function is that it cannot
+include marginal totals; for that, the <strong>xtabs() %&gt;%
+addmargins()</strong> option would be the way to go.</p>
+<div class="questionbox question">
+<p><strong>Questions</strong></p>
+<p>So, what have we learned so far about the relationship between sex
+and smoking behaviours? - Are there more men or women among the
+non-smokers? - Is the percentage of smokers among men higher or lower
+than among women?</p>
+</div>
+<div class="taskbox task">
+<p><strong>Task</strong></p>
+<p>Using the functions we’ve learnt above, summarise the relationship
+between <em>smoking</em> behaviour and <em>financial situation</em>
+using cross-tabulations. <strong>Tip</strong>: because the
+<em>finnow</em> variable has so many levels (categories), it’s visually
+better to place it in the rows.</p>
+<pre class="r"><code>### Complete the tasks below:
+
+# Contingency table of &#39;finnow&#39; by &#39;smoker&#39; showing frequencies and marginal totals
+
+...
+
+
+# Contingency table of &#39;finnow&#39; by &#39;smoker&#39; showing column percentages:
+
+...
+
+# Contingency table of &#39;finnow&#39; by &#39;smoker&#39; showing column percentages:
+
+...
+</code></pre>
+</div>
+<div class="questionbox question">
+<p><strong>Questions</strong></p>
+<p>What have we learned about the relationship between subjective
+financial situation and smoking behaviour? - Among which
+financial-situation group is the proportion of smokers the highest? -
+Which financial-situation group has the highest percentage among the
+smokers? And explain why this is the case, give the answer to the
+previous question! (<strong>tip</strong>: look again at the frequency
+contingency table too) - Overall, based on these results, would you say
+that there is an association between <em>financial situation</em> and
+<em>smoking</em> behaviour? If so, why do you think that?</p>
+</div>
+</div>
+</div>
+<div id="step-4-model-the-relationship-between-your-variables" class="section level2">
+<h2>Step 4: <strong>Model</strong> the relationship between your
+variables</h2>
+<p>Of course, we need to check whether your answer to the last question
+above stands up against statistical validation. This is where regression
+modelling comes in. We can fit three separate bivariate models here,
+checking in turn the predictive power of each of the three predictor
+variables, as we have done in previous weeks. Then, our final aim is to
+fit a model that estimates the effect of <em>financial situation</em> on
+<em>smoking behaviour</em> while also accounting for the effect of
+<em>age</em> and <em>sex</em>; that is, a multiple regression with more
+than a single predictor. In this exercise we will fit the final, full
+model to get an idea of the overall picture, but you can then check on
+your own how simpler models with fewer predictors behave.</p>
+<p>Our challenge compared to previous weeks is that now our outcome
+variable of interest, <em>smoker</em>, is not a numeric/scale variable
+but a dichotomous, categorical one. So the
+<strong><em>units</em></strong> in which we can measure any effect on
+this outcome “scale” of 0/1 are no longer that easy to get our heads
+around. That means that interpreting the results is where the challenge
+will be.</p>
+<p>The actual fitting of the model is fairly simple: we can use the
+function that fits a <strong>g</strong>eneralised
+<strong>l</strong>inear <strong>model</strong> (<code>glm()</code>)
+using similar syntax to that of <strong>l</strong>inear *m**odel
+(<code>lm()</code>), with the only difference that we should specify
+which “family” of distributions the outcome variable belongs to; a
+binary/dichotomous outcome has a so-called “<strong>binomial</strong>”
+distribution, and that’s what we need to tell <code>R</code>:</p>
+<pre class="r"><code>model_logistic &lt;- glm(smoker ~ finnow + sex + age_dv, family = binomial, data = ukhls)</code></pre>
+<p>With the code above, we have saved the logistic regression output as
+an object called ‘model_logistic’, so we can perform some additional
+work on that model, such as getting a summary of it. Previously we have
+used both the <code>summary()</code> function from base <code>R</code>
+as well as the <code>summ()</code> function from the
+<code>{jtools}</code> package. This latter gives us better formatted
+summmaries and has several further options that will come extremely
+useful now wich logistic regressions; so let’s ask for a
+<code>summ()</code>:</p>
+<pre class="r"><code>jtools::summ(model_logistic, digits=3)</code></pre>
+<pre class="outputbox"><code>MODEL INFO:
+Observations: 37449 (1844 missing obs. deleted)
+Dependent Variable: smoker
+Type: Generalized linear model
+  Family: binomial 
+  Link function: logit 
+
+MODEL FIT:
+χ²(6) = 1253.769, p = 0.000
+Pseudo-R² (Cragg-Uhler) = 0.058
+Pseudo-R² (McFadden) = 0.040
+AIC = 30034.905, BIC = 30094.620 
+
+Standard errors: MLE
+---------------------------------------------------------------
+                                 Est.    S.E.    z val.       p
+---------------------------- -------- ------- --------- -------
+(Intercept)                     1.720   0.055    31.324   0.000
+finnowDoing alright            -0.517   0.040   -12.832   0.000
+finnowJust about getting       -1.007   0.043   -23.360   0.000
+by                                                             
+finnowFinding it quite         -1.329   0.062   -21.607   0.000
+difficult                                                      
+finnowFinding it very          -1.630   0.082   -19.872   0.000
+difficult                                                      
+sexfemale                       0.238   0.030     8.005   0.000
+age_dv                          0.010   0.001    12.454   0.000
+---------------------------------------------------------------</code></pre>
+<div id="from-log-odds-to-odds-ratios" class="section level3">
+<h3>From <strong><em>log-odds</em></strong> to <strong><em>Odds
+Ratios</em></strong></h3>
+<p>The coefficients (<strong>Est.</strong>imates) returned by our logit
+model are a bit difficult to interpret intuitively because they are
+measured on a strange mathematical scale called the <em>log-odds</em>,
+but which can be converted back to <em>probabilities</em> and <em>odds
+ratios</em> if we want. The advantage of <em>log odds</em> is that it
+follows the same logic we already know from linear regression: either an
+increase or a decrease of <em>x</em> value - for instance, here, being
+female as opposed to male is associated with 0.238 higher
+<em>log-odds</em> of being a smoker. But what this actually means in
+practice is very unclear.</p>
+<p>It is more common to report <strong>odds ratios</strong> (OR)
+instead. An odds ratio less than 1 means that a unit increase in the
+value of the predictor variable leads to a <em>decrease</em> in the odds
+that the outcome is equal to its value 1 (being a <em>smoker</em> in our
+case). An odds ratio greater than 1 means that an increase in the
+predictor leads to an <em>increase</em> in the odds that the outcome is
+1 (<em>smoker</em>). In general, the <strong>percent change</strong> in
+the odds given a one-unit change in the predictor can be determined
+as:</p>
+<p><span class="math display">\[
+Percent Chance in Odds = 100\times(OR-1)
+\]</span></p>
+<p>The <code>summ()</code> function of the <code>{jtools}</code> package
+makes it easier to request odds ratios (same as
+“<strong>exp</strong>onentiated coefficients”) with the
+<code>exp =</code> option:</p>
+<pre class="r"><code>jtools::summ(model_logistic, digits=3, exp = TRUE)</code></pre>
+<pre class="outputbox"><code>MODEL INFO:
+Observations: 37449 (1844 missing obs. deleted)
+Dependent Variable: smoker
+Type: Generalized linear model
+  Family: binomial 
+  Link function: logit 
+
+MODEL FIT:
+χ²(6) = 1253.769, p = 0.000
+Pseudo-R² (Cragg-Uhler) = 0.058
+Pseudo-R² (McFadden) = 0.040
+AIC = 30034.905, BIC = 30094.620 
+
+Standard errors: MLE
+--------------------------------------------------------------------------
+                               exp(Est.)    2.5%   97.5%    z val.       p
+---------------------------- ----------- ------- ------- --------- -------
+(Intercept)                        5.583   5.013   6.217    31.324   0.000
+finnowDoing alright                0.596   0.551   0.645   -12.832   0.000
+finnowJust about getting           0.365   0.336   0.398   -23.360   0.000
+by                                                                        
+finnowFinding it quite             0.265   0.235   0.299   -21.607   0.000
+difficult                                                                 
+finnowFinding it very              0.196   0.167   0.230   -19.872   0.000
+difficult                                                                 
+sexfemale                          1.269   1.197   1.345     8.005   0.000
+age_dv                             1.010   1.009   1.012    12.454   0.000
+--------------------------------------------------------------------------</code></pre>
+<p>We see that we are also getting confidence intervals instead of
+standard errors by default, which can be again easier to interpret.</p>
+<p>The <strong>‘exp(Est.)’</strong> (for “exponentiated coefficient”)
+estimates shown are the <strong>odds ratios</strong>, and while they
+look very different from what we are used to from linear regression
+(i.e. they do not take negative values but run from 0 to infinity, with
+anything between 0 and 1 meaning a <em>decrese</em> and anything above 1
+meaning an <em>increase</em>), they are easier to interpret in terms of
+<em>percentage change in the odds of beig a smoker</em>:</p>
+<ul>
+<li>the odds of being a smoker if you are a woman are 100*(1.269-1)=
+26.9% higher than if you were a man;</li>
+<li>the odds of being a smoker increase by 100*(1.010-1)= 1% with each
+additional year of age</li>
+<li>the odds of being a smoker if you <em>find it very difficult</em> to
+manage financially as opposed to <em>Living comfortably</em> are
+100*(0.196-1)= -80.4% - in other words, much lower. <strong>Remember
+that here the <em>living comfortably</em> variable is the <em>base</em>
+or <em>reference</em> level to which all other categories of ‘finnow’
+compare</strong></li>
+<li>and so on for the other estimates; <strong>basically, we subtract a
+1 from the estimate number and move the decimal point two spots to the
+right to get a percentage of odds.</strong></li>
+</ul>
+<p>If you are the kind of person who likes betting on horse races in the
+weekend, the concept of <em>odds</em> will make perfect sense; the res
+of us can take away the main idea that we either see an
+<em>increase</em> or a <em>decrease</em> of a certain amount in respect
+to the outcome, so we gain a general understanding of how the various
+factor we are assessing affect the probability of the outcome (being a
+smoker).</p>
+</div>
+</div>
+<div id="exercise-2-make-it-simple" class="section level2">
+<h2>Exercise 2: Make it simple</h2>
+<p>We started with a complex model to get an idea of the whole picture.
+But it’s generally useful to have a quick look at simpler models too
+that only include a subset of the variables of interest. For example, it
+would be interesting to see what the effect of <em>financial
+situation</em> on <em>smoking</em> is if we <em>do not</em> also control
+for <em>age</em> and <em>gender</em>. Try to fit this model and check if
+any of the main results change significantly.</p>
+<pre class="r"><code># Fit a simpler model
+</code></pre>
+</div>
+<div id="exercise-3-on-your-own" class="section level2">
+<h2>Exercise 3: On your own</h2>
+<p>If there’s time left, chose another set of variables that can help
+explain a theoretically/sociologically interesting question and
+following the steps in Example 1,work towards fitting a logistic
+regression model.</p>
+<p><strong>TIP</strong>: if you have looked at the Assignment 2 research
+question options you will know that there is a question there that can
+be answered using logistic regression; if you’re interested in that one,
+you can give it a go!</p>
 </div>
 </div>
 

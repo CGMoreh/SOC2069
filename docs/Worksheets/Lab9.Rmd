@@ -269,30 +269,244 @@ So, for now, we won't change anything.
 
 ## Step 3: **Describe** the relationship between your variables
 
-We have many variables here, so we will need to focus on the most useful comparisons. What we are interested in is how our predictor variables relate to our outcome variable, ***smoker***. 
-
-```{r}
-sjmisc::flat_table(smoker, sex, data = ukhls)  %>% chisq.test()
-
-sjmisc::flat_table(smoker, sex, margin="row", data = ukhls)  %>% chisq.test()
-
-sjPlot::tab_xtab(ukhls$smoker, ukhls$sex, show.summary = TRUE)
-
-
-
-```
-
-
-
+We have many variables here, so we will need to focus on the most useful comparisons. What we are interested in is how our predictor variables relate to our outcome variable, ***smoker***.
 
 
 ### *Boxplots* to compare group medians
 
+We have already practiced describing the relationship between *numeric* and *categorical* variables visually using box-plots, and we can apply the same here to compare the median ages of *smokers* and *non-smokers* in our dataset:
+
+```{r}
+boxplot(age_dv ~ smoker, data = ukhls)
+```
+
+::: {.questionbox .question}
+**Questions**
+
+- Is the median age of smokers higher than that of non-smokers?
+- Are there any extreme outliers?
+:::
+
+To describe the relationship between two *categorical* variables, we need to a method we haven't practiced before: a **cross-tabulation** or **contingency** table. You should be very familiar with these types of tables. They show the distribution of a categorical variable ***contingent*** on another categorical variable.
+
+Again, there are several ways to get simple contingency tables and there are numerous functions is various packages that make more complex or nicely formatted contingency tables. For simplicity, we'll only look at the options available using base-R and the packages we are already familiar with.
+
+### Crosstabulations: the `xtabs()` function
+
+Using the base-R function `xtabs()` we can write:
+
+```{r}
+xtabs( ~ smoker + sex, data = ukhls)
+```
+
+This shows us the frequency distribution of the *smoker* variable by each category of the *sex* variable, and vice-versa, depending on whether we read it row-wise or column-wise.
+If we want to also see the marginal totals (for columns and rows), we can pipe on the table to the `addmargins()` function:
+
+```{r}
+xtabs( ~ smoker + sex, data = ukhls) %>% addmargins()
+```
+
+If instead of frequencies we would like to see the proportions (percentages), we can pass the `xtabs` table on to the `prop.table()` function, where we should also select whether we are interested in *row* or *column* percentages using the `margin =` option (where **1 stands for rows** and **2 for columns**). It's up to us to decide which option is best for our analysis. We can do both in turn, because they help us answer different questions.
+
+In general, if we have a clear *outcome* variable - like **smoker** in our case - then we would want to place its categories in the rows and show the values of the predictor (**sex** in our case) in the columns. If so, then *column* proportions would tell us the ratio of smokers and non-smokers among women and men, while *row* percentages would tell us the ratio of men/women among the smokers or non-smokers: 
+
+```{r}
+
+# row proportions:
+
+xtabs( ~ smoker + sex, data = ukhls) %>% prop.table(margin = 1)
+
+# column proportions:
+
+xtabs( ~ smoker + sex, data = ukhls) %>% prop.table(margin = 2)
+```
+If we're annoyed by the many decimals and want to see a cleaner table rounded down to two decimal places, we can pass the `prop.table` further to a `round()` function, where we also specify the desired number of decimal places. Let's say we want to show only 2 decimals (we can also simplify the previous command by not spelling out "margins = " in the command and simply giving it's value):
+
+```{r}
+xtabs( ~ smoker + sex, data = ukhls) %>% 
+  prop.table(1) %>% 
+  round(2)
+
+xtabs( ~ smoker + sex, data = ukhls) %>% 
+  prop.table(2) %>% 
+  round(2)
+
+```
+If we have row proportions, the values across rows should add up to 1 (i.e. 100%); if we have column proportins, then they should add up to 1 vertically, across columns; if they don't, then we've done something wrong. For example, if we do not specify a `margin =`, then by default the proportions will be calculated per cell (rather than by row or column) respective to the total number of respondents.
+
+If we prefer to convert the proportions to percentages, we can simply multiply the `prop.table` by 100:
+
+```{r}
+# row proportions
+
+xtabs( ~ smoker + sex, data = ukhls) %>% 
+  prop.table(1) * 100
+
+# column proportions
+
+xtabs( ~ smoker + sex, data = ukhls) %>% 
+  prop.table(2) * 100
+```
+
+
+### Crosstabulations: the `flat_table()` function from `{sjmisc}`
+
+We've already used the `{sjmisc}` package, and it contains another function that may be useful for crosstabulations: `flat_table()'. It gives similar results to those above, but the code may be a bit more simple. We just need to list the variables we want to cross-tabulate, separated by commas; to show proportions, we can add an additional argument `margin = ` and choose either "row" or "col" as a value. The results are shown directly as percentages (i.e. proportions * 100) rounded down to two decimals:
+
+```{r}
+sjmisc::flat_table(smoker, sex, data = ukhls)
+
+# or as row percentages:
+
+sjmisc::flat_table(smoker, sex, data = ukhls , margin = "row")
+
+# or as column percentages:
+
+sjmisc::flat_table(smoker, sex, data = ukhls , margin = "col")
+```
+
+**The issue** with this function is that it cannot include marginal totals; for that, the **xtabs() %>% addmargins()** option would be the way to go.
+
+::: {.questionbox .question}
+**Questions**
+
+So, what have we learned so far about the relationship between sex and smoking behaviours?
+- Are there more men or women among the non-smokers?
+- Is the percentage of smokers among men higher or lower than among women?
+:::
+
+::: {.taskbox .task}
+**Task**
+
+Using the functions we've learnt above, summarise the relationship between *smoking* behaviour and *financial situation* using cross-tabulations. **Tip**: because the *finnow* variable has so many levels (categories), it's visually better to place it in the rows.
+
+```{r, eval=F, purl=FALSE}
+### Complete the tasks below:
+
+# Contingency table of 'finnow' by 'smoker' showing frequencies and marginal totals
+
+...
+
+
+# Contingency table of 'finnow' by 'smoker' showing column percentages:
+
+...
+
+# Contingency table of 'finnow' by 'smoker' showing column percentages:
+
+...
+
+```
+:::
+
+
+```{r, include=F, echo=FALSE}
+
+# Contingency table showing frequencies and marginal totals
+
+xtabs( ~ finnow + smoker, data = ukhls) %>% 
+    addmargins()
+
+
+# Contingency table showing column percentages (that's the more useful proportion table for us in this case):
+
+flat_table(finnow, smoker, data = ukhls , margin = "row")
+
+# Contingency table of 'finnow' by 'smoker' showing column percentages (less useful):
+
+flat_table(finnow, smoker, data = ukhls , margin = "col")
+
+#### Student questions -------------------
+
+# Answer to the second question: because the 'Doing alright' group is the largest group in the variable as a whole, so it's likely that it will be the largest among both smokers and non-smokers. In essence, it doesn't tell us much and definitely it doesn't tell as the answer to what we are looking for. So this question should draw students' attention to the care one needs to take when interpreting marginal proportions in contingency tables.
+
+```
+
+::: {.questionbox .question}
+**Questions**
+
+What have we learned about the relationship between subjective financial situation and smoking behaviour?
+- Among which financial-situation group is the proportion of smokers the highest?
+- Which financial-situation group has the highest percentage among the smokers? And explain why this is the case, give the answer to the previous question! (**tip**: look again at the frequency contingency table too)
+- Overall, based on these results, would you say that there is an association between *financial situation* and *smoking* behaviour? If so, why do you think that? 
+:::
+
+
+```{r include=FALSE}
+##### Step 4: Linear modeling ----------
+```
+## Step 4: **Model** the relationship between your variables
+
+Of course, we need to check whether your answer to the last question above stands up against statistical validation. This is where regression modelling comes in. We can fit three separate bivariate models here, checking in turn the predictive power of each of the three predictor variables, as we have done in previous weeks. Then, our final aim is to fit a model that estimates the effect of *financial situation* on *smoking behaviour* while also accounting for the effect of *age* and *sex*; that is, a multiple regression with more than a single predictor. In this exercise we will fit the final, full model to get an idea of the overall picture, but you can then check on your own how simpler models with fewer predictors behave.
+
+Our challenge compared to previous weeks is that now our outcome variable of interest, *smoker*, is not a numeric/scale variable but a dichotomous, categorical one. So the ***units*** in which we can measure any effect on this outcome "scale" of 0/1 are no longer that easy to get our heads around. That means that interpreting the results is where the challenge will be.
+
+The actual fitting of the model is fairly simple: we can use the function that fits a **g**eneralised **l**inear **model** (`glm()`) using similar syntax to that of **l**inear *m**odel (`lm()`), with the only difference that we should specify which "family" of distributions the outcome variable belongs to; a binary/dichotomous outcome has a so-called "**binomial**" distribution, and that's what we need to tell `R`:
+
+```{r}
+model_logistic <- glm(smoker ~ finnow + sex + age_dv, family = binomial, data = ukhls)
+```
+
+With the code above, we have saved the logistic regression output as an object called 'model_logistic', so we can perform some additional work on that model, such as getting a summary of it. Previously we have used both the `summary()` function from base `R` as well as the `summ()` function from the `{jtools}` package. This latter gives us better formatted summmaries and has several further options that will come extremely useful now wich logistic regressions; so let's ask for a `summ()`:
+
+```{r}
+jtools::summ(model_logistic, digits=3)
+```
+
+### From ***log-odds*** to ***Odds Ratios***
+
+The coefficients (**Est.**imates) returned by our logit model are a bit difficult to interpret intuitively because they are measured on a strange mathematical scale called the *log-odds*, but which can be converted back to *probabilities* and *odds ratios* if we want. The advantage of *log odds* is that it follows the same logic we already know from linear regression: either an increase or a decrease of *x* value - for instance, here, being female as opposed to male is associated with 0.238 higher *log-odds* of being a smoker. But what this actually means in practice is very unclear.
+
+It is more common to report **odds ratios** (OR) instead. An odds ratio less than 1 means that a unit increase in the value of the predictor variable leads to a *decrease* in the odds that the outcome is equal to its value 1 (being a *smoker* in our case). An odds ratio greater than 1 means that an increase in the predictor leads to an *increase* in the odds that the outcome is 1 (*smoker*). In general, the **percent change** in the odds given a one-unit change in the predictor can be determined as:
+
+$$
+Percent Chance in Odds = 100\times(OR-1)
+$$
+
+The `summ()` function of the `{jtools}` package makes it easier to request odds ratios (same as "**exp**onentiated coefficients") with the `exp =` option:
+
+```{r}
+jtools::summ(model_logistic, digits=3, exp = TRUE)
+```
+
+We see that we are also getting confidence intervals instead of standard errors by default, which can be again easier to interpret.
+
+The **'exp(Est.)'** (for "exponentiated coefficient") estimates shown are the **odds ratios**, and while they look very different from what we are used to from linear regression (i.e. they do not take negative values but run from 0 to infinity, with anything between 0 and 1 meaning a *decrese* and anything above 1 meaning an *increase*), they are easier to interpret in terms of *percentage change in the odds of beig a smoker*:
+
+- the odds of being a smoker if you are a woman are 100\*(1.269-1)= `r 100*(1.269-1)`% higher than if you were a man;
+- the odds of being a smoker increase by 100\*(1.010-1)= `r 100*(1.010-1)`% with each additional year of age
+- the odds of being a smoker if you *find it very difficult* to manage financially as opposed to *Living comfortably* are 100\*(0.196-1)= `r 100*(0.196-1)`% - in other words, much lower. **Remember that here the *living comfortably* variable is the  *base* or *reference* level to which all other categories of 'finnow' compare**
+- and so on for the other estimates; **basically, we subtract a 1 from the estimate number and move the decimal point two spots to the right to get a percentage of odds.** 
+
+If you are the kind of person who likes betting on horse races in the weekend, the concept of *odds* will make perfect sense; the res of us can take away the main idea that we either see an *increase* or a *decrease* of a certain amount in respect to the outcome, so we gain a general understanding of how the various factor we are assessing affect the probability of the outcome (being a smoker).
+
+## Exercise 2: Make it simple
+
+We started with a complex model to get an idea of the whole picture. But it's generally useful to have a quick look at simpler models too that only include a subset of the variables of interest. For example, it would be interesting to see what the effect of *financial situation* on *smoking* is if we *do not* also control for *age* and *gender*. Try to fit this model and check if any of the main results change significantly.
+
+```{r}
+# Fit a simpler model
+
+
+```
+
+```{r, eval=F, echo=F}
+model_logistic_simple <- glm(smoker ~ finnow, family = binomial, data = ukhls)
+jtools::summ(model_logistic_simple, digits=3, exp = TRUE)
+```
+
+
+
+## Exercise 3: On your own
+
+If there's time left, chose another set of variables that can help explain a theoretically/sociologically interesting question and following the steps in Example 1,work towards fitting a logistic regression model.
+
+**TIP**: if you have looked at the Assignment 2 research question options you will know that there is a question there that can be answered using logistic regression; if you're interested in that one, you can give it a go!
 
 
 ```{r eval=FALSE, include=FALSE, purl=FALSE}
 # Just run this chunk manually at the end...
-knitr::purl("Lab8.Rmd", documentation = 0)
+knitr::purl("Lab9.Rmd", documentation = 0)
 ```
 
 ```{r eval=FALSE, include=FALSE, purl=FALSE}
