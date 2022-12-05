@@ -449,8 +449,12 @@ model_logistic <- glm(smoker ~ finnow + sex + age_dv, family = binomial, data = 
 
 With the code above, we have saved the logistic regression output as an object called 'model_logistic', so we can perform some additional work on that model, such as getting a summary of it. Previously we have used both the `summary()` function from base `R` as well as the `summ()` function from the `{jtools}` package. This latter gives us better formatted summmaries and has several further options that will come extremely useful now wich logistic regressions; so let's ask for a `summ()`:
 
-```{r}
+```{r, eval=FALSE}
 jtools::summ(model_logistic, digits=3)
+```
+
+```{r, eval=TRUE, echo=FALSE, purl=FALSE}
+jtools::summ(model_logistic, digits=3) %>% knitr::normal_print()
 ```
 
 ### From ***log-odds*** to ***Odds Ratios***
@@ -465,8 +469,12 @@ $$
 
 The `summ()` function of the `{jtools}` package makes it easier to request odds ratios (same as "**exp**onentiated coefficients") with the `exp =` option:
 
-```{r}
+```{r, eval=FALSE}
 jtools::summ(model_logistic, digits=3, exp = TRUE)
+```
+
+```{r, eval=TRUE, echo=FALSE, purl=FALSE}
+jtools::summ(model_logistic, digits=3, exp = TRUE)  %>% knitr::normal_print()
 ```
 
 We see that we are also getting confidence intervals instead of standard errors by default, which can be again easier to interpret.

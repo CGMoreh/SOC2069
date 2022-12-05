@@ -1,6 +1,5 @@
 ---
 title: "logit"
-format: docx
 ---
 
 
@@ -18,18 +17,20 @@ ukhls <- readRDS(url("https://cgmoreh.github.io/SOC2069/SOC2069-Statistical-anal
 
 ```{r}
 
-frq(ukhls$smoker, out="viewer")
+frq(ukhls$smoker)
 
-frq(ukhls$urban_dv, out="viewer")
+frq(ukhls$urban_dv)
 
-frq(ukhls$hiqual_dv, out = "viewer")
+frq(ukhls$hiqual_dv)
 
 summary(ukhls$fimnnet_dv) %>% t() %>% kable()
+
 ```
 
 
 ```{r}
 glm(smoker ~ fimnnet_dv + hiqual_dv + urban_dv, family = binomial, data = ukhls) %>% 
-  jtools::summ(digits=3, out="html")
+  jtools::summ(digits=3, exp = TRUE)
 ```
+
 

@@ -2261,16 +2261,20 @@ ratios</em> if we want. The advantage of <em>log odds</em> is that it
 follows the same logic we already know from linear regression: either an
 increase or a decrease of <em>x</em> value - for instance, here, being
 female as opposed to male is associated with 0.238 higher
-<em>log-odds</em> of being a smoker. But what this actually means in
-practice is very unclear.</p>
+<em>log-odds</em> of being a <strong>non-smoker</strong> (remember that
+the <em>smoker</em> variable is coded such that <em>yes</em> is the
+first category (0) and <em>no</em> is the second category (1), so we are
+getting results for the probability of the second (1) category compared
+to the first (0), so for being <em>non-smokers</em>). But what this
+actually means in practice is very unclear.</p>
 <p>It is more common to report <strong>odds ratios</strong> (OR)
 instead. An odds ratio less than 1 means that a unit increase in the
 value of the predictor variable leads to a <em>decrease</em> in the odds
-that the outcome is equal to its value 1 (being a <em>smoker</em> in our
-case). An odds ratio greater than 1 means that an increase in the
+that the outcome is equal to its value 1 (being a <em>non-smoker</em> in
+our case). An odds ratio greater than 1 means that an increase in the
 predictor leads to an <em>increase</em> in the odds that the outcome is
-1 (<em>smoker</em>). In general, the <strong>percent change</strong> in
-the odds given a one-unit change in the predictor can be determined
+1 (<em>non-smoker</em>). In general, the <strong>percent change</strong>
+in the odds given a one-unit change in the predictor can be determined
 as:</p>
 <p><span class="math display">\[
 Percent Chance in Odds = 100\times(OR-1)
@@ -2314,20 +2318,20 @@ standard errors by default, which can be again easier to interpret.</p>
 estimates shown are the <strong>odds ratios</strong>, and while they
 look very different from what we are used to from linear regression
 (i.e. they do not take negative values but run from 0 to infinity, with
-anything between 0 and 1 meaning a <em>decrese</em> and anything above 1
-meaning an <em>increase</em>), they are easier to interpret in terms of
-<em>percentage change in the odds of beig a smoker</em>:</p>
+anything between 0 and 1 meaning a <em>decrease</em> and anything above
+1 meaning an <em>increase</em>), they are easier to interpret in terms
+of <em>percentage change in the odds of being a non-smoker</em>:</p>
 <ul>
-<li>the odds of being a smoker if you are a woman are 100*(1.269-1)=
+<li>the odds of being a non-smoker if you are a woman are 100*(1.269-1)=
 26.9% higher than if you were a man;</li>
-<li>the odds of being a smoker increase by 100*(1.010-1)= 1% with each
-additional year of age</li>
-<li>the odds of being a smoker if you <em>find it very difficult</em> to
-manage financially as opposed to <em>Living comfortably</em> are
-100*(0.196-1)= -80.4% - in other words, much lower. <strong>Remember
-that here the <em>living comfortably</em> variable is the <em>base</em>
-or <em>reference</em> level to which all other categories of ‘finnow’
-compare</strong></li>
+<li>the odds of being a non-smoker increase by 100*(1.010-1)= 1% with
+each additional year of age</li>
+<li>the odds of being a non-smoker if you <em>find it very
+difficult</em> to manage financially as opposed to <em>Living
+comfortably</em> are 100*(0.196-1)= -80.4% - in other words, much lower.
+<strong>Remember that here the <em>living comfortably</em> variable is
+the <em>base</em> or <em>reference</em> level to which all other
+categories of ‘finnow’ compare</strong></li>
 <li>and so on for the other estimates; <strong>basically, we subtract a
 1 from the estimate number and move the decimal point two spots to the
 right to get a percentage of odds.</strong></li>
@@ -2338,7 +2342,7 @@ of us can take away the main idea that we either see an
 <em>increase</em> or a <em>decrease</em> of a certain amount in respect
 to the outcome, so we gain a general understanding of how the various
 factor we are assessing affect the probability of the outcome (being a
-smoker).</p>
+non-smoker).</p>
 </div>
 </div>
 <div id="exercise-2-make-it-simple" class="section level2">
