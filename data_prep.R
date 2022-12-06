@@ -58,19 +58,19 @@ us <- read_stata(path_office) %>%
 sjlabelled::write_stata(us, "docs/Data/ukhls_w8.dta")  # Stata .dta
 saveRDS(us, file = "docs/Data/ukhls_w8.rds")           # gz compressed .rds
 
-summarytools::dfSummary(us) %>% print(file = "docs/Data/varlist.html", footnote = NA)
+summarytools::dfSummary(us) %>% print(file = "docs/Data/varlist2.html", footnote = NA)
 
 ### ADD TO <BODY>
 # <div class="container st-container">
 #   <h4>The UK Household Longitudinal Study (Understanding Society), Wave 8 (2016-17)</h4>
 #   <b>Data set name</b>: ukhls_w8
-#   <b>Dimensions</b>: 39293 x 208 <br>
+#   <b>Dimensions</b>: 39293 x 199 <br>
 #   <b>Description</b>: This dataset is an edited version of the <b>h_indresp</b> dataset available from Understanding Society. The following changes have been done to the original dataset:
 #   <li>it has been reduced in size, keeping only <b>199</b> variables of the original <b>2152</b></li>
 #   <li>the wave prefix (<b>h_</b>) has been removed from all the variable names</li>
 #   <li>all negative-coded missing values (-21 to -1) were transformed to generic missing (NA) values</li>
 #   Keeping the above in mind, <a href="https://www.understandingsociety.ac.uk/documentation/mainstage/dataset-documentation">the variable search function </a> provided on the Understanding Society website can and should be used to gain insight into the meaning of variables beyond the description provided in the variable labels.<br>
-#   <b>Citation</b>: To cite this data, use the recommended citation to the original dataset: 
+#   <b>Citation</b>: To cite this data, use the recommended citation to the original dataset:
 #   <li>University of Essex, Institute for Social and Economic Research (2022) Understanding Society: Wave 8, 2016-2017. UK Data Service, SN: 6614, http://doi.org/10.5255/UKDA-SN-6614-17</li>
 #   
 # #   ...
@@ -89,6 +89,28 @@ summarytools::dfSummary(us) %>% print(file = "docs/Data/varlist.html", footnote 
 # Read in data
 
 us <- readRDS("C:/Users/ncm281/Documents/SOC2069/docs/Data/ukhls_w8.rds")
+
+
+# Gender identity variable for assignment
+
+sjmisc::frq(us$scwhorusex)
+
+table(us$scwhorusex, useNA = "always")
+
+us <- us %>% sjmisc::rec(scwhorusex, rec = "Very important to my sense of who I am, 
+Fairly important to my sense of who I am
+            =1 [Important]; 
+            Not very important to my sense of who I am,
+            Not at all important to my sense of who I am
+            =0 [Not Important]")
+
+us <- us %>% mutate(scwhorusex_r = as_label(scwhorusex_r))
+
+
+sjmisc::frq(us$scwhorusex_r)
+
+
+
 
 # Small data for testing
 
