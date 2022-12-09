@@ -1,0 +1,147 @@
+---
+title: "Worksheet 10"
+output:
+  html_document:
+    theme: lumen
+    toc: yes
+    toc_float: yes
+    toc_highlight: yes
+    tabset: yes
+    number_sections: no
+    anchor_sections: no
+    self_contained: yes
+    code_download: no
+    highlight: default
+    css: ./../my_themes/labcss.css
+---
+
+```{r, include=FALSE, purl=FALSE}
+options(repos = list(CRAN="http://cran.rstudio.com/"))
+```
+
+```{r setup, include = FALSE, purl=FALSE}
+# knitr::knit_hooks$set(purl = knitr::hook_purl)
+
+knitr::opts_chunk$set(error = FALSE, warning=FALSE, comment="", prompt=FALSE, message = F, strip.white = F, fig.width = 5, fig.asp = .8, fig.align = "center", fig.show = 'hold', class.output = "outputbox")
+```
+
+```{r klippy, echo=FALSE, include=TRUE, purl=FALSE}
+pacman::p_load_gh("rlesur/klippy"); klippy(position = c('right'))
+```
+
+------------------------------------------------------------------------
+
+    Timetable week: 15
+    Topic: ""
+
+------------------------------------------------------------------------
+
+```{r, include=FALSE}
+### ---- Lab 9 script ---- ###
+```
+
+# Intro
+
+The aim of this final week is to gain some practice in getting the various outputs we have produced as part of a statistical analysis onto "paper", as part of the process of writing up our findings into a report.
+
+In every quantitative analysis, we need to ensure that our analysis is open and reproducible. This is increasingly a professional standard expected of all data analysts in the social sciences. This means that we need to have an efficient way in which to share our **analysis code** and well as our **outputs** and our **interpretations** of our findings with our readers. This is also what the **assignment** requires.
+
+`RStudio` has an efficient way of handling this requirement with the use of the **R markdown** document format, ***.Rmd*** (a more recent version of which is the *Quarto* version of it, ***.qmd***).
+
+In fact, these worksheets themselves were written in `R Markdown`, so you have already witnessed how the output may look like: we have this text, and we can also include and execute `R` code chunks such as this one:
+
+```{r}
+# Let's first (install and) load the packages we want to use.
+
+# install.packages(c("tidyverse", "mosaic", "sjmisc", "jtools"))     
+
+library(tidyverse)
+library(mosaic)
+library(sjmisc)
+library(jtools)
+```
+
+While one can do amazing things with `.Rmd` documents and there are various settings that one can use to customise the output in every way possible and in various output formats, we'll only cover the very basics that allow you to complete a full data analysis project (**such as your Assignment 2!!**) in an `.Rmd` document.
+
+
+# Readings
+
+Instead of readings, you have some online training to complete this week:
+
+- Component 6 of "R for Social Scientists": https://datacarpentry.org/r-socialsci Links to an external site.. (“Getting started with R Markdown”, around 1 hour).
+
+And/or the following:
+
+- Official "R Markdown" tutorial from RStudio: https://rmarkdown.rstudio.com/lesson-1.html Links to an external site. 
+- Andy Field's "Getting started in R and RStudio" (see on the software tutorial page too), especially the section on 'R Markdown' (http://milton-the-cat.rocks/learnr/r/r_getting_started/#section-r-markdown Links to an external site.); and/or his more recent video tutorial on the newer sister version or 'RMarkdown', Quarto: https://www.youtube.com/playlist?list=PLEzw67WWDg80-fT1hq2IZf7D62tRmKy8f Links to an external site. 
+ 
+
+Further training:
+
+For those interested in developing their `R` skills in creating publishable-quality visualisations (graphs, figures)
+
+- Component 5 of "R for Social Scientists": https://datacarpentry.org/r-socialsci Links to an external site.. (“Data Visualisation with ggplot2”, around 2 hours).
+ 
+
+Secondary readings:
+
+- Neuman (2014): Chapter 15 (pp. 513–546)
+
+
+
+
+# Exercise 0: Setup
+
+1.  **Open the `R Studio` interface** by clicking on the *SOC2069-Statistical-analysis**.Rproj*** file included in the ***SOC2069-Statistical-analysis*** project folder that you downloaded from Canvas in Lab6. The folder should be stored on your Newcastle University **OneDrive** and accessible from any computer
+
+    `r fontawesome::fa("wrench")` If you haven't yet downloaded the project folder in TW11 (Lab6), then [download it from Canvas](https://ncl.instructure.com/courses/48074/pages/data-access-and-description?module_item_id=2544656). **Tip:** If you haven't completed the Lab6 worksheet, it will be difficult to follow the next steps; please go through *Exercise 1* and *2* of [Lab6](https://cgmoreh.github.io/SOC2069/Worksheets/Lab6)).
+
+2.  **Create a new blank `R` script** for this lab session
+
+    `r fontawesome::fa("wrench")` Check *Exercise 1, Task 2* of [*Lab6*](https://cgmoreh.github.io/SOC2069/Worksheets/Lab6)) if you need help with this. **Tip:**
+
+    ```{r, echo=F, purl=FALSE}
+    #| out.width="40%",  fig.topcaption = TRUE, fig.align = "center", 
+
+    knitr::include_graphics("images/new_script_1.jpg")
+    ```
+
+    <center>or</center>
+
+    ```{r, echo=F, purl=FALSE}
+    #| out.width="40%",  fig.topcaption = TRUE, fig.align = "center", 
+
+    knitr::include_graphics("images/new_script_2.jpg")
+    ```
+
+3.  **Write a comment line** at the top of the new script to briefly detail what the script is about (e.g. *\# Script for Lab x, Week y*). **Tip:** in `R` scripts the hashtag (*\#*) denotes that the text following it on the same line is just a comment, not a programming command.
+
+4.  **Load user-written `R` packages** we commonly use with the `library()` function
+
+    `r fontawesome::fa("wrench")` Check *Exercise 1, Task 4* of [*Lab6*](https://cgmoreh.github.io/SOC2069/Worksheets/Lab6) if you need help with this. **Tip:** You may need to first install the package with the `install.packages()` function if it's not yet installed
+
+
+5.  **Load the *ukhls_w8.rds* dataset** to an object in the session Environment; let's call that object "ukhls":
+
+```{r include=FALSE}
+##### Read in data ----------
+```
+
+    ```{r eval=FALSE}
+    ukhls <- readRDS("ukhls_w8.rds")
+    ```
+    `r fontawesome::fa("wrench")`   Check *Exercise 1, Task 4* of [*Lab6*](https://cgmoreh.github.io/SOC2069/Worksheets/Lab6)) if you need help with this. **Tip:** Specifying only the file name without a path assumes that you have followed Step 1 above correctly and your working directory is the RProject. If not, go back to Step 1.
+
+    <span style="color:red">`r fontawesome::fa("wrench")`   If you have accidentally overwritten the original dataset with incorrect transformations to variables, you can download the original dataset again from here: </span> **[https://cgmoreh.github.io/SOC2069/SOC2069-Statistical-analysis/ukhls_w8.rds](https://cgmoreh.github.io/SOC2069/SOC2069-Statistical-analysis/ukhls_w8.rds)**. <span style="color:red">Save it to the project folder, replacing the old dataset.</span>
+
+```{r include=FALSE, purl=FALSE}
+ukhls <- readRDS(url("https://cgmoreh.github.io/SOC2069/SOC2069-Statistical-analysis/ukhls_w8.rds"))
+```
+
+# Exercise 1: Open and get to know an `.Rmd` document
+
+`About 30  minutes`
+
+------------------------------------------------------------------------
+
+## Exercise 2: Complete your assignment today!
