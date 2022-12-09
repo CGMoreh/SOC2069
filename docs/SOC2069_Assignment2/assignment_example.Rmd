@@ -1,0 +1,170 @@
+---
+title: ""
+output:
+  word_document: default
+  pdf_document: default
+  html_document:
+    df_print: paged
+self-contained: true
+---
+
+```{r}
+# These are ptions to produce the best results when knitting to Word documents; 
+# If you are knitting to HTML, delete this whole code chunk
+
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, render = knitr::normal_print)
+```
+
+
+
+
+
+```{r message=FALSE, warning=FALSE, include=FALSE}
+## To make your lives easier, I include this code chunk that installs and loads all the packages that we have used this semester, and which you may want to use for the assignment
+
+## Because we do not want any information about this to actually get printed into the output document, I have added some options to the code-chunk header above
+
+## For this reason, leave this chunk as it is. All the other code chunks that you will include later should print everything in the output (code and results)
+
+## To make sure that the packages listed below are loaded into your session (so that you can run your code chunks below separately to keep track of your results), run this code chunk first by clicking on the green righ-pointing arrow at the top-right corner of this code chunk
+
+options(repos = list(CRAN = "http://cran.rstudio.com/")) # Just tells R where to download the packages from
+
+install.packages("tidyverse")
+install.packages("mosaic")
+install.packages("sjmisc")
+install.packages("jtools")
+
+library(tidyverse)
+library(mosaic)
+library(sjmisc)
+library(jtools)
+```
+
+
+
+# Does *education*, *sex* and *age* have an impact on *subjective wellbeing*?
+
+This is Exercise 3 from Lab8. Needless to say, you cannot do this exact research question for your assignment, but whichever research question you choose, the process will be similar.
+
+
+## Introduction
+
+Here I will introduce the issue of "subjective wellbeing"; I can combine it with the 'literature review' if I want, and then I would also briefly introduce some findings that we already know from the existing literature that I have reviewed.
+
+## Literature review
+
+Or I can have a separate brief section for the literature review, and then this is where I place my research question in the context of existing literature, summarizing what we already know about the topic based on a few academic sources (around 5 should be enough for this assignment).
+
+
+## Data and methods
+
+The main research question I have is whether "education" has an impact on someone's sense of "wellbeing" (satisfaction with their lives). I also want to account for the effect that age and sex may have on wellbeing.
+
+I will be using the UKHLS dataset to answer my research question. In the assignment proper I will say a few more words about this data based on the information available on the UKHLS website, and I'll include a citation to the original data. I know how to do all this because I have read everything on Canvas and I've attended the labs this semester.
+
+The variable that are useful for answering my research question are: 
+- scghq1_dv ("subjective wellbeing"), the outcome variable I want to explain; 
+- hiqual_dv ("educational qualification")
+- age_dv ("age")
+- sex ("biological sex")
+
+The variables look like this:
+
+```{r}
+# First, I'll load the dataset
+
+ukhls <- readRDS("ukhls_w8.rds")
+```
+
+```{r}
+# Then I'll do a number of summary statistics for my variables
+# First, summary stats for scghq1_dv:
+
+summary(ukhls$scghq1_dv)
+
+# Maybe also a histogram:
+
+histogram( ~ scghq1_dv, data = ukhls)
+```
+
+I can briefly explain here what the above summary tells me.
+
+
+
+```{r}
+#  Then a frequency table for hiqual_dv
+
+ukhls %>% sjmisc::frq(hiqual_dv)
+```
+
+I can briefly explain what we find from the table.
+
+
+
+
+```{r}
+# Then a frequency table for sex
+
+ukhls %>% sjmisc::frq(sex)
+```
+
+
+I can briefly explain what we find from the table.
+
+
+
+```{r}
+
+# Then summary stats for age
+
+summary(ukhls$age_dv)
+
+```
+
+I can briefly explain here what the above summary tells me.
+
+
+To answer my research question, I will first explore visually the relationship between my outcome variable ("subjective wellbeing") and the main predictor variable whose effect I am interested in ("educational qualification"). Then, because my outcome variable is measured on a "numeric" scale, I will use a linear regression model to estimate the impact of education, age and sex on my outcome of interest.
+
+
+## Results
+
+```{r}
+# First, let's look at the relationship between wellbeing and education
+# I have a numeric and a factor variable, so the best method to visualise their relationship is using a boxplot
+
+bwplot(hiqual_dv ~ scghq1_dv, data = ukhls, pch = "|")
+
+```
+
+We see in this boxplot that there are some minor differences in the median level of distress felt by respondents with different educational qualifications, but we cannot see any large obvious differences. In the assignment propers I'll include a bit more elaborate interpretation of this graph.
+
+```{r}
+# I'll fit my regression model now and ask for some nice summary statistics using the summ() function from the jtools package
+
+
+assignment_reg <- lm(scghq1_dv ~ age_dv + as.factor(sex) + as.factor(hiqual_dv), data = ukhls)
+
+jtools::summ(assignment_reg, digits = 3, confint = TRUE)
+
+```
+
+Now I have my results, so I will write down my interpretation here. This is where I need to be very careful and think deeply, go back to the lab worksheets and maybe even the assigned readings, because I need to give accurate interpretations of the results.
+
+
+
+## Discussion and conclusions
+
+This is where I take the broader picture of what my analysis and outputs have shown and connect it back to the existing literature, stating how my findings relate to what we already know.
+
+
+
+
+## References
+
+Here I will include a reference list for the literature that I cited above.
+
+
+
+
