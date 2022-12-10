@@ -59,7 +59,7 @@ library(tidyverse)
 library(mosaic)
 library(sjmisc)
 library(jtools)
-  ```
+```
 ````
 
 
@@ -69,7 +69,7 @@ While one can do amazing things with `.Rmd` documents and there are various sett
 
 Instead of readings, you have some online training to complete this week:
 
--   Component 6 of "R for Social Scientists": <https://datacarpentry.org/r-socialsci> ("Getting started with R Markdown", around 1 hour).
+-   Component 7 of "R for Social Scientists": <https://datacarpentry.org/r-socialsci> ("Getting started with R Markdown", around 1 hour).
 
 And/or the following:
 
@@ -80,7 +80,7 @@ Further training:
 
 For those interested in developing their `R` skills in creating publishable-quality visualisations (graphs, figures)
 
--   Component 5 of "R for Social Scientists": <https://datacarpentry.org/r-socialsci> ("Data Visualisation with ggplot2", around 2 hours).
+-   Component 6 of "R for Social Scientists": <https://datacarpentry.org/r-socialsci> ("Data Visualisation with ggplot2", around 2 hours).
 
 Secondary readings:
 
@@ -169,9 +169,13 @@ With additional settings, one can obtain tables of publishable quality, but we w
 To make your life easier, you can download another "R Project" folder for the assignment from here: **[https://cgmoreh.github.io/SOC2069/SOC2069_Assignment2.zip](https://cgmoreh.github.io/SOC2069/SOC2069_Assignment2.zip)**
 
 The folder contains:
+
 - the UKHLS dataset (ukhls_w8.rds)
+
 - a template `.Rmd` document to use for the assignment, with some useful default settings included ("my_assignment_RENAME.Rmd")
+
 - an Example`.Rmd` document that shows how the analysis would look like if you were doing Exercise 3 from Lab8 as your assignment question
+
 - a Microsoft Word document containing the knitted version of the Example.
 
 Open the "my_assignment_RENAME.Rmd" document, read through it, and begin working on your assignment, following the same steps we practiced in previous weeks. If you need inspiration, look also at the Example.
