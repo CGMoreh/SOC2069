@@ -1,33 +1,29 @@
 ---
-title: ""
+title: ''
+self-contained: yes
 output:
+  word_document: default
   html_document:
     df_print: paged
-  pdf_document: default
-  word_document: default
-self-contained: true
 ---
 
 ```{r, echo=FALSE}
 # These are options to produce the best basic styled results when knitting to Word documents; Don't delete or change these settings!
 
 knitr::opts_chunk$set(warning = FALSE, message = FALSE, results = "markup", comment = "", size = "footnotesize", render = knitr::normal_print)
+
+options(repos = list(CRAN = "http://cran.rstudio.com/")) # This tells R where to download packages from
 ```
 
 
-
-
-
-```{r message=FALSE, warning=FALSE, echo=FALSE}
+```{r message=FALSE, warning=FALSE, include=FALSE, echo=FALSE}
 ## To make your lives easier, I include this code chunk that installs and loads all the packages that we have used this semester, and which you may want to use for the assignment
 
 ## Because we do not want any information about this to actually get printed into the output document, I have added some options to the code-chunk header above
 
 ## For this reason, leave this chunk as it is. All the other code chunks that you will include later should print everything in the output (code and results)
 
-## To make sure that the packages listed below are loaded into your session (so that you can run your code chunks below separately to keep track of your results), run this code chunk first by clicking on the green righ-pointing arrow at the top-right corner of this code chunk
-
-options(repos = list(CRAN = "http://cran.rstudio.com/")) # Just tells R where to download the packages from
+## To make sure that the packages listed below are loaded into your session (so that you can run your code chunks below separately to keep track of your results), run this code chunk first by clicking on the green right-pointing arrow in the top-right corner of this code chunk
 
 install.packages("tidyverse")
 install.packages("mosaic")
@@ -143,9 +139,9 @@ We see in this boxplot that there are some minor differences in the median level
 # I'll fit my regression model now and ask for some nice summary statistics using the summ() function from the jtools package
 
 
-assignment_reg <- lm(scghq1_dv ~ age_dv + as.factor(sex) + as.factor(hiqual_dv), data = ukhls)
+assignment_reg <- lm(scghq1_dv ~ age_dv + sex + hiqual_dv, data = ukhls)
 
-jtools::summ(assignment_reg, digits = 3, confint = TRUE)
+jtools::summ(assignment_reg, digits = 3)
 
 ```
 

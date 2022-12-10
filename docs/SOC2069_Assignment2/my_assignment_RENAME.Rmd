@@ -1,23 +1,29 @@
 ---
-title: ""
+title: ''
+self-contained: yes
 output:
   word_document: default
-  pdf_document: default
   html_document:
     df_print: paged
-self-contained: true
 ---
 
-```{r message=FALSE, warning=FALSE, include=FALSE}
+```{r, echo=FALSE}
+# These are options to produce the best basic styled results when knitting to Word documents; Don't delete or change these settings!
+
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, results = "markup", comment = "", size = "footnotesize", render = knitr::normal_print)
+
+options(repos = list(CRAN = "http://cran.rstudio.com/")) # This tells R where to download packages from
+```
+
+
+```{r message=FALSE, warning=FALSE, include=FALSE, echo=FALSE}
 ## To make your lives easier, I include this code chunk that installs and loads all the packages that we have used this semester, and which you may want to use for the assignment
 
 ## Because we do not want any information about this to actually get printed into the output document, I have added some options to the code-chunk header above
 
 ## For this reason, leave this chunk as it is. All the other code chunks that you will include later should print everything in the output (code and results)
 
-## To make sure that the packages listed below are loaded into your session (so that you can run your code chunks below separately to keep track of your results), run this code chunk first by clicking on the green righ-pointing arrow at the top-right corner of this code chunk
-
-options(repos = list(CRAN = "http://cran.rstudio.com/")) # Just tells R where to download the packages from
+## To make sure that the packages listed below are loaded into your session (so that you can run your code chunks below separately to keep track of your results), run this code chunk first by clicking on the green right-pointing arrow in the top-right corner of this code chunk
 
 install.packages("tidyverse")
 install.packages("mosaic")
@@ -34,7 +40,7 @@ library(jtools)
 
 # My title (as a first-level heading)
 
-All of the text in this document can **and should** be deleted. They are just there to give you some guidance. You will write your own text here and can choose to keep or replace the headings (text that begins with # hashtags) too.
+All the text in this document should be deleted. It is here only to give you some guidance. You will write your own text and headings.
 
 
 ## Introduction (as a second-level heading)

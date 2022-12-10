@@ -59,7 +59,7 @@ library(tidyverse)
 library(mosaic)
 library(sjmisc)
 library(jtools)
-```
+  ```
 ````
 
 
@@ -138,7 +138,8 @@ For this quick exercise, let's use the same "cars" dataset that is included with
 
 - select and delete all the text under the heading "## Including Plots"
 - create a new code chunk under "## Including Plots"
-- inside the code chunk, write the command for a simple linear regression that regresses "dist" (the outcome) on "speed" (the predictor)
+- inside the code chunk, write the command for **a simple linear regression** that regresses "dist" (the outcome) on "speed" (the predictor) and saves the regression output to an object called "**practice_reg**"
+- In the same code chunk, under the regression command, write a command to request summary statistics for the regression object; use the "summary()" command from base R for simplicity
 - **you can run the commands in a code chunk to see the results by clicking on the *green arrow* in the upper-right corner of the chunk**
 - In a new line under the output, write a brief sentence about the result: what is the relationship between a car's speed (measured in mph) and the distance it requires to stop (measured in ft)
 - finally, "knit" the document to Microsoft Word to see the results (**Important**: first, close the Word document from the previous knit if it's still open, otherwise it cannot be overwritten and the knitting process will fail)
