@@ -1,4 +1,6 @@
 
-# This is enough to complete the student task
+# Command to complete the student task in Exercise 1
 
-lm(dist ~ speed, data = cars)
+practice_reg <- lm(dist ~ speed, data = cars)
+
+summary(practice_reg)

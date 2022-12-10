@@ -146,24 +146,35 @@ For this quick exercise, let's use the same "cars" dataset that is included with
 
 ```{r, eval=FALSE, echo=FALSE}
 
-# This is enough to complete the student task
+# Command to complete the student task in Exercise 1
 
-lm(dist ~ speed, data = cars)
+practice_reg <- lm(dist ~ speed, data = cars)
+
+summary(practice_reg)
 ```
 
 :::
 
+::: {.importantbox .important}
+**Note** that tables do not print nicely to Microsoft Word. The HTML format is much more flexible, so will notice that if you knit to both HTML and Word, the HTML document will have much nicer formatting.
+
+With additional settings, one can obtain tables of publishable quality, but we will not cover those options in this module. The **Assignment 2 template** file that you can download (see below) includes some settings that make all tables print in plain text format as they usually appear in the Console. This is far from "publishable" quality, but the aim is to be able to show results that you can interpret.
+:::
+
+
+
 
 # Exercise 2: Complete your assignment today!
 
-To make your life easier, you can download another "R Project" folder for the assignment from here:
+To make your life easier, you can download another "R Project" folder for the assignment from here: **[https://cgmoreh.github.io/SOC2069/SOC2069-Assignment2.zip](https://cgmoreh.github.io/SOC2069/SOC2069-Assignment2.zip)**
 
 The folder contains:
-- the UKHLS dataset
+- the UKHLS dataset (ukhls_w8.rds)
 - a template `.Rmd` document to use for the assignment, with some useful default settings included ("my_assignment_RENAME.Rmd")
-- an example Microsoft Word document, the "knitted" output from the `.Rmd`
+- an Example`.Rmd` document that shows how the analysis would look like if you were doing Exercise 3 from Lab8 as your assignment question
+- a Microsoft Word document containing the knitted version of the Example.
 
-Open the "my_assignment_RENAME.Rmd" document, read through it, and begin working on your assignment, following the same steps we practiced in previous weeks.
+Open the "my_assignment_RENAME.Rmd" document, read through it, and begin working on your assignment, following the same steps we practiced in previous weeks. If you need inspiration, look also at the Example.
 
 The aim is to complete the data analysis part of the assignment today, in class. You can leave the literature review and discussion for later. But if you manage finish this exercise and export your results to Microsoft Word or to HTML, you won't even need to use `R Studio` outside class to complete the assignment. You can just add the additional content directly onto the Word document as you would do with any other essay. 
 
