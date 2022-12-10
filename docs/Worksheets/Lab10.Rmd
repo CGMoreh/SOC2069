@@ -166,7 +166,7 @@ With additional settings, one can obtain tables of publishable quality, but we w
 
 # Exercise 2: Complete your assignment today!
 
-To make your life easier, you can download another "R Project" folder for the assignment from here: **[https://cgmoreh.github.io/SOC2069/SOC2069-Assignment2.zip](https://cgmoreh.github.io/SOC2069/SOC2069-Assignment2.zip)**
+To make your life easier, you can download another "R Project" folder for the assignment from here: **[https://cgmoreh.github.io/SOC2069/SOC2069_Assignment2.zip](https://cgmoreh.github.io/SOC2069/SOC2069_Assignment2.zip)**
 
 The folder contains:
 - the UKHLS dataset (ukhls_w8.rds)
