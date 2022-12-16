@@ -2110,10 +2110,12 @@ smoker     male   female
 <code>{sjmisc}</code></h3>
 <p>We’ve already used the <code>{sjmisc}</code> package, and it contains
 another function that may be useful for crosstabulations:
-<code>flat_table()&#39;. It gives similar results to those above, but the code may be a bit more simple. We just need to list the variables we want to cross-tabulate, separated by commas; to show proportions, we can add an additional argument</code>margin
-= ` and choose either “row” or “col” as a value. The results are shown
-directly as percentages (i.e. proportions * 100) rounded down to two
-decimals:</p>
+<code>flat_table()</code>. It gives similar results to those above, but
+the code may be a bit more simple. We just need to list the variables we
+want to cross-tabulate, separated by commas; to show proportions, we can
+add an additional argument <code>margin =</code> and choose either “row”
+or “col” as a value. The results are shown directly as percentages
+(i.e. proportions * 100) rounded down to two decimals:</p>
 <pre class="r"><code>sjmisc::flat_table(smoker, sex, data = ukhls)</code></pre>
 <pre class="outputbox"><code>       sex  male female
 smoker                 
