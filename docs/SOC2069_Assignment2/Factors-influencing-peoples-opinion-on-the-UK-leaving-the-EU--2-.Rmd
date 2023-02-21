@@ -1,0 +1,146 @@
+---
+title: ''
+self-contained: yes
+output:
+  word_document: default
+  html_document:
+    df_print: paged
+---
+
+```{r, echo=FALSE}
+# These are options to produce the best basic styled results when knitting to Word documents; Don't delete or change these settings!
+
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, results = "markup", comment = "", size = "footnotesize", render = knitr::normal_print)
+
+options(repos = list(CRAN = "http://cran.rstudio.com/")) # This tells R where to download packages from
+```
+
+
+```{r message=FALSE, warning=FALSE, include=FALSE, echo=FALSE}
+## To make your lives easier, I include this code chunk that installs and loads all the packages that we have used this semester, and which you may want to use for the assignment
+
+## Because we do not want any information about this to actually get printed into the output document, I have added some options to the code-chunk header above
+
+## For this reason, leave this chunk as it is. All the other code chunks that you will include later should print everything in the output (code and results)
+
+## To make sure that the packages listed below are loaded into your session (so that you can run your code chunks below separately to keep track of your results), run this code chunk first by clicking on the green right-pointing arrow in the top-right corner of this code chunk
+
+install.packages("tidyverse")
+install.packages("mosaic")
+install.packages("sjmisc")
+install.packages("jtools")
+
+library(tidyverse)
+library(mosaic)
+library(sjmisc)
+library(jtools)
+```
+
+
+
+# What factors influenced peoples opinion on whether the UK should remain a member of the EU or leave the EU?
+
+
+## Introduction
+
+
+The vote for the UK to leave the European Union in 2016, established a great insight to the feelings of the general public towards the countries relationship with continental Europe. With the turnout resulting in a majority "Leave" response, it was clear the UK's population was fed up being steered by an unstable government. With the public ignoring the warnings of exiting the union and recommendations to remain. The otherwise known as "Brexit deal" was to predominantly impact trade, travel and economy with the heightening of sovereignty. Furthermore, in this report I will be exploring the numerous factors of race, age and, income which influenced the public's opinion to remain a member of the European Union and those who voted and influenced the turnout in the majority to leave the European Union.
+
+
+## Literature review
+The question of the specific factors which influenced the electorate towards the vote to leave the European Union is a topic which has been reviewed by significant readings. Socio economic factors often decide how one is perceived in society and the privileges they experience, thus giving individuals with different socio-economic statuses a different outlook to life. Therefore, affecting their priorities for bureaucratic changes in their society to benefit them. So, in this case the Brexit deal massively divided the UKs society. Specifically looking at race, research by Martin, Sobolewska et al. Showed that White British were the most pro-leave as compared to other minority groups, followed by those of Indian background who were twice as likely to vote leave as other minority groups. Pakistanis, Black Caribbean, Bangladeshis and Black Africans on average were a quarter more pro leave than remain. This emphasising the evident connection between a voters race and their response. This could be viewed as an impact with 73% of those worried about immigration voted leave compared to 36% of people who did not identify this as a concern, therefore could be deemed an association between ethnic minorities concern for possibilities of their future and impacting their vote to leave. 
+When viewing the correlation between income and voter turnout, Goodwin, and Heath reviewed the poorest households with incomes of less than £20,000 per annum were much more likely to support leaving the EU. Moreover, Merkado found that the more expensive the average property price in an area, the higher chance of the overall vote from that area was to be "Remain", at variance with areas with lower priced properties voting "leave". These statistics can only strengthen the relationship between lower incomes and those voting to leave, with them viewing the decision to leave giving them opportunity to benefit, as opposed to those wealthier regarding the decision to leave as ultimately changing the economy, therefore heightening financial risks and instability thus strengthening their decision to remain. Finally looking at the association with education and voter turnout, on the day of the vote YouGov polled and discovered around two to one of graduates opinions sided with remaining in the EU, as opposed to those whose highest qualification was a GCSE or the equivalent favouring the Leave campaign. This can suggest that the education behind the consequences of the Brexit deal were detailed and discussed more in higher educations which ultimately influenced the votes from those with university, or college degrees to vote in favour of “Remain”.
+
+
+## Data and methods
+The dataset which i will be using to answer this reports research question of What factors influenced voters decision to either leave or remain a member of the EU will be the same Wave 8 of the UK Household Longitudinal Study (ukhls_w8.rds). This survey dataset consists of the members of around 40,000 households across the UK. Said households are revisited each year to confirm or update each households conditions, in order to ensure data is accurate and reliable for research to recognise the individual impact of social and economic change. 
+
+The variables that were most useful from the dataset for answering my research question of what the factors were that influenced the decision to leave of remain in the EU are:
+- eumem (should UK remainn a member of the EU), this being the outcome variable explained with the help of;
+
+- jbsat ("Job satisfaction")
+- hiqual_dv ("highest qualification, UKHLS and BHPS samples")
+- age_dv ("Age, derived from dob_dv and indat_dv")
+
+
+##Results
+The variables look like this:
+```{r}
+#Voter turnout for the decision to leave or remain in the European Union
+
+#some decriptive
+
+summary(`ukhls_w8 `$eumem) 
+
+
+```
+We can see that from the samples within the survey that the decision to remain a member of the European Union prevailed with 20050 siding with the "Remain party", in comparison to the 14225 whos vote was given to the "Leave" party. With that being said it is also important to mention the 5018 participants who answers were either deemed inapplicable, unreliable or undecided on their opinion. 
+```{r}
+# highest educational qualification
+
+summary(`ukhls_w8 `$hiqual_dv)
+
+
+#frequency table
+`ukhls_w8 `%>% frq(`ukhls_w8 `$hiqual_dv)
+
+```
+This frequency table shows the participants of the survey and their highest education qualification , the data presents that those who have an A-level or the equivalent and or a University Degree cumulatively comes to 59.9% of the population surveyed. With the majority of the participants voting remain and the greater number of these people being in education for a longer period of time than the minority it can only be assumed that within higher education, opportunities to speak of current day politics arose more and the exposure of the negative implications of the brexit deal were more prevalent therefore strengthened their belief to remain within the European Union to utilize the benefits it presents the United Kingdom. 
+
+(hiqual_dv) as an ordinal variable i chose to use the method of a frequency table to show the figures of the datasets highest qualifications clearly.
+
+```{r}
+#some descriptives 
+
+summary(`ukhls_w8 `$age_dv)
+
+# xy plot 
+
+xyplot(eumem ~ age_dv, 
+       type = c("p", "r"), 
+       col.line = "red", 
+       data = `ukhls_w8 `)
+```
+From this graph the line on an incline can show that on average the older the voter was the higher liklihood of them voting in favour of leaving the European Union. With the mean of the surveyed voters being 48.7 this can effectively show that from the survey sample there was an wide range of ages interviewed showing a relatively representative opinion on Brexit according to age. With the graph explaining that from the survey conducted, typically the older generations opinions coincided with the manifesto of the leave party. 
+
+(age_dv) as a numerical variable in order to clearly display the correlation between age and towards the people who voted leave or remain i used an xy plot. 
+
+
+```{r}
+#Job satisfaction levels 
+
+`ukhls_w8 `%>% frq(`ukhls_w8 `$jbsat)
+
+```
+The data shown in this graph displays the extent of the populations satisfaction towards their Job. the Brexit deal was believed to have numerous implications towards employment and business advancements with trade, travel and UK nationalism. Ultimately, with this data it can be assumed that with 62.2% of these voters viewing themselves as satisfied within their workplace, they believed that the exiting of the European Union would have negative outcomes for their employment with the majority also voting for remaining in the Eurpoean Union. 
+
+
+(jbsat) as a categorical variable i again decided to use the method of a frequency table in order to adequetly present the data.
+
+
+## Discussion and conclusions
+When analysing someones age and the correlation with their vote it was clear that the older the voter was the more likely they were to vote for the Leave campaign, this may be rooted towrads the commonly known old fashioned ideologies of many older generations. This can be strengthened by Whitley, Clarke, they showed the greater number of voters who voted remain were those who classed themesleves as British, whereas those who thought of themselevs as English were strong supporters of Brexit. They again proved that over 44% of over 65s thought themeselves as english in comparison to 21% of under 26s thought that way. perceptions of being English grew with age, this being one of the most paramount reasons why older people voted Brexit. MOreover, from the previous literature reviewed in this report the relationship between age and the vote, the data collected relates with the Yougov source, the yougov source showing that majority of graduates opinions coincided with those of the remain campaign, with the assumption of this being reliant on the greater oppurtunities to have educational conversations on topical debates. The assumption can be heightened through the collection from the UKHLS dataset which showed this to again be the case of those with further education understanding the negative implications which could have been had on the UK.
+
+The correlation between those in the population who were satisfied with their job and their vote in the brexit referendum was that those who were satisfied in their workplace were seemingly more likely to have voted for remaining inside the European Union. The correlation between financial satisfaction and job satisfaction can then be put into question, the decision to leave the EU could have been a risk for many workers with the trade and travel changes, these being described as "oppurtunities" by the government shows the distrust which the public had towards them with these "oppurtunities" ultimately being viewed as risks. Therefore, impacting the security of jobs and risking many peoples financial security, ultimately prioritising security thus votes for the remain campaign increased. 
+
+
+## References
+The original Dataset 
+University of Essex, Institute for Social and Economic Research (2022) Understanding Society: Wave 8, 2016-2017. UK Data Service, SN: 6614, http://doi.org/10.5255/UKDA-SN-6614-17
+
+
+Clarke, Whitely, "Brexit: Why did older voters choose to leave the EU"(2016) Avaiable at Independant: https://www.independent.co.uk/news/uk/politics/brexit-why-did-old-people-vote-leave-young-voters-remain-eu-referendum-a7103996.html?amp
+
+Curtice, Research consultant, The national centre for social research and professor of politics, university of Strathclyde (2016) Available at: https://journals.sagepub.com/doi/full/10.1177/2041905816666122
+
+
+Curtice, Research consultant, The national Centre for social Reseach, and Professor of politics, University of Strathclyde(2017) available at: https://www.bsa.natcen.ac.uk/media/39149/bsa34_brexit_final.pdf
+
+
+Goodwin, Heath "the 2016 referendum, Brexit and the Left Behind: an aggregate level analysis of the result' Political quarterly, forthcoming (2016) Available at:
+https://www.jrf.org.uk/report/brexit-vote-explained-poverty-low-skills-and-lack-opportunities
+
+Martin, Nicole and Sobolewska, Maria and Begum, Neema, Left Out of the Left Behind? Ethnic Minority Support for Brexit (January 22, 2019). Available at SSRN: https://ssrn.com/abstract=3320418 or http://dx.doi.org/10.2139/ssrn.3320418
+
+Merkado, "we measure the relationship between UK House prices and voting results from the EU referendum and found some interesting results"(2017) Available at Linked in: https://www.linkedin.com/pulse/we-measured-relationship-between-uk-house-prices-voting-merkado?trk=public_profile_article_view
+

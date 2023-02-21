@@ -1,0 +1,191 @@
+---
+title: ''
+self-contained: yes
+output:
+  word_document: default
+  html_document:
+    df_print: paged
+---
+
+```{r, echo=FALSE}
+# These are options to produce the best basic styled results when knitting to Word documents; Don't delete or change these settings!
+
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, results = "markup", comment = "", size = "footnotesize", render = knitr::normal_print)
+
+options(repos = list(CRAN = "http://cran.rstudio.com/")) # This tells R where to download packages from
+```
+
+
+```{r message=FALSE, warning=FALSE, include=FALSE, echo=FALSE}
+## To make your lives easier, I include this code chunk that installs and loads all the packages that we have used this semester, and which you may want to use for the assignment
+
+## Because we do not want any information about this to actually get printed into the output document, I have added some options to the code-chunk header above
+
+## For this reason, leave this chunk as it is. All the other code chunks that you will include later should print everything in the output (code and results)
+
+## To make sure that the packages listed below are loaded into your session (so that you can run your code chunks below separately to keep track of your results), run this code chunk first by clicking on the green right-pointing arrow in the top-right corner of this code chunk
+
+install.packages("tidyverse")
+install.packages("mosaic")
+install.packages("sjmisc")
+install.packages("jtools")
+
+library(tidyverse)
+library(mosaic)
+library(sjmisc)
+library(jtools)
+```
+
+
+
+## Data and methods
+```{r}
+#loading the dataset 
+
+ukhls <- readRDS("ukhls_w8.rds")
+```
+
+
+```{r}
+# descriptives
+
+summary(ukhls$mental_scores)
+```
+
+
+```{r}
+# Long-standing illness or disability
+
+ukhls %>% sjmisc::frq(health)
+```
+
+
+```{r}
+# GHQ: unhappy or depressed
+
+ukhls %>% sjmisc::frq(depressed)
+```
+
+
+```{r}
+summary(ukhls$age_dv)
+```
+
+```{r}
+# histogram
+
+histogram( ~ mental_scores, data = ukhls )
+```
+
+
+```{r}
+# histogram
+
+histogram( ~ age_dv, data = ukhls)
+```
+
+# results
+
+
+```{r}
+ukhls <- ukhls %>%
+  mutate(mental_scores = sf12mcs_dv)
+```
+
+
+#age
+
+```{r}
+ukhls <- ukhls %>%
+  mutate(age = age_dv)
+```
+
+
+```{r}
+# scatterplot
+
+xyplot(mental_scores ~ age, type = c("p", "r"), col.line = "red", data = ukhls)
+```
+
+```{r}
+cor.test(mental_scores ~ age, data = ukhls)
+```
+
+
+```{r}
+
+ model1 <- lm(mental_scores ~ 1 + age_dv, ukhls)
+```
+
+```{r}
+coef(model1)
+```
+
+```{r}
+lm(mental_scores ~ 1, data = ukhls) %>% coef()
+```
+
+
+#health
+
+```{r}
+# with base R 'boxplot'
+boxplot(mental_scores ~ health, data = ukhls, horizontal = TRUE)
+```
+
+```{r}
+mosaic::favstats(mental_scores ~ health, data = ukhls)
+```
+
+```{r}
+model_ex1 <- lm(mental_scores ~ health, data = ukhls)
+
+summary(model_ex1)
+```
+```{r}
+model_ex1 <- lm(mental_scores ~ as.factor(health), data = ukhls)
+
+summary(model_ex1)
+```
+
+
+#depressed
+
+```{r}
+ukhls <- ukhls %>%
+  mutate(depressed = scghqi)
+```
+
+
+```{r}
+xyplot(mental_scores ~  depressed, type = c("p","r"), data = ukhls) 
+```
+
+
+```{r}
+model_ex1 <- lm(mental_scores ~ depressed, data = ukhls)
+
+summary(model_ex1)
+```
+
+
+```{r}
+model_ex1 <- lm(mental_scores ~ as.factor(depressed), data = ukhls)
+
+summary(model_ex1)
+```
+
+#regression
+
+```{r}
+regression1 <- lm(mental_scores ~ depressed, data = ukhls)
+
+jtools::summ(regression1, digits = 3)
+
+regression2 <- lm(mental_scores ~ depressed + age_dv + health, data = ukhls)
+
+jtools::summ(regression2, digits = 3)
+```
+
+
+
