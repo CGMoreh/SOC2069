@@ -1,6 +1,23 @@
 ---
-title: "SOC2069"
+title: "SOC2069: Researching Social Life I"
 description: |
   A  research methods module for 2nd-year undergraduate Sociology / Politics & Sociology students at Newcastle University (UK)
 output: distill::distill_article
 ---
+
+## Aims
+
+Sociology is based on systematic knowledge about the social world that we inhabit. ‘Researching Social Life I’ introduces the range of ways that sociologists do research by collecting empirical information so that they can develop their sociological ideas. Its core theme is the importance of evidence: the way we collect and analyse information has a huge effect on our research findings. Data analysis is a practical activity, and therefore the module is distinctive in involving a series of hands-on computer labs and seminars, as well as being focused on practical assignments. It is in these applied sessions that you will convert the principles explained in the lectures into skills, so that you too can carry out research. Although concerned to convey the systematic application of appropriate professional standards, the module also tries to communicate some of the excitement and fun of doing research.
+The module makes four main contributions to the degree program:
+
+1. It lays a foundation of knowledge and critical awareness about how research gets done, which helps to appreciate and make sense of the other sociological sources used in the rest of the degree’s modules.
+
+2. It enables the best choice of research methods to be made for doing your research for the Final Year Dissertation in sociology.
+
+3. More generally, the informed and critical thinking learned in the module can also be applied to analyse what really lies behind media news-stories, politicians’ speeches, lobby groups’ reports on social problems – and even gossip – that we all encounter as citizens.
+
+4. Finally, because Research Social Life I delivers a substantial part of “what every sociology graduate can be expected to know”, having studied the subject, it offers the opportunity to acquire transferable skills for later employment in a range of professions. These include interviewing, analysing social behaviour, using computers to process quantitative information, where to locate data on public issues and how to apply them, and how to make sense of social surveys.
+
+## Teaching methods (2022-2023)
+
+The main practical content will be delivered in IT labs (seminars). These will be supplemented with 10 recorded lectures and 5 timetabled drop-in on-campus Q&A sessions focusing particularly on the assessments. Students are required to complete some self-study online training sessions as well.
