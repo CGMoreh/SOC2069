@@ -1,5 +1,5 @@
 ---
-title: "Resit assignment task"
+title: "Resit Part 1: Interpreting statistical results"
 output:
   html_document:
     theme: lumen
