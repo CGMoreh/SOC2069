@@ -1,0 +1,43 @@
+---
+title: "Alternative assessment: Interpreting statistical results"
+output:
+  html_document:
+    theme: lumen
+    toc: yes
+    toc_float: yes
+    toc_highlight: yes
+    tabset: yes
+    number_sections: no
+    anchor_sections: no
+    self_contained: yes
+    code_download: no
+    highlight: default
+    css: ./../my_themes/labcss.css
+---
+
+```{r, include=FALSE, purl=FALSE}
+options(repos = list(CRAN="http://cran.rstudio.com/"))
+```
+
+```{r setup, include = FALSE, purl=FALSE}
+# knitr::knit_hooks$set(purl = knitr::hook_purl)
+
+knitr::opts_chunk$set(error = FALSE, warning=FALSE, comment="", prompt=FALSE, message = F, strip.white = F, fig.width = 5, fig.asp = .8, fig.align = "center", fig.show = 'hold', class.output = "outputbox")
+```
+
+
+
+# Task description
+
+
+Below you will find some outputs from a statistical analysis undertaken using data from one of the datasets we used in class. To prepare for the task, you should revisit the IT lab worksheets from all the relevant weeks.
+
+Your task is to interpret the findings as completely as you can in the format of a brief report (2,000 words).
+
+The outputs contain some information about the variables included in the analysis, but to gain a more complete understanding of where the data came from and how the variables were measured you should also engage with the survey’s webpage. Information about the survey will be provided.
+
+
+# Statistical results
+
+Outputs and further information will be posted here ahead of the resit period.
+
