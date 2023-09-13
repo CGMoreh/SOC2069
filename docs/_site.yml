@@ -1,7 +1,7 @@
 name: "docs"
 title: ""
-description: |
-  Researching Social Life 1
+# description: |
+#   Researching Social Life 1
 output_dir: "."
 navbar:
   logo:

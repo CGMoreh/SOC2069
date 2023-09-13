@@ -1,0 +1,58 @@
+---
+title: "Intro"
+subtitle: "Week One"
+author: "Chris"
+format:
+  pptx:
+    incremental: true   
+    reference-doc: template.pptx
+---
+
+# In the morning
+
+## Getting up
+
+- Turn off alarm
+- Get out of bed
+
+## Breakfast
+
+- Eat eggs
+- Drink coffee
+- more eggs
+- loads of coffee
+
+# In the evening
+
+## Dinner
+
+- Eat spaghetti
+- Drink wine
+
+## Going to sleep
+
+- Get in bed
+- Count sheep
+
+## Incremental stuff
+
+:::: {.columns}
+
+::: {.column width="40%"}
+contents...
+:::
+
+::: {.column width="60%"}
+contents...
+:::
+
+::::
+
+::: {.notes}
+I may write a lot of extra stuff here in case you are interested.
+:::
+
+```{r}
+getwd()
+```
+
