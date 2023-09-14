@@ -1,0 +1,97 @@
+---
+title: "Intro"
+subtitle: "Week One"
+format:
+  pptx:
+    incremental: true   
+    reference-doc: templates/SOC2069_pptx_template.pptx
+---
+
+# In the morning
+
+## Getting up
+
+- Turn off alarm
+- Get out of bed
+  - something else
+  - something other
+
+## Breakfast
+
+- Eat eggs
+- Drink coffee
+- more eggs
+- loads of coffee
+
+# In the evening
+
+
+
+## Dinner
+
+- Eat spaghetti
+- Drink wine
+
+## Going to sleep
+
+- Get in bed
+- Count sheep
+
+## Incremental stuff
+
+:::: {.columns}
+
+::: {.column width="40%"}
+contents...
+:::
+
+::: {.column width="60%"}
+contents...
+:::
+
+::::
+
+::: {.notes}
+I may write a lot of extra stuff here in case you are interested.
+:::
+
+
+## Title
+
+```{r}
+
+library(tidyverse)
+library(palmerpenguins)
+```
+
+
+```{r}
+#| echo: true
+
+ggplot(penguins,                        
+       aes(x = bill_length_mm,          
+           y = bill_depth_mm, 
+           color = species)) +
+  geom_point()
+```
+
+## 
+
+```{r}
+#| echo: true
+#| output-location: column-fragment
+#| code-line-numbers: "|2"
+
+library(ggplot2)
+
+mtcars |> 
+  ggplot(aes(x = disp, y = mpg)) +
+  geom_point() +
+  geom_smooth(method = "loess", formula = "y~x")
+```
+
+
+## Final
+
+This is an [important sentence!]{.fragment .highlight-red}
+

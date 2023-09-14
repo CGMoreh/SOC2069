@@ -1,4 +1,12 @@
+# Libraries
 library(tidyverse)
+library(hrbrthemes)
+library(viridis)
+library(gridExtra)
+library(ggrepel)
+library(plotly)
+library(gapminder)
+
 
 #### SSC7001 logo -------------------------------------------------------------------
 
@@ -121,17 +129,33 @@ ggplot(logo_data, aes(x, y)) +
   geom_point(aes(color = group), shape = 15, size = 25, show.legend = F) +
   scale_color_manual(values = c("#99999900", "#C4961A", "#293352", "#52854C", "#D16103" )) + 
   geom_text(aes(label=a), size=20, 
-            colour = ifelse(logo_data$group=="b" | logo_data$group=="d", "white", "#1e1e1e"),
+            colour = ifelse(logo_data$group=="b" | logo_data$group=="d", "#FCFFFFFF", "#1e1e1e"),
             fontface = 2) + 
   expand_limits(x=c(1.8,12.2), y=c(0.6, 3.4)) +
   scale_x_continuous(breaks=seq(1.5, 12.5, 0.5)) +
-  scale_y_continuous(breaks=seq(0.5,3.5,0.5))
+  scale_y_continuous(breaks=seq(0.5,3.5,0.5)) +
+  theme_void() +
+  theme(axis.title.x = element_blank(),
+        axis.title.y = element_blank(),
+        axis.text.x = element_blank(),
+        axis.ticks.x = element_blank(),
+        axis.text.y = element_blank(),
+        axis.ticks.y = element_blank(),
+        #panel.background = element_rect(fill='transparent'),
+        plot.background = element_rect(fill='transparent', color=NA),
+        plot.margin = margin(t = 0,  # Top margin
+                             r = 0,  # Right margin
+                             b = 0,  # Bottom margin
+                             l = 0) # Left margin
+  )
 
-dev.print(png, "Res_Soc-Life_logo.png", width = 890, height = 260, bg = "transparent", res = 95.5)
+dev.print(png, "SOC2069_logo.png", width = 890, height = 260, bg = "transparent", res = 95.5)
+
+dev.print(png, "SOC2069_logo_noaxis.png", width = 890, height = 260, bg = "transparent", res = 95.5)
 
 
 
-### Front slide logo
+# Simple front slide logo
 
 ggplot(logo_data, aes(x, y)) +
   geom_point(aes(color = group), shape = 15, size = 15, show.legend = F) +
@@ -142,7 +166,7 @@ ggplot(logo_data, aes(x, y)) +
             #                 ifelse(logo_data$group== "d", "#293352", 
             #                 "white")),
             fontface = 2) + 
-  expand_limits(x=c(-15.1, 13.5), y=c(-10, 5)) +
+  expand_limits(x=c(-15.1, 12), y=c(-10, 3.5)) +
   scale_x_continuous(breaks=seq(-16, 15, 1)) +
   scale_y_continuous(breaks=seq(-10, 5, 1)) +
   theme(axis.title.x = element_blank(), 
@@ -153,7 +177,68 @@ ggplot(logo_data, aes(x, y)) +
         axis.ticks.y = element_blank()
         )
 
-dev.print(png, "Res_Soc-Life_slide_logo.png", width = 1407, height = 725, bg = "transparent", res = 91)
+dev.print(png, "SOC2069_slide_logo.png", width = 1407, height = 725, bg = "transparent", res = 100)
+
+
+# Gapminder slide logo
+
+data <- gapminder %>% 
+  filter(year=="2007") %>% 
+  dplyr::select(-year)
+
+data %>%
+  mutate(pop=pop/100000,
+         lifeExp=lifeExp/10,
+         # lifeExp = ifelse(gdpPercap > 9100, lifeExp*1.1, lifeExp),
+         # lifeExp = ifelse(gdpPercap > 15000, lifeExp*1.15, lifeExp),
+         # lifeExp = ifelse(gdpPercap < 2000, lifeExp*0.9, lifeExp),
+         # lifeExp = ifelse(lifeExp > 7, lifeExp*1.15, lifeExp),
+         # lifeExp = ifelse(lifeExp > 6, lifeExp*1.05, lifeExp),
+         gdpPercap=gdpPercap/2000) %>%
+  arrange(desc(pop)) %>%
+  mutate(country = factor(country, country)) %>%
+  ggplot( aes(x=gdpPercap, y=lifeExp, size = pop, color = continent)) +
+  geom_point(alpha=0.8) +
+  scale_size(range = c(3, 20), name="Population (M)") +
+  scale_colour_manual(values=c("#293352", "#C4961A", "#52854C", "#D16103", "#99999900")) +
+  theme(axis.title.x = element_blank(), 
+        axis.title.y = element_blank(),
+        axis.text.x = element_blank(),
+        axis.ticks.x = element_blank(),
+        axis.text.y = element_blank(),
+        axis.ticks.y = element_blank(),
+        legend.position="none") +
+  scale_x_continuous(breaks = seq(0, 35, 1.8), expand = c(0, 0.1)) +
+  scale_y_continuous(breaks = seq(0, 8, 0.7), expand = c(0, 0.15)) +
+  expand_limits(x=c(0, 25), y=c(5.5, 8))
+  
+dev.print(png, "gapminder_background.png", width = 1407, height = 725, bg = "transparent", res = 100)
+
+
+
+data %>%
+  mutate(pop=pop/100000,
+         lifeExp=lifeExp/10,
+         gdpPercap=gdpPercap/2000) %>%
+  arrange(desc(pop)) %>%
+  mutate(country = factor(country, country)) %>%
+  ggplot( aes(y=gdpPercap, x=lifeExp, size = pop, color = continent)) +
+  geom_point(alpha=0.8) +
+  scale_size(range = c(3, 20), name="Population (M)") +
+  scale_colour_manual(values=c("#293352", "#C4961A", "#52854C", "#D16103", "#99999900")) +
+  theme(axis.title.x = element_blank(), 
+        axis.title.y = element_blank(),
+        axis.text.x = element_blank(),
+        axis.ticks.x = element_blank(),
+        axis.text.y = element_blank(),
+        axis.ticks.y = element_blank(),
+        legend.position="none") +
+  scale_y_continuous(breaks = seq(0, 25, 5), expand = c(0, 0.4)) +
+  scale_x_continuous(breaks = seq(0, 8, 0.4), expand = c(0, 0.1)) +
+  expand_limits(y=c(3, 25), x=c(4, 8))
+
+dev.print(png, "gapminder_background_inverse.png", width = 1407, height = 725, bg = "transparent", res = 100)
+
 
 
 ### Plain page
