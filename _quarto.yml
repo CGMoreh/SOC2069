@@ -1,0 +1,94 @@
+project:
+  type: website
+  preview:
+    port: 4000
+    browser: true
+
+website:
+  title: "HOME"
+  favicon: "/site_pics/SOC2069_logo_noaxis.png"
+  search: false
+  back-to-top-navigation: true
+  navbar:
+    pinned: false
+    background: light
+    right:
+      # - href: index.qmd
+      #   text: Home
+      - href: "Structure.html"
+        text: "Module structure"      
+      - text: "Week 1"
+        href: Materials/Labs/Worksheet_1.qmd
+      - text: "Week 2"
+        file: Materials/Labs/Worksheet_2.qmd
+      - text: "Week 3"
+        href: "ttt"
+      - text: "Week 4"
+        file: Materials/Labs/Worksheet_4.qmd
+      - text: "Week 5"
+        file: Materials/Labs/Worksheet_5.qmd
+      - text: "Week 6"
+        href: "ttt"
+      - text: "Week 7"
+        href: "ttt"
+      - text: "Week 8"
+        href: "ttt"
+      - text: "Week 9"
+        href: "ttt"
+      - text: "Week 10"
+        href: "ttt"
+      - text: "Assessment"
+        href: "ttt"
+
+      - icon: house-lock
+        href: https://ncl.instructure.com/courses/53153
+        aria-label: Canvas page (Newcastle University login required)
+  # sidebar:
+  #   - title: "Materials"
+  #     contents:
+  #       - section: "Week 1"
+  #         contents:
+  #           - text: "Worksheet 1"
+  #             href: Materials/Labs/Worksheet_1.qmd
+  #       - section: "Week 2"
+  #         contents:
+  #           - text: "Worksheet 2"
+  #             file: Materials/Labs/Worksheet_2.qmd
+  #       - section: "Week 3"
+  #       - section: "Week 4"
+  #         contents:
+  #           - text: "Worksheet 4"
+  #             file: Materials/Labs/Worksheet_4.qmd
+  #       - section: "Week 5"
+  #         contents:
+  #           - text: "Worksheet 5"
+  #             file: Materials/Labs/Worksheet_5.qmd
+  #       - section: "Week 6"
+  #       - section: "Week 7"
+  #       - section: "Week 8"
+  #       - section: "Week 9"
+  #       - section: "week 10"
+
+format:
+  html:
+    theme: 
+      - cosmo
+      - styles.css
+    toc: true
+    toc-location: left
+    toc-title: Contents
+    grid:
+      sidebar-width: 350px
+      margin-width: 200px
+      body-width: 1200px
+
+# editor: visual
+
+# filters:
+#   - line-highlight
+#   - _extensions/ChrisMoreh/newpagelink/newpagelink.lua
+
+#bibliography: hss8005.bib
+#suppress-bibliography: true
+link-external-newwindow: true
+# link-external-icon: true

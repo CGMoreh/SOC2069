@@ -1,0 +1,6 @@
+---
+title: "Materials"
+css: labcss.css
+---
+
+Materials for each week are available from the side menu. 
