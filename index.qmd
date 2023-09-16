@@ -13,8 +13,9 @@ page-layout: full
 format: 
   html: 
     grid:
-      margin-width: 300px
-      body-width: 500px
+      sidebar-width: 400px
+      margin-width: 400px
+      body-width: 400px
 ---
 
 ```{r setup, include=FALSE}
