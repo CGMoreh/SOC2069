@@ -11,7 +11,7 @@ output:
     anchor_sections: no
     self_contained: yes
     code_download: no
-    css: ./../my_themes/labcss.css
+css: labcss.css
 ---
 
 ```{r setup, include = FALSE}
@@ -182,7 +182,7 @@ data <- readRDS("ukhls_w8.rds")
 ```
 
 ```{r include=FALSE}
-data <-  readRDS(url("https://cgmoreh.github.io/SOC2069/SOC2069-Statistical-analysis/ukhls_w8.rds"))
+data <-  readRDS(url("https://github.com/CGMoreh/SOC2069/raw/main/SOC2069-Statistical-analysis/ukhls_w8.rds"))
 ```
 
 This will only work if you are within an R Project; otherwise you need to provide the complete file path to the dataset.

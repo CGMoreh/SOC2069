@@ -11,7 +11,7 @@ output:
     anchor_sections: no
     self_contained: yes
     code_download: no
-    css: labcss.css
+css: labcss.css
 ---
 
 ```{r setup, include = FALSE}

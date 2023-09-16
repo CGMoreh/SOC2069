@@ -4,7 +4,7 @@ description: ""
 
 about:
   template: marquee
-  image: /site_pics/SOC2069_logo_noaxis.png
+  image: ./site_pics/SOC2069_logo_noaxis.png
   
 sidebar: false
 toc: false
@@ -12,10 +12,11 @@ page-layout: full
 
 format: 
   html: 
+    page-layout: article
     grid:
-      sidebar-width: 400px
-      margin-width: 400px
-      body-width: 400px
+      sidebar-width: 50px
+      margin-width: 100px
+      body-width: 1100px
 ---
 
 ```{r setup, include=FALSE}

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>HOME -</title>
+<title>HOME - Timetable</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -30,6 +64,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
@@ -53,7 +88,7 @@ ul.task-list li input[type="checkbox"] {
 
 </head>
 
-<body class="floating nav-fixed fullcontent">
+<body class="floating nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -70,7 +105,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./Structure.html" rel="" target="">
+    <a class="nav-link active" href="./Structure.html" rel="" target="" aria-current="page">
  <span class="menu-text">Module structure</span></a>
   </li>  
   <li class="nav-item">
@@ -137,42 +172,43 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
 <!-- main -->
-<div class="quarto-about-marquee">
-  <div class="about-image-container">
-    <img src="./site_pics/SOC2069_logo_noaxis.png" class="about-image " style="width: 100%;">
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Timetable</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
   </div>
-  <div class="about-contents">
-     <main class="content" id="quarto-document-content">
+  
+
+</header>
+
 <div class="cell">
-<style type="text/css">
-d-title {
-    display: none;
-  }
-</style>
+<div class="cell-output-display">
+<p><img src="Structure_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="672"></p>
 </div>
-<!-- ![](./site_pics/SOC2069_logo_noaxis.png) -->
-<section id="aims" class="level2">
-<h2 data-anchor-id="aims">Aims</h2>
-<p>Sociology is based on systematic knowledge about the social world that we inhabit. ‘Researching Social Life I’ introduces the range of ways that sociologists do research by collecting empirical information so that they can develop their sociological ideas. Its core theme is the importance of evidence: the way we collect and analyse information has a huge effect on our research findings. Data analysis is a practical activity, and therefore the module is distinctive in involving a series of hands-on computer labs and seminars, as well as being focused on practical assignments. It is in these applied sessions that you will convert the principles explained in the lectures into skills, so that you too can carry out research. Although concerned to convey the systematic application of appropriate professional standards, the module also tries to communicate some of the excitement and fun of doing research. The module makes four main contributions to the degree program:</p>
-<ol type="1">
-<li><p>It lays a foundation of knowledge and critical awareness about how research gets done, which helps to appreciate and make sense of the other sociological sources used in the rest of the degree’s modules.</p></li>
-<li><p>It enables the best choice of research methods to be made for doing your research for the Final Year Dissertation in sociology.</p></li>
-<li><p>More generally, the informed and critical thinking learned in the module can also be applied to analyse what really lies behind media news-stories, politicians’ speeches, lobby groups’ reports on social problems – and even gossip – that we all encounter as citizens.</p></li>
-<li><p>Finally, because Research Social Life I delivers a substantial part of “what every sociology graduate can be expected to know”, having studied the subject, it offers the opportunity to acquire transferable skills for later employment in a range of professions. These include interviewing, analysing social behaviour, using computers to process quantitative information, where to locate data on public issues and how to apply them, and how to make sense of social surveys.</p></li>
-</ol>
-</section>
-<section id="teaching-methods-2022-2023" class="level2">
-<h2 data-anchor-id="teaching-methods-2022-2023">Teaching methods (2022-2023)</h2>
-<p>The main practical content will be delivered in IT labs (seminars). These will be supplemented with 10 recorded lectures and 5 timetabled drop-in on-campus Q&amp;A sessions focusing particularly on the assessments. Students are required to complete some self-study online training sessions as well.</p>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>calendR<span class="sc">::</span><span class="fu">calendR</span>(<span class="at">year =</span> <span class="dv">2021</span>, <span class="at">month =</span> <span class="dv">8</span>, <span class="at">papersize =</span> <span class="st">"A0"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Structure_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
 
 
-</section>
-<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> 
-  </div>
-</div>
- <!-- /main -->
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -193,6 +229,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
   const isCodeAnnotation = (el) => {
     for (const clz of el.classList) {
       if (clz.startsWith('code-annotation-')) {                     

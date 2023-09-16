@@ -12,7 +12,7 @@ output:
     self_contained: yes
     code_download: no
     highlight: default
-    css: ./../my_themes/labcss.css
+css: labcss.css
 ---
 
 ```{r, include=FALSE, purl=FALSE}
@@ -139,7 +139,7 @@ library(jtools)
     <span style="color:red">`r fontawesome::fa("wrench")`   If you have accidentally overwritten the original dataset with incorrect transformations to variables, you can download the original dataset again from here: </span> **[https://cgmoreh.github.io/SOC2069/SOC2069-Statistical-analysis/ukhls_w8.rds](https://cgmoreh.github.io/SOC2069/SOC2069-Statistical-analysis/ukhls_w8.rds)**. <span style="color:red">Save it to the project folder, replacing the old dataset.</span>
 
 ```{r include=FALSE, purl=FALSE}
-ukhls <- readRDS(url("https://cgmoreh.github.io/SOC2069/SOC2069-Statistical-analysis/ukhls_w8.rds"))
+ukhls <- readRDS(url("https://github.com/CGMoreh/SOC2069/raw/main/SOC2069-Statistical-analysis/ukhls_w8.rds"))
 ```
 
 # Exercise 1: The effect of *gender* on *subjective wellbeing*
