@@ -78,6 +78,7 @@ format:
     toc: true
     toc-location: left
     toc-title: Contents
+    embed-resources: true
     grid:
       sidebar-width: 350px
       margin-width: 200px
