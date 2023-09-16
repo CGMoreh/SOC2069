@@ -1,0 +1,36 @@
+---
+title: "logit"
+---
+
+
+```{r}
+library(tidyverse)
+library(mosaic)
+library(sjmisc)
+library(jtools)
+library(kableExtra)
+
+ukhls <- readRDS(url("https://cgmoreh.github.io/SOC2069/SOC2069-Statistical-analysis/ukhls_w8.rds"))
+```
+
+
+
+```{r}
+
+frq(ukhls$smoker)
+
+frq(ukhls$urban_dv)
+
+frq(ukhls$hiqual_dv)
+
+summary(ukhls$fimnnet_dv) %>% t() %>% kable()
+
+```
+
+
+```{r}
+glm(smoker ~ fimnnet_dv + hiqual_dv + urban_dv, family = binomial, data = ukhls) %>% 
+  jtools::summ(digits=3, exp = TRUE)
+```
+
+

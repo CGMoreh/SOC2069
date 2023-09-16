@@ -1,0 +1,201 @@
+---
+title: |
+  | SOC2069
+  | Researching 
+  | Social Life 1
+subtitle: Analysing qualitative data
+author: Dr. Chris Moreh
+format: 
+  revealjs:
+    history: false
+    # revealjs-plugins:
+    #  - ../my_plugins/attribution
+     # - ../my_plugins/countdown
+     # - ../my_plugins/fullscreen
+     # - ../my_plugins/elapsed
+    title-slide-attributes:
+      data-background-color: "white"
+      data-background-iframe: "https://cgmoreh.github.io/webslides/particles-bkg/particles.html"
+      data-background-interactive: true
+      data-background-opacity: "0.2"
+      data-background-size: 100vh
+      data-transition: "slide-out"
+      data-background-transition: "slide-out"
+    data-transition-speed: "default"
+    controls: true
+     #controls-layout: edges
+    controls-back-arrows: faded
+    slide-number: false
+    preview-links: true
+    theme: ../my_themes/cgm.scss
+    logo:  "../pics/Res_Soc_Life_logo.png"
+    incremental: false
+    self-contained: true
+bibliography: references.bib
+csl: ../../american-sociological-association.csl
+---
+
+## Outline {background-iframe="https://cgmoreh.github.io/webslides/particles-bkg/particles.html" background-opacity="0.2" transition="slide"}
+
+::: {.outlineslide .nonincremental}
+1.  What is qualitative data analysis?
+2.  Themes and coding
+3.  Arguing from qualitative data
+:::
+
+##  {visibility="hidden" background-iframe="https://cgmoreh.github.io/webslides/particles-bkg/particles.html" background-opacity="0.2" transition="slide-in fade-out"}
+
+::: sectiontitle
+What is qualitative data analysis?
+:::
+
+::: sectionhead
+1 [2 3 4]{.opq}
+:::
+
+## Qualitative data analysis
+
+![](../pics/meaning.jpg){.absolute right="-5%" height="auto"}
+
+::: {.column width="60%"}
+::: fragment
+> We have two tasks after we have gathered our data, namely to reduce our data to something we can manage, and to analyze our data in meaningful ways [@Luker2008SalsaDancingSocialSciencesResearch, pp. 198-199]
+:::
+
+::: fragment
+> Analysis involves a constant moving back and forward between the entire data set, the coded extracts of data that you are analysing, and the analysis of the data that you are producing [@BraunClarke2013SuccessfulQualitativeResearchPracticalGuide]
+:::
+
+::: fragment
+> As we contemplate that first interview, or set of field notes, or focus group experience, or day in the archives, we need to remind ourselves that our most important job today (and all subsequent days) is *pattern recognition* [@Luker2008SalsaDancingSocialSciencesResearch, p. 199]
+:::
+:::
+
+## Thematic analysis {background-image="../pics/neuman_figure_3_analysis.png" background-opacity="1" background-size="45% auto" background-position="right"}
+
+::: {.column width="50%"}
+1.  [Familiarize yourself with your **data**]{.fragment .highlight-current-blue}
+2.  [Assign preliminary **codes** to your data in order to **describe** the content]{.fragment .highlight-current-blue}
+3.  [Search for **patterns** or **themes** in your codes across the different interviews]{.fragment .highlight-current-blue}
+4.  [Review themes]{.fragment .highlight-current-blue}
+5.  [Define and name themes]{.fragment .highlight-current-blue}
+6.  [Interpretation]{.fragment .highlight-current-blue}
+:::
+
+::: attribution2
+Source: @Neuman2014SocialResearchMethodsQualitativeQuantitative [p. 488]
+:::
+
+## Thematic coding {background-image="../pics/user-coding1.webp" background-opacity="1" background-size="45% 90%" background-position="top right 0px"}
+
+::: attribution2
+Source: [https://www.interaction-design.org](https://www.interaction-design.org/literature/article/how-to-do-a-thematic-analysis-of-user-interviews)
+:::
+
+::: {.column width="50%"}
+-   [Categorising and labelling -- nothing more complicated than that!]{.fragment .highlight-current-blue}
+-   [Deductive, inductive, or (more commonly) a mixture]{.fragment .highlight-current-blue}
+-   [You can code as you go along, or start at the end of data collection]{.fragment .highlight-current-blue}
+-   [Keep your coding scheme/frame under review]{.fragment .highlight-current-blue}
+-   [Start descriptive but aim to be analytical]{.fragment .highlight-current-blue}
+-   [Record your thoughts and ideas during the process]{.fragment .highlight-current-blue}
+-   [Listen to your gut!]{.fragment .highlight-current-blue}
+:::
+
+## Coding in practice {background-image="../pics/user-coding1.webp" background-opacity="1" background-size="45% 90%" background-position="top right 0px"}
+
+::: attribution2
+Source: [https://www.interaction-design.org](https://www.interaction-design.org/literature/article/how-to-do-a-thematic-analysis-of-user-interviews)
+:::
+
+. . .
+
+![](../pics/user-coding2.webp){.absolute left="1%" top="10%" height="300"}
+
+. . .
+
+![](../pics/user-coding3.webp){.absolute left="1%" bottom="0%" height="300"}
+
+## Coding in practice
+
+::: r-stack
+![](../pics/Kafkas-Metamorphosis-coded-using-Word-comments.jpg){.absolute left="0%" width="70%"} ![](../pics/Kafkas-Metamorphosis-extracted-Excel.jpg){.fragment .absolute left="40%" top="30%" width="80%"}
+:::
+
+::: attribution2
+Source: [https://carstenknoch.com](https://carstenknoch.com/2020/02/qualitative-data-analysis-with-microsoft-word-comments-python-updated/)
+:::
+
+## Coding in practice
+
+::: {r-stack}
+![](../pics/structured-codes1.png){.absolute left="0%" width="60%"} ![](../pics/structured-codes2.png){.fragment .absolute left="40%" top="25%" width="70%"}
+:::
+
+::: attribution2
+Source: @MatthewsRoss2014ResearchMethods [p. 335]
+:::
+
+## Coding in practice
+
+::: r-stack
+![](../pics/nvivo1.png){.absolute left="0%" width="80%"} ![](../pics/nvivo2.png){.fragment .absolute left="40%" top="20%" width="60%"}
+:::
+
+## Developing themes
+
+::: attribution2
+Source: [@Byrne2022WorkedExampleBraunClarkeApproach]
+:::
+
+::: {.column width="50%"}
+-   Initial coding
+:::
+
+![](../pics/byrne-coding1){.fragment .current-visible .absolute right="-5%" top="20%" width="500"}
+
+. . .
+
+::: {.column width="50%"}
+-   Generating themes -- coded data is reviewed and analysed as to how different codes may be combined according to shared meanings so that they may form themes or sub-themes
+:::
+
+![](../pics/byrne-coding2){.absolute right="-5%" top="30%" width="500"}
+
+. . .
+
+::: {.column width="50%"}
+-   Reviewing themes -- some candidate themes may not function well as meaningful interpretations of the data, or may not provide information that addresses the research question(s).
+:::
+
+![](../pics/byrne-coding3){.absolute right="-5%" top="30%" width="500"}
+
+. . .
+
+::: {.column width="50%"}
+-   Select extracts for writing up the analysis -- *illustrative* or *analytical*
+:::
+
+![](../pics/byrne-coding4){.absolute right="-5%" top="20%" width="500"}
+
+![](../pics/byrne-coding5){.fragment .current-visible .absolute right="-5%" top="20%" width="500"}
+
+## Writing it up {background-image="../pics/man-writing.gif" background-opacity="1" background-size="45%" background-position="right 15%"}
+
+::: {.column width="65%"}
+-   [Coding is only one part of the analysis -- you must interpret your data]{.fragment .highlight-current-blue}
+-   [Interconnections, similarities, and differences]{.fragment .highlight-current-blue}
+-   [Selecting quotes -- why and how the selected quotes illustrate a noteworthy pattern]{.fragment .highlight-current-blue}
+-   [Craft a persuasive conclusion -- "What do I know now that I didn't know before the research began, and what is surprising and important about these findings?"]{.fragment .highlight-current-blue} [@GersonDamaske2020ScienceArtInterviewing, p. 186]
+-   [A strong conclusion also addresses the limitations of your research and clarifies when and how your arguments do and do not apply]{.fragment .highlight-current-blue}
+:::
+
+## Arguing from qualitative data
+
+![](../pics/phipps-arguing-from-qualitative-data)
+
+::: attribution2
+Source: [https://phipps.space](https://phipps.space/2016/11/17/arguing-from-data/)
+:::
+
+## References and further readings {background-color="#e3e5e8"}
