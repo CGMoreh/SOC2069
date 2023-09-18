@@ -12,16 +12,30 @@ format:
 
 
 ```{r, echo=F}
-calendR::calendR(start_date = "2023/09/1", end_date = "2024/01/30", orientation = "portrait", title = "2023/2024",
-                         mbg.col = 4,           # Background color for the month names
-        months.col = "white",  # Text color of the month names
-        special.days = c(26, 36),
-        special.col = "pink", # Color of the special.days
-        months.pos = 0.5)     # Horizontal alignment of the month names)
+
+# Set dates
+from_day <- as.Date("2023/09/1")
+to_day <- as.Date("2024/01/31")
+daylist <- seq(from_day, to_day, by="1 day")
+
+days_to_highlight <- match(as.Date(c("2023/10/23", "2024/1/13")),
+  daylist)
+
+
+
+calendR::calendR(start_date = "2023/09/1", end_date = "2024/01/30", 
+                 title = "2023/2024",
+                 orientation = "portrait", 
+                 start = "M",
+                 mbg.col = 4,           # Background color for the month names
+                 months.col = "white",  # Text color of the month names
+                 special.days = days_to_highlight,
+                 special.col = "pink", # Color of the special.days
+                 months.pos = 0.5)     # Horizontal alignment of the month names)
 ```
 
 
 ```{r}
-calendR::calendR(year = 2021, month = 8, papersize = "A0")
+t <- calendR::calendR(year = 2021, month = 8, papersize = "A0")
 ```
 
