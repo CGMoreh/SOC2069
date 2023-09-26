@@ -54,7 +54,7 @@ As a first exercise, let's explore the survey mentioned in the lecture: the **Wo
 
 ### Task 1
 
-Navigate to the [www.worldvaluessurvey.org/](www.worldvaluessurvey.org/) website and read about the World Values Survey. 
+Navigate to the [The World Values Survey (WVS)](https://www.worldvaluessurvey.org/WVSContents.jsp) website and read about the World Values Survey. 
 
 ```{block WVS, type = 'questionblock'}
 
@@ -102,7 +102,7 @@ There are several large-scale social surveys that are conducted internationally 
 
 To save time, you will organise in three groups, and each group will explore at least one of the following surveys:
 
-- [The European Social Survey (ESS)](www.europeansocialsurvey.org)
+- [The European Social Survey (ESS)](https://www.europeansocialsurvey.org/)
 - [The European Values Study (EVS)](https://europeanvaluesstudy.eu) 
 - [The International Social Survey Programme (ISSP)](https://issp.org)
 
