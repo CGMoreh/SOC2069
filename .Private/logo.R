@@ -141,27 +141,28 @@ ggplot(logo_data, aes(x, y)) +
             colour = ifelse(logo_data$group=="b" | logo_data$group=="d", "#FCFFFFFF", "#1e1e1e"),
             fontface = 2) + 
   expand_limits(x=c(1.8,12.2), y=c(0.6, 3.4)) +
-  scale_x_continuous(breaks=seq(1.5, 12.5, 0.5)) +
-  scale_y_continuous(breaks=seq(0.5,3.5,0.5)) +
-  theme_void() +
+  # scale_x_continuous(breaks=seq(1.5, 12.5, 0.5)) +
+  # scale_y_continuous(breaks=seq(0.5,3.5,0.5)) +
+  scale_y_continuous(breaks=seq(0, 5 , 1), limits = c(-0.5, 4.5)) +
+  scale_x_continuous(breaks=seq(-2, 16, 1), limits = c(-2, 16)) +
+  # theme_void() +
   theme(axis.title.x = element_blank(),
         axis.title.y = element_blank(),
-        axis.text.x = element_blank(),
-        axis.ticks.x = element_blank(),
-        axis.text.y = element_blank(),
-        axis.ticks.y = element_blank(),
+        # axis.text.x = element_blank(),
+        # axis.ticks.x = element_blank(),
+        # axis.text.y = element_blank(),
+        # axis.ticks.y = element_blank(),
         #panel.background = element_rect(fill='transparent'),
         plot.background = element_rect(fill='transparent', color=NA),
-        plot.margin = margin(t = 0,  # Top margin
-                             r = 0,  # Right margin
-                             b = 0,  # Bottom margin
-                             l = 0) # Left margin
+        # plot.margin = margin(t = 0,  # Top margin
+        #                      r = 0,  # Right margin
+        #                      b = 0,  # Bottom margin
+        #                      l = 0) # Left margin
   )
 
 dev.print(png, "SOC2069_logo.png", width = 890, height = 260, bg = "transparent", res = 95.5)
 
 dev.print(png, "SOC2069_logo_noaxis.png", width = 890, height = 260, bg = "transparent", res = 95.5)
-
 
 ### Empty ggplot canvas for backgrounds
 
@@ -270,73 +271,64 @@ dev.print(png, "gapminder_background_inverse.png", width = 1407, height = 725, b
 
 
 
+# WVS trust/gdp logo
 
-# Trust data
-
-## Wave 7 only
-
-
-wvs7 <- sjlabelled::read_spss("./docs/Data/WVS_7/WVS_Cross-National_Wave_7_spss_v5_0.sav") |> 
-  select(B_COUNTRY, B_COUNTRY_ALPHA, C_COW_NUM, C_COW_ALPHA,
-                Q57, 
-                GDPpercap1, militaryexp, educationexp, healthexp, clfhscore, polity, 
-                incrichest10p, giniWB, lifeexpect, urbanpop, easeofbusiness, Trade,
-                medageun, meanschooling) |> 
-  rename(trust = Q57)
-
-w <- wvs7
+data <- read_rds("Data/data_for_logo.rds") |> 
+  mutate(gdp = GDPpercap2,
+         ln_gdp = log(gdp),
+         lnx_gdp = log(log(log(gdp))),
+         exp_trust = (trust_pct^2)
+         ) |>
+  drop_na()
 
 
-# w$trust_d <- sjmisc::rec(w$trust, rec = "2=0; 1=1; else=NA")
+data %>%
+  filter(country != "China") |> 
+  arrange(desc(pop)) %>%
+  mutate(country = factor(country, country)) %>%
+  ggplot( aes(x=lnx_gdp, y=exp_trust, size = pop, color = Region)) +
+  geom_point(alpha=0.7) +
+  scale_size(range = c(3, 15), name="Population") +
+  scale_colour_manual(values=c("#293352", "#C4961A", "#52854C", "#D16103", "#99999900", "#9a372d", "#2d9aa4")) +
+  theme(axis.title.x = element_blank(), 
+        axis.title.y = element_blank(),
+        axis.text.x = element_blank(),
+        axis.ticks.x = element_blank(),
+        axis.text.y = element_blank(),
+        axis.ticks.y = element_blank(),
+        legend.position="none"
+  ) +
+  scale_x_continuous(breaks = seq(0.7, 0.88, 0.02), limits = c(0.7, 0.88)) +
+  scale_y_continuous(breaks = seq(0, 6050, 1000), limits = c(0, 6050))
+# xlim(7.5, 11.15) +
+# expand_limits(x=c(7.5, 11), y=c(0, 80))
 
-# w$country <- (as_factor(as_character(as_numeric(w$B_COUNTRY))))
-
-## remove individual-level variables
-
-nrow(w)
-nrow(distinct(w))
-
-
-
-w <- w |> 
-  mutate(country = as_numeric(B_COUNTRY) |> 
-                   as_character(),
-         trust_d = sjmisc::rec(trust, 
-                               rec = "2=0; 1=1; else=NA")) |> 
-  mutate(trust_pct = round(mean(trust_d, na.rm = T) * 100, 2), 
-         .by = country) |>                                                      # instead of `group_by` (https://dplyr.tidyverse.org/reference/dplyr_by.html)
-  select(-c(trust, trust_d)) |> 
-  distinct(country, .keep_all = TRUE)
+dev.print(png, "site_pics/trust_background.png", width = 1407, height = 725, bg = "transparent", res = 100)
 
 
 
+data %>%
+  filter(country != "China") |> 
+  arrange(desc(pop)) %>%
+  mutate(country = factor(country, country)) %>%
+  ggplot( aes(x=trust_pct, y=ln_gdp, size = pop, color = Region)) +
+  geom_point(alpha=0.7) +
+  scale_size(range = c(3, 15), name="Population") +
+  scale_colour_manual(values=c("#293352", "#C4961A", "#52854C", "#D16103", "#99999900", "#9a372d", "#2d9aa4")) +
+  theme(axis.title.x = element_blank(), 
+        axis.title.y = element_blank(),
+        axis.text.x = element_blank(),
+        axis.ticks.x = element_blank(),
+        axis.text.y = element_blank(),
+        axis.ticks.y = element_blank(),
+        legend.position="none"
+  ) +
+  scale_y_continuous(breaks = seq(7.5, 11.2, 0.6), limits = c(7.5, 11.1)) +
+  scale_x_continuous(breaks = seq(0, 80, 10))
+# xlim(7.5, 11.15) +
+# expand_limits(x=c(7.5, 11), y=c(0, 80))
 
-
-## Joint EVS/WVS 2017-2022
-
-
-joint <- sjlabelled::read_spss("./docs/Data/WVS_7/EVS_WVS_Joint_Spss_v4_0.sav") |> 
-  select(cntry, cntry_AN, A165) |> 
-  rename(trust = A165) |> 
-  mutate(country = as_numeric(cntry) |> 
-           as_character(),
-         trust_d = sjmisc::rec(trust, 
-                               rec = "2=0; 1=1; else=NA")) |> 
-  mutate(trust_pct = round(mean(trust_d, na.rm = T) * 100, 2), 
-         .by = country)                                                     # instead of `group_by` (https://dplyr.tidyverse.org/reference/dplyr_by.html)
-
-
-nrow(joint)
-nrow(distinct(joint)) # 257
-
-
-
-j <- joint |> 
-  select(-c(trust, trust_d)) |> 
-  distinct(country, .keep_all = TRUE)
-
-
-
+dev.print(png, "site_pics/inverse_trust_background.png", width = 1407, height = 725, bg = "transparent", res = 100)
 
 
 

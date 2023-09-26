@@ -211,7 +211,7 @@ h1 {
 h1.title {
   font-size: 50px;
   text-align: center;
-  color: #003300;
+  color: #071a31;
   font-weight: bold;
   padding-top: 30px;
   padding-bottom: 40px;
@@ -231,7 +231,7 @@ body {
 h1 {
     font-size: 30px;
     font-weight: bold;
-    color: #003300;
+    color: #071a31;
 }
 
 h2 {
@@ -248,7 +248,7 @@ pre code {
 
 /* ---------- Links ----------------- */
 a {
-  color: #69b3a2;
+  color: #16686f;
 }
 a:hover {
   color: #69b3a2;

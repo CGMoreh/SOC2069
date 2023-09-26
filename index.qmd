@@ -53,6 +53,3 @@ The module makes four main contributions to the degree program:
 
 4. Finally, because Research Social Life I delivers a substantial part of “what every sociology graduate can be expected to know”, having studied the subject, it offers the opportunity to acquire transferable skills for later employment in a range of professions. These include interviewing, analysing social behaviour, using computers to process quantitative information, where to locate data on public issues and how to apply them, and how to make sense of social surveys.
 
-## Teaching methods (2022-2023)
-
-The main practical content will be delivered in IT labs (seminars). These will be supplemented with 10 recorded lectures and 5 timetabled drop-in on-campus Q&A sessions focusing particularly on the assessments. Students are required to complete some self-study online training sessions as well.

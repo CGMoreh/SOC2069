@@ -24,7 +24,7 @@ days_to_highlight <- match(as.Date(c("2023/10/23", "2024/1/13")),
 
 
 calendR::calendR(start_date = "2023/09/1", end_date = "2024/01/30", 
-                 title = "2023/2024",
+                 title = "SOC2069 23/24",
                  orientation = "portrait", 
                  start = "M",
                  mbg.col = 4,           # Background color for the month names
