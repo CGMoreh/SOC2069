@@ -1,8 +1,9 @@
 ---
-title: " "
+pagetitle: "404"
 # page-layout: full
 code-link: true
-self-contained: false
+self-contained: true
+format: html
 ---
 
 ::: {.content-block}
@@ -54,3 +55,4 @@ function goBack()
 </body>
 
 :::
+

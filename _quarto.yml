@@ -10,12 +10,22 @@ project:
     - "!Assessment/resit.Rmd"
     - "!Assessment/alternative.Rmd"
     - "!SOC2069-Statistical-analysis/"
+    - "!Materials/Slides"
+
+
+embed-resources: true
+
+execute:
+  freeze: true
 
 website:
   title: "HOME"
   favicon: "/site_pics/SOC2069_logo_noaxis.png"
   search: false
   back-to-top-navigation: true
+  # page-navigation: true
+  site-path: "/SOC2069/"
+  # site-url: https://cgmoreh.github.io/SOC2069/
   navbar:
     pinned: false
     background: light
@@ -76,6 +86,9 @@ website:
   #       - section: "Week 8"
   #       - section: "Week 9"
   #       - section: "week 10"
+
+
+
 
 format:
   html:
