@@ -24,7 +24,7 @@ website:
   search: false
   back-to-top-navigation: true
   # page-navigation: true
-  site-path: "/SOC2069/"
+  # site-path: "/SOC2069/"
   # site-url: https://cgmoreh.github.io/SOC2069/
   navbar:
     pinned: false

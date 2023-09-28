@@ -2,8 +2,8 @@
 pagetitle: "404"
 # page-layout: full
 code-link: true
-self-contained: true
-format: html
+self-contained: false
+# format: html
 ---
 
 ::: {.content-block}
