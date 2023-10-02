@@ -40,7 +40,7 @@ You may have already begun the ["R for Social Scientists"](https://datacarpentry
 
 # Exercise A1: Getting to know RStudio and RStudio Projects
 
-`About 20  minutes`
+`About 15  minutes`
 
 ------------------------------------------------------------------------
 
@@ -56,6 +56,7 @@ If you have kept up with the exercises in Lab 1, you should already have a folde
 
 ```{r}
 #| echo: false
+#| width: 60
 
 fs::dir_tree("D:/OneDrive - Newcastle University/SOC2069/Data")
 ```
@@ -70,6 +71,10 @@ If you do not yet have a folder for the module set up on `OneDrive - Newcastle U
 
 
 # Exercise A2: Explore the RStudio (main) Panes
+
+`About 15  minutes`
+
+------------------------------------------------------------------------
 
 Let's have a closer look at the four (main) panes of RStudio:
 
@@ -107,9 +112,19 @@ You can arrange the panes in different ways, depending on your preferences, usin
 
 # Exercise A3: Using R scripts and RMarkdown/Quarto documents
 
-R scripts are special text documents where you can write and execute commands in the `R` programming language. You can create an R Script from within RStudio by going to *File \> New File \> R Script* (also CNTRL + SHIFT + N). If you followed the steps in the training in the previous exercise, you should already have produced your first R script (`script.R`). It's a good idea to have a separate script for each lab - e.g. name your R script from this session `Lab2.R`.
+`About 15  minutes`
 
-Apart from R scripts, *RStudio* allows for the easy editing and processing of another plain text file type, one which allows us to combine human-readable text (such as the one we would write in a Microsoft Word document) with executable computer code that generates output (e.g. data processing, tables, graphs, etc.). These file types are called ***Quarto*** markdown documents (`.qmd`) (or *RMarkdown* (`.Rmd), an earlier implementation available in older versions of RStudio; this may be the case in some computer clusters). You can open a new Quarto document by going to *File \> New File \> Quarto Document*
+------------------------------------------------------------------------
+
+R scripts are special text documents where you can write and execute commands in the `R` programming language. You can create an R Script from within RStudio by going to *File \> New File \> R Script* (also CNTRL + SHIFT + N), or clicking on the *New File* button on the toolbar:
+
+![](sheet_pics/r_studio_menu_newdocument.png)
+
+If you followed the steps in the training in the previous exercise, you should already have produced your first R script (`script.R`). It's a good idea to have a separate script for each lab - e.g. name your R script from this session `Lab2.R`.
+
+Apart from R scripts, *RStudio* allows for the easy editing and processing of another plain text file type, one which allows us to combine human-readable text (such as the one we would write in a Microsoft Word document) with executable computer code that generates output (e.g. data processing, tables, graphs, etc.). These file types are called ***Quarto*** markdown documents (`.qmd`) (or *RMarkdown* (`.Rmd), an earlier implementation available in older versions of RStudio; this may be the case in some computer clusters). You can open a new Quarto (or RMarkdown) document by going to *File \> New File \> Quarto Document*, or with the *New File* button:
+
+![](sheet_pics/r_studio_toolbar_newquarto.png){fig-align="center" width=200}
 
 
 ::: {.taskbox .task}
@@ -118,7 +133,13 @@ Apart from R scripts, *RStudio* allows for the easy editing and processing of an
 
 Quarto markdown is a reimagined version of R Markdown. The two are very similar. Newer versions of RStudio have Quarto pre-installed, making it much easier to work with Quarto files and projects. Older versions rely on RMarkdown. You can also learn more about the latter in the ["7. Getting started with R Markdown" section of the "R for Social Scientists"](https://datacarpentry.org/r-socialsci/instructor/06-rmarkdown.html) course.
 
+Create a new `.qmd` document for "Lab 2" with a few basic items in it (some section headings, some text, a code block; you haven't yet learnt any useful commands in the `R` language to write in the code chunk, but you can use `R` as a simple calculator too, so come up with some simple mathematical calculations that you want the code to evaluate and give you the results for). Your end product would look something like this:
+
+![](sheet_pics/r_studio_newquartodoc.png)
+
 :::
+
+
 
 
 
