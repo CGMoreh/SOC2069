@@ -1,0 +1,95 @@
+
+# World Values Survey, Wave 7 (WVS7)
+
+This dataset comes from the [World Values Survey Wave 7 (2017-2022)](https://www.worldvaluessurvey.org/WVSDocumentationWV7.jsp). The data (version 5.0) was downloaded in SPSS format to a local folder, `raw/wvs7/`:
+
+```{r}
+#| echo: false
+#| eval: true
+#| message: false
+#| warning: false
+
+# The folder, which also contains the original data documentation, looks like this:
+
+fs::dir_info("raw/wvs7", glob = c("*.zip", "*.sav", "*.pdf"))[, c(1,3)] |> gt::gt_preview() |> gt::cols_align(align = "left") |> gt::tab_options(table.width = "70%")
+
+```
+
+The SOC2069 version of the dataset can be reproduced from the raw data file with the `R` code shown in the expandable field below.
+
+```{r}
+#| warning: false
+#| output: false
+#| code-fold: true
+#| code-summary: "Show the code"
+
+## Packages (install first if needed) ----------------------------------------------------------------------------------------
+
+library(datawizard)
+
+## Path to file --------------------------------------------------------------------------------------------------------------
+
+filepath <- "raw/wvs7/F00010733-WVS_Cross-National_Wave_7_spss_v5_0.zip"
+
+## Read in the data file -----------------------------------------------------------------------------------------------------
+
+wvs7 <- data_read(filepath) |> 
+  data_select(select = c(B_COUNTRY, G_TOWNSIZE, H_SETTLEMENT,
+                         H_URBRURAL,                                # Technical variables
+                         Q1:Q259,                                   # Core variables
+                         Q260:Q290),                                # Demographic and socio-economic variables
+              exclude = c(Q82_AFRICANUNION:Q82_UNDP,                # Exclude: region specific,
+                          Q91:Q93,                                  # knowledge test,
+                          Q266:Q268, Q290)) |>                      # too detailed
+  data_select(exclude = c(ends_with("R", "A", "CS9"),               # recoded, country-specific
+                          contains("Q223", "X00", "V00")))
+
+## Save the dataset as .rds for SOC2069 --------------------------------------------------------------------------------------
+
+data_write(wvs7, "for_analysis/wvs7.rds")
+
+```
+
+
+If you use the WVS7 data in your work, cite it as follows:
+
+  > Haerpfer, C., Inglehart, R., Moreno, A., Welzel, C., Kizilova, K., Diez-Medrano J., M. Lagos, P. Norris, E. Ponarin & B. Puranen (eds.). 2022. World Values Survey: Round Seven - Country-Pooled Datafile Version 5.0. Madrid, Spain & Vienna, Austria: JD Systems Institute & WVSA Secretariat. doi:10.14281/18241.20
+
+
+## WVS7 Codebook
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+
+library(dplyr)
+library(sjlabelled)
+
+## The `datawizard::data_read()` function already transforms variables into factors more efficiently than `sjlabelled::read_spss()`, but for the `data_codebook()` we would like to have the Values listed as well as the Value Labels, so we need to transform the factors back to numeric and then into factors again.
+## This is a bit different compared to importing with `sjlabelled::read_spss()`, when we would do:
+  # drop_labels() |>
+  # mutate(across(where(is.factor), 
+  #               as_numeric) |> 
+  #               as_label()) 
+
+
+`SOC2069: World Values Survey, Wave 7` <- wvs7 |> 
+  mutate(across(where(is.factor), 
+                as_numeric) |> 
+                as_factor()
+         )
+
+`SOC2069: World Values Survey, Wave 7` |> 
+    data_codebook(variable_label_width = 60, 
+                  value_label_width = 35,
+                  max_values = 10,
+                  range_at = 5) |> 
+    print_html(font_size = "80%",
+               line_padding = 0,
+               title = "")
+```
+
+
+
+

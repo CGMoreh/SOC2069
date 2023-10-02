@@ -1,0 +1,14 @@
+{
+  "hash": "bc81eb2e512ba4071af33b807ea2ee13",
+  "result": {
+    "markdown": "::: {.cell}\n\n```{.r .cell-code}\narchive::archive_extract(\"bsa2020/ukda_data_dictionaries.zip\", \"bsa2020/\")\n```\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

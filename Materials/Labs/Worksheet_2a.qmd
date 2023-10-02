@@ -1,0 +1,127 @@
+---
+title: "Worksheet 2a"
+subtitle: "Setting up an R Project in RStudio"
+output:
+  html_document:
+    theme: lumen
+    toc: yes
+    toc_float: yes
+    toc_highlight: no
+    tabset: yes
+    number_sections: no
+    anchor_sections: no
+    self_contained: yes
+    code_download: no
+css: labcss.css
+---
+
+
+------------------------------------------------------------------------
+
+```
+Timetable week: 5
+Topic: "Measurement and Description"
+```
+------------------------------------------------------------------------
+
+# Learning outcomes
+
+  - Understanding the *RStudio* interface
+  - Setting up an *R Studio Project*
+  - Opening and working in an *R script*
+  - Opening and working in an *RMarkdown* (.Rmd) or *Quarto* markdown (.qmd) document
+
+# Intro
+
+This week we begin learning how to analyse quantitative data using the free, open-source, statistical analysis programme `R` via the `RStudio` interface. The aim in this module is to address substantive research questions with the use of `R` rather than achieve a deep understanding of `R` itself. For this reason, it is expected that you develop your `R` skills beyond the minimum required by the worksheets outside class.
+
+You may have already begun the ["R for Social Scientists"](https://datacarpentry.org/r-socialsci) online training, in which case you should already be familiar with the basics of `R`, `RStudio` and `RStudio projects`. If you haven't yet started the course, in the first exercise below you will get started.
+
+
+# Exercise A1: Getting to know RStudio and RStudio Projects
+
+`About 20  minutes`
+
+------------------------------------------------------------------------
+
+The term "`R`" is used to refer to both the programming language and the software that interprets the scripts written using it. To make it easier to interact with R, we will use *RStudio*. RStudio is the most popular IDE (Integrated Development Environment) for R. An IDE is a piece of software that provides tools to make programming easier.
+
+*R* and *RStudio* should be available on all computers in the IT clusters. You can find RStudio among the list of programs (in the Start menu) and open the programme directly. This will open a new RStudio session in the *computer's* default working directory. However, to make sure that all your files are in the same place and accessible regardless of the computer you are using, it's best to get into the practice of using RStudio **projects**. An **RStudio Project** stores all the files and data objects and performs all the operations relative to the location of the *project's* root file on the computer.
+
+::: {.taskbox .task}
+
+**Navigate to the ["1. Before we Start" section of the "R for Social Scientists"](https://datacarpentry.org/r-socialsci/instructor/00-intro.html) course and work your way through that section.**
+
+If you have kept up with the exercises in Lab 1, you should already have a folder for your work on this module that is organised something like this:
+
+```{r}
+#| echo: false
+
+fs::dir_tree("D:/OneDrive - Newcastle University/SOC2069/Data")
+```
+Last week we saved all the survey documentation materials there for the various surveys you read about. If you already have a folder like this, try turning the `/SOC2069/` parent folder into an *RStudio Project*. You can start off with the same steps (*File \> New project \>*), but instead of `New directory` choose `Existing directory` and find your `/SOC2069/` folder on OneDrive. When you are done, you will see that a new file with the extension `.Rproj` has been created in the folder.
+
+The great advantage of having an `.Rproj` file in the folder that you are using is that you don't have to worry about setting manually any paths to files that you will be using or producing; everything is stored relative to where the `.Rproj` file is located on your computer.
+
+If you do not yet have a folder for the module set up on `OneDrive - Newcastle University`, follow the instructions in the course and set up a new project as a new directory, creating the advised folders. Then, organise your `data` or the `documents` folder (`documents` may be a good option if you then plan on storing the data files separately from the survey documentation material, but it's up to you) to have the sub-folders shown above as you will be using these to store data files in later exercises.
+
+:::
+
+
+
+# Exercise A2: Explore the RStudio (main) Panes
+
+Let's have a closer look at the four (main) panes of RStudio:
+
+![](sheet_pics/console_etc.png)
+
+### The R Console Pane
+
+The R Console, by default the left or lower-left pane in R Studio, is the home of the R "engine". This is where the commands are actually run and non-graphic outputs and error/warning messages appear. The **Console** is the direct interface to the `R` software itself; it's what we get if instead of `RStudio` we open the `R` software: a direct interface to the `R` programming language, where we can type commands and **where results/messages are printed**.
+
+You can directly enter and run commands in the R Console, but realize that these commands are not saved as they are when running commands from a script. For this reason, we should not use the **Console** pane directly too much. For typing commands that we want `R` to execute, we should instead use an `R` script file, where everything we type can be saved for later and complex analyses can be built up.
+
+### The Source Pane
+
+This pane, by default in the upper-left, is a space to edit and run your scripts. This pane can also display datasets (data frames) for viewing.
+
+### The Environment Pane
+
+This pane, by default the upper-right, is most often used to see brief summaries of objects in the R Environment in the current session. These objects could include imported, modified, or created datasets, parameters you have defined, or vectors or lists you have defined during analysis. You can click on the arrow next to a dataframe name to see its variables.
+
+::: {.notebox .note}
+**Note**
+
+If your Environment pane is empty, it means that you don't have any "objects" loaded or created yet. We will be creating some objects later and we will also import an example dataset.
+:::
+
+### Files, Plots, Packages, Help, etc
+
+The lower-right pane includes several tabs including plots (display of graphics including maps), help, a file library, and available R packages (including installation/update options).
+
+You can arrange the panes in different ways, depending on your preferences, using *Tools \> Global Options in the top menu.* So the arrangement of panes may look different on different computers.
+
+
+
+
+
+# Exercise A3: Using R scripts and RMarkdown/Quarto documents
+
+R scripts are special text documents where you can write and execute commands in the `R` programming language. You can create an R Script from within RStudio by going to *File \> New File \> R Script* (also CNTRL + SHIFT + N). If you followed the steps in the training in the previous exercise, you should already have produced your first R script (`script.R`). It's a good idea to have a separate script for each lab - e.g. name your R script from this session `Lab2.R`.
+
+Apart from R scripts, *RStudio* allows for the easy editing and processing of another plain text file type, one which allows us to combine human-readable text (such as the one we would write in a Microsoft Word document) with executable computer code that generates output (e.g. data processing, tables, graphs, etc.). These file types are called ***Quarto*** markdown documents (`.qmd`) (or *RMarkdown* (`.Rmd), an earlier implementation available in older versions of RStudio; this may be the case in some computer clusters). You can open a new Quarto document by going to *File \> New File \> Quarto Document*
+
+
+::: {.taskbox .task}
+
+**Navigate to the ["29.  Quarto" section of the "R for Data Science" (2nd ed.)](https://r4ds.hadley.nz/quarto.html) book and work your way through the first few sections of that chapter**
+
+Quarto markdown is a reimagined version of R Markdown. The two are very similar. Newer versions of RStudio have Quarto pre-installed, making it much easier to work with Quarto files and projects. Older versions rely on RMarkdown. You can also learn more about the latter in the ["7. Getting started with R Markdown" section of the "R for Social Scientists"](https://datacarpentry.org/r-socialsci/instructor/06-rmarkdown.html) course.
+
+:::
+
+
+
+
+
+

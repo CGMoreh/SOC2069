@@ -1,0 +1,84 @@
+
+# European Social Survey (Round 10 - 2020)
+
+This dataset comes from the [European Social Survey (ESS Round 10 - 2020)](https://ess-search.nsd.no/en/study/172ac431-2a06-41df-9dab-c1fd8f3877e7). The data (ESS10 - integrated file, edition 3.1) was downloaded in SPSS format from the ESS repository and stored in the folder `raw/ess10/`:
+
+```{r}
+#| echo: false
+#| eval: true
+#| message: false
+#| warning: false
+
+fs::dir_info("raw/ess10", glob = c("*.zip", "*.sav", "*.pdf"))[, c(1,3)] |> gt::gt_preview() |> gt::cols_align(align = "left") |> gt::tab_options(table.width = "70%")
+
+```
+
+The SOC2069 version of the dataset can be reproduced from the raw data file with the `R` code shown in the expandable field below.
+
+```{r}
+#| warning: false
+#| output: false
+#| code-fold: true
+#| code-summary: "Show the code"
+
+## Packages (install first if needed) ----------------------------------------------------------------------------------------
+
+library(datawizard)
+
+library(sjlabelled)
+library(dplyr)
+
+## Path to file --------------------------------------------------------------------------------------------------------------
+
+filepath <- "raw/ess10/ESS10.zip"
+
+## Read in the data file -----------------------------------------------------------------------------------------------------
+
+# ess10 <- data_read(filepath) |>
+ess10 <- sjlabelled::read_spss(filepath) |>
+  drop_labels() |>
+  # mutate(across(where(is.factor), 
+  #               as_numeric) |> 
+  #               as_label()
+  #        ) |> 
+  remove_empty_columns() |>
+  data_select(-c(name:idno, dweight:psu,
+                 prtvtebe:prtvtdgb, prtclebe:prtclesk, rlgdnach:rlgdnbsk,
+                 rlgblge:rlgdegb, dscrrce:dscrna, cntbrthd:lnghom2,
+                 fbrncntc, mbrncntc, admrclc:vteubcmb, chpldmi:impdeme,
+                 gndr2:gndr12, yrbrn2:rshpsgb, marsts:marstgb, edulvlb:edagegb,
+                 mainact, crpdwk, pdjobyr, emplno:iorgact, nacer2, isco08,
+                 uemp12m, uemp5yr, edulvlpb:isco08p, wkhtotp:region,
+                 accref:fampdf, gndro12a:c19mco12, trdawrk:mcwrkhom,
+                 testii1:testii9, admc19:domain)
+              )
+
+## Save the dataset as .rds for SOC2069 --------------------------------------------------------------------------------------
+
+data_write(ess10, "for_analysis/ess10.rds")
+
+```
+
+If you use the ESS10 data in your work, cite it as follows:
+
+ > European Social Survey European Research Infrastructure (ESS ERIC). (2023). ESS10 integrated file, edition 3.1 [Data set]. Sikt - Norwegian Agency for Shared Services in Education and Research. https://doi.org/10.21338/ess10e03_1
+
+## ESS10 Codebook
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+
+
+`SOC2069: European Social Survey, Round 10` <- ess10
+
+
+`SOC2069: European Social Survey, Round 10` |>  
+    data_codebook(variable_label_width = 60, 
+                  value_label_width = 35,
+                  max_values = 10,
+                  range_at = 5) |> 
+    print_html(font_size = "80%",
+               line_padding = 0)
+```
