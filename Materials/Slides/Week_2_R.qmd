@@ -8,16 +8,57 @@ format:
 ---
 
 ```{r}
+#| output: false
 
-# Packages
 library(tidyverse)
-library(palmerpenguins)
+library(strengejacke)
+library(easystats)
+library(ggformula)
+
 ```
+
+
+##
+
+```{r}
+#| echo: false
+#| warning: false
+
+data <- read_rds("../../Data/data_for_logo.rds") |> 
+  mutate(gdp = GDPpercap2,
+         ln_gdp = log(gdp),
+         lnx_gdp = log(log(log(gdp))),
+         exp_trust = (trust_pct^2)
+         ) |>
+  drop_na()
+
+data %>%
+  # filter(country != "China") |> 
+  arrange(desc(pop)) %>%
+  mutate(country = factor(country, country)) %>%
+  ggplot( aes(x=gdp, y=trust_pct, size = pop/1000000, color = Region)) +
+  geom_point(alpha=0.7) +
+  scale_size(range = c(3, 15), name="Population") +
+  scale_colour_manual(values=c("#293352", "#C4961A", "#52854C", "#D16103", "#99999900", "#9a372d", "#2d9aa4")) +
+  theme(legend.position="right") +
+  geom_text(aes(label = country), check_overlap = TRUE, size = 2.5) +
+  xlab("GDP/capita in PPP") +
+  ylab("Generalised trust (% of trusting in national population)") +
+  ggtitle("Figure 1: Generalised Trust by GDP") +
+  labs(caption = str_wrap("Source: The data on generalised social trust originate from the latest waves of the World Values Survey (2022) and the European Values Study (2017). Contextual data on GDP and population size come from the World Bank Development Indicators Database.", width = 130)) +
+  theme(plot.caption = element_text(hjust=0),
+        plot.caption.position = "plot")
+```
+
+
+## 
+
+
 
 
 # Working in ***R*** and ***RStudio***
 
-## こんにちは、私の名前は：***R***
+## こんにちは、私の名前は ***R*** です。
 
 - A statistical programming language 
 - A language called *S* is developed at Bell Labs (USA) in **1976**
@@ -25,12 +66,11 @@ library(palmerpenguins)
 - *R* goes public in **1993**, a core maintainer group is set up in **1997**, and Version 1.0.0 is released in **2000**
 - Current stable, released version (`r Sys.Date()`) is *R-4.3.1* (2023-06-16, "Beagle Scouts"); minor releases about 4/5 times a year; mid-version releases about once a year; major releases every 7/8 years
 
+
 ## こんにちは、私の名前は：***R***
 
 - A statistical programming language
 - Computer commands as *speech acts*
-- dictator example: error ; decapitate your general in chief - computing equivalent being...
-
 
 
 ## ***RStudio***: "But I'm here to help!"
@@ -43,7 +83,7 @@ library(palmerpenguins)
 
 ## The ***RStudio*** interface
 
-- watch the video too!
+
 
 
 ## Other essential tools we will use
@@ -53,21 +93,20 @@ library(palmerpenguins)
     - `dplyr`
   - `easystats`
     - `datawizard`
-  - `strengejacke`
-    - `sjlabelled`
-    - `sjmisc`
-    - `sjPlot`
   - `ggplot2`
   - `ggformula`
   - `gtsummary`
   
 - *R Markdown* / *Quarto*
 
+
+
 ## Functions
 
 Example:
 
 ```{r}
+#| echo: true
 
 Chris_s_mean <- function(number1, number2) {
   mean_value <- (number1 + number2) / 2
@@ -79,6 +118,7 @@ Chris_s_mean <- function(number1, number2) {
 
 ```{r}
 #| error: true
+#| echo: true
 
 Chris_s_mean(2, 8)
 Chris_s_mean(7, 9)
@@ -91,6 +131,8 @@ Chris_s_mean(1, 2, 3)
 What if we want more?
 
 ```{r}
+#| echo: true
+
 Chris_s_mean <- function(...) {
   numbers <- c(...)
   mean_value <- mean(numbers)
@@ -101,9 +143,16 @@ Chris_s_mean <- function(...) {
 }
 ```
 
+```{r}
+#| echo: true
 
+Chris_s_mean(1, 2, 3)
 
+Chris_s_mean(9, 23)
 
+Chris_s_mean(4:400)
+
+```
 
 # Measurement: from questionnaire items to dataset variables
 
@@ -148,6 +197,8 @@ Chris_s_mean <- function(...) {
 ```{r}
 #| echo: true
 #| eval: true
+
+library(palmerpenguins)
 
 ggplot(penguins,                        
        aes(x = bill_length_mm,          
