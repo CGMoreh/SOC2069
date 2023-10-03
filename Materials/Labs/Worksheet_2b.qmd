@@ -232,7 +232,7 @@ Let's decipher the code above:
 
 - first, we assume that there is an object called 'wvs7data' in our Environment that contains the *wvs7* dataset; unless we restarted RStudio or deleted it, the object should still be there from the previous exercise; 
 
-- the `|>` operator (called a *pipe*) allows objects and functions to be fed (i.e. piped) forward to other functions. Getting into the habit of using the "pipe" workflow is particularly useful as it makes combining a series of operations/commands easier to read and follow. Here, we take our dataset and pipe it forward so that we can easily refer to variables from that dataset (such as *Q57*); 
+- the `|>` (or `%>%`) operator (called a *pipe*) allows objects and functions to be fed (i.e. piped) forward to other functions. The `%>%` "pipe" originates from the user-written package `{magrittr}` and was widely adopted in the `{tidyverse}`. The `|>` version is a new operative native in recent versions of `R`. It looks a bit simpler than the original pipe, but it behaves somewhat differently (we won't get into that here). The Windows Rstudio keyboard shortcut to insert the pipe character is *Ctrl + Shift + M*, which by default inserts the original version. You can change the RStudio settings to insert the native version instead. If you get to use RStudio more, you may want to do this. Getting into the habit of using the "pipe" workflow is particularly useful as it makes combining a series of operations/commands easier to read and follow. Here, we take our dataset and pipe it forward so that we can easily refer to variables from that dataset (such as *Q57*); 
 
 - the remaining code applies the `data_tabulate` function to the variable *Q57*
 
@@ -244,9 +244,9 @@ data_tabulate(wvs7data, Q57)
 data_tabulate(wvs7data$Q57)
 ```
 
-What we learn here is that another way of referring to variables within datasets is by using the `$` operator. Here, `wvs7data**$**Q57` extracts the *Q57* variable/column from the *wvs7data* object.
+The first approach above takes the general form `function_name(dataframe_name, variable_name)`, which some `tidyverse`-based functions allow. The second one follows base-R's general form of `function_name(dataframe_name**$**variable_name)`, using the `$` operator. Here, `wvs7data**$**Q57` extracts the *Q57* variable/column from the *wvs7data* dataframe object.
 
-We will aim to follow the "piped" workflow whenever possible, because it's more flexible to expand and reads more logically to humans.
+We will aim to follow the `\>` "piped" workflow whenever possible, because it's more flexible to expand and reads more logically to humans. However, the `$` "extract"
 
 The resulting frequency table will be printed in the Console, and will look something like this:
 
@@ -272,6 +272,16 @@ There are much fewer *numeric* variables in this dataset (and in sociological da
 summary(wvs7data$Q262)
 
 ```
+
+There are various other options available too in different packages. For example, the below is the result from the `report_table()` function from the `{report}` package which is part of the `{easystats}` ecosystem that we already installed and loaded:
+
+
+```{r}
+report_table(wvs7data$Q262)
+```
+
+These outputs can be customised and extended in various ways.
+
 
 ```{block , type = 'questionblock'}
 **Question**
