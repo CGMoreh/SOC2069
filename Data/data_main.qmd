@@ -23,6 +23,15 @@ The datasets listed on this page are slightly processed versions of the raw data
 
 The codebooks shown on this page describe the processed datasets. The processed datasets can be downloaded by students from the module's institutional Canvas page for the purpose of coursework, but for all other research purposes students are asked to download the original raw data from the data repositories. The `R` code available on this page can be run on the raw data to reproduce the processed datasets and can serve as a basis for further data wrangling.
 
+Available datasets for download:
+
+- **World Values Survey, Wave 7**: `wvs7.rds` -- [**`Download`**]( https://ncl.instructure.com/files/7487654/download?download_frd=1)
+- **European Values Study, 2017**: `evs2017.rds` -- [**`Download`**]( https://ncl.instructure.com/files/7487653/download?download_frd=1)
+- **European Social Survey, Round 10, 2020**: `ess10.rds` -- [**`Download`**]( https://ncl.instructure.com/files/7487652/download?download_frd=1)
+
+More datasets will become available in the future.
+
+
 {{< include _wvs7_prep.qmd >}}
 
 {{< include _evs2017_prep.qmd >}}

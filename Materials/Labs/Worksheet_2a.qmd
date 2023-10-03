@@ -126,12 +126,11 @@ Apart from R scripts, *RStudio* allows for the easy editing and processing of an
 
 ![](sheet_pics/r_studio_toolbar_newquarto.png){fig-align="center" width=200}
 
+Quarto markdown is a reimagined version of R Markdown. The two are very similar. Newer versions of RStudio have Quarto pre-installed, making it much easier to work with Quarto files and projects. Older versions rely on RMarkdown. You can also learn more about the latter in the ["7. Getting started with R Markdown" section of the "R for Social Scientists"](https://datacarpentry.org/r-socialsci/instructor/06-rmarkdown.html) course.
 
 ::: {.taskbox .task}
 
-**Navigate to the ["29.  Quarto" section of the "R for Data Science" (2nd ed.)](https://r4ds.hadley.nz/quarto.html) book and work your way through the first few sections of that chapter**
-
-Quarto markdown is a reimagined version of R Markdown. The two are very similar. Newer versions of RStudio have Quarto pre-installed, making it much easier to work with Quarto files and projects. Older versions rely on RMarkdown. You can also learn more about the latter in the ["7. Getting started with R Markdown" section of the "R for Social Scientists"](https://datacarpentry.org/r-socialsci/instructor/06-rmarkdown.html) course.
+**Navigate to the ["Get started" tutorial on the Quarto website](https://quarto.org/docs/get-started/hello/rstudio.html) and work your way through the first page. That should be enough to get you started out using Quarto. You can watch the full video tutorial and work your way through the rest of the pages outside class.**
 
 Create a new `.qmd` document for "Lab 2" with a few basic items in it (some section headings, some text, a code block; you haven't yet learnt any useful commands in the `R` language to write in the code chunk, but you can use `R` as a simple calculator too, so come up with some simple mathematical calculations that you want the code to evaluate and give you the results for). Your end product would look something like this:
 

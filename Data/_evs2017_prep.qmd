@@ -10,7 +10,7 @@ This dataset comes from the [European Values Study 2017 (EVS 2017)](https://sear
 #| message: false
 #| warning: false
 
-fs::dir_info("raw/evs2017", glob = c("*.zip", "*.sav", "*.pdf"))[, c(1,3)] |> gt::gt_preview() |> gt::cols_align(align = "left") |> gt::tab_options(table.width = "70%")
+fs::dir_info("raw/evs2017")[, c(1,3)] |> gt::gt_preview() |> gt::cols_align(align = "left") |> gt::tab_options(table.width = "70%")
 
 ```
 
@@ -47,7 +47,7 @@ evs2017 <- data_read(filepath) |>
 
 ## Save the dataset as .rds for SOC2069 --------------------------------------------------------------------------------------
 
-data_write(evs2017, "for_analysis/evs2017.rds")
+data_write(evs2017, "for_analysis/evs2017.sav")
 
 ```
 
@@ -80,8 +80,8 @@ library(sjlabelled)
          )
 
 `SOC2069: European Values Study, 2017` |> 
-    data_codebook(variable_label_width = 60, 
-                  value_label_width = 35,
+    data_codebook(variable_label_width = 55, 
+                  value_label_width = 30,
                   max_values = 10,
                   range_at = 5) |> 
     print_html(font_size = "80%",
