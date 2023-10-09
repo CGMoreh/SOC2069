@@ -1,0 +1,98 @@
+
+# International Social Survey Programme, 2020
+
+This dataset comes from the [International Social Survey Programme (2020)](https://www.gesis.org/en/issp/modules/issp-modules-by-topic/environment/2020). The data (version 2.0.0) was downloaded in SPSS format to a local folder, `raw/issp2020/`:
+
+```{r}
+#| echo: false
+#| eval: true
+#| message: false
+#| warning: false
+
+# The folder, which also contains the original data documentation, looks like this:
+
+fs::dir_info("raw/issp2020")[, c(1,3)] |> gt::gt_preview() |> gt::cols_align(align = "left") |>
+  gt::tab_options(table.width = "70%")
+
+```
+
+The SOC2069 version of the dataset can be reproduced from the raw data file with the `R` code shown in the expandable field below.
+
+```{r}
+#| warning: false
+#| output: false
+#| code-fold: true
+#| code-summary: "Show the code"
+
+## Packages (install first if needed) ----------------------------------------------------------------------------------------
+
+library(here)           # Write paths to data relative to project directory on both Win and Mac
+library(dplyr)          # Data wrangling
+library(datawizard)     # All data import, export and wrangling
+library(sjlabelled)     # Data import and label management
+
+## Path to file --------------------------------------------------------------------------------------------------------------
+
+datafile <- here("Data", "raw", "issp2020", "ZA7650_v2-0-0.sav")
+
+## Read in the data file -----------------------------------------------------------------------------------------------------
+
+issp2020 <- read_spss(datafile) |> 
+  drop_labels() |> 
+  mutate(across(where(~ is.factor(.x) && nlevels(.x) > 7), 
+                as_numeric),                                        # Turn long factors to labelled numeric
+         # across(c(B_COUNTRY, Q272, Q275:Q287, Q289), 
+         #        as_factor)
+         )                                      # Long factors that should stay categorical
+  # set_labels(Q270, Q274, labels = "") |>                            # Pure numeric, no labels needed
+  # data_select(select = c(B_COUNTRY, G_TOWNSIZE, H_SETTLEMENT,
+  #                        H_URBRURAL,                                # Technical variables
+  #                        Q1:Q259,                                   # Core variables
+  #                        Q260:Q290),                                # Demographic and socio-economic variables
+  #             exclude = c(Q82_AFRICANUNION:Q82_UNDP,                # Exclude: region specific,
+  #                         Q91:Q93,                                  # knowledge test,
+  #                         Q266:Q268, Q290)) |>                      # too detailed
+  # data_select(exclude = c(ends_with("R", "A", "CS9"),               # recoded, country-specific
+  #                         contains("Q223", "X00", "V00")))
+
+  
+  
+## Save the dataset as for SOC2069 --------------------------------------------------------------------------------------
+
+# rds
+# saveRDS(issp2020, "for_analysis/issp2020.rds", compress = "bzip2")
+
+
+```
+
+
+If you use the ISSP2020 data in your work, cite it as follows:
+
+  > ISSP Research Group (2023). International Social Survey Programme: Environment IV - ISSP 2020. GESIS, Cologne. ZA7650 Data file Version 2.0.0, https://doi.org/10.4232/1.14153.
+
+
+
+## ISSP2020 Codebook
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+
+
+`SOC2069: International Social Survey Programme, 2020` <- issp2020 
+
+`SOC2069: International Social Survey Programme, 2020`  |> 
+    data_codebook(variable_label_width = 50, 
+                  value_label_width = 25,
+                  max_values = 11,
+                  range_at = 6) |> 
+    print_html(font_size = "80%",
+               line_padding = 0)
+  # select(-10) |>
+  # DT::datatable(rownames = FALSE, options = list(pageLength = 50))
+```
+
+
+
+

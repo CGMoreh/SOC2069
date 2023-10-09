@@ -23,25 +23,23 @@ The SOC2069 version of the dataset can be reproduced from the raw data file with
 
 ## Packages (install first if needed) ----------------------------------------------------------------------------------------
 
-library(datawizard)
-
-library(sjlabelled)
-library(dplyr)
+library(here)           # Write paths to data relative to project directory on both Win and Mac
+library(dplyr)          # Data wrangling
+library(datawizard)     # All data import, export and wrangling
+library(sjlabelled)     # Data import and label management
 
 ## Path to file --------------------------------------------------------------------------------------------------------------
 
-filepath <- "raw/ess10/ESS10.zip"
+datafile <- here("Data", "raw", "ess10", "ESS10.zip")
 
-## Read in the data file -----------------------------------------------------------------------------------------------------
+## Read in the data file with sjlabelled::read_spss() ------------------------------------------------------------------------
 
-# ess10 <- data_read(filepath) |>
-ess10 <- sjlabelled::read_spss(filepath) |>
+ess10 <- sjlabelled::read_spss(datafile) |> 
   drop_labels() |>
-  # mutate(across(where(is.factor), 
-  #               as_numeric) |> 
-  #               as_label()
-  #        ) |> 
-  remove_empty_columns() |>
+  mutate(across(where(~ is.factor(.x) && nlevels(.x) > 9), 
+              as_numeric),                                        # Turn long factors to labelled numeric
+         across(c(cntry, prtcldgb, rlgdngb), 
+              as_factor)) |>                                      # Long factors that should stay categorical
   data_select(-c(name:idno, dweight:psu,
                  prtvtebe:prtvtdgb, prtclebe:prtclesk, rlgdnach:rlgdnbsk,
                  rlgblge:rlgdegb, dscrrce:dscrna, cntbrthd:lnghom2,
@@ -53,11 +51,87 @@ ess10 <- sjlabelled::read_spss(filepath) |>
                  testii1:testii9, admc19:domain)
               )
 
-## Save the dataset as .rds for SOC2069 --------------------------------------------------------------------------------------
 
-data_write(ess10, "for_analysis/ess10.sav")
+## Save the dataset for SOC2069 --------------------------------------------------------------------------------------
+
+saveRDS(ess10, "for_analysis/ess10.rds", compress = "bzip2")
 
 ```
+
+
+
+```{r ESS TESTING}
+#| eval: false
+#| echo: false
+
+#### ========= TESTING ==================================================== ####
+  
+  
+ess10dw |> describe_distribution(nwspol)
+ess10sj |> describe_distribution(nwspol)
+
+  
+  
+
+# ess10v2 |> mutate(across(where(is.factor), as.numeric)) |>  
+  # describe_distribution(centrality = c("mode"))
+
+
+ess10dw     |> data_tabulate(c(netusoft))
+ess10dwimp  |> data_tabulate(c(netusoft))
+
+ess10dw2    |> data_tabulate(c(netusoft))
+ess10dw2imp |> data_tabulate(c(netusoft))
+
+
+ess10sjimp     |> data_tabulate(c(netusoft))
+  # mutate(netusoft = as_factor(as_label(netusoft))) |>
+
+
+ess10sj     |> 
+  sjmisc::frq(netusoft)
+
+
+ess10sjimp  |> data_tabulate(c(netusoft))
+
+
+
+ess10dw2rdsx |>   
+                # mutate(across(where(is.factor),
+                # as_numeric) |>
+                # as_factor()) |> 
+  data_select(c(netusoft, trstprl, agea)) |> 
+  data_codebook(variable_label_width = 55, 
+                  value_label_width = 30,
+                  max_values = 10,
+                  range_at = 5)
+
+
+fs::dir_create(here("Data", "test"))
+
+data_write(ess10dw, "test/ess10dw.rds")
+data_write(ess10dw2, "test/ess10dw2.rds")
+data_write(ess10sj, "test/ess10sj.rds")
+
+sjlabelled::write_spss(ess10sj, "test/ess10sj.sav")
+
+ess10dwimp <- data_read(here("Data", "test", "ess10dw.sav"))
+ess10dw2imp <- data_read(here("Data", "test", "ess10dw2.sav"))
+ess10sjimp <- read_spss(here("Data", "test", "ess10sj.sav"))
+
+ess10dwrds <- data_read(here("Data", "test", "ess10dw.rds"))
+ess10dw2rdsx <- data_read(here("Data", "test", "ess10dw2.rds"), convert_factors = FALSE)
+ess10sjrds <- data_read(here("Data", "test", "ess10sj.rds"))
+
+
+
+
+ess10sjrds |> sjmisc::frq(netusoft)
+
+
+```
+
+
 
 If you use the ESS10 data in your work, cite it as follows:
 
@@ -70,13 +144,12 @@ If you use the ESS10 data in your work, cite it as follows:
 #| message: false
 #| warning: false
 
-
 `SOC2069: European Social Survey, Round 10` <- ess10
 
 
 `SOC2069: European Social Survey, Round 10` |>  
-    data_codebook(variable_label_width = 55, 
-                  value_label_width = 30,
+    data_codebook(variable_label_width = 50, 
+                  value_label_width = 25,
                   max_values = 10,
                   range_at = 5) |> 
     print_html(font_size = "80%",

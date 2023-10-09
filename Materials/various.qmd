@@ -1,0 +1,13 @@
+
+
+Yihui technique to emulate very fast touchtyping for presentations
+
+```{r}
+#| eval: false
+
+xfun::rstudio_type(t, pause = function() truncnorm::rtruncnorm(1, 0, 0.5, .005, .01), mistake = .001)
+xfun::rstudio_type(t, pause = function() rbeta(1, 1, 9)/60, mistake = .001)
+xfun::rstudio_type(t, pause = function() rbeta(1, 1, 2)/60, mistake = .001)
+
+```
+

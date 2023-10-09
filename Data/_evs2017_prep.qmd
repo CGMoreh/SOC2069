@@ -24,17 +24,24 @@ The SOC2069 version of the dataset can be reproduced from the raw data file with
 
 ## Packages (install first if needed) ----------------------------------------------------------------------------------------
 
-library(datawizard)
+library(here)           # Write paths to data relative to project directory on both Win and Mac
+library(dplyr)          # Data wrangling
+library(datawizard)     # All data import, export and wrangling
+library(sjlabelled)     # Data import and label management
 
 ## Path to file --------------------------------------------------------------------------------------------------------------
 
-filepath <- "raw/evs2017/ZA7500_v5-0-0.sav.zip"
+datafile <- here("Data", "raw", "evs2017", "ZA7500_v5-0-0.sav.zip")
 
 ## Read in the data file -----------------------------------------------------------------------------------------------------
 
-evs2017 <- data_read(filepath) |> 
+evs2017 <- sjlabelled::read_spss(datafile) |> 
   drop_labels() |>
-  remove_empty_columns() |> 
+  mutate(across(where(~ is.factor(.x) && nlevels(.x) > 9), 
+                as_numeric),                                                    # Turn long factors to labelled numeric
+         # across(c(), 
+                # as_factor)                                                    # Long factors that should stay categorical
+         ) |>                                      
   data_select(-c(studyno:fw_end, c_abrv, mode:fmissings, v228b:v229,
                  v231b, v231b_r, v233b, v233b_r, v242_r:v243_8cat,
                  v243_cs_DE1:v243_cs_GB2,v245:v248a,
@@ -45,9 +52,9 @@ evs2017 <- data_read(filepath) |>
                  ends_with("_IT", "_DK", "_cs", "_SE", "a", "b", "c"))
               )
 
-## Save the dataset as .rds for SOC2069 --------------------------------------------------------------------------------------
+## Save the dataset for SOC2069 --------------------------------------------------------------------------------------
 
-data_write(evs2017, "for_analysis/evs2017.sav")
+saveRDS(evs2017, "for_analysis/evs2017.rds", compress = "bzip2")
 
 ```
 
@@ -62,26 +69,12 @@ If you use the EVS2017 data in your work, cite it as follows:
 #| message: false
 #| warning: false
 
-library(dplyr)
-library(sjlabelled)
 
-## The `datawizard::data_read()` function already transforms variables into factors more efficiently than `sjlabelled::read_spss()`, but for the `data_codebook()` we would like to have the Values listed as well as the Value Labels, so we need to transform the factors back to numeric and then into factors again.
-## This is a bit different compared to importing with `sjlabelled::read_spss()`, when we would do:
-  # drop_labels() |>
-  # mutate(across(where(is.factor), 
-  #               as_numeric) |> 
-  #               as_label()) 
-
-
-`SOC2069: European Values Study, 2017` <- evs2017 |> 
-  mutate(across(where(is.factor), 
-                as_numeric) |> 
-                as_factor()
-         )
+`SOC2069: European Values Study, 2017` <- evs2017
 
 `SOC2069: European Values Study, 2017` |> 
-    data_codebook(variable_label_width = 55, 
-                  value_label_width = 30,
+    data_codebook(variable_label_width = 50, 
+                  value_label_width = 25,
                   max_values = 10,
                   range_at = 5) |> 
     print_html(font_size = "80%",

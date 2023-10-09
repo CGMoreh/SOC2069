@@ -14,7 +14,7 @@ Rproj.user
 /Data/**/*.sav
 /Data/**/*.7z
 
-Data/analysis/
+Data/for_analysis/
 
 
 /.luarc.json

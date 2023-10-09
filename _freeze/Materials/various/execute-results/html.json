@@ -1,0 +1,14 @@
+{
+  "hash": "a828ca67798355eb54ffac0b62c3c22d",
+  "result": {
+    "markdown": "\n\nYihui technique to emulate very fast touchtyping for presentations\n\n\n::: {.cell}\n\n```{.r .cell-code}\nxfun::rstudio_type(t, pause = function() truncnorm::rtruncnorm(1, 0, 0.5, .005, .01), mistake = .001)\nxfun::rstudio_type(t, pause = function() rbeta(1, 1, 9)/60, mistake = .001)\nxfun::rstudio_type(t, pause = function() rbeta(1, 1, 2)/60, mistake = .001)\n```\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

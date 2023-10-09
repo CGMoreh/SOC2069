@@ -122,3 +122,21 @@ wvs7s |>
 ```
 
 
+## Testing `here:here()`
+
+```{r}
+library(here)
+library(datawizard)
+
+d <- data_read(here("Data", "for_analysis", "ess10.sav"))
+
+
+```
+
+
+
+
+
+
+
+

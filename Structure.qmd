@@ -36,6 +36,10 @@ calendR::calendR(start_date = "2023/09/1", end_date = "2024/01/30",
 
 
 ```{r}
+#| eval: false
+
 t <- calendR::calendR(year = 2021, month = 8, papersize = "A0")
+
+
 ```
 
