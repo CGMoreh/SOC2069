@@ -12,6 +12,7 @@ Rproj.user
 
 /Data/**/*.zip
 /Data/**/*.sav
+/Data/**/*.dta
 /Data/**/*.7z
 
 Data/for_analysis/ess10.rds
