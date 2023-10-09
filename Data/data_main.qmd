@@ -38,5 +38,7 @@ More datasets will become available in the future.
 
 {{< include _ess10_prep.qmd >}}
 
+{{< include _issp2020_prep.qmd >}}
 
+{{< include _bsa2020_prep.qmd >}}
 

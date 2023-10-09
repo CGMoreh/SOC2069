@@ -145,18 +145,21 @@ identical(nrow(joint_cntry_averages),
 ### Importing "GDP per capita, PPP (constant 2017 international $) [World Bank, 2019]" data from https://data.worldbank.org/indicator
 ### WVS variable name: "GDPpercap2"
 
-fs::dir_ls("Data/macro_contextual")
+fs::dir_ls("Data/raw/macro_contextual")
 
 # a <- archive("Data/macro_contextual/P_Data_Extract_From_World_Development_Indicators.zip")
 
 
-WB <- readxl::read_xlsx("Data/macro_contextual/P_Data_Extract_From_World_Development_Indicators.xlsx", sheet = 1) |> 
-  select(3, 5, 6, 7) |> 
+WB <- readxl::read_xlsx("Data/raw/macro_contextual/P_Data_Extract_From_World_Development_Indicators.xlsx", sheet = 1) |> 
+  select(3, 5:10) |> 
   rename(country = 1,
          GDPpercap2 = 2,
          pop = 3,
-         urban_pop_pct = 4) |> 
-  mutate(across(c(GDPpercap2, pop, urban_pop_pct), as.numeric),
+         urban_pop_pct = 4,
+         inc_top20 = 5,
+         inc_bottom20 = 6,
+         s80s20 = 7) |> 
+  mutate(across(-c(country), as.numeric),
          country = case_match(country, 
                               "Russian Federation" ~ "Russia", 
                               "Slovak Republic" ~ "Slovakia", 
@@ -168,11 +171,11 @@ WB <- readxl::read_xlsx("Data/macro_contextual/P_Data_Extract_From_World_Develop
                               "Korea, Rep." ~ "South Korea",
                               "Turkiye" ~ "Turkey",
                               .default = country)) |> 
-  var_labels(GDPpercap2 = "GDP per capita, PPP (constant 2017 international $)")
+  var_labels(GDPpercap2 = "GDP per capita, PPP (constant 2017 international $)",
+             s80s20 = "Ratio of the average income of the 20% richest to the 20% poorest")
 
 
-
-WB_CLASS <- readxl::read_xlsx("Data/macro_contextual/CLASS.xlsx", sheet = 1, n_max = 220) |> 
+WB_CLASS <- readxl::read_xlsx("Data/raw/macro_contextual/CLASS.xlsx", sheet = 1, n_max = 220) |> 
   rename(country = "Economy") |> 
   select(1, 3) |> 
   mutate(country = case_match(country, 
@@ -199,6 +202,8 @@ l <- list(joint_cntry_averages,
 
 joint_merged <- datawizard::data_merge(l, join = "left", by = "country")
 
-write_rds(joint_merged, "Data/data_for_logo.rds")
+# write_rds(joint_merged, "Data/data_for_logo.rds")
+
+saveRDS(joint_merged, "Data/for_analysis/lab3macro.rds", compress = "bzip2")
 
      

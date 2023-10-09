@@ -1,7 +1,7 @@
 {
-  "hash": "57d82b1d4e0eb34bbb95bd817d957882",
+  "hash": "84e926b0b1e2c0bf335a03c73fe8858c",
   "result": {
-    "markdown": "---\ntitle: \"Timetable\"\nformat: \n  html: \n    grid:\n      sidebar-width: 100px\n      margin-width: 100px\n      body-width: 1100px\n---\n\n::: {.cell}\n::: {.cell-output-display}\n![](Structure_files/figure-html/unnamed-chunk-1-1.png){width=672}\n:::\n:::\n\n::: {.cell}\n\n```{.r .cell-code}\nt <- calendR::calendR(year = 2021, month = 8, papersize = \"A0\")\n```\n:::\n",
+    "markdown": "---\ntitle: \"Timetable\"\nformat: \n  html: \n    grid:\n      sidebar-width: 100px\n      margin-width: 100px\n      body-width: 1100px\n---\n\n::: {.cell}\n::: {.cell-output-display}\n![](Structure_files/figure-html/unnamed-chunk-1-1.png){width=672}\n:::\n:::\n\n::: {.cell}\n\n:::\n",
     "supporting": [
       "Structure_files"
     ],

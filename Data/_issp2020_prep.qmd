@@ -1,5 +1,5 @@
 
-# International Social Survey Programme, 2020
+# International Social Survey Programme, 2020 (ISSP2020)
 
 This dataset comes from the [International Social Survey Programme (2020)](https://www.gesis.org/en/issp/modules/issp-modules-by-topic/environment/2020). The data (version 2.0.0) was downloaded in SPSS format to a local folder, `raw/issp2020/`:
 
@@ -39,29 +39,22 @@ datafile <- here("Data", "raw", "issp2020", "ZA7650_v2-0-0.sav")
 
 issp2020 <- read_spss(datafile) |> 
   drop_labels() |> 
-  mutate(across(where(~ is.factor(.x) && nlevels(.x) > 7), 
-                as_numeric),                                        # Turn long factors to labelled numeric
-         # across(c(B_COUNTRY, Q272, Q275:Q287, Q289), 
-         #        as_factor)
-         )                                      # Long factors that should stay categorical
-  # set_labels(Q270, Q274, labels = "") |>                            # Pure numeric, no labels needed
-  # data_select(select = c(B_COUNTRY, G_TOWNSIZE, H_SETTLEMENT,
-  #                        H_URBRURAL,                                # Technical variables
-  #                        Q1:Q259,                                   # Core variables
-  #                        Q260:Q290),                                # Demographic and socio-economic variables
-  #             exclude = c(Q82_AFRICANUNION:Q82_UNDP,                # Exclude: region specific,
-  #                         Q91:Q93,                                  # knowledge test,
-  #                         Q266:Q268, Q290)) |>                      # too detailed
-  # data_select(exclude = c(ends_with("R", "A", "CS9"),               # recoded, country-specific
-  #                         contains("Q223", "X00", "V00")))
+  mutate(across(where(~ is.factor(.x) && nlevels(.x) > 9), 
+                as_numeric),                                                    # Turn long factors to labelled numeric
+         across(c(country, c_alphan, v16, ISCO08, RELIGGRP),
+                as_factor)) |>                                                  # Long factors that should stay categorical
+  set_labels(BIRTH, AGE, WRKHRS, NSUP, HOMPOP, HHCHILDR,  HHTODD,
+             labels = "") |>                                                    # Pure numeric, no labels needed
+  data_select(-c(studyno:doi, c_sample, CASEID:PARTIALS,                        # Technical variables
+                 AT_ISCD:ISCED, AT_RELIG:ZA_RELIG, AT_PRTY:ZA_PRTY,
+                 AT_ETHN1:ZA_ETHN1, AT_RINC:ZA_INC, AT_REG:ZA_REG,              # Country specific variables
+                 SPWORK:SPMAINST, TOPBOT, HHADULT, F_BORN, M_BORN))             # Too much detail
 
-  
-  
-## Save the dataset as for SOC2069 --------------------------------------------------------------------------------------
+
+## Save the dataset for SOC2069 --------------------------------------------------------------------------------------
 
 # rds
-# saveRDS(issp2020, "for_analysis/issp2020.rds", compress = "bzip2")
-
+saveRDS(issp2020, "for_analysis/issp2020.rds", compress = "bzip2")
 
 ```
 
@@ -84,13 +77,11 @@ If you use the ISSP2020 data in your work, cite it as follows:
 
 `SOC2069: International Social Survey Programme, 2020`  |> 
     data_codebook(variable_label_width = 50, 
-                  value_label_width = 25,
+                  value_label_width = 45,
                   max_values = 11,
                   range_at = 6) |> 
     print_html(font_size = "80%",
                line_padding = 0)
-  # select(-10) |>
-  # DT::datatable(rownames = FALSE, options = list(pageLength = 50))
 ```
 
 

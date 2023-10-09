@@ -50,13 +50,13 @@ wvs7 <- read_spss(datafile) |>
                          Q260:Q290),                                # Demographic and socio-economic variables
               exclude = c(Q82_AFRICANUNION:Q82_UNDP,                # Exclude: region specific,
                           Q91:Q93,                                  # knowledge test,
-                          Q266:Q268, Q290)) |>                      # too detailed
+                          Q266:Q268, Q272, Q290)) |>                # too detailed
   data_select(exclude = c(ends_with("R", "A", "CS9"),               # recoded, country-specific
                           contains("Q223", "X00", "V00")))
 
   
   
-## Save the dataset as for SOC2069 --------------------------------------------------------------------------------------
+## Save the dataset for SOC2069 --------------------------------------------------------------------------------------
 
 # rds
 saveRDS(wvs7, "for_analysis/wvs7.rds", compress = "bzip2")
@@ -283,11 +283,12 @@ If you use the WVS7 data in your work, cite it as follows:
 
 `SOC2069: World Values Survey, Wave 7`  |> 
     data_codebook(variable_label_width = 50, 
-                  value_label_width = 25,
+                  value_label_width = 45,
                   max_values = 10,
                   range_at = 6) |> 
     print_html(font_size = "80%",
-               line_padding = 0)
+               line_padding = 0,
+               table.width = "100%")
   # select(-10) |>
   # DT::datatable(rownames = FALSE, options = list(pageLength = 50))
 ```

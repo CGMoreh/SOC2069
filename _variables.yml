@@ -36,18 +36,17 @@ institution:
   hass: "[Faculty of Humanities and Social Sciences](https://www.ncl.ac.uk/hass/)"
   
 
-lecture:
-  w1: "Data, measurement"
-  w2: "Understanding, description"
+topic:
+  w1: "Questions, data, models"
+  w2: "Measurement and description"
   w3: "Linear models"
-  w4: "Interaction models"
-  w5: "Logistic models"
-  w6: ""
-  w7: ""
-  w8: ""
-  w9: ""
-  w10: ""
-  w11: ""
+  w4: "Logistic models"
+  w5: "Interaction models"
+  w6: "Probability, uncertainty, inference"
+  w7: "Elicitation: interviews and focus groups"
+  w8: "Observation: ethnographic fieldwork"
+  w9: "Exploration: documents and archives"
+  w10: "Interpretation: analysis and writing"
 
 
 lab:

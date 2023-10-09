@@ -1,5 +1,5 @@
 
-# European Social Survey (Round 10 - 2020)
+# European Social Survey, Round 10, 2020 (ESS10)
 
 This dataset comes from the [European Social Survey (ESS Round 10 - 2020)](https://ess-search.nsd.no/en/study/172ac431-2a06-41df-9dab-c1fd8f3877e7). The data (ESS10 - integrated file, edition 3.1) was downloaded in SPSS format from the ESS repository and stored in the folder `raw/ess10/`:
 
@@ -149,7 +149,7 @@ If you use the ESS10 data in your work, cite it as follows:
 
 `SOC2069: European Social Survey, Round 10` |>  
     data_codebook(variable_label_width = 50, 
-                  value_label_width = 25,
+                  value_label_width = 45,
                   max_values = 10,
                   range_at = 5) |> 
     print_html(font_size = "80%",

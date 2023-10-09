@@ -214,8 +214,19 @@ h1.title {
   color: #071a31;
   font-weight: bold;
   padding-top: 30px;
+  padding-bottom: 5px;
+}
+
+
+p.subtitle.lead {
+  font-size: 30px;
+  text-align: center;
+  color: #071a31;
+  font-weight: bold;
+  padding-top: 5px;
   padding-bottom: 40px;
 }
+
 
 pre {
     border: 0px solid #cccccc;

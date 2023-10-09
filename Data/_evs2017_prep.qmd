@@ -1,5 +1,5 @@
 
-# European Values Study (2017)
+# European Values Study, 2017 (EVS2017)
 
 This dataset comes from the [European Values Study 2017 (EVS 2017)](https://search.gesis.org/research_data/ZA7500?doi=10.4232/1.13897). The data (Version 5.0.0) was downloaded in SPSS format from the GESIS repository and save to the `raw/evs2017/` folder:
 
@@ -74,7 +74,7 @@ If you use the EVS2017 data in your work, cite it as follows:
 
 `SOC2069: European Values Study, 2017` |> 
     data_codebook(variable_label_width = 50, 
-                  value_label_width = 25,
+                  value_label_width = 45,
                   max_values = 10,
                   range_at = 5) |> 
     print_html(font_size = "80%",

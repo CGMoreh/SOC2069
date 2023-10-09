@@ -50,7 +50,7 @@ Open the `Lab_2.R` script file and start working there. At the end, once you hav
 
 Most work in `R` is done using *functions*. The most common operations involving a function take the following generic form (think of an analogy of baking a loaf of bread):
 
-![](sheet_pics/bake_function.png)
+![](sheet_pics/bake_function.png){fig-align="center" width=400}
 
 It's possible to **create your own functions**. This makes `R` extremely powerful and extendible. But instead of programming our own functions, we can rely on functions written by other people and bundled together into **packages** designed to perform some specific (or sometimes many very general) tasks.
 
@@ -317,7 +317,7 @@ summary(wvs7data$Q262)
 There are various other options available too in different packages. For example, the below is the default output from the `describe_distribution()` function from the `{datawizard}` package which is part of the `{easystats}` ecosystem that we already installed and loaded:
 
 ```{r}
-wvs7data |> describe_distribution(Q262) |> flextable::flextable()
+wvs7data |> describe_distribution(Q262)
 ```
 
 
@@ -426,14 +426,18 @@ wvs7data |>
   gf_density( ~ Q262 | Q57)
 
 ```
-Sometimes it may be useful to add additional information to the graph, such as a straight line representing the mean/average value of the plotted variable:
 
 ```{r}
+#| eval: false
+#| echo: false
+
 wvs7data |> 
   drop_na(Q57, Q262) |> 
   gf_density( ~ Q262 | Q57) |> 
   gf_vline(xintercept = mean(wvs7data$Q262, na.rm = TRUE), color = "red", linetype = "dashed")
+
 ```
+
 
 
 

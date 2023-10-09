@@ -14,7 +14,13 @@ Rproj.user
 /Data/**/*.sav
 /Data/**/*.7z
 
-Data/for_analysis/
+Data/for_analysis/ess10.rds
+Data/for_analysis/evs2017.rds
+Data/for_analysis/wvs*
+Data/for_analysis/issp2020.rds
+Data/for_analysis/bsa2020.rds
+
+Data/raw/
 
 
 /.luarc.json
