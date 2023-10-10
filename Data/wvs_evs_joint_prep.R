@@ -75,7 +75,7 @@ nrow(distinct(wvs7small))
 
 ctry_averages <- wvs7small |> 
   mutate(country = as_numeric(B_COUNTRY) |> 
-           as_character(),
+           as_label(),
          country = case_match(country, 
                               "Great Britain" ~ "United Kingdom",
                               "Northern Ireland" ~ "United Kingdom",
@@ -115,7 +115,7 @@ joint_small <- joint |>
   select(cntry, cntry_AN, A165) |> 
   rename(trust = A165) |> 
   mutate(country = as_numeric(cntry) |> 
-            as_character(),
+            as_label(),
          country = case_match(country, 
                               "Great Britain" ~ "United Kingdom",
                               "Northern Ireland" ~ "United Kingdom",
@@ -131,8 +131,10 @@ nrow(distinct(joint_small)) # 257
 
 
 joint_cntry_averages <- joint_small |> 
-  select(-c(trust, trust_d)) |> 
-  distinct(country, .keep_all = TRUE)
+  select(-c(trust, trust_d, cntry)) |> 
+  distinct(country, .keep_all = TRUE) |> 
+  var_labels(trust_pct = "% people who agree that “most people can be trusted”")
+             
 
 nrow(distinct(joint_cntry_averages)) # 89
 

@@ -25,9 +25,11 @@ The codebooks shown on this page describe the processed datasets. The processed 
 
 Available datasets for download:
 
-- **World Values Survey, Wave 7**: `wvs7.rds` -- [**`Download`**]( https://ncl.instructure.com/files/7487654/download?download_frd=1)
-- **European Values Study, 2017**: `evs2017.rds` -- [**`Download`**]( https://ncl.instructure.com/files/7487653/download?download_frd=1)
-- **European Social Survey, Round 10, 2020**: `ess10.rds` -- [**`Download`**]( https://ncl.instructure.com/files/7487652/download?download_frd=1)
+- **World Values Survey, Wave 7**: `wvs7.rds` -- [**`Download`**](https://ncl.instructure.com/files/7506140/download?download_frd=1)
+- **European Values Study, 2017**: `evs2017.rds` -- [**`Download`**](https://ncl.instructure.com/files/7506137/download?download_frd=1)
+- **European Social Survey, Round 10, 2020**: `ess10.rds` -- [**`Download`**](https://ncl.instructure.com/files/7506136/download?download_frd=1)
+- **International Social Survey Programme, 2020**: `issp2020.rds` -- [**`Download`**](https://ncl.instructure.com/files/7506138/download?download_frd=1)
+- **British Social Attitudes Study, 2020**: `bsa2020.rds` -- [**`Download`**](https://ncl.instructure.com/files/7506135/download?download_frd=1)
 
 More datasets will become available in the future.
 

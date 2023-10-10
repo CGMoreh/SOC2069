@@ -153,7 +153,7 @@ However, if you will want to use survey data in the future, you will need to dow
 
 Let's load the *World Values Survey, Wave 7* dataset. 
 
-First, [**download the dataset from Canvas**](https://ncl.instructure.com/files/7487654/download?download_frd=1) and save it in the "Data" subfolder of the R Project folder you created in *Worksheet 2a*.
+First, [**download the dataset from Canvas**](https://ncl.instructure.com/files/7506140/download?download_frd=1) and save it in the "Data" subfolder of the R Project folder you created in *Worksheet 2a*.
 
 Once the dataset is downloaded, you can import it into `R`. Because the downloaded data file is in the `.rds` format, you can navigate to the file either from within RStudio's Files pane, or manually in Windows Explorer, and double-click the file to open. However, this is not a recommended way of opening a file, because you want to have a record of the action in your R script for the future. 
 
