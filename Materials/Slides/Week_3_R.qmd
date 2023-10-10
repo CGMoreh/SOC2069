@@ -1,0 +1,417 @@
+---
+title: "Linear regression"
+subtitle: "Week 3"
+format:
+  pptx:
+    incremental: true   
+    reference-doc: templates/SOC2069_pptx_template.pptx
+---
+
+```{r}
+#| output: false
+
+library(tidyverse)
+library(strengejacke)
+library(easystats)
+library(ggformula)
+
+```
+
+
+##
+
+```{r}
+#| echo: false
+#| warning: false
+
+inequality <- readRDS("../../Data/for_analysis/lab3macro.rds")
+```
+
+
+## 
+
+
+
+
+# Is inequality affecting social trust?
+
+## "The spirit level" (2010)
+
+
+
+
+
+
+
+## 
+
+
+
+
+## 
+
+
+```{r}
+#| echo: true
+
+data_peek(inequality)
+```
+
+
+```{r}
+#| echo: true
+describe_distribution(inequality)
+```
+
+##
+
+```{r}
+#| echo: true
+
+gf_histogram( ~ trust_pct, data = inequality)
+gf_density( ~ trust_pct, data = inequality)
+
+gf_histogram( ~ s80s20, data = inequality)
+gf_density( ~ s80s20, data = inequality)
+
+```
+
+
+## 
+
+
+```{r}
+gf_point(trust_pct ~ s80s20, data = inequality)
+```
+
+
+## 
+
+```{r}
+gf_point(trust_pct ~ s80s20, data = inequality) |> 
+  gf_lm()
+```
+
+##
+
+```{r}
+gf_point(trust_pct ~ s80s20, data = inequality) |> 
+  gf_lims(y = c(1, 80)) |> 
+  gf_lm()
+```
+
+
+##
+
+```{r}
+gf_point(trust_pct ~ s80s20, data = inequality) |> 
+  gf_lm() |> 
+  gf_lims(y = c(1, 80)) |> 
+  gf_text(label = ~ country, size = 2.5, hjust = 0, nudge_x = 0.15, nudge_y = 0.15)
+```
+
+
+##
+
+
+
+
+
+
+##
+
+```{r}
+gf_point(trust_pct ~ s80s20, data = inequality) |> 
+  gf_smooth() |> 
+  gf_text(label = ~ country, size = 2.5, hjust = 0, nudge_x = 0.15)
+```
+
+##
+
+```{r}
+gf_point(trust_pct ~ s80s20, data = inequality, color = ~ Region) |> 
+  gf_lims(y = c(1, 80)) |> 
+  gf_lm()
+```
+
+
+##
+
+
+```{r}
+lm(trust_pct ~ s80s20, data = inequality) |> 
+  summary()
+```
+
+
+
+# Measurement: from questionnaire items to dataset variables
+
+
+## Variables
+
+
+
+# Understanding and describing (clean) data
+
+
+
+
+
+
+
+# Managing "messy" data
+
+
+
+
+
+
+
+
+# Visualisation
+
+
+
+
+
+
+## This print "Two content" output
+
+:::: {.columns}
+
+::: {.column width="40%"}
+```{r}
+#| echo: true
+#| eval: true
+
+library(palmerpenguins)
+
+ggplot(penguins,                        
+       aes(x = bill_length_mm,          
+           y = bill_depth_mm, 
+           color = species)) +
+  geom_point()
+```
+:::
+
+::: {.column width="60%"}
+
+Something else
+
+:::
+
+::::
+
+::: {.notes}
+I may write a lot of extra stuff here in case you are interested.
+:::
+
+
+## Title
+
+
+```{r}
+#| echo: true
+
+ggplot(penguins,                        
+       aes(x = bill_length_mm,          
+           y = bill_depth_mm, 
+           color = species)) +
+  geom_point()
+```
+
+
+## This prints to Comparison
+
+:::: {.columns}
+
+::: {.column}
+
+```{r}
+#| echo: true
+#| output: true
+
+plot(penguins$bill_depth_mm, 
+     penguins$bill_length_mm)
+
+```
+
+:::
+
+::: {.column}
+
+```{r}
+#| echo: true
+#| output: true
+
+ggplot(penguins,                        
+       aes(bill_depth_mm,          
+           bill_length_mm)) +
+  geom_point()
+```
+
+:::
+
+::::
+
+--------------------------------------------------------------------------------
+
+## Using `with()` in *base R*
+
+:::: {.columns}
+
+::: {.column}
+
+```{r}
+#| echo: true
+#| output: true
+
+with(penguins,
+     plot(bill_depth_mm, 
+          bill_length_mm))
+
+```
+
+:::
+
+::: {.column}
+
+```{r}
+#| echo: true
+#| output: true
+
+ggplot(penguins,                        
+       aes(bill_depth_mm,          
+           bill_length_mm)) +
+  geom_point()
+```
+
+:::
+
+::::
+
+
+--------------------------------------------------------------------------------
+
+## Changing the `ggplot` theme
+
+:::: {.columns}
+
+::: {.column}
+
+```{r}
+#| echo: true
+#| output: true
+
+with(penguins,
+     plot(bill_depth_mm, 
+          bill_length_mm))
+
+```
+
+:::
+
+::: {.column}
+
+```{r}
+#| echo: true
+#| output: true
+
+ggplot(penguins,                        
+       aes(bill_depth_mm,          
+           bill_length_mm)) +
+  geom_point() +
+  theme_classic()
+```
+
+:::
+
+::::
+
+
+--------------------------------------------------------------------------------
+
+## *Some* further styling options
+
+:::: {.columns}
+
+::: {.column}
+
+```{r}
+#| echo: true
+#| output: true
+
+par(mar=c(4.5, 4.2, 1, 7), xpd=TRUE)          # set custom plot size
+
+with(penguins,                                # select data frame
+     plot(bill_depth_mm,                      # select variables to plot
+          bill_length_mm,
+          col = species,                      # grouping colour
+          bty = "L")                          # change plot border style 
+     )                                                            
+
+with(penguins,
+      legend("right",                         # legend position
+             inset=c(-0.23,0.5),              # legend custom location (outside the plot)
+             legend = levels(species),        # legend labels
+             pch = 16,                        # legend symbol size
+             col = unique(species),           # legend symbol colour
+             bty = "n"                        # remove legend borders
+             )
+     )
+
+```
+
+
+:::
+
+::: {.column}
+
+```{r}
+#| echo: true
+#| output: true
+
+ggplot(penguins,                              # draw empty canvas
+       aes(bill_depth_mm,                     # select variables to plot
+           bill_length_mm,
+           color = species)) +                # grouping colour
+  geom_point() +                              # select plot type
+  theme_classic()                             # select pre-set style settings (theme)
+```
+
+:::
+
+::::
+
+
+
+
+
+
+--------------------------------------------------------------------------------
+
+
+## Test
+
+
+```{r}
+#| echo: true
+#| output-location: column-fragment
+#| code-line-numbers: "|2"
+
+library(ggplot2)
+
+mtcars |> 
+  ggplot(aes(x = disp, y = mpg)) +
+  geom_point() +
+  geom_smooth(method = "loess", formula = "y~x")
+```
+
+
+
+
+--------------------------------------------------------------------------------
+
+
+
