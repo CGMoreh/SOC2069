@@ -1,0 +1,492 @@
+---
+title: "Worksheet 3"
+subtitle: "Linear regression in R"
+format: 
+  html: 
+    code-link: true
+# output:
+#   html_document:
+#     theme: lumen
+#     toc: yes
+#     toc_float: yes
+#     toc_highlight: no
+#     tabset: yes
+#     number_sections: no
+#     anchor_sections: no
+#     self_contained: yes
+#     code_download: no
+execute: 
+  warning: false
+  echo: true
+css: labcss.css
+bibliography: references.bib
+---
+
+------------------------------------------------------------------------
+
+```         
+Timetable week: 6
+Topic: "Linear models"
+```
+
+------------------------------------------------------------------------
+
+# Learning outcomes
+
+By the end of the session you will know how to:
+
+-   Fit and summarise linear regression models in `R`
+-   Interpret results from linear regression models
+-   Understand the main assumptions behind linear regression models
+
+# Intro
+
+One of the most commonly encountered statistical methods in social science publications is **linear regression**. This week we will make some first steps towards understanding what this method involves and applying it in practice using the `R` programming language.
+
+We begin with the simple (*but not trivial!* - as [@GelmanEtAl2020RegressionOtherStories] admonish - case where we model the relationship between two ***numeric*** (***continuous***) variables using a ***simple linear regression model***. The aim of a **simple linear regression model** is to predict the expected values of one ***numeric*** variable (e.g. a child's *age*) from another ***numeric*** variable (e.g. the child's *height*). The variable we want to predict is usually called the *response* (or *outcome*/*dependent*/*explained* variable) and the variable used for predicting this outcome is referred to as the *explanatory* (or *predictor*/*independent* variable).
+
+In actual applied sociological research the *simple linear regression* model is rarely used on its own because we understand that in the social world there are always many factors that influence an outcome at the same time - even in the case of modelling a child's *height*, we know that *age* is an important factor, but there is some considerable variation in height even among children of the same age, so there must be other factors at play too. We also understand that assuming a strict ***linear*** relationship between two variables is too much of an oversimplification (staying with the *height \~ age* example, while the linear assumption may be realistic when applied to children, it is definitely not applicable if we extend the analysis to all ages: an increase in age is associated with an increase in height for children, but once the age of maturity is reached, we no longer get taller as we get older - in fact, in old age, as we get older we tend to get shorter!).
+
+But the simple linear regression model contains many of the statistical components on which other statistical tests and more complex models are built, so understanding it is essential. We will also learn a few concepts and methods related to simple linear regression - such as *correlation* (also known as the *Pearson correlation,* after the mathematician [Karl Pearson](https://en.wikipedia.org/wiki/Karl_Pearson "Wikipedia")) - and we'll make some steps towards expanding the linear model to include non-continuous predictors. The main `R` function that we will learn is `lm()` (check `help(lm)` for technical information).
+
+# Exercise 0: Setup
+
+1.  **Open the `R Studio` interface** by clicking on the ***.Rproj*** file included in the project folder that you created in *Lab2*. The folder should be stored on your Newcastle University **OneDrive** and accessible from any computer.
+
+2.  **Create a new blank Quarto document for this lab session and call it *Lab3.qmd***
+
+3.  At the top of the page briefly detail what the script is about (e.g. "Lab work for Week x").
+
+4.  **Load `R` packages** that we commonly use with the `library()` function
+
+    `r fontawesome::fa("wrench")` **Tip:** You may need to first install the package with the `install.packages()` function if it's not yet installed
+
+    ```{r}
+    #| output: false
+
+    library(tidyverse)
+    library(easystats)
+    library(gtsummary)
+    library(ggformula)
+    ```
+
+# Exercise 1: Is *inequality* associated with *generalised trust*?
+
+`About 30  minutes`
+
+------------------------------------------------------------------------
+
+For all data analysis tasks, follow a "0 + 5"-step workflow. First (**"Step 0"**, because it's not really a separate analytical step), state the research question you are attempting to answer and identify data that can be used to address the question; then (**Step 1**) describe the variables (data) that you plan to use to answer your question; then (**Step 2**), if needed, modify (wrangle) any variables that need to be adjusted to help the analysis and interpretation; then (**Step 3**) describe how your *response* variable(s) and main *explanatory* variable(s) are related. This will help with the interpretation of the statistical results and with identifying any further changes to the variables that may be needed (returning to **Step 2** again). You may also wish to check the relationship between your predictor variables if you have more than one (but we're not using multiple predictors yet); then (**Step 4**) apply the statistical model that is most appropriate to answer the research question; and finally (**Step 5**) summarise the results from your analysis using tables, figures and your own words.
+
+## Research question and data
+
+As a first exercise, let's reproduce the analysis presented in the lecture. The exercise explores the relationship between inequality and generalised trust at the national level in international comparison. The aim is to assess the arguments put forward by [@WilkinsonPickett2010SpiritLevelWhy] in their Chapter 4. Their measurement of *generalised trust* comes from the World Values Study (1999-2001), while for the measure of inequality they use the so-called "S80/S20" measure, which is the ratio of the average income of the 20% richest to the 20% poorest people in a country. We have similar data obtained from the latest waves of the World Values Survey and European Values Study (2017-2022) and the [World Bank](https://data.worldbank.org/indicator/SI.DST.05TH.20). To ensure that inequality data is available for as many countries as possible, I calculated the "S80/S20" measure as the average of the data available in each country between the years 2010-2022.
+
+The dataset can be loaded into `R` directly from the module's github repository:
+
+```{r}
+inequality <- data_read("https://github.com/CGMoreh/SOC2069/raw/main/Data/for_analysis/lab3macro.rds")
+```
+
+We can check the list of variables in the dataset and their first few values with the `data_peek()` function from `{datawizard}`:
+
+```{r}
+data_peek(inequality)
+```
+
+## Describe individual variables
+
+For summary statistics of the numeric variables in the dataset, we can use `describe_distribution()`:
+
+```{r}
+describe_distribution(inequality)
+```
+
+::: {.questionbox .question}
+**Questions**
+
+Examine the descriptive results and try to answer these questions:
+
+-   What is the average (mean) generalised trust score of the countries in the dataset?
+-   What is the average GDP per capita of the countries in the dataset?
+-   What is the average value for the measure of inequality across all the countries in the data?
+-   How spread out are the inequality scores? (**tip**: the *standard deviation* (SD) is a good measure of "spread", or *variation* around the *mean*)
+-   What is the *minimum* and *maximum* percentage of the urban (versus rural) population in individual countries in the data? Do you think this value is correct, or might there be something wrong with the data? How would you explain this distribution? (**tip**: check the dataset itself to explore the individual data points; you can open it in a viewer window by double-clicking on the data object in the Environment, or using the `View()` function)
+-   Are there any missing values (NAs) on any of the variables in the dataset?
+-   How would you describe the distribution of the *population* variable?
+:::
+
+As we have practised in Lab2, we can also tabulate factors and character variables with the `data_tabulate()` function. For example:
+
+```{r}
+inequality |> data_tabulate(Region)
+```
+
+We see that the majority of the countries in the dataset are from Europe and Central Asia.
+
+More importantly, let's explore visually the distribution of our two main variable of interest: *generalised trust* and *inequality*.
+
+::: {.taskbox .task}
+Using the plotting functions we learnt in Lab2, create a histogram or a density plot for each of the two variables `trust_pct` and `s80s20`:
+
+```{r}
+#| echo: true
+# Insert a new code chunk into your Quarto document, write your functions there and execute the code chunk to see the results
+
+
+
+
+```
+
+```{r}
+#| include: false
+
+gf_histogram( ~ trust_pct, data = inequality)
+gf_density( ~ trust_pct, data = inequality)
+
+gf_histogram( ~ s80s20, data = inequality)
+gf_density( ~ s80s20, data = inequality)
+
+```
+
+**Question**: would you describe the two variables as "normally distributed"?
+:::
+
+## Describe the relationship between your variables
+
+To visualise the relationship between two numeric variables we can use a *scatterplot*. Relying on the `{ggformula}` package we got to know in Lab2, we can use the `gf_point()` function. We keep in mind that our *response* variable is *generalised trust* and the *explanatory* variable is *inequality*. So it is customary to place the *response* on the *y* axis and the *explanatory* (predictor) variable on the *x* axis, in line with the general formula notation ***y*** **\~ *x***. The command is the following:
+
+```{r}
+gf_point(trust_pct ~ s80s20, data = inequality)
+```
+
+To add a linear regression line to the scatterplot we can use the `gf_lm()` function:
+
+```{r}
+gf_point(trust_pct ~ s80s20, data = inequality) |> 
+  gf_lm()
+```
+
+The straight line we plotted is a *regression line* that visualises the linear model $\hat{y} = a + bx$ (see **Agresti 2018: 250-252**; **Gelman et al. 2020: 37-38, 82-95**). In Step 4 we will fit this model statistically to obtain the values for the $a$ and $b$ coefficients so we can interpret the regression line more accurately. For the moment, let's rely on our eyes.
+
+One thing to notice immediately is how the y-axis has expanded into negative values. This is because the linear assumption of the regression line means that at high values of *inequality* very low, below-zero values of *trust* are predicted, even though that is not logically possible, given that our measurement is on a percentage scale (i.e. running between 0 and 100).
+
+To constrain the *y* axis to the actual values of our data, we can set limits on the scale using the `gf_lims()` function:
+
+```{r}
+gf_point(trust_pct ~ s80s20, data = inequality) |> 
+  gf_lims(y = c(1, 80)) |> 
+  gf_lm()
+```
+
+::: {.questionbox .question}
+**Questions**
+
+-   Does the graph show a *negative* or *positive* correlation?
+-   Does the graph show a *strong* or *weak* correlation?
+:::
+
+Another addition to the chart that may come useful are value labels, in this case the names of the countries; this would allow us to identify which are the outliers. We can use the `gf_text()` function for this, with some additional specifications to set the size of the labels and their distance from the value points:
+
+```{r}
+gf_point(trust_pct ~ s80s20, data = inequality) |> 
+  gf_lm() |> 
+  gf_lims(y = c(1, 80)) |> 
+  gf_text(label = ~ country, size = 2.5, hjust = 0, nudge_x = 0.15, nudge_y = 0.15)
+```
+
+We may wonder whether a linear function is really appropriate for our data, and we could replace the linear model line with a smoothed line that follows the shape of the data more closely:
+
+```{r}
+gf_point(trust_pct ~ s80s20, data = inequality) |> 
+  gf_smooth() |> 
+  gf_text(label = ~ country, size = 2.5, hjust = 0, nudge_x = 0.15)
+```
+
+In this case, while it is apparent that the relationship between *inequality* and *trust* is not completely linear, the curvature is not too extreme.
+
+Finally, we may wonder whether there are any group effects in the data that are being missed in the bivariate plot. We could add a third variable to the plot by using colouring. Below, we use the `Region` variable a third grouping variable (notice the `~` sign when adding the colour aesthetic):
+
+```{r}
+gf_point(trust_pct ~ s80s20, data = inequality, color = ~ Region) |> 
+  gf_lims(y = c(1, 80)) |> 
+  gf_lm()
+```
+
+By adding a third variable to our visual model, the linear regression line also breaks down by `Region` and we can see more clearly that the effect (and indeed the direction) of inequality on trust is not the same within each regional grouping; in some regions the association is very steep and negative, while in others is flatter - or, in the case of "Middle East and North Africa" it is strong positive association.
+
+This hints to an important limitation of correlations and simple bivariate regressions. It is often the case that third (and further) variables can have a very strong influence on the associations we observe, and we need to pay careful attention to disentangling the meaning behind our regression results.
+
+## Fit the statistical model
+
+So far we have only visualised the relationship between *inequality* and *trust*, but we haven't build a statistical model to obtain the coefficients describing the relationship. We already know from the scatterplots that a linear model may not be the ideal approach for our variables, but it is a very simple model that is worth starting with. In `R`, we can use the `lm()` function to run a **l**inear **m**odel. Because we often want to have access to various components of the models we fit for further analysis, it's recommended to always save the model results to an object. Let's call out first model **m1.1**:
+
+```{r}
+m1.1 <- lm(trust_pct ~ s80s20, data = inequality)
+```
+
+::: {.codebox .code}
+**Coding tip: Understand and simplify the formula**
+
+<details>
+
+<summary><i>Click to view</i></summary>
+
+The `lm()` formula echoes the mathematical equation we are fitting:
+
+```{=tex}
+\begin{aligned}
+  \color{Blue}{\widehat{generalised\:trust}} &\color{Grey}{=} \color{Red}{a} \color{Grey}{+} \color{Red}{b}\color{Grey}{\times}\color{Blue}{inequality} \\
+  
+  \color{Blue}{trust\_pct} &\color{Grey}{\sim} \color{Red}{1} \color{Grey}{+} \color{Red}{b}\color{Grey}{\times}\color{Blue}{\text{s80s20}}
+\end{aligned}
+```
+We have data on the blue components (our two variables) and we are searching for the corresponding coefficients for the red components. The $a$ is called the "**intercept**", referring to the point where the regression fit line we plotted earlier on the scatterplot *intercepts* the $y$ (trust) axis **when the** $x$ (inequality) axis equals **0**. The $b$ is called the *slope* (visually, it's the angle between a completely flat horizontal line and the regression fit line) and it tells us the observed difference between different countries' values of $generalised\;trust$ when their levels of $inequality$ also differ by one unit.
+
+The *intercept* is included in the `lm()` function by default, so we don't need to explicitly write it. We also don't have to explicitly write `data =`, we can simply write just the name of the dataset. Our function call could be simplified to:
+
+```{r eval=FALSE}
+m1.1 <- lm(trust_pct ~ s80s20, inequality)
+```
+
+However, leaving out `data =` does not work for all formula-style functions, so until you become very used to writing these commands, it's better to spell out more than the strictly necessary. Also, remember that it's more important to be accurate and to make it easy for yourself and others to understand your code easily.
+
+</details>
+:::
+
+We can see that the object "m1.1" now appears in the Environment pane, and if we expand it we see a list of different elements ("coefficients", "residuals", "effects", etc.). The "coefficients" are the most elementary and most important elements. We can print them by using the `coefficients()` function or simply `coef()`:
+
+```{r}
+coef(m1.1)
+```
+
+As noted in the *Coding tip* above, the two *coefficients* that we see here for `(Intercept)` and `s80s20` are the corresponding values for $a$ and $b$, respectively, in the $\hat{y} = a + bx$ equation. We can substitute them - rounding down to two decimal places for simplicity - to obtain the equation: $\widehat{trust} = 45.38 - 3.11\times inequality$. So what does this mean?
+
+We said at the start that the aim of a linear regression model is to help us predict the value of *generalised trust* from that of *inequality*; i.e. what would our best guess concerning a country's population's level of *trust* be if the only information we had about that country was its level of inequality? Knowing a country's *inequality* score is already more information than ***not*** knowing anything. Without information on *inequality* our best guess would be simply the overall ***mean*** (i.e. ***average***) trust score for the whole dataset. If we remember from the descriptive statistics we've done earlier in the exercise, the **mean** of the `trust` variable was 25.73.
+
+We can actually obtain the mean of a numeric variable also by using the `lm()` function without any predictors specified. Let's check the mean *trust* score using this method and compare it with what we got from the summary statistics earlier:
+
+```{r}
+lm(trust_pct ~ 1, data = inequality) |> coef()
+
+```
+
+The coefficient is exactly the same as the one we got from the descriptive statistics we did in earlier steps. So, without knowledge of a country's *inequality* level, or any other further information, our safest guess of a national population's *trust* level would be 25.73. However, in knowledge of a country's *inequality*, the slope ($b$) coefficients we got from the regression tell us that the best guess is the *intercept* (45.38) **plus** -3.11 **times** the country's inequality score. For example, our best guess for the *generalised trust* score of a country with an inequality score of *5.4* in our dataset would be:
+
+```{r}
+45.38 + (-3.11 * 5.4)
+```
+
+More generally, the model tells us that a 1-unit difference in *inequality* is associated with a 3.11-unit difference in *generalised trust* as measured here.
+
+::: {.importantbox .important}
+Remember how we said earlier that the *Intercept* is the point where the regression fit line intercepts the $y$ axis when the $x$ axis is 0? This may sound okay visually, but note that in the case of our variables this means that the *Intercept* refers to the value of *trust* when the *inequality* variables is equal to **0**. Mathematically, there's nothing wrong with this, but in practice we don't have countries scoring "0" on *inequality* in our dataset - in fact, a S80/S20 income quintile share ratio of "0" would not make much sense at all. In other words: the interpretation of the *Intercept* value is meaningless in our case. That doesn't affect the *slope* coefficient, so our regression equation is useful for predicting from, but we should not interpret the *Intercept* as it is.
+
+In order to make the *Intercept* more meaningful, one common approach is to **mean-centre** the predictor variable(s). In our case, we would "shift" the *inequality* scale so that the average (i.e. mean) inequality takes the value of "0". The mean `s80s20` inequality score in the dataset is 6.5, so using the mean-centred variable in the regression would make the *Intercept* refer to the value of *inequality* for the countries with an average income quintile share ratio; of course, there may not exist such a country in the dataset, but the value itself is theoretically possible within the context of our measurement.
+:::
+
+To request a more detailed summary of the model results, the base `R` function to use is `summary()`:
+
+```{r}
+summary(m1.1)
+```
+
+The `summary()` function prints out a lot of information, but it's not the best format if we wish to reuse the various statistical components for further analysis, and the presentation of the output could also be improved. The `model_parameters()` and the `model_performance()` functions from the `{parameters}` package part of `{easystats}` is a better option:
+
+```{r}
+model_parameters(m1.1) 
+
+model_performance(m1.1)
+```
+
+We will learn more about the inferential statistics included in these model results (the *standard error*, the 95% *confidence interval*, the *t*-value and the *p*-value) later, once we are more confident with fitting and visualising regression models and interpreting the coefficients. For now, it's enough to note that they are all related statistics testing the level of confidence that we can have in the generalisability of our results given the characteristics of our sample.
+
+The statistics obtained from the `model_performance()` function, on the other hand, describe the model overall and purport to aid with comparing the "performance" of different models. The R2 value (more precisely $R^2$, R-squared) is called the *coefficient of determination* and measures how well a linear model predicts the outcome, representing the proportion of variation in the *response* variable that is predicted by the *explanatory* variables; in our case that's 0.185 or 18.5%. That's a reasonable proportion, but not nearly close to explaining all the variation in levels of trust, highlighting that there are various other factors also at play apart from inequality, both at the national and the individual levels.
+
+## Standardizing the modelled variables
+
+As mentioned earlier, *centring* our variables around the value "0" so that regardless of their measurement scale the value "0" becomes a meaningful number can be useful and help interpretation. Furthermore, if we constrain our *descriptor* variables to the same scale, then they become more easily comparable. Of course, we only have one *descriptor* variable at the moment, but that's always just an initial phase in a real analysis project. The way we can constrain variables to a comparable scale is through *standardization*. A standardized variable (sometimes called a *z-score* or a standard score) is a variable that has been rescaled to have a mean of zero and a standard deviation of one.
+
+To standardise a numeric variable, we can use the `standardize()` function. Let's create a new standardised version of the `s80s20` variable and save it as a new variable in the dataset:
+
+```{r}
+inequality <- inequality |> 
+  data_modify(s80s20_std = standardize(s80s20))
+```
+
+We can plot the new variable:
+
+```{r}
+describe_distribution(inequality, s80s20_std)
+
+gf_histogram( ~ s80s20_std, data = inequality)
+```
+
+Wee see that the *mean* of the new variable is very close to 0 (**9.13e-17** is just scientific notation for a very small and therefore very long number; it tells us to move the decimal point 17 places to the left to obtain the number), and the standard deviation is precisely 1.
+
+If we were to refit the regression model with this variable, we would get:
+
+```{r}
+lm(trust_pct ~ s80s20_std, data = inequality) |> 
+  model_parameters()
+```
+
+In this case, we find that the average value of *trust* for a country with an *average* (0) level of *inequality* is 25.13 (Intercept), while countries with a 1 standard deviation higher inequality than the average are expected to have a *trust* score that is 8.09 units (percentage points) lower than the average. Although the units of measurement have changed, the actual proportions of the effects we observe have not changed. We have made the intercept value meaningful, but the units by which we measure *inequality* are no longer the same. A *standard deviation* is a much larger unit than the units of the original scale, so a 1-unit change in inequality now translates into a larger effect.
+
+We could also standardize the *response* variable in the same way and refit the model with all the modelled variables in standardized format:
+
+```{r}
+inequality <- inequality |> 
+  data_modify(trust_std = standardize(trust_pct))
+
+m1.2 <- lm(trust_std ~ s80s20_std, data = inequality)
+
+model_parameters(m1.2)
+
+```
+
+The interesting thing about this output is that the coefficient we get for `s80s20_std` is the same (within rounding error) as the *correlation coefficient* (r) between `s80s20` and `trust_pct`. To check the correlation between two numeric variables, we can either use the base-`R` function `cor.test()`:
+
+```{r}
+cor.test(inequality$trust_pct, inequality$s80s20)
+```
+
+Or the `cor_test()` function included in `{easystats}`:
+
+```{r}
+cor_test(inequality, "s80s20", "trust_pct")
+```
+
+The `{easystats}` ecosystem also has a convenience `plot()` function that creates quick plots from various summary functions, including `cor_test()`:
+
+```{r}
+plot(cor_test(inequality, "s80s20", "trust_pct"))
+```
+
+A correlation is nothing more (or less) than a bivariate regression with both variables standardized. Its coefficient is a measure of the strength and direction of the association between two numerical variables. In this case, we observe a negative correlation between *inequality* and *trust* of medium strength.
+
+From the regression model we obtained a related statistics, the *coefficient of determination* ($R^2$), which is the square of the correlation coefficient (\$-0.4304\^2 = \$`r (-0.430389)^2`).
+
+# Exercise 2: Predicting *trust* from *inequality* and *urbanization*, while accounting for *region* effects
+
+`About 30  minutes`
+
+------------------------------------------------------------------------
+
+In this exercise we extend the model we fit earlier by introducing two new variables: `urban_pop_pct` (the percentage of the urban population), and `Region`, the world geographical region to which the country belongs, which, as we saw earlier in the scatter-plot, complicates the simple correlation between *inequality* and *trust*.
+
+::: {.taskbox .task}
+## On your own: Perform the appropriate descriptive statistics for the two new variables
+
+```{r}
+# Univariate descriptive statistics
+
+
+
+
+
+```
+
+## Plot the relationship between *urbanisation* and *trust*, and between *urbanisation* and *inequality*
+
+```{r}
+# Scatterplots
+
+
+
+
+
+```
+:::
+
+## Plot the relationship between *Region* and the other numerical variables
+
+For this task, we need to introduce a new plot type: the *boxplot*. Box-plots are useful for visualising the relationship between a *categorical* and a *numeric* variable. They describe the distribution of the numeric variables in each category of the categorical variable:
+
+```{r}
+gf_boxplot(trust_pct ~ Region, data = inequality)
+```
+
+To avoid the overlapping labels o the *x* axis, we can add some further specifications:
+
+```{r}
+
+gf_boxplot(trust_pct ~ Region, data = inequality) +
+  scale_x_discrete(guide = guide_axis(n.dodge=3))
+```
+
+Box-plots contain a lot of useful summary information about variables, and the interpretation of the shapes is the following:
+
+![box-plot](sheet_pics/1_boxplots.jpg)
+
+::: {.taskbox .task}
+**Create box-plots for the association between *region* and the other numeric variables**
+
+```{r}
+# Box plots
+
+
+```
+:::
+
+To get the precise numeric values of the summary statistics captured in the box-plot, we can make a summary table using the `means_by_group()` function from the `{easystats}`:
+
+```{r}
+means_by_group(inequality, "trust_pct", "Region")
+```
+
+What the function provides is effectively a type of regression results, as the statistics at the bottom of the table allude. Specifically, besides the mean value of trust in countries within each geographical grouping, we see statistics about the generalisability of the distributions and of model fit. The model that is being summarised is an Anova model (or *analysis of variance*) and its results are very similar to what we would obtain from a linear regression using the `lm()` function:
+
+```{r}
+m1.3 <- lm(trust_pct ~ Region , data = inequality)
+
+model_parameters(m1.3)
+```
+
+Look at the regression results closely and compare it with the results from the Anova model in th previous table.
+
+The logic of the linear regression model is different. As we know from the previous exercise, the coefficients represent a comparison between different values or levels of the *explanatory* variable. In the previous exercise, the comparison was to *a unit difference* in the level of *inequality*; here, `R` has recognised that `Region` is a categorical variable and has broken it down into a series of *indicator*/*dummy*/*binary* variables, one for each category of the region variable. Then, these individual *binary* indicator variables were intered into the regression model, effectively turning it into a multiple regression model with six predictors. The first category of the *Region* variable ("East Asia & Pacific") appears to be missing. However, if we look closely, we notice that the mean value of "East Asia & Pacific" that we got in the previous summary table and the value of the *Intercept* in the regression model are the same. That's because in the linear regression model results the "East Asia & Pacific" category was "absorbed" into the intercept - it became the "reference category" to which all the other categories compare.
+
+As in the models in the previous exercise, the *Intercept* is purely the *average* value of the *response* variable `trust_pct` when the value of the *explanatory* variables(s) is **0**. In our case, if the values of each of the six regions listed in the model are equal to **0** (i.e. a country does *not* belong to them), then the *Intercept* shows the average *trust* value of the remaining region ("East Asia & Pacific"). The other coefficients in the table are just the difference between the average *trust* in the reference category ("East Asia & Pacific") and the other region. For instance the value of -1.66 associated with "Europe and Central Asia" means that the average *trust* of the countries in this region is $33.10 + (-1.66) = 31.44$, which is precisely the mean value that we saw in the `means_by_group()` table.
+
+We can in fact remove the *Intercept* from the model by adding a column of **0** to the regression model like so:
+
+```{r}
+m1.4 <- lm(trust_pct ~ Region + 0 , data = inequality)
+
+model_parameters(m1.4)
+```
+
+## Build a multiple linear regression model
+
+The aim of building a multiple regression model is to improve predictions of the *response* variable by taking account of the information provided by further variables. We can expand model `m1.3` by including the *urbanisation* and *inequality* variables as well. Because at this stage we are still assuming an "additive" relationship, we can include further *explanatory* variables using the `+` sign:
+
+```{r}
+m1.5 <- lm(trust_pct ~ s80s20 + urban_pop_pct + Region , data = inequality)
+
+model_parameters(m1.5)
+
+model_performance(m1.5)
+
+```
+
+The interpretation of the coefficients is similar to the one in the previous model. The *Intercept* still represents the average *trust* value when the *explanatory* variables hold the value **0**. In this case, it represents the average trust of a country in "East Asia and the Pacific" with 0% of its population living in cities and with an income quintile share ratio of "0". As with the first model, such a country cannot exist in reality, so the *Intercept* value should not be interpreted. However, the $b$ slope values of the other coefficients can be interpreted as the difference in the *trust* value when the variable takes on a value that is one unit higher (in the scale on which the variable is measured), while taking into account the effect of the other variables included in the model.
+
+We find that the *inequality* variable still has a negative and notable association with *trust* even after accounting for differences in urbanization and world region.
+
+# Exercise 3: Are anti-immigrant attitudes associated with lower social trust?
+
+`About 30  minutes`
+
+------------------------------------------------------------------------
+
+In this exercise you can attempt to address the research question in the title on your own, using the steps and modelling techniques practiced in the previous exercises.
+
+The "application" reading by [@Mitchell2021-04-09SocialTrustAntiimmigrant] has addressed a similar question, and you can use that article as background information. To address the question, you will be using data from the latest round of the **European Social Survey**. You can download the **ESS10** dataset and check the variable codebook here: https://soc2069.chrismoreh.com/data/data_main
+
+Your task is to:
+
+-   download the data and import it to `R`
+-   using the variable codebook, identify potentially useful variables. You need to identify a variable relating to *generalised social trust*, and a variable of your choice that measures attitudes towards immigration
+-   describe your variables individually and in relationship to each other
+-   fit and interpret the results from a linear regression model
