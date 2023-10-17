@@ -159,7 +159,13 @@ Once the dataset is downloaded, you can import it into `R`. Because the download
 
 You can load datasets saved in the `.rds` format using the `readRDS()` command. If your dataset is in another format, you can check out the `{readr}` package (for rectangular data such as `.csv` (comma separated values) or `.tsv` (tab separated values)), `{readxl}` (for Excel data), and `{sjlabelled}` (for SPSS, Stata and SAS formats). 
 
-The more generic function `data_read()` from `{easystats}`'s `{datawizard}` package loads data from various formats based on the source files extension, including files from internet sources or compressed files. It relies on the `{rio}` package, which provides similar functionality.
+The more generic function `data_read()` from `{easystats}`'s `{datawizard}` package loads data from various formats based on the source files extension, including files from internet sources or compressed files. It relies on the `{rio}` package, which provides similar functionality. 
+
+::: {.notebox .note}
+
+**It's important** to note that by default the `data_read()` function assumes that numeric variables where all values have a value label are categorical and will convert them into *factors*. That means that all the numeric "values" will be replaced by the "value labels" (e.g. 1="Yes"/ 2="No" will become simply "Yes"/"No"). This is usually a reasonable default behaviour, because the majority of functions in `R` do not handle "value labels" and working with textual (character string) values can be more explicit. However, this may be less appropriate when the dataset contains many long ordered variables (such as 0-10 scale items), as we will most likely want to treat such variables as *numeric* in statistical models. To cancel this default behaviour, we can add the additional argument `convert_factors = FALSE`. This is the format of the variables as listed in the Codebook on the module's website (https://soc2069.chrismoreh.com/data/data_main), with both "Values" and "Value labels" kept as in the original survey questionnaire documentation. This is also the format that gets imported when using `readRDS()`. However, most of the common tabulation and graphing functions will not show the category "labels" in the output either, and for that purpose having variables "converted to factors" (with the original "Values" overwritten by the "Value labels") may be a better option. Below we will import the data with factors converted, as we will focus on tabulation and plotting.
+
+:::
 
 On my computer, I can import the WVS7 dataset from the location (path) where I saved the file like so:
 
@@ -168,11 +174,17 @@ On my computer, I can import the WVS7 dataset from the location (path) where I s
 
 # Change the file path to the one on your computer!
 
+# wvs7data <- readRDS("D:/GitHub/SOC2069/Data/for_analysis/wvs7.rds")
+
+# or #
+
 wvs7data <- data_read("D:/GitHub/SOC2069/Data/for_analysis/wvs7.rds")
 
 ```
 
 In the code above, I am assigning (with the assignment operator `<-`) the data to an **object** I called "wvs7data", but I could have given it any other name as long as it follows `R`'s naming conventions (no spaces, avoid special characters; [see also recommended naming strategies in the tidyverse style guide](https://style.tidyverse.org/syntax.html?q=object#object-names)). The object will appear in the Environment tab (on the bottom right pane).
+
+
 
 
 ::: {.importantbox .important}
@@ -201,6 +213,7 @@ Another option is to use the function `readClipboard()`, which pastes into R wha
 #| eval: false
 
 # First, copy the path to your data folder on your computer
+# Check the output:
 
 paste0(readClipboard(), "/wvs7.rds")
 

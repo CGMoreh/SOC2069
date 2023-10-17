@@ -1,0 +1,169 @@
+---
+title: "Functions and packages"
+format: 
+  html: 
+    code-link: true
+    embed-resources: true
+    fig-align: center
+    fig-width: 5
+    fig-asp: .8
+    fig-responsive: true
+    code-overflow: wrap
+    code-tools:
+      source: false # add URL to script document to be downloaded
+      toggle: false
+      caption: none
+execute: 
+  warning: false
+  error: false
+  echo: true
+  eval: false
+knitr: 
+  opts_chunk: 
+    comment: ""
+    prompt: false
+    message: false
+    strip.white: false
+    purl: false
+css: ../Materials/Labs/labcss.css
+bibliography: references.bib
+---
+
+# Statement of purpose
+
+Once learners complete the first steps of installing `R` and the `RStudio` IDE, they need to develop a basic understanding of what `R` actually does and how they will be using it. For this, we need an elementary understanding of ***functions*** and ***packages***.
+
+# Functions
+
+A ***function*** is a set of *statements* organized together to perform a specific task. What is a *statement*? Well, in computer programming, a statement is a *syntactic unit* of a programming language that expresses some action to be carried out. In other words, a *statement* is a command that the programmer gives to the computer. Probably the most famous *statement* in programming history is to ask the computer to print out the sentence "Hello, World!"; we can trace it back to the year 1972, when computer scientist Brian Kernighan included it in his manual for the language `B` (*A Tutorial Introduction to the Language B*). His aim was to demonstrate how `B` can take little scraps of text and assemble them together, following the more elementary example of printing the statement "hi!". [^1] He allegedly came up with the statement after having seen "some cartoon of a chick coming out of an egg, and it says *Hello, World*", which he found funny [see @Thompson2019-10-16HelloHelloWorld]. Others in the emergent subculture of computer programming must also have found the phrase humorous during ["the Me Decade"](https://www.encyclopedia.com/history/culture-magazines/1970s-me-decade), and its reuse in Kernighan's later book on *The C Programming Language* (1978) has brought about its universal fame. Today, it's probably the first computer programme that anyone writes in their first class in computer science. [^2] 
+
+In the `R` language, one would write that statement as `print("Hello, World!")`. This command has a *verb* ("print") and some other details (the text to be "printed"). In this case, the command `print` means "show on the screen", rather than "print to a sheet of paper on the printer". The programmer either gives the statement directly to the computer (go ahead, [type it into the **R Console** and hit ↵](https://youtu.be/2hg1Qg7uLwU?si=OiMTh28qrlvLI3Th)), or creates a text file with the command in it. You could create a simple text file called something like "myHello.R" (or anything else), write the above statement in it, and give the file to `R` for processing. [^3]
+
+*Retournons à nos moutons*. A *function* in `R` is an *object* containing multiple interrelated statements that are run together in a predefined order every time the function is called. Most work in `R` is done using *functions*. The most common operations involving a function take the following generic form (think of an analogy of baking a loaf of bread):
+
+![](`r here::here("Materials", "Labs", "sheet_pics", "bake_function.png")`){fig-align="center" width="500"}
+
+The `R` language is made up of a set of built-in *functions*, which are collectively called, colloquially, as ***base R***. Functions that relate to some common programming aim or task are bundled together into ***packages***. Strictly speaking, the `{base}` package contains the core of ***base R***, but the latter refers more broadly to the set of packages that are **loaded** by default when `R` starts. To exacerbate the potential confusion just a bit more, apart from the packages that are ***loaded*** by default when `R` starts, there are also a number of packages included with `R`, but which are merely *recommended*, and users need to **load** them using the `library()` function if they want access to their *functions*. In the `R` version used at the time of writing this guide (`r cat(version$version.string)`), the following packages were distributed as part of this extended **base R** universe of packages:
+
+```{r}
+#| echo: false
+i <- data.frame(installed.packages())
+i <- i[order(i$Priority),]
+
+# cat("Packages included in", version$version.string, ":", "\n", "\n")
+print(i[ i[,"Priority"] %in% c("base","recommended"), c("Package", "Priority")]) |> flextable::flextable()
+```
+
+To print a list and brief description of all the *functions* in a package into our **Viewer**, we can use the command `library(help = "`<span class=EX>PACKAGE-NAME</span>`")`. For example, with the code below we can check the *functions* included in the `{base}` package:
+
+```{r}
+library(help = "base")
+```
+
+To read more detailed documentation about a *function* directly in the **Help** panel window, we can use the command `help(FUNCTION-NAME)` (or the shortcut `?FUNCTION-NAME`). This is useful if we know the name of the function we want to read about. If we want to discover a new function based on a functionality and we have an approximate idea about what we are looking for, we can use the command `??FUNCTION-NAME` instead (or `help.search("FUNCTION-NAME")`). 
+
+More on `hwlp`: https://www.r-project.org/help.html
+
+...
+
+It's possible to **create your own functions**. This makes `R` extremely powerful and extendible. But instead of programming our own functions, we can rely on functions written by other people and bundled together into **packages** designed to perform some specific (or sometimes many very general) tasks.
+
+There are a large number of reliable, tested and oft-used packages containing functions that are particularly useful for social scientists. In this module, we will rely on several such user-written packages that extend the basic packages already bundled in with our `R` software (the so-called *base-R* packages and functions).
+
+Most mature packages are available from the *Comprehensive R Archive Network* (CRAN) or private repositories such as *Bioconductor* and *GitHub*. Packages made available on CRAN can be installed using the command `install.packages("PACKAGE-NAME")`. Once the package/library is installed (i.e. it is sitting somewhere on your computer), we then need to *load* it to the current R session using the command `library(PACKAGE-NAME)`.
+
+::: {.taskbox .task}
+**Install the `tidyverse` collection of packages and read about the packages and functions they contain**
+
+Type the following commands into your R script and execute each line of code:
+
+```{r}
+#| eval: false
+#| echo: true
+
+install.packages("tidyverse")
+
+library("tidyverse")
+
+```
+
+Here's a one-minute video crash-course on what you are expected to do:
+
+![](sheet_pics/first-code-in-script.mp4)
+:::
+
+We can check the list of packages that are loaded with the `tidyverse` library using a command from the `tidyverse` itself:
+
+```{r, eval=FALSE}
+tidyverse_packages()
+```
+
+With the `library()` function, we are loading the entire "library" of functions and data from the given package (or suite of packages). If we know that we will only be using one or two functions just once or twice from a package in our session, we could alternatively just use the function we need without loading the entire library, prepending the function name with the package name and two consecutive colons (`PACKAGE-NAME::FUNCTION-NAME()`):
+
+```{r, eval=FALSE}
+tidyverse::tidyverse_packages()
+```
+
+I will sometimes use this form in the worksheets to clarify what package a function originates from, even if the package is loaded in the library.
+
+::: {.taskbox .task}
+Now that you've installed a package, write the required functions in your R scripts to **install** and **load** the following packages that we will also be using a lot:
+
+-   the `{easystats}` collection of packages
+-   the `{gtsummary}` package
+-   the `{ggformula}` package
+:::
+
+```{r}
+#| include: false
+
+library(tidyverse)
+library(easystats)
+library(gtsummary)
+library(ggformula)
+```
+
+You can read more about the packages we have just installed here:
+
+-   [`tidyverse`](https://www.tidyverse.org/)
+-   [`easystats`](https://easystats.github.io/easystats/)
+-   [`gtsummary`](https://www.danieldsjoberg.com/gtsummary/index.html)
+-   [`ggformula`](https://www.mosaic-web.org/ggformula/index.html)
+
+
+
+
+
+
+
+
+
+
+# References
+
+
+
+
+
+
+
+
+[^1]: In fact, a statement like this is a very basic computer programme!.
+
+[^2]: If you are interested in a readable book on the history of the most consequential lines of code in computing history, I can highly recommend @BoschEtAl2022YouAreNot.
+
+[^3]: Yeah, why not, go ahead, try this out too. [Create the `.R` script file](https://youtu.be/KHv-68Q4wVo?si=JdxSah666ghliKUa) - which is just a simple text file - and paste the "Hello, World!" command in there, then save the file in your working directory and close it. You can run the entire content of an `.R` file with the `source()` command. For example, in the **R Terminal** you would write `source("myHello.R")`, which would print the outputs of the commands included in that file. You can also [run the commands directly from the `.R` script file in `R Studio`](https://youtu.be/YS5EmxBWchk?si=C--IwhAx4a7xCIW9), either line-by-line, by all the selected line, or *sourcing* the entire script.
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,276 @@
+---
+title: "Tables"
+format: 
+  # html: 
+  #   code-link: true
+  #   embed-resources: true
+  #   fig-align: center
+  #   fig-width: 5
+  #   fig-asp: .8
+  #   fig-responsive: true
+  #   code-overflow: wrap
+  #   code-tools:
+  #     source: false # add URL to script document to be downloaded
+  #     toggle: false
+  #     caption: none
+  docx: default
+execute: 
+  warning: false
+  error: false
+  echo: true
+  eval: true
+knitr: 
+  opts_chunk: 
+    comment: ""
+    prompt: false
+    message: false
+    strip.white: false
+    purl: false
+css: labcss.css
+bibliography: references.bib
+---
+
+# Statement of purpose
+
+Various `R` packages aiming to facilitate the creation of descriptive and modelling summary tables have seen light in recent years. Tabulation has for a long time been a limitation in `base R`, particularly in respect to creating the types of tables that summarise typical social scientific variables and datasets (i.e. categorical variables with labelled values). Various recent packages now facilitate the creation of tables, focusing either on (a) creating near-to-publishable quality summary tables for specific purposes with very little and easy code, or (b) allowing maximum flexibility to create any table imaginable with more complex code. However, it is harder to find functions that achieve a good middle ground between the two. Furthermore, most of the table functions work best for HTML output or - with the additional complexities introduced by LaTex - PDF. Options for output to Microsoft Word (and related popular text editing) format is severely limited.
+
+My aim here is to identify the optimal packages and functions for all tabulation needs that satisfy the following criteria, primarily with the purpose of facilitating teaching:
+
+- the fewest packages needed to rely upon;
+- the simplest code;
+- code that follows the same pattern as other functions used for other purposes (e.g. formula syntax as with modelling; graphics syntax, as with ggplot2);
+- prints well to MS Word (or produces an object type that can easily be passed on to `{flextable}` or similar)
+
+
+## Packages
+
+```{r}
+
+library(here)
+library(tidyverse)
+library(janitor)
+library(easystats)    # datawizard
+library(modelsummary)
+library(strengejacke)
+library(gt)
+library(flextable)
+
+```
+
+
+## Data
+
+```{r}
+
+# data1 <- readRDS(here("Data", "for_analysis", "wvs7.rds")) |>
+data <- data_read(here("Data", "for_analysis", "wvs7.rds")) |>
+  sjlabelled::drop_labels() |>
+  data_extract(c(B_COUNTRY, Q1, Q57, Q195, Q260, Q261:Q263)) |>
+  mutate(B_COUNTRY = as_character(B_COUNTRY),
+         across(Q261:Q262, as_numeric)) |> 
+  sample_n(1000)
+
+```
+
+## Dataset summaries
+
+```{r}
+
+## gt_preview
+
+gt::gt_preview(data)
+```
+
+
+```{r}
+
+data |> 
+  data_codebook() |> print_html(variable_label_width = 20,
+                                value_label_width = 20,
+                                font_size = "80%", line_padding = 0)
+
+```
+
+
+## One-way tabulations (frequencies tables)
+
+#### Base R
+
+```{r}
+# Base R
+
+
+```
+
+#### `{tidyverse}` `dplyr::count()`
+
+```{r}
+# {tidyverse} dplyr::count()
+
+data |> count(Q263) |>                          # basic: N's only
+  mutate(`%` = (n / sum(n)) * 100)              # compute % by hand
+  # janitor::adorn_percentages("col")
+  # janitor::adorn_totals("row")                 # add Totals using `janitor`
+
+```
+
+
+#### `janitor::tabyl()`
+
+```{r}
+data |> tabyl(Q263) |> 
+  flextable()
+```
+
+
+
+#### `{easystats}` `datawizard::data_tabulate()`
+
+```{r}
+
+
+data |> datawizard::data_tabulate(Q263) |> sjmisc::print_html()         # needs help from sjmisc to print in Word
+
+data |> datawizard::data_tabulate(Q263) |> sjmisc::print_md()
+
+
+```
+
+
+#### `modelsummary::datasummary()`
+
+```{r}
+
+# Needs formula syntax
+
+
+modelsummary::datasummary(Q57 ~ N, data = data)                           # most basic: N only; prints to Word
+
+modelsummary::datasummary(Q57 + 1 ~ N + Percent() + 1, data = data)       # most complex: N, % and full marginals
+
+modelsummary::datasummary(Q57 + 1 ~ N + Percent(),                        # Column marginals only
+            data = data, 
+            output = "markdown")                                          # Nicer print to Word within rmd/qmd
+
+
+
+```
+
+
+#### `gtsummary::tbl_summary()`
+
+
+```{r}
+
+data |> gtsummary::tbl_summary(include = Q57)                        # a bit hacky; meant to summarise dataframes, not single variables
+# , missing = "no"
+# |> gtsummary::modify_header(label ~ "")
+
+
+```
+
+
+
+## Two-way tabulations (corsstabulations)
+
+#### Base R
+
+```{r}
+# Base R
+
+xtabs( ~ educ_num + trusting, data = ex1) |> prop.table(margin = 2) |> round(2) |> addmargins()
+
+```
+
+
+#### `{tidyverse}` `dplyr::`
+
+```{r}
+# {tidyverse} dplyr::
+
+data |> count(Q57, Q263)
+
+```
+
+
+#### `{easystats}` `datawizard::data_tabulate()`
+
+```{r}
+#| eval: false
+
+# `datawizard`
+
+# by default creates `n_distinct(data$B_COUNTRY)` number of separate frequency tables of `data$Q263`
+# the `collapse` option collapses the output into one table
+
+data |> 
+  # group_by(B_COUNTRY) |>
+  data_group(Q260) |>
+  data_tabulate(Q263, collapse = TRUE) # |> print_md()
+
+
+```
+
+
+#### `janitor::tabyl()`
+
+```{r}
+data |> tabyl(Q57, Q263, show_na = FALSE) |> 
+  adorn_totals(c("row", "col")) |>
+  adorn_percentages("row") |> 
+  adorn_pct_formatting(rounding = "half up", digits = 1) |> 
+  adorn_ns() |> 
+  flextable()
+```
+
+#### `sjmisc::flat_table`
+
+```{r}
+data |> sjmisc::flat_table(Q57, Q263, margin = c("row"))
+```
+
+
+### `gtsummary::tbl_cross()`
+
+
+```{r}
+
+data |> 
+  gtsummary::tbl_cross(Q57, Q260,
+                     percent = "row",
+                     missing = "no") # "no", "always", "ifany"
+
+```
+
+
+### `modelsummary::datasummary_crosstab()`
+
+Major shortcoming that the "All" total marginals summarise the entire data, with the missing values of the crosstabulated variables included, while the missign values themselves are not shown within the table, so it can be very confusing and dangerous.
+
+```{r}
+
+modelsummary::datasummary(Q57 + 1 ~ Q260 + Percent("col") + 1, data = data) # limited options for adding column and row statistics
+
+modelsummary::datasummary_crosstab(Q57 ~ Q260, data = data)     # relatively good defaults; BUT "All" includes missing values without explicitly telling
+
+modelsummary::datasummary_crosstab(Q57 ~ Q260, data = na.omit(data[c("Q57", "Q260")]))   # This is what we would expect
+
+modelsummary::datasummary_crosstab(Q57 ~ Q260, statistic = 1 ~ N + Percent("col") + Percent("row") + 1, data = data)     # can add/remove statistics
+
+```
+
+
+
+
+
+
+```{r}
+#| eval: false
+
+# Doesn't render to Word; doesn't work well with piping
+
+with(data, 
+  sjPlot::sjt.xtab(Q57, Q260))
+```
+
+

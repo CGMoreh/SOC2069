@@ -1,0 +1,212 @@
+---
+title: "testing"
+format: 
+  html: 
+    code-link: true
+    embed-resources: true
+    fig-align: center
+    fig-width: 5
+    fig-asp: .8
+    fig-responsive: true
+    code-overflow: wrap
+    code-tools:
+      source: false # add URL to script document to be downloaded
+      toggle: false
+      caption: none
+execute: 
+  warning: false
+  error: false
+  echo: true
+  eval: false
+knitr: 
+  opts_chunk: 
+    comment: ""
+    prompt: false
+    message: false
+    strip.white: false
+    purl: false
+css: labcss.css
+bibliography: references.bib
+---
+
+```{r}
+#| purl: false
+
+
+library(easystats)
+```
+
+
+```{r}
+#| purl: false
+
+datafolder <- "D:\\OneDrive - Newcastle University\\DATA\\EVS_WVS\\WVS_7"
+datafile <- "WVS_Cross-National_Wave_7_spss_v5_0.7z"
+d <- fs::path(datafolder, datafile)
+d <- archive::archive_read(d)
+# d <- archive::archive_extract(d)
+# d <- archive::archive_read(d)
+# wvs7zip <- datawizard::data_read(d)
+wvs7 <- sjlabelled::read_spss(d)
+
+```
+
+
+```{r}
+#| eval: false
+#| purl: false
+
+## gt_preview
+
+gt::gt_preview(wvs7)
+```
+
+
+```{r}
+#| eval: false
+#| purl: false
+
+# data(efc)
+
+wvs7 |> 
+  # sjlabelled::set_labels(J_INTDATE, labels = "") |>
+  # data_select(J_INTDATE) |> 
+  data_codebook() |> print_html(variable_label_width = 20,
+                                value_label_width = 20,
+                                font_size = "80%", line_padding = 0)
+  
+  # DT::datatable()
+  
+  # rmarkdown::paged_table()
+  # print_html()
+
+```
+
+```{r}
+#| eval: false
+#| purl: false
+
+summarytools::dfSummary(wvs7)
+```
+
+
+
+```{r}
+#| purl: false
+# Renders to Word
+
+# Prints as many tables as countries
+
+wvs7 |> 
+  data_group(B_COUNTRY) |> 
+  data_tabulate(Q291G1) 
+# |> 
+  # print_md()
+
+
+```
+
+
+```{r}
+# Doesn't render to Word
+with(wvs7, 
+  sjPlot::sjt.xtab(Q57, Q260))
+```
+
+
+```{r}
+#| purl: false
+
+library(tidyverse)
+library(strengejacke)
+
+wvs7s <- wvs7 |> 
+  # data_extract(c(B_COUNTRY, Q1, Q57, Q260)) |> 
+  drop_labels() |>
+  mutate(across(where(is.factor), 
+                as_numeric) |> 
+                as_label()
+         ) 
+
+```
+
+
+```{r}
+## TABLES ----------------------------------------------------------------------
+
+## Frequencies ==================================================================
+
+
+
+
+# `modelsummary::datasummary`
+# Uses formula syntax
+
+modelsummary::datasummary(Q57 + 1 ~ N + Percent(),
+            data = wvs7s)
+
+
+
+# `gtsummary`; Renders to Word
+wvs7s |> 
+  gtsummary::tbl_cross(Q57, Q260,
+                     percent = "row",
+                     missing = "no")
+
+# `modelsummary`; needs formula syntax
+
+  modelsummary::datasummary_crosstab(Q57 ~ Q260, data = wvs7s)
+
+```
+
+
+## Testing `here:here()`
+
+```{r}
+#| echo: false
+
+# Testing here:here() ------------------------------------------
+```
+
+
+```{r}
+#| purl: false
+
+library(here)
+library(datawizard)
+
+d <- data_read(here("Data", "for_analysis", "ess10.sav"))
+
+
+```
+
+
+
+
+```{r}
+#| purl: true
+#| eval: true
+
+# Important Stuff here
+
+data("mtcars")
+library(ggformula)
+
+
+gf_point(mpg ~ disp, data = mtcars)
+
+lm(mpg ~ disp, data = mtcars)
+  
+  
+```
+
+
+```{r eval=FALSE, include=FALSE, purl=FALSE}
+
+# Just run this chunk manually at the end...
+
+knitr::purl(".testing.qmd", documentation = 0)
+
+```
+
+

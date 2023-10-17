@@ -1,0 +1,486 @@
+---
+title: "Worksheet 4"
+subtitle: "Logistic regression in R"
+format: 
+  html: 
+    code-link: true
+    embed-resources: true
+    fig-align: center
+    fig-width: 5
+    fig-asp: .8
+    fig-responsive: true
+    code-overflow: wrap
+    code-tools:
+      source: false # add URL to script document to be downloaded
+      toggle: false
+      caption: none
+execute: 
+  warning: false
+  error: false
+  echo: true
+  purl: false
+knitr: 
+  opts_chunk: 
+    comment: ""
+    prompt: false
+    message: false
+    strip.white: false
+css: labcss.css
+bibliography: references.bib
+---
+
+------------------------------------------------------------------------
+
+```         
+
+Timetable week: 7
+Topic: "Logistic models"
+```
+
+------------------------------------------------------------------------
+
+# Learning outcomes
+
+By the end of the session you will know how to:
+
+-   Fit and summarise logistic regression models in `R`
+-   Interpret results from logistic regression models
+-   Manipulate the regression output to ease interpretation
+-   Plot and visualise results from logistic regression models to aid interpretation
+
+# Introduction
+
+This worksheet introduces a new type of regression model: *(binary) logistic regression*.
+
+The logistic regression model attempts to **predict the *probability* that an observation falls into one of two categories of a dichotomous dependent (outcome) variable** based on one or more independent (*predictor*, *explanatory*) variables that can be either numeric or categorical ("factors" in `R`).
+
+In many ways, logistic regression is like linear regression, except for the measurement type of the dependent variable (i.e., linear regression uses a numeric dependent variable rather than a dichotomous one). However, unlike in linear regression, you are not attempting to determine **the predicted value** of the dependent variable, **but the *probability* of being in a particular category** of the dependent variable given the independent variable(s). An observation is assigned to whichever category is predicted as most likely. Logistic modelling is thus often considered a *classification* method rather than a *regression* method, especially in recent *machine learning* parlance.
+
+Just as in linear regression analysis, logistic regression gives us a set of **coefficients** that **show the effect of x on y**. However, because logistic regression is based on other assumptions than linear regression, we cannot interpret these coefficients very easily. They do not represent the expected value of $y$ given a one-unit difference in the value of $x$, but instead the '**log of the odds**' of belonging in the outcome category coded as *1* as opposed to *0* (e.g. answering "yes" to a survey question if the variable is coded as "yes" = 1 and "no" = 0).
+
+# Exercise 0: Setup
+
+1.  **Open the `R Studio` interface** by clicking on the ***.Rproj*** file included in the project folder that you created in *Lab2*. The folder should be stored on your Newcastle University **OneDrive** and accessible from any computer.
+
+2.  **Create a new blank Quarto document for this lab session and call it *Lab4.qmd***
+
+3.  At the top of the page briefly detail what the script is about (e.g. "Lab work for Week x").
+
+4.  **Load `R` packages** that we will use with the `library()` function
+
+    `r fontawesome::fa("wrench")` **Tip:** You may need to first install the package with the `install.packages()` function if it's not yet installed
+
+    ```{r}
+    #| output: false
+
+    library(tidyverse)
+    library(easystats)
+    library(gtsummary)
+    library(ggformula)
+    library(strengejacke)
+    library(marginaleffects)
+    ```
+
+
+# Exercise 1: How does education relate to social trust?
+
+`About 30  minutes`
+
+------------------------------------------------------------------------
+
+To demonstrate logistic regression using `R`, in this exercise we follow in the footsteps of [@Wu2021-12-01EducationSocialTrust] (see reading list). As they note, sociological research has generally concluded that "there is a strong and positive relation between education level and trust". However, "several studies have shown that education might yield differential impacts on trust in different societies. In Sweden, Sven Oskarsson et al. (2017) show that education has little impact on trust. In China, Cary Wu and Zhilei Shi (2020) suggest that education has a negative impact on people’s trust. Several cross-national studies have also shown that the education and trust association can vary from positive to negative depending on the specific institutional contexts ... For example, the effect of education is found to be negative in highly corrupt countries such as Serbia, Turkey, Hungary, Slovakia, Bulgaria, Croatia, Kosovo, and Ukraine" (p. 1167). The article then investigates how individual-level (micro) factors (such as *education level*) may have different effects on *trust* depending on country-level (macro) factors (such as *sociopolitical risk*). We will focus on the individual (micro) level in this exercise. Specifically, we will build a model similar to those summarised in Table 1 of the article. We will initially disregard the fact that our dataset contains data from various countries, but in a follow-up exercise we will select one country from the dataset to refit the model on that smaller sample and compare our results to those reported in Wu's Table 1.
+
+## Step 0: Research question and data
+
+Let's ask the following research question: what is the association between *education* and *social trust* at a global level?
+
+To answer this question, we will use the **WVS7** dataset. The dataset should already be downloaded and available in your module data folder. Let's import the data into `R`, but first, it's worth highlighting some options that need bearing in mind when importing labelled data of the kind that comes from social surveys:
+
+::: {.notebox .note}
+
+**It's important** to note that by default the `data_read()` function assumes that numeric variables where all values have a value label are categorical and will convert them into *factors*. That means that all the numeric "values" will be replaced by the "value labels" (e.g. 1="Yes"/ 2="No" will become simply "Yes"/"No"). This is usually a reasonable default behaviour, because the majority of functions in `R` do not handle "value labels" and working with textual (character string) values can be more explicit. However, this may be less appropriate when the dataset contains many long ordered variables (such as 0-10 scale items), as we will most likely want to treat such variables as *numeric* in statistical models. 
+
+To cancel this default behaviour, we can add the additional argument `convert_factors = FALSE` into the `data_read()` function. This is the format of the variables as listed in the Codebook on the module website (https://soc2069.chrismoreh.com/data/data_main), with both "Values" and "Value labels" kept as in the original survey questionnaire documentation. This is also the format that gets imported when using `readRDS()`. However, most of the common tabulation and graphing functions will not show the category "labels" in the output either, and for that purpose having variables "converted to factors" (with the original "Values" overwritten by the "Value labels") may be a better option. 
+
+Below we will import the data ***without*** converting to factors.
+
+
+```{r}
+# Change the file path to the one on your computer!
+
+wvs <- data_read("D:/GitHub/SOC2069/Data/for_analysis/wvs7.rds", convert_factors = FALSE)
+
+# or #
+
+wvs <- readRDS("D:/GitHub/SOC2069/Data/for_analysis/wvs7.rds")
+
+```
+
+:::
+
+
+## Step 1: Find and describe individual variables
+
+The next step is to identify the variables that are most useful for answering the research question we posed. We can do this by browsing through the WVS7 codebook (https://soc2069.chrismoreh.com/data/data_main#wvs7-codebook). If our aim is to stay as close as possible to [@Wu2021-12-01EducationSocialTrust]'s analysis, we can also read the sections of the paper where they describe their choice of variables:
+
+> "For the WVS, I use the standard survey item asking, “Generally speaking, would you say that most people can be trusted or that you can’t be too careful in dealing with people?” (Rosenberg 1956). The variable is coded on a 0 to 1 scale, with 1 corresponding to high levels of trust." (p. 1170)
+> "For the WVS, I measure educational attainment using respondents’ highest education level attained with eight categories, namely, 1 = no formal education or inadequately completed elementary education, 2 = completed (compulsory) elementary education, 3 = incomplete secondary school: technical/vocational, 4 = complete secondary school: technical/vocational, 5 = incomplete secondary: university, 6 = complete secondary: university, 7 = some university without degree, and 8 = university with degree/higher education. In some analyses, I treat education as a categorical variable. To reduce the number of categories, I recode respondents’ education into Primary, Secondary, Post-secondary, and Tertiary. This is also consistent with the most recent wave of the WVS coding" (p. 1171)
+> "I also control for relevant demographic covariates such as gender, age, income, marital status, and occupational status at the individual level" (p. 1172)
+
+Based on the above description, the most appropriate variables available to us in the WVS7 dataset are:
+
+```{r}
+#| echo: false
+
+# wvs_factors |> 
+#   # data_select(c(Q57, Q275, Q260, Q262, Q288, Q273, Q279)) |> 
+#   select(Q57, Q275, Q260, Q262, Q288, Q273, Q279) |> 
+#   data_codebook() 
+
+
+"WVS7, selected variables" <- wvs |>
+  select(Q57, Q275, Q260, Q262, Q288, Q273, Q279)
+
+data_codebook(`WVS7, selected variables`) |>
+    print_html(font_size = "80%",
+               line_padding = 0)
+
+```
+
+If we decide that these are all the variables that we will need for our current analysis, we can shrink the `wvs` dataframe to these selected few columns to make it cleaner to work with. The `select()` function comes handy for this task. We can either overwrite the dataset that we have in the Environment, or we can save the reduced dataset under a new name (maybe `ex1`, for "Exercise 1"):
+
+```{r}
+ex1 <- wvs |> 
+  select(Q57, Q275, Q260, Q262, Q288, Q273, Q279)
+
+# or #
+
+ex1 <- select(wvs, 
+              Q57, Q275, Q260, Q262, Q288, Q273, Q279)
+
+```
+
+We can make a codebook table like the one above with the `data_codebook()` function:
+
+```{r}
+#| eval: false
+data_codebook(ex1)
+```
+
+To get a better sense of how the two numeric variables in this dataset are distributed, we can use the `describe_distribution()` function that we have used before:
+
+```{r}
+describe_distribution(ex1)
+```
+
+We can also look more closely to our main variable on *social trust*:
+
+```{r}
+ex1 |> data_tabulate(Q57)
+```
+
+## Step 2: Recoding and renaming variables
+
+Before we proceed with the analysis, we will need to make some alterations to our variables. Our data is generally tidy, but some adjustments are needed:
+
+- Variable `Q57` will serve as our response (dependent) variable - the one we which to explain/model. We can see from the frequency table that it has two valid categories ("1" and "2"), which we can read off from the codebook table that they refer to "Most people can be trusted" and "Need to be very careful", respectively. Given that it is a binary (dichotomous) variable, we will use *binary logistic regression* to model it. When we enter a variable into a logistic regression model as dependent variable in `R`, the first category/level will be automatically recoded internally to the value "0" and be used as the reference category; the latter category/level will be recoded to "1", and it will be the indicator category that the model predicts in contrast to the reference category. In our case, that will mean that the category referring to "Need to be very careful" will be treated as the *indicator* variable by default, so effectively the coefficients of the explanatory (predictor, independent) variables will be estimating the propensity towards "distrust". If we first reversed the order of the categories in the dependent variable, the model would be estimating "trust", which is conceptually cleaner and more straightforward to interpret. 
+- Following [@Wu2021-12-01EducationSocialTrust], we will treat our main *explanatory* variable - *Q275*, *Highest educational level* - as numeric. But it in the dataset it is coded as *factor*, so we should change that. Technically, the *education* variable is categorical in nature, but given that it has 9 levels/categories (0 to 8) and there is a clear ordering in the levels running from low education to high education, we can conceptually treat it as numeric, which makes it easier to use a single scale (with a *mean*, *standard deviation*, etc.)
+- [@Wu2021-12-01EducationSocialTrust] also noted that in some models they used a recoded categorical version of the education, reduced to 4 categories: "Primary", "Secondary", "Post-secondary", and "Tertiary" education. We can also create this variable to potentially include it in our models
+- Finally, while we're at it, we can also rename our variables to have more human-readable names than the original ones.
+
+We can achieve all of the above in a single call to the `{datawizard}` function `data_modify()` like this:
+
+```{r}
+
+ex1 <- ex1 |>                                                                       # (1)
+  data_modify(trusting = reverse(Q57),                                              # (2)
+              educ_num = as_numeric(Q275),                                          # (3)
+              educ_cat = recode_values(Q275,                                        # (4)
+                                       recode = list("Primary" = ("0, 1"), 
+                                                     "Secondary" = ("2, 3"), 
+                                                     "Post-secondary" = ("4, 5"),
+                                                     "Tertiary" = ("6, 7, 8"))),    # (4.1)
+              sex = Q260,                                                           # (5)
+              age = Q262,
+              income = Q288,
+              marital = Q273,
+              employment = Q279)                                                    # (6) 
+
+# Code explanation:
+# (1) overwrite the data object with the changes
+# (2) reverse the category order of "Q57" and save it as a new variable called "trusting"
+# (3) change the type of variable "Q275" to numeric and save it as the new variable "educ_num"
+# (4) recode the "Q275" variable into 4 larger categories and save the new variable as "educ_cat"
+# (4.1) make sure to close all the brackets under `recode_values()`
+# (5) rename the remaining variables as "newName" = "oldName"
+# (6) remember to close the brackets under `data_modify()`
+
+```
+
+Of course, we could do all the changes one-by-one, but because we can achieve everything we wanted using the `data_modify()` option, it's easier to do it all at once. When you are experimenting with recoding, it is probably a good idea to do it one-by-one and check the results at each step to catch out any errors more easily.
+
+Let's have a look at the recoded dataset; because we did not overwrite any of the original variables, we will have both the old and the newly recoded/renamed variable in the dataset, but we will be referring to the new variables from now on:
+
+```{r}
+#| eval: false
+## Save the codebook table to an object:
+
+ex1_codebook <- ex1 |> data_codebook()
+
+## Open in a Viewer window:
+
+View(ex1_codebook)
+```
+
+
+```{r}
+#| echo: false
+ex1 |> data_codebook()  |>   
+  print_html(font_size = "80%",
+               line_padding = 0)
+```
+
+
+
+```{r}
+#| eval: false
+#| include: false
+
+
+##### TRANSFORMATIONS ######################
+
+ex1f <- wvs2 |> 
+  select(Q57, Q275, Q260, Q262, Q288, Q273, Q279)
+
+library(sjmisc)
+
+ex1 |> ref_lvl(Q57, lvl = 2) |> recode_to(Q57) |> frq(Q57)
+
+ex1 |> frq(Q57)
+
+
+ex1 |> data_modify(trusting = recode_values(Q57, recode = list("1 Trusting" = "1", "0 Not trusting" = "2"))) |> frq(Q57, trusting)
+
+ex1f |> data_modify(trusting = recode_values(Q57, recode = list("Trusting" = "Most people can be trusted", "Not trusting" = "Need to be very careful"))) |> frq(Q57, trusting)
+
+ex1f |> to_numeric(Q57) |> data_modify(trusting = recode_values(Q57, recode = list(`1` = 1, `0` = 2))) |> frq(Q57, trusting)
+
+ex1f |> mutate(trusting = case_match(Q57, "Most people can be trusted" ~ "Trusting", "Need to be very careful" ~ "Not trusting")) |> frq(Q57, trusting)
+
+ex1|> data_modify(trusting = reverse(Q57) |> recode_to()) |> frq(Q57, trusting)
+
+ex1|> data_modify(trusting = reverse(Q57)) |> frq(Q57, trusting) 
+ex1|> data_modify(trusting = reverse(Q57)) |> 
+  recode_to(trusting) |> frq(Q57, trusting, trusting_r0) 
+
+
+ex1|> data_modify(trusting = slide(select = "Q57")) |> frq(Q57, trusting)
+
+
+ex1f|> mutate(trusting = reverse(as_numeric(Q57))) |> data_codebook(c(Q57, trusting)) ## !!! CAREFUL, LABELS ARE NOT REVERSED
+
+
+```
+
+
+
+## Step 3: Describe the relationship between the main variables of interest
+
+Now that the data has been recoded, we can have a closer look at the relationship between our two main variables: *trusting* and *educ_num*. Since the *education* variable is now recorded as numeric, we can make use of a *boxplot* for visualisation:
+
+
+```{r}
+gf_boxplot(educ_num ~ trusting, data = ex1)
+```
+
+We can see a slightly higher median education level among those responding that "Most people can be trusted" (category "2"). For a more detailed numerical summary of this association, we can use another function that we know from Lab3, `means_by_group()`: 
+
+```{r}
+ex1 |> means_by_group(educ_num, trusting)
+```
+
+Here we can see more clearly the difference in average education levels between those with high *trust* levels and those with low *trust* levels. We also know from Lab3 that this table is equivalent to the results from a linear regression model in which the numeric variable `educ_num` is the dependent variable and `trusting` is the explanatory (independent) variable.
+
+However, we are interested here in modelling the `trusting` variable as a function of *education*, while also accounting for the other demographic covariates. For this, we turn to a *logistic regression model*.
+
+
+
+## Step 4: Fit and interpret a simple bivariate logistic regression model
+
+Fitting a logistic regression model is fairly simple. We can use the base R `glm()` function and would write the following code:
+
+```{r}
+m1 <- glm(trusting ~ educ_num, data = ex1, family = binomial)
+```
+
+In the code above, instead of the *linear model* function (`lm()`) we used the *generalised linear model* function (`glm()`), and because `glm()` is a larger family of models, we need to also specify which "family" we are fitting; since our dependent variable is binary variable, we are calling the "binomial" family. In all other aspects the formula is the same as the one we already know from *linear regression*.
+
+Let's look at the model parameters:
+
+```{r}
+model_parameters(m1)
+```
+
+It is at the stage of interpretation that logistic regression models become difficult. The coefficients that we obtain in the standard output are similar to those from a linear regression in that they summarise a linear and additive relationship between the independent and dependent variables. The difference is that the dependent variable has been transformed to a *logit* or *logged odds* scale. We could say - following the logic of linear regression - that each unit difference in one's education level is associated with a *0.18*-point positive difference in the *logged odds*/*logit* value of *trusting*. But this doesn't make much sense, because the *logit* scale is difficult to comprehend. It would be more intuitive to see the results on a different scale, such as *odds* or *probabilities*.
+
+If we exponentiate the logistic regression coefficients, we could say that the independent variables relate to the *odds* of the dependent variable, rather than the *logged odds*, which is somewhat easier to relate to. The `model_parameters()` function can do that for us in exchange of some additional specification:
+
+```{r}
+model_parameters(m1, exponentiate = TRUE)
+```
+
+The *odds ratios* that we find in this table are somewhat easier to interpret, but we need to understand how *odds* work. By having exponentiated the coefficients, we have moved from an *additive* scale to a *multiplicative* scale. Basically, what this means is that while on an *additive* scale the value "0" means no change (because by *adding* 0 to a number we don not alter the number), on a *multiplicative* scale that role is taken over by "1" (when we multiply a number by "1", we keep it as it is). Consequently, a coefficient of "1" on the exponentiated scale means *no difference*, while values between 0 and 1 represent a *negative difference* and values greater than 1 a *positive difference*. I our case, the coefficient of **1.19** means that a difference of one degree in education level is associated with a positive difference of **1.19** in the odds of being A *trusting* person. We could further translate this into a percentage: if we subtract 1 from the exponentiated coefficients and multiply it by 100, we get the percentage difference due to a unit change in the independent variable.
+
+$$
+\% \Delta _{odds} = 100\times(OR-1)
+$$
+
+For values grater than 1 this calculation is very straightforward. In our case, this translated to a **19%** increase in the *odds* of being a *trusting* person.
+
+It doesn't add much to our understanding to plot the regression results from a model with a single predictor, but knowing how to plot results will be particularly useful once we expand the model with further explanatory variables. To create a plot of the results, we can simply take the output from the `model_parameters()` function and pass it on to the `plot()` function:
+
+
+```{r}
+parameters(m1, exponentiate = TRUE) |> plot()
+```
+
+
+However, the fact that the exponentiated coefficients are measured on a multiplicative scale poses some difficulties and it makes it easy to fall into the trap of interpreting these *odds* as *probabilities*. The issue is that odds can range from 0 to infinity, so the scale is far from standard. *Probabilities*, on the other hand, have the nice feature of being constrained between 0 and 1, so a percentage change has much more meaning.
+
+There are several packages that help us compute various comparative statistics on the *probability* scale from logistic models. Below, we will use the `avg_slopes()` function from the `{marginaleffects}` package to compute the average difference in the probability of being *trusting* based on a one-unit difference in education level:
+
+```{r}
+avg_slopes(m1)
+```
+The result tells us that that probability is just over **3%**. 
+
+To make these numerical results easier to understand, we can plot the result. There are several options, but probably the most straightforward approach is to estimate the probabilities of being *trusting* at each level of the predictor variable (*education*). The `plot_predictions()` function from the `{marginaleffects}` package or the `plot()` function of `{ggpredict}` can be used here. Below, we'll use the latter. 
+
+
+```{r}
+#| include: false
+#| eval: false
+marginaleffects::plot_predictions(m1, condition = "educ_num")
+```
+
+
+```{r}
+ggpredict(m1, "educ_num") |> 
+  plot()
+```
+
+This code first calculates predictions of the outcome probability for each level of the explanatory variable (we could save these results as a dataframe), then passes those results on to the `plot()` function. To remove the overlapping value labels on the horizontal axis,, we could add something like the following to the command:
+
+```{r}
+ggpredict(m1, "educ_num") |> 
+  plot() +
+    scale_x_continuous()
+```
+
+This graph makes it a lot clearer how *education* is associated with *trust* in our model, and if *education* is our main variable of interest, we can plot its effect even from a larger model that contains other covariates.
+
+
+## Step 5: Add demographic control variables to the logistic regression model
+
+This step does not contain anything new compared to what we already know from multiple linear regression and what we have learnt in the previous step about the logistic regression model. Below I'll summarise the code, but will leave the interpretation of the results to you.
+
+
+Fit the multiple logistic regression model:
+
+```{r}
+m2 <- glm(trusting ~ educ_num + sex + age + income + marital + employment, data = ex1, family = binomial)
+```
+
+Tabulate the model parameters:
+
+```{r}
+model_parameters(m2)
+```
+Plot the model parameters on the log-odds scale:
+
+```{r}
+model_parameters(m2) |> plot()
+```
+
+The plotted results are much more informative in the case of the multiple regression model. We find that higher education, being a female, higher age and higher income brackets all have a positive association with *trust*, while being other than married and in non-full-time employment show a negative association with trust. 
+
+We can plot the exponentiated coefficients to interpret odds instead:
+
+```{r}
+model_parameters(m2, exponentiate = TRUE) |> plot()
+```
+
+Transform the coefficients to *probability* scale:
+
+```{r}
+avg_slopes(m2)
+```
+
+Plot predicted probabilities of *trusting* based on *education*, adjusted for the effect of the other covariates in the model:
+
+```{r}
+ggpredict(m2, c("educ_num")) |> 
+  plot() +
+    scale_x_continuous()
+```
+
+Given the multiple explanatory variables included in the model, we can further break down the effects. For example, we can plot the effect of *education* on *trust* **by** *sex* **within** each *marital status*.
+
+```{r}
+ggpredict(m2, c("educ_num", "sex", "marital")) |> 
+  plot() +
+    scale_x_continuous()
+```
+
+It looks like the effect of *education* on *trust* is stronger among those married, or single or cohabitating than among the divorced, separated or widowed, for both men and women.
+
+This is a rather complex finding, and we can explore this model in much more depth, as well as thinking about developing it or specifying it further.
+
+For the next exercise, let's make a few minor tweaks to the data and model and compare the results.
+
+
+## Exercise 2: Refitting the model for a single country
+
+You will carry out this exercise on your own, but we'll make two adjustments:
+
+- Instead of treating the entire dataset as undifferentiated, originating from one single population, we will acknowledge the fact that the data originate from various countries and that the local socio-cultural context has an impact om social behaviours and attitudes. To account for this, fit two versions of the multiple logistic regression model we fit in the earlier exercise:
+  1. fit the same model as before, but add the *country* variable to the model as a covariate (search the WVS7 for the variable name; you will need to select the variables again from the main dataset, as in Step 1 above);
+  2. select only *one* country of your choice, reduce the dataset to that country and fit the model on that data;
+- Replace the `educ_num` variable with its categorical counterpart `educ_cat` and check how it affects the model.
+
+
+In order to select countries from the data, we need to learn about another function, `filter()`, which lets us select rows (cases) given some criteria. Let's make the following changes to the code we used in Step 1 and 2 to select the data we were interested in and transform it:
+
+
+```{r}
+
+ex2 <- wvs |>      
+  select(B_COUNTRY, Q57, Q275, Q260, Q262, Q288, Q273, Q279)  |>                    # (1)
+  data_modify(trusting = reverse(Q57),
+              trusting = as_label(trusting),                                        # (2)
+              educ_num = as_numeric(Q275),                                          
+              educ_cat = recode_values(Q275,                                        
+                                       recode = list("Primary" = ("0, 1"), 
+                                                     "Secondary" = ("2, 3"), 
+                                                     "Post-secondary" = ("4, 5"),
+                                                     "Tertiary" = ("6, 7, 8"))),
+              country = as_label(B_COUNTRY),
+              educ_cat = as_label(educ_cat),
+              sex = as_factor(Q260),                                                           
+              age = Q262,
+              income = Q288,
+              marital = as_label(Q273),
+              employment = as_label(Q279))
+
+
+ex2.2 <- ex2 |> filter(country == "Greece")                                     # (3)
+
+# Code explanation:
+# (1) also keep Country variable
+# (2) also transform the categorical variables to factors with character/label values to improve the outputs
+# (3) select one country by character name; here Greece, but you should select another one.
+
+```
+
+
+With these datasets you should be able to complete the modelling tasks above. Good luck!
