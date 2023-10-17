@@ -490,3 +490,34 @@ Your task is to:
 -   using the variable codebook, identify potentially useful variables. You need to identify a variable relating to *generalised social trust*, and a variable of your choice that measures attitudes towards immigration
 -   describe your variables individually and in relationship to each other
 -   fit and interpret the results from a linear regression model
+
+
+
+<!--
+
+## Solution to exercise 3
+
+-->
+
+
+```{r}
+#| include: false
+ess10 <- readRDS(here::here("Data", "for_analysis", "ess10.rds"))
+
+gf_point(ppltrst ~ imwbcnt, data = ess10,
+         alpha = 0.08, 
+         position = "jitter", width = 1, height = 1) |>
+  gf_lm() 
+```
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,121 @@
+---
+title: "Logistic regression"
+subtitle: "Week 4"
+format:
+  pptx:
+    incremental: true   
+    reference-doc: templates/SOC2069_pptx_template.pptx
+---
+
+## What is logistic regression?
+
+- Logistic regression is a generalized linear model where the outcome is a two-level categorical variable
+- E.g "Trusting people" = 1, "Not trusting people" = 0
+- The outcome variable for a GLM is denoted by $Y_i$, where the index $i$ is used to represent observation $i$.
+
+## What is logistic regression?
+
+- E.g. $Y_i$ will be used to represent whether person $i$ is in the *trusting* category ($Y_i=1$) or not ($Y_i=0$).
+- The outcome, $Y_i$, takes the value 1 with probability $p_i$ and the value 0 with probability $1 - p_i$.
+- Because each observation has a slightly different context, (e.g., different education level if we have education as an independent variable), the probability $p_i$ will differ for each observation.
+- It is this **probability** that we model in relation to the predictor variables
+
+## The **logit** transformation
+
+- The predictor variables are represented as follows: $x_{1,i}$ is the value of variable 1 for observation $i$, $x_{2,i}$ is the value of variable 2 for observation $i$, and so on.
+
+- We want to choose a **transformation** in the equation that makes practical and mathematical sense.
+
+$$
+transformation(p_i) = b_0 + b_1 x_{1,i} + b_2 x_{2,i} + \cdots + b_k x_{k,i}
+$$
+
+
+## The **logit** transformation
+
+- For example, we want a transformation that makes the range of possibilities on the left hand side of the equation equal to the range of possibilities for the right hand side; if there was no transformation for this equation, the left hand side could only take values between 0 and 1, but the right hand side could take values outside of this range.
+
+- A common transformation for $p_i$ is the **logit transformation**\index{logit transformation}, which may be written as:
+
+
+$$
+logit(p_i) = \log_{e}\left( \frac{p_i}{1-p_i} \right)
+$$
+
+## The **logit** transformation
+
+- We can rewrite the equation relating $Y_i$ to its predictors using the logit transformation of $p_i$:
+
+
+$$
+\log_{e}\left( \frac{p_i}{1-p_i} \right) = b_0 + b_1 x_{1,i} + b_2 x_{2,i} + \cdots + b_k x_{k,i}
+$$
+
+
+## The **logit** transformation
+
+```{r}
+#| echo: false
+
+library(tidyverse)
+
+logit_df_line <- tibble(
+  p  = seq(0.0001, 0.9999, 0.0002),
+  lp = log(p / (1 - p))
+)
+
+logit_df_point <- tibble(
+  lp = -5:6,
+  p = round(exp(lp) / (exp(lp) + 1), 3)
+) |>
+  mutate(
+    label = glue::glue("({lp}, {p})"),
+    label_pos = case_when(
+      lp %in% c(-5, -3, 4, 6) ~ "above",
+      lp %in% c(-4, 3, 5)     ~ "below",
+      lp == -2                ~ "right",
+      lp %in% c(-1, 0, 1, 2)  ~ "left",
+    )
+  )
+
+ggplot(logit_df_line, aes(x = lp, y = p)) +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "blue") +
+  geom_hline(yintercept = 1, linetype = "dashed", color = "blue") +
+  geom_smooth(se = FALSE, size = 0.5) +
+  coord_cartesian(
+    xlim = c(-5.5, 6.15), 
+    ylim = c(-0.05, 1.1)
+  ) +
+  geom_point(data = logit_df_point, shape = "circle open", 
+             size = 3, color = "red", stroke = 2) +
+  geom_text(data = logit_df_point |> filter(label_pos == "above"), 
+            aes(label = label), vjust = -2) +
+  geom_text(data = logit_df_point |> filter(label_pos == "below"), 
+            aes(label = label), vjust = 2.5) +
+  geom_text(data = logit_df_point |> filter(label_pos == "right"), 
+            aes(label = label), hjust = -0.25) +
+  geom_text(data = logit_df_point |> filter(label_pos == "left"), 
+            aes(label = label), hjust = 1.25) +
+  labs(
+    x = expression(logit(p[i])),
+    y = expression(p[i])
+  )
+```
+
+
+
+## What are *probabilities*?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
