@@ -2,20 +2,32 @@
 title: "Worksheet 2b"
 subtitle: "Importing, exploring and describing data"
 format: 
+  # docx: default # error becasue of embedded mp4
   html: 
     code-link: true
-# output:
-#   html_document:
-#     theme: lumen
-#     toc: yes
-#     toc_float: yes
-#     toc_highlight: no
-#     tabset: yes
-#     number_sections: no
-#     anchor_sections: no
-#     self_contained: yes
-#     code_download: no
+    embed-resources: true
+    fig-align: center
+    fig-width: 5
+    fig-asp: .8
+    fig-responsive: true
+    code-overflow: wrap
+    code-tools:
+      source: false # add URL to script document to be downloaded
+      toggle: false
+      caption: none
+execute: 
+  warning: false
+  error: false
+  echo: true
+  purl: false
+knitr: 
+  opts_chunk: 
+    comment: ""
+    prompt: false
+    message: false
+    strip.white: false
 css: labcss.css
+bibliography: references.bib
 ---
 
 ------------------------------------------------------------------------

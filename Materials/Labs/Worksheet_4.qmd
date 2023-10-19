@@ -2,6 +2,7 @@
 title: "Worksheet 4"
 subtitle: "Logistic regression in R"
 format: 
+  # docx: default # word doc in docs already edited a bit
   html: 
     code-link: true
     embed-resources: true
@@ -77,7 +78,8 @@ Just as in linear regression analysis, logistic regression gives us a set of **c
     library(easystats)
     library(gtsummary)
     library(ggformula)
-    library(strengejacke)
+    library(ggeffects)
+    library(sjlabelled)
     library(marginaleffects)
     ```
 
@@ -296,7 +298,7 @@ gf_boxplot(educ_num ~ trusting, data = ex1)
 We can see a slightly higher median education level among those responding that "Most people can be trusted" (category "2"). For a more detailed numerical summary of this association, we can use another function that we know from Lab3, `means_by_group()`: 
 
 ```{r}
-ex1 |> means_by_group(educ_num, trusting)
+ex1 |> means_by_group("educ_num", "trusting")
 ```
 
 Here we can see more clearly the difference in average education levels between those with high *trust* levels and those with low *trust* levels. We also know from Lab3 that this table is equivalent to the results from a linear regression model in which the numeric variable `educ_num` is the dependent variable and `trusting` is the explanatory (independent) variable.
@@ -354,7 +356,7 @@ avg_slopes(m1)
 ```
 The result tells us that that probability is just over **3%**. 
 
-To make these numerical results easier to understand, we can plot the result. There are several options, but probably the most straightforward approach is to estimate the probabilities of being *trusting* at each level of the predictor variable (*education*). The `plot_predictions()` function from the `{marginaleffects}` package or the `plot()` function of `{ggpredict}` can be used here. Below, we'll use the latter. 
+To make these numerical results easier to understand, we can plot the result. There are several options, but probably the most straightforward approach is to estimate the probabilities of being *trusting* at each level of the predictor variable (*education*). The `plot_predictions()` function from the `{marginaleffects}` package or the `plot()` function of `{ggeffects}` can be used here. Below, we'll use the latter:
 
 
 ```{r}
@@ -369,7 +371,7 @@ ggpredict(m1, "educ_num") |>
   plot()
 ```
 
-This code first calculates predictions of the outcome probability for each level of the explanatory variable (we could save these results as a dataframe), then passes those results on to the `plot()` function. To remove the overlapping value labels on the horizontal axis,, we could add something like the following to the command:
+This code first calculates predictions of the outcome probability for each level of the explanatory variable using the `ggpredict()` function (we could save these results as a data-frame), then passes those results on to the `plot()` function. To remove the overlapping value labels on the horizontal axis,, we could add something like the following to the command:
 
 ```{r}
 ggpredict(m1, "educ_num") |> 
@@ -443,7 +445,7 @@ For the next exercise, let's make a few minor tweaks to the data and model and c
 
 You will carry out this exercise on your own, but we'll make two adjustments:
 
-- Instead of treating the entire dataset as undifferentiated, originating from one single population, we will acknowledge the fact that the data originate from various countries and that the local socio-cultural context has an impact om social behaviours and attitudes. To account for this, fit two versions of the multiple logistic regression model we fit in the earlier exercise:
+- Instead of treating the entire dataset as undifferentiated, originating from one single population, we will acknowledge the fact that the data originate from various countries and that the local socio-cultural context has an impact on social behaviours and attitudes. To account for this, re-fit the logistic regression model from the previous exercise in two different ways:
   1. fit the same model as before, but add the *country* variable to the model as a covariate (search the WVS7 for the variable name; you will need to select the variables again from the main dataset, as in Step 1 above);
   2. select only *one* country of your choice, reduce the dataset to that country and fit the model on that data;
 - Replace the `educ_num` variable with its categorical counterpart `educ_cat` and check how it affects the model.
