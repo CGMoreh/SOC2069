@@ -11,14 +11,13 @@ format:
 #| output: false
 
 library(tidyverse)
-library(strengejacke)
+# library(strengejacke)
 library(easystats)
 library(ggformula)
 
 ```
 
-
-##
+## 
 
 ```{r}
 #| echo: false
@@ -50,56 +49,43 @@ data %>%
         plot.caption.position = "plot")
 ```
 
-
 ## 
-
-
-
 
 # Working in ***R*** and ***RStudio***
 
 ## こんにちは、私の名前は ***R*** です。
 
-- A statistical programming language 
-- A language called *S* is developed at Bell Labs (USA) in **1976**
-- The *R* language created as a free open source implementation of *S* in **1991** at the University of Auckland (NZ); it developed into a different "dialect" of the original language *S*
-- *R* goes public in **1993**, a core maintainer group is set up in **1997**, and Version 1.0.0 is released in **2000**
-- Current stable, released version (`r Sys.Date()`) is *R-4.3.1* (2023-06-16, "Beagle Scouts"); minor releases about 4/5 times a year; mid-version releases about once a year; major releases every 7/8 years
-
+-   A statistical programming language
+-   A language called *S* is developed at Bell Labs (USA) in **1976**
+-   The *R* language created as a free open source implementation of *S* in **1991** at the University of Auckland (NZ); it developed into a different "dialect" of the original language *S*
+-   *R* goes public in **1993**, a core maintainer group is set up in **1997**, and Version 1.0.0 is released in **2000**
+-   Current stable, released version (`r Sys.Date()`) is *R-4.3.1* (2023-06-16, "Beagle Scouts"); minor releases about 4/5 times a year; mid-version releases about once a year; major releases every 7/8 years
 
 ## こんにちは、私の名前は：***R***
 
-- A statistical programming language
-- Computer commands as *speech acts*
-
+-   A statistical programming language
+-   Computer commands as *speech acts*
 
 ## ***RStudio***: "But I'm here to help!"
 
-- An *Integrated Development Interface* (IDE)
-- Company founded in **2009** in Boston (MA, USA) to develop open source and enterprise-ready professional software for the *R* statistical computing environment
-- First public beta version (v0.92) of the RStudio IDE came out in **2011**; Version 1 released in 2016; latest version (on `r Sys.Date()`) is Version: 2023.09.0+463, released: 2023-09-28
-- In **2022** the company changes its name to *Posit PBC* in a move to be seen as more language-agnostic and embrace other programming languages too (Python, Julia, etc.). *RStudio* lives on as an IDE
-
+-   An *Integrated Development Interface* (IDE)
+-   Company founded in **2009** in Boston (MA, USA) to develop open source and enterprise-ready professional software for the *R* statistical computing environment
+-   First public beta version (v0.92) of the RStudio IDE came out in **2011**; Version 1 released in 2016; latest version (on `r Sys.Date()`) is Version: 2023.09.0+463, released: 2023-09-28
+-   In **2022** the company changes its name to *Posit PBC* in a move to be seen as more language-agnostic and embrace other programming languages too (Python, Julia, etc.). *RStudio* lives on as an IDE
 
 ## The ***RStudio*** interface
 
-
-
-
 ## Other essential tools we will use
 
-- *R* packages
-  - `tidyverse`
-    - `dplyr`
-  - `easystats`
-    - `datawizard`
-  - `ggplot2`
-  - `ggformula`
-  - `gtsummary`
-  
-- *R Markdown* / *Quarto*
-
-
+-   *R* packages
+    -   `tidyverse`
+        -   `dplyr`
+    -   `easystats`
+        -   `datawizard`
+    -   `ggplot2`
+    -   `ggformula`
+    -   `gtsummary`
+-   *R Markdown* / *Quarto*
 
 ## Functions
 
@@ -114,7 +100,6 @@ Chris_s_mean <- function(number1, number2) {
 }
 
 ```
-
 
 ```{r}
 #| error: true
@@ -156,43 +141,22 @@ Chris_s_mean(4:400)
 
 # Measurement: from questionnaire items to dataset variables
 
-
 ## Variables
 
-- Variables vs. constants
-- "Lives in Newcastle" (Yes/No)
-- "Lives in the UK" (Yes/No)
-- "Lives on planet Earth" (Yes/No) (When you will be giving this lecture and your children will be sitting where you are sitting now, this may no longer be the case)
-
+-   Variables vs. constants
+-   "Lives in Newcastle" (Yes/No)
+-   "Lives in the UK" (Yes/No)
+-   "Lives on planet Earth" (Yes/No) (When you will be giving this lecture and your children will be sitting where you are sitting now, this may no longer be the case)
 
 # Understanding and describing (clean) data
 
-
-
-
-
-
-
 # Managing "messy" data
-
-
-
-
-
-
-
 
 # Visualisation
 
-
-
-
-
-
 ## This print "Two content" output
 
-:::: {.columns}
-
+::: columns
 ::: {.column width="40%"}
 ```{r}
 #| echo: true
@@ -209,20 +173,15 @@ ggplot(penguins,
 :::
 
 ::: {.column width="60%"}
-
 Something else
-
+:::
 :::
 
-::::
-
-::: {.notes}
+::: notes
 I may write a lot of extra stuff here in case you are interested.
 :::
 
-
 ## Title
-
 
 ```{r}
 #| echo: true
@@ -234,13 +193,10 @@ ggplot(penguins,
   geom_point()
 ```
 
-
 ## This prints to Comparison
 
-:::: {.columns}
-
-::: {.column}
-
+::: columns
+::: column
 ```{r}
 #| echo: true
 #| output: true
@@ -249,11 +205,9 @@ plot(penguins$bill_depth_mm,
      penguins$bill_length_mm)
 
 ```
-
 :::
 
-::: {.column}
-
+::: column
 ```{r}
 #| echo: true
 #| output: true
@@ -263,19 +217,15 @@ ggplot(penguins,
            bill_length_mm)) +
   geom_point()
 ```
-
+:::
 :::
 
-::::
-
---------------------------------------------------------------------------------
+------------------------------------------------------------------------
 
 ## Using `with()` in *base R*
 
-:::: {.columns}
-
-::: {.column}
-
+::: columns
+::: column
 ```{r}
 #| echo: true
 #| output: true
@@ -285,11 +235,9 @@ with(penguins,
           bill_length_mm))
 
 ```
-
 :::
 
-::: {.column}
-
+::: column
 ```{r}
 #| echo: true
 #| output: true
@@ -299,20 +247,15 @@ ggplot(penguins,
            bill_length_mm)) +
   geom_point()
 ```
-
+:::
 :::
 
-::::
-
-
---------------------------------------------------------------------------------
+------------------------------------------------------------------------
 
 ## Changing the `ggplot` theme
 
-:::: {.columns}
-
-::: {.column}
-
+::: columns
+::: column
 ```{r}
 #| echo: true
 #| output: true
@@ -322,11 +265,9 @@ with(penguins,
           bill_length_mm))
 
 ```
-
 :::
 
-::: {.column}
-
+::: column
 ```{r}
 #| echo: true
 #| output: true
@@ -337,20 +278,15 @@ ggplot(penguins,
   geom_point() +
   theme_classic()
 ```
-
+:::
 :::
 
-::::
-
-
---------------------------------------------------------------------------------
+------------------------------------------------------------------------
 
 ## *Some* further styling options
 
-:::: {.columns}
-
-::: {.column}
-
+::: columns
+::: column
 ```{r}
 #| echo: true
 #| output: true
@@ -375,38 +311,26 @@ with(penguins,
      )
 
 ```
-
-
 :::
 
-::: {.column}
-
+::: column
 ```{r}
 #| echo: true
 #| output: true
 
-ggplot(penguins,                              # draw empty canvas
-       aes(bill_depth_mm,                     # select variables to plot
-           bill_length_mm,
-           color = species)) +                # grouping colour
-  geom_point() +                              # select plot type
-  theme_classic()                             # select pre-set style settings (theme)
+# ggplot(penguins,                              # draw empty canvas
+#        aes(bill_depth_mm,                     # select variables to plot
+#            bill_length_mm,
+#            color = species)) +                # grouping colour
+#   geom_point() +                              # select plot type
+#   theme_classic()                             # select pre-set style settings (theme)
 ```
-
+:::
 :::
 
-::::
-
-
-
-
-
-
---------------------------------------------------------------------------------
-
+------------------------------------------------------------------------
 
 ## Test
-
 
 ```{r}
 #| echo: true
@@ -421,16 +345,8 @@ mtcars |>
   geom_smooth(method = "loess", formula = "y~x")
 ```
 
-
-
-
---------------------------------------------------------------------------------
-
+------------------------------------------------------------------------
 
 ## Final
 
-
 This is an [important sentence!]{.fragment .highlight-red}
-
-
-

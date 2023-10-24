@@ -32,44 +32,56 @@ bibliography: references.bib
 
 # Statement of purpose
 
-Various `R` packages aiming to facilitate the creation of descriptive and modelling summary tables have seen light in recent years. Tabulation has for a long time been a limitation in `base R`, particularly in respect to creating the types of tables that summarise typical social scientific variables and datasets (i.e. categorical variables with labelled values). Various recent packages now facilitate the creation of tables, focusing either on (a) creating near-to-publishable quality summary tables for specific purposes with very little and easy code, or (b) allowing maximum flexibility to create any table imaginable with more complex code. However, it is harder to find functions that achieve a good middle ground between the two. Furthermore, most of the table functions work best for HTML output or - with the additional complexities introduced by LaTex - PDF. Options for output to Microsoft Word (and related popular text editing) format is severely limited.
+Various `R` packages aiming to facilitate the creation of descriptive and modelling summary tables have seen light in recent years.
+Tabulation has for a long time been a limitation in `base R`, particularly in respect to creating the types of tables that summarise typical social scientific variables and datasets (i.e. categorical variables with labelled values).
+Various recent packages now facilitate the creation of tables, focusing either on (a) creating near-to-publishable quality summary tables for specific purposes with very little and easy code, or (b) allowing maximum flexibility to create any table imaginable with more complex code.
+However, it is harder to find functions that achieve a good middle ground between the two.
+Furthermore, most of the table functions work best for HTML output or - with the additional complexities introduced by LaTex - PDF.
+Options for output to Microsoft Word (and related popular text editing) format is severely limited.
 
 My aim here is to identify the optimal packages and functions for all tabulation needs that satisfy the following criteria, primarily with the purpose of facilitating teaching:
 
-- the fewest packages needed to rely upon;
-- the simplest code;
-- code that follows the same pattern as other functions used for other purposes (e.g. formula syntax as with modelling; graphics syntax, as with ggplot2);
-- prints well to MS Word (or produces an object type that can easily be passed on to `{flextable}` or similar)
-
+-   the fewest packages needed to rely upon;
+-   the simplest code;
+-   code that follows the same pattern as other functions used for other purposes (e.g. formula syntax as with modelling; graphics syntax, as with ggplot2);
+-   prints well to MS Word (or produces an object type that can easily be passed on to `{flextable}` or similar)
 
 ## Packages
 
 ```{r}
+
+# renv::install("rio")
 
 library(here)
 library(tidyverse)
 library(janitor)
 library(easystats)    # datawizard
 library(modelsummary)
+library(gtsummary)
 library(strengejacke)
 library(gt)
 library(flextable)
 
 ```
 
-
 ## Data
 
 ```{r}
+#| eval: false
 
 # data1 <- readRDS(here("Data", "for_analysis", "wvs7.rds")) |>
-data <- data_read(here("Data", "for_analysis", "wvs7.rds")) |>
+data_read(here("Data", "for_analysis", "wvs7.rds")) |>
   sjlabelled::drop_labels() |>
   data_extract(c(B_COUNTRY, Q1, Q57, Q195, Q260, Q261:Q263)) |>
   mutate(B_COUNTRY = as_character(B_COUNTRY),
          across(Q261:Q262, as_numeric)) |> 
-  sample_n(1000)
+  sample_n(1000) |> 
+  data_write(here("Data", "test", "sampledata.rds"))
 
+```
+
+```{r}
+data <- data_read(here("Data", "test", "sampledata.rds"), convert_factors = FALSE)
 ```
 
 ## Dataset summaries
@@ -81,7 +93,6 @@ data <- data_read(here("Data", "for_analysis", "wvs7.rds")) |>
 gt::gt_preview(data)
 ```
 
-
 ```{r}
 
 data |> 
@@ -91,10 +102,9 @@ data |>
 
 ```
 
-
 ## One-way tabulations (frequencies tables)
 
-#### Base R
+#### `{base}`
 
 ```{r}
 # Base R
@@ -114,15 +124,12 @@ data |> count(Q263) |>                          # basic: N's only
 
 ```
 
-
 #### `janitor::tabyl()`
 
 ```{r}
 data |> tabyl(Q263) |> 
   flextable()
 ```
-
-
 
 #### `{easystats}` `datawizard::data_tabulate()`
 
@@ -135,7 +142,6 @@ data |> datawizard::data_tabulate(Q263) |> sjmisc::print_md()
 
 
 ```
-
 
 #### `modelsummary::datasummary()`
 
@@ -156,9 +162,7 @@ modelsummary::datasummary(Q57 + 1 ~ N + Percent(),                        # Colu
 
 ```
 
-
 #### `gtsummary::tbl_summary()`
-
 
 ```{r}
 
@@ -169,11 +173,19 @@ data |> gtsummary::tbl_summary(include = Q57)                        # a bit hac
 
 ```
 
+#### `flextable::proc_freq()`
 
+See https://ardata-fr.github.io/flextable-book/crosstabs.html
+
+```{r}
+data |> 
+  # drop_na(Q57) |>  
+  flextable::proc_freq("Q57")
+```
 
 ## Two-way tabulations (corsstabulations)
 
-#### Base R
+#### `{base}`
 
 ```{r}
 # Base R
@@ -181,7 +193,6 @@ data |> gtsummary::tbl_summary(include = Q57)                        # a bit hac
 xtabs( ~ educ_num + trusting, data = ex1) |> prop.table(margin = 2) |> round(2) |> addmargins()
 
 ```
-
 
 #### `{tidyverse}` `dplyr::`
 
@@ -191,7 +202,6 @@ xtabs( ~ educ_num + trusting, data = ex1) |> prop.table(margin = 2) |> round(2) 
 data |> count(Q57, Q263)
 
 ```
-
 
 #### `{easystats}` `datawizard::data_tabulate()`
 
@@ -211,7 +221,6 @@ data |>
 
 ```
 
-
 #### `janitor::tabyl()`
 
 ```{r}
@@ -229,9 +238,7 @@ data |> tabyl(Q57, Q263, show_na = FALSE) |>
 data |> sjmisc::flat_table(Q57, Q263, margin = c("row"))
 ```
 
-
-### `gtsummary::tbl_cross()`
-
+#### `gtsummary::tbl_cross()`
 
 ```{r}
 
@@ -242,8 +249,7 @@ data |>
 
 ```
 
-
-### `modelsummary::datasummary_crosstab()`
+#### `modelsummary::datasummary_crosstab()`
 
 Major shortcoming that the "All" total marginals summarise the entire data, with the missing values of the crosstabulated variables included, while the missign values themselves are not shown within the table, so it can be very confusing and dangerous.
 
@@ -259,11 +265,6 @@ modelsummary::datasummary_crosstab(Q57 ~ Q260, statistic = 1 ~ N + Percent("col"
 
 ```
 
-
-
-
-
-
 ```{r}
 #| eval: false
 
@@ -273,4 +274,11 @@ with(data,
   sjPlot::sjt.xtab(Q57, Q260))
 ```
 
+#### `flextable::proc_freq()`
 
+See https://ardata-fr.github.io/flextable-book/crosstabs.html
+
+```{r}
+data |> 
+  flextable::proc_freq("Q57", "Q260")
+```

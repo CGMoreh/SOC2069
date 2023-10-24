@@ -32,27 +32,30 @@ bibliography: references.bib
 
 ------------------------------------------------------------------------
 
-```
+```         
 Timetable week: 5
 Topic: "Measurement and Description"
 ```
+
 ------------------------------------------------------------------------
 
 # Learning outcomes
 
 By thee end of the session you will know how to:
 
-  - Install and load *packages* in R
-  - Import data into your R environment
-  - Explore variables of different types using descriptive statistics
-  - Create basic descriptive graphs to visualise your data
+-   Install and load *packages* in R
+-   Import data into your R environment
+-   Explore variables of different types using descriptive statistics
+-   Create basic descriptive graphs to visualise your data
 
 # Introduction
 
-In *Worksheet 2a* you have had a look at the RStudio environment and have created an R script (`script.R` or `Lab_2.R`) and a Quarto markdown document (`Lab_2.qmd`). In *Worksheet 1* you have also explored some survey data sources and read through survey documentation to gain an understanding of how sociological concepts - such as "trust" - are being measured and operationalised in empirical research. The exercises on this worksheet will begin bringing these two activities together by exploring the original survey data using `R`.
+In *Worksheet 2a* you have had a look at the RStudio environment and have created an R script (`script.R` or `Lab_2.R`) and a Quarto markdown document (`Lab_2.qmd`).
+In *Worksheet 1* you have also explored some survey data sources and read through survey documentation to gain an understanding of how sociological concepts - such as "trust" - are being measured and operationalised in empirical research.
+The exercises on this worksheet will begin bringing these two activities together by exploring the original survey data using `R`.
 
-Open the `Lab_2.R` script file and start working there. At the end, once you have completed all the exercises, the final task will be to transfer some of the code from the `R` script into the `Lab_2.qmd` markdown document, add some more description to what the code is supposed to achieve, and test if you have done it all correctly by rendering it to HTML or Microsoft Word.
-
+Open the `Lab_2.R` script file and start working there.
+At the end, once you have completed all the exercises, the final task will be to transfer some of the code from the `R` script into the `Lab_2.qmd` markdown document, add some more description to what the code is supposed to achieve, and test if you have done it all correctly by rendering it to HTML or Microsoft Word.
 
 # Exercise B1: `R` functions and user-written packages
 
@@ -60,16 +63,21 @@ Open the `Lab_2.R` script file and start working there. At the end, once you hav
 
 ------------------------------------------------------------------------
 
-Most work in `R` is done using *functions*. The most common operations involving a function take the following generic form (think of an analogy of baking a loaf of bread):
+Most work in `R` is done using *functions*.
+The most common operations involving a function take the following generic form (think of an analogy of baking a loaf of bread):
 
-![](sheet_pics/bake_function.png){fig-align="center" width=400}
+![](sheet_pics/bake_function.png){fig-align="center" width="400"}
 
-It's possible to **create your own functions**. This makes `R` extremely powerful and extendible. But instead of programming our own functions, we can rely on functions written by other people and bundled together into **packages** designed to perform some specific (or sometimes many very general) tasks.
+It's possible to **create your own functions**.
+This makes `R` extremely powerful and extendible.
+But instead of programming our own functions, we can rely on functions written by other people and bundled together into **packages** designed to perform some specific (or sometimes many very general) tasks.
 
-There are a large number of reliable, tested and oft-used packages containing functions that are particularly useful for social scientists. In this module, we will rely on several such user-written packages that extend the basic packages already bundled in with our `R` software (the so-called *base-R* packages and functions).
+There are a large number of reliable, tested and oft-used packages containing functions that are particularly useful for social scientists.
+In this module, we will rely on several such user-written packages that extend the basic packages already bundled in with our `R` software (the so-called *base-R* packages and functions).
 
-Most mature packages are available from the *Comprehensive R Archive Network* (CRAN) or private repositories such as *Bioconductor* and *GitHub*. Packages made available on CRAN can be installed using the command `install.packages("packagename")`. Once the package/library is installed (i.e. it is sitting somewhere on your computer), we then need to *load* it to the current R session using the command `library(packagename)`.
-
+Most mature packages are available from the *Comprehensive R Archive Network* (CRAN) or private repositories such as *Bioconductor* and *GitHub*.
+Packages made available on CRAN can be installed using the command `install.packages("packagename")`.
+Once the package/library is installed (i.e. it is sitting somewhere on your computer), we then need to *load* it to the current R session using the command `library(packagename)`.
 
 ::: {.taskbox .task}
 **Install the `tidyverse` collection of packages and read about the packages and functions they contain**
@@ -89,7 +97,6 @@ library("tidyverse")
 Here's a one-minute video crash-course on what you are expected to do:
 
 ![](sheet_pics/first-code-in-script.mp4)
-
 :::
 
 We can check the list of packages that are loaded with the `tidyverse` library using a command from the `tidyverse` itself:
@@ -98,7 +105,8 @@ We can check the list of packages that are loaded with the `tidyverse` library u
 tidyverse_packages()
 ```
 
-With the `library()` function, we are loading the entire "library" of functions and data from the given package (or suite of packages). If we know that we will only be using one or two functions just once or twice from a package in our session, we could alternatively just use the function we need without loading the entire library, prepending the function name with the package name and two consecutive colons (`packagename::functionname()`):
+With the `library()` function, we are loading the entire "library" of functions and data from the given package (or suite of packages).
+If we know that we will only be using one or two functions just once or twice from a package in our session, we could alternatively just use the function we need without loading the entire library, prepending the function name with the package name and two consecutive colons (`packagename::functionname()`):
 
 ```{r, eval=FALSE}
 tidyverse::tidyverse_packages()
@@ -106,14 +114,12 @@ tidyverse::tidyverse_packages()
 
 I will sometimes use this form in the worksheets to clarify what package a function originates from, even if the package is loaded in the library.
 
-
 ::: {.taskbox .task}
 Now that you've installed a package, write the required functions in your R scripts to **install** and **load** the following packages that we will also be using a lot:
 
-- the `{easystats}` collection of packages
-- the `{gtsummary}` package
-- the `{ggformula}` package
-
+-   the `{easystats}` collection of packages
+-   the `{gtsummary}` package
+-   the `{ggformula}` package
 :::
 
 ```{r}
@@ -125,15 +131,12 @@ library(gtsummary)
 library(ggformula)
 ```
 
-
 You can read more about the packages we have just installed here:
 
-- [`tidyverse`](https://www.tidyverse.org/)
-- [`easystats`](https://easystats.github.io/easystats/)
-- [`gtsummary`](https://www.danieldsjoberg.com/gtsummary/index.html)
-- [`ggformula`](https://www.mosaic-web.org/ggformula/index.html)
-
-
+-   [`tidyverse`](https://www.tidyverse.org/)
+-   [`easystats`](https://easystats.github.io/easystats/)
+-   [`gtsummary`](https://www.danieldsjoberg.com/gtsummary/index.html)
+-   [`ggformula`](https://www.mosaic-web.org/ggformula/index.html)
 
 # Exercise B2: Importing data
 
@@ -141,42 +144,58 @@ You can read more about the packages we have just installed here:
 
 ------------------------------------------------------------------------
 
-So far we have learnt about some useful functions for installing and loading R packages. We can now look at functions that can be used to load a dataset and make it available for analysis. `R`'s native data format carries the extension `.rds`. But we can import data stored in other formats too, such as the generic *comma separated values* (`.csv`) format or the various formats used by other proprietary statistical analysis packages (e.g. SPSS, Stata, SAS).
+So far we have learnt about some useful functions for installing and loading R packages.
+We can now look at functions that can be used to load a dataset and make it available for analysis.
+`R`'s native data format carries the extension `.rds`.
+But we can import data stored in other formats too, such as the generic *comma separated values* (`.csv`) format or the various formats used by other proprietary statistical analysis packages (e.g. SPSS, Stata, SAS).
 
 The typical survey data that we use most commonly in the social sciences is usually distributed in one of the proprietary formats mentioned, because those have been designed specifically to manage "labelled" data (i.e. variables that need to have longer descriptive *labels* and consist of many categorical variables whose categories/levels only make sense if they are themselves meaningfully "labelled").
 
-We saw from the exercises in *Worksheet 1* that the [The World Values Survey (WVS)](https://www.worldvaluessurvey.org/WVSContents.jsp) provides the greatest number of options for data download formats, including `.rds`. All other surveys provide their data either in `.csv`, `.sav` (SPSS) or `.dta` (Stata). My advice is to download the `.sav` (SPSS) version of the data whenever possible, just because SPSS allows the longest variable and value labels and therefore that data labelling may be the most complete. 
+We saw from the exercises in *Worksheet 1* that the [The World Values Survey (WVS)](https://www.worldvaluessurvey.org/WVSContents.jsp) provides the greatest number of options for data download formats, including `.rds`.
+All other surveys provide their data either in `.csv`, `.sav` (SPSS) or `.dta` (Stata).
+My advice is to download the `.sav` (SPSS) version of the data whenever possible, just because SPSS allows the longest variable and value labels and therefore that data labelling may be the most complete.
 
-Traditionally, one of the most severe shortcomings of `R` compared to other proprietary statistical analysis packages has been it's very limited and cumbersome support of labelling. This has changed significantly over the past few years, and currently a suite of packages developed or contributed to by sociologist [Daniel Lüdecke](https://github.com/strengejacke) of the University of Hamburg are among the best available tools for this purpose - including the packages making up the `{easystats}` ecosystem, which we have just installed in the previous exercise.
+Traditionally, one of the most severe shortcomings of `R` compared to other proprietary statistical analysis packages has been it's very limited and cumbersome support of labelling.
+This has changed significantly over the past few years, and currently a suite of packages developed or contributed to by sociologist [Daniel Lüdecke](https://github.com/strengejacke) of the University of Hamburg are among the best available tools for this purpose - including the packages making up the `{easystats}` ecosystem, which we have just installed in the previous exercise.
 
 ::: {.notebox .note}
 **Access to survey data**
 
-In these lab sessions we will be using real-world data from some of the surveys that you learnt about in Lab 1. However, real-life data - even structured survey data - can be messy and too large. 
+In these lab sessions we will be using real-world data from some of the surveys that you learnt about in Lab 1.
+However, real-life data - even structured survey data - can be messy and too large.
 
-To make it easier for you to focus on the more substantive aspects of methodological work in this module, you will be able to access lightly pre-formatted and reduced versions of those data-sets. You will be able to download the SOC2069-version of the data from Canvas for the purpose of working with them for this module. 
+To make it easier for you to focus on the more substantive aspects of methodological work in this module, you will be able to access lightly pre-formatted and reduced versions of those data-sets.
+You will be able to download the SOC2069-version of the data from Canvas for the purpose of working with them for this module.
 
 However, if you will want to use survey data in the future, you will need to download the original raw versions of the datasets form the original sources following a free registration process.
 
-**You can read about the data that you have available here: [https://soc2069.chrismoreh.com/data/data_main](https://soc2069.chrismoreh.com/data/data_main)**
-
+**You can read about the data that you have available here: <https://soc2069.chrismoreh.com/data/data_main>**
 :::
 
-
-Let's load the *World Values Survey, Wave 7* dataset. 
+Let's load the *World Values Survey, Wave 7* dataset.
 
 First, [**download the dataset from Canvas**](https://ncl.instructure.com/files/7506140/download?download_frd=1) and save it in the "Data" subfolder of the R Project folder you created in *Worksheet 2a*.
 
-Once the dataset is downloaded, you can import it into `R`. Because the downloaded data file is in the `.rds` format, you can navigate to the file either from within RStudio's Files pane, or manually in Windows Explorer, and double-click the file to open. However, this is not a recommended way of opening a file, because you want to have a record of the action in your R script for the future. 
+Once the dataset is downloaded, you can import it into `R`.
+Because the downloaded data file is in the `.rds` format, you can navigate to the file either from within RStudio's Files pane, or manually in Windows Explorer, and double-click the file to open.
+However, this is not a recommended way of opening a file, because you want to have a record of the action in your R script for the future.
 
-You can load datasets saved in the `.rds` format using the `readRDS()` command. If your dataset is in another format, you can check out the `{readr}` package (for rectangular data such as `.csv` (comma separated values) or `.tsv` (tab separated values)), `{readxl}` (for Excel data), and `{sjlabelled}` (for SPSS, Stata and SAS formats). 
+You can load datasets saved in the `.rds` format using the `readRDS()` command.
+If your dataset is in another format, you can check out the `{readr}` package (for rectangular data such as `.csv` (comma separated values) or `.tsv` (tab separated values)), `{readxl}` (for Excel data), and `{sjlabelled}` (for SPSS, Stata and SAS formats).
 
-The more generic function `data_read()` from `{easystats}`'s `{datawizard}` package loads data from various formats based on the source files extension, including files from internet sources or compressed files. It relies on the `{rio}` package, which provides similar functionality. 
+The more generic function `data_read()` from `{easystats}`'s `{datawizard}` package loads data from various formats based on the source files extension, including files from internet sources or compressed files.
+It relies on the `{rio}` package, which provides similar functionality.
 
 ::: {.notebox .note}
-
-**It's important** to note that by default the `data_read()` function assumes that numeric variables where all values have a value label are categorical and will convert them into *factors*. That means that all the numeric "values" will be replaced by the "value labels" (e.g. 1="Yes"/ 2="No" will become simply "Yes"/"No"). This is usually a reasonable default behaviour, because the majority of functions in `R` do not handle "value labels" and working with textual (character string) values can be more explicit. However, this may be less appropriate when the dataset contains many long ordered variables (such as 0-10 scale items), as we will most likely want to treat such variables as *numeric* in statistical models. To cancel this default behaviour, we can add the additional argument `convert_factors = FALSE`. This is the format of the variables as listed in the Codebook on the module's website (https://soc2069.chrismoreh.com/data/data_main), with both "Values" and "Value labels" kept as in the original survey questionnaire documentation. This is also the format that gets imported when using `readRDS()`. However, most of the common tabulation and graphing functions will not show the category "labels" in the output either, and for that purpose having variables "converted to factors" (with the original "Values" overwritten by the "Value labels") may be a better option. Below we will import the data with factors converted, as we will focus on tabulation and plotting.
-
+**It's important** to note that by default the `data_read()` function assumes that numeric variables where all values have a value label are categorical and will convert them into *factors*.
+That means that all the numeric "values" will be replaced by the "value labels" (e.g. 1="Yes"/ 2="No" will become simply "Yes"/"No").
+This is usually a reasonable default behaviour, because the majority of functions in `R` do not handle "value labels" and working with textual (character string) values can be more explicit.
+However, this may be less appropriate when the dataset contains many long ordered variables (such as 0-10 scale items), as we will most likely want to treat such variables as *numeric* in statistical models.
+To cancel this default behaviour, we can add the additional argument `convert_factors = FALSE`.
+This is the format of the variables as listed in the Codebook on the module's website (https://soc2069.chrismoreh.com/data/data_main), with both "Values" and "Value labels" kept as in the original survey questionnaire documentation.
+This is also the format that gets imported when using `readRDS()`.
+However, most of the common tabulation and graphing functions will not show the category "labels" in the output either, and for that purpose having variables "converted to factors" (with the original "Values" overwritten by the "Value labels") may be a better option.
+Below we will import the data with factors converted, as we will focus on tabulation and plotting.
 :::
 
 On my computer, I can import the WVS7 dataset from the location (path) where I saved the file like so:
@@ -194,13 +213,10 @@ wvs7data <- data_read("D:/GitHub/SOC2069/Data/for_analysis/wvs7.rds")
 
 ```
 
-In the code above, I am assigning (with the assignment operator `<-`) the data to an **object** I called "wvs7data", but I could have given it any other name as long as it follows `R`'s naming conventions (no spaces, avoid special characters; [see also recommended naming strategies in the tidyverse style guide](https://style.tidyverse.org/syntax.html?q=object#object-names)). The object will appear in the Environment tab (on the bottom right pane).
-
-
-
+In the code above, I am assigning (with the assignment operator `<-`) the data to an **object** I called "wvs7data", but I could have given it any other name as long as it follows `R`'s naming conventions (no spaces, avoid special characters; [see also recommended naming strategies in the tidyverse style guide](https://style.tidyverse.org/syntax.html?q=object#object-names)).
+The object will appear in the Environment tab (on the bottom right pane).
 
 ::: {.importantbox .important}
-
 **Working with folders and paths**
 
 If the data file is in the same folder as the R script used to import it, it's enough to specify the data file's name to import it; e.g.:
@@ -217,9 +233,13 @@ However, if the data is in a different directory, you will need to specify eithe
 
 ***Copy/pasting paths on Windows computers***
 
-An easy way to get the path to the data file is to navigate there on your computer, copy the path, and paste it into your R script. However, there are some complications with this procedure when using a Windows PC. My path above would have copied as `D:\GitHub\SOC2069\Data\for_analysis`, but `R` does not recognise back-slashes as path elements because in `R` the backslash has a special meaning. You must manually replace backslashes with either forward slashes or double-backslashes (`D:\\GitHub\\SOC2069\\Data\\for_analysis`). 
+An easy way to get the path to the data file is to navigate there on your computer, copy the path, and paste it into your R script.
+However, there are some complications with this procedure when using a Windows PC. My path above would have copied as `D:\GitHub\SOC2069\Data\for_analysis`, but `R` does not recognise back-slashes as path elements because in `R` the backslash has a special meaning.
+You must manually replace backslashes with either forward slashes or double-backslashes (`D:\\GitHub\\SOC2069\\Data\\for_analysis`).
 
-Another option is to use the function `readClipboard()`, which pastes into R whatever text you have on your clipboard (after copying it) using double backslashes. For example, you can copy a path to the folder where the data is located, then add the filename to the end of the text string using the `paste0()` function to get a working path to the file you want to load. You can check:
+Another option is to use the function `readClipboard()`, which pastes into R whatever text you have on your clipboard (after copying it) using double backslashes.
+For example, you can copy a path to the folder where the data is located, then add the filename to the end of the text string using the `paste0()` function to get a working path to the file you want to load.
+You can check:
 
 ```{r}
 #| eval: false
@@ -239,10 +259,12 @@ The file in the path can then be imported as normal:
 wvs7data <- data_read(paste0(readClipboard(), "/wvs7.rds"))
 ```
 
-
 ***Using the `{here}` package***
 
-Working with paths, folders, directories in a sustainable and robust way can be a challenge. The `{here}` package provides some useful options if you are working within R project directories. By loading the `here` library, you establish the working directory to be the root folder of your R project (i.e. the folder where the `.Rproj` file is located), and you can easily construct paths to any file within that project by listing the folders that contain it relative to the project root. This works similarly on all operating systems, and it's as easy as:
+Working with paths, folders, directories in a sustainable and robust way can be a challenge.
+The `{here}` package provides some useful options if you are working within R project directories.
+By loading the `here` library, you establish the working directory to be the root folder of your R project (i.e. the folder where the `.Rproj` file is located), and you can easily construct paths to any file within that project by listing the folders that contain it relative to the project root.
+This works similarly on all operating systems, and it's as easy as:
 
 ```{r}
 
@@ -252,12 +274,13 @@ wvs7data <- data_read(here("Data", "for_analysis", "wvs7.rds"))
 
 ```
 
-
 You can read more about the package in the ["R for Social Scientists"](https://datacarpentry.org/r-socialsci) course.
-
 :::
 
-We can look at the dataset object in the Environment pane. If we click on the blue button with the white arrow before the name of the object, a list of variables and other information about them will roll down. If we click on the object's name or info, the dataset will open in the Sources pane, just next to the R script file. This is equivalent to having run the following command:
+We can look at the dataset object in the Environment pane.
+If we click on the blue button with the white arrow before the name of the object, a list of variables and other information about them will roll down.
+If we click on the object's name or info, the dataset will open in the Sources pane, just next to the R script file.
+This is equivalent to having run the following command:
 
 ```{r eval=FALSE}
 View(wvs7data)    
@@ -265,13 +288,15 @@ View(wvs7data)
 
 Note the capital "V"; `R` is case-sensitive, so always pay attention; `view(wvs7data)` won't work.
 
-You can explore the dataset a bit. Only the first 50 columns (i.e. variables) are displayed, to see the next 50 you can click on arrow (\>) in the dataset window's toolbar. Once you've had a quick look, you can close that view or return to the R script.
+You can explore the dataset a bit.
+Only the first 50 columns (i.e. variables) are displayed, to see the next 50 you can click on arrow (\>) in the dataset window's toolbar.
+Once you've had a quick look, you can close that view or return to the R script.
 
-We have already read about the WVS7 survey in Lab 1 and have had a look at the survey website. The codebook for the dataset is available at: [https://soc2069.chrismoreh.com/data/data_main#world-values-survey-wave-7-wvs7](https://soc2069.chrismoreh.com/data/data_main#world-values-survey-wave-7-wvs7) 
+We have already read about the WVS7 survey in Lab 1 and have had a look at the survey website.
+The codebook for the dataset is available at: <https://soc2069.chrismoreh.com/data/data_main#world-values-survey-wave-7-wvs7>
 
-Have a look through the dataset description and variable list to get a sense of the data. As you did last week, locate the variables that refer to "trust" and make a note of the variable names.
-
-
+Have a look through the dataset description and variable list to get a sense of the data.
+As you did last week, locate the variables that refer to "trust" and make a note of the variable names.
 
 # Exercise B3: Basic descriptive statistics
 
@@ -283,7 +308,8 @@ Let's learn a few functions that can help us explore variables through basic des
 
 ## Tabulate categorical variables
 
-Most of the variables in the dataset are categorical, so tabulating the frequency distributions of their categories can come handy. There are various ways for doing this in R, but one of the most convenient options is to use the `data_tabulate()` function from the `{datawizard}` package.
+Most of the variables in the dataset are categorical, so tabulating the frequency distributions of their categories can come handy.
+There are various ways for doing this in R, but one of the most convenient options is to use the `data_tabulate()` function from the `{datawizard}` package.
 
 Let's look, for instance, at the "generalised social trust" variable, *Q57*:
 
@@ -294,13 +320,21 @@ wvs7data |> data_tabulate(Q57)
 
 ```
 
-Let's decipher the code above: 
+Let's decipher the code above:
 
-- first, we assume that there is an object called 'wvs7data' in our Environment that contains the *WVS7* dataset; unless we restarted RStudio or deleted it, the object should still be there from the previous exercise; 
+-   first, we assume that there is an object called 'wvs7data' in our Environment that contains the *WVS7* dataset; unless we restarted RStudio or deleted it, the object should still be there from the previous exercise;
 
-- the `|>` (or `%>%`) operator (called a *pipe*) allows objects and functions to be fed (i.e. piped) forward to other functions. The `%>%` "pipe" originates from the user-written package `{magrittr}` and was widely adopted in the `{tidyverse}`. The `|>` version is a new native operator introduced in recent versions of `R`. It looks a bit simpler than the original pipe, and it behaves somewhat differently (we won't get into that here). The Windows Rstudio keyboard shortcut to insert the pipe character is *Ctrl + Shift + M*, which by default inserts the original version. You can change the RStudio settings to insert the native version instead. If you get to use RStudio more, you may want to do this (in the RStudio Menu bar, go *Tools* \> *Global Options...*, click *Code* and then tick the box *"Use native pipe operator"*). Getting into the habit of using the "pipe" workflow is particularly useful as it makes combining a series of operations/commands easier to read and follow. Here, we take our dataset and pipe it forward so that we can easily refer to variables from that dataset (such as *Q57*); 
+-   the `|>` (or `%>%`) operator (called a *pipe*) allows objects and functions to be fed (i.e. piped) forward to other functions.
+    The `%>%` "pipe" originates from the user-written package `{magrittr}` and was widely adopted in the `{tidyverse}`.
+    The `|>` version is a new native operator introduced in recent versions of `R`.
+    It looks a bit simpler than the original pipe, and it behaves somewhat differently (we won't get into that here).
+    The Windows Rstudio keyboard shortcut to insert the pipe character is *Ctrl + Shift + M*, which by default inserts the original version.
+    You can change the RStudio settings to insert the native version instead.
+    If you get to use RStudio more, you may want to do this (in the RStudio Menu bar, go *Tools* \> *Global Options...*, click *Code* and then tick the box *"Use native pipe operator"*).
+    Getting into the habit of using the "pipe" workflow is particularly useful as it makes combining a series of operations/commands easier to read and follow.
+    Here, we take our dataset and pipe it forward so that we can easily refer to variables from that dataset (such as *Q57*);
 
-- the remaining code applies the `data_tabulate` function to the variable *Q57*
+-   the remaining code applies the `data_tabulate` function to the variable *Q57*
 
 We could have written the command in these ways, with the same result:
 
@@ -310,9 +344,12 @@ data_tabulate(wvs7data, Q57)
 data_tabulate(wvs7data$Q57)
 ```
 
-The first approach above takes the general form `function_name(dataframe_name, variable_name)`, which some `tidyverse`-based functions allow. The second one follows base-R's general form of `function_name(dataframe_name**$**variable_name)`, using the `$` operator. Here, `wvs7data**$**Q57` extracts the *Q57* variable/column from the *wvs7data* dataframe object.
+The first approach above takes the general form `function_name(dataframe_name, variable_name)`, which some `tidyverse`-based functions allow.
+The second one follows base-R's general form of `function_name(dataframe_name**$**variable_name)`, using the `$` operator.
+Here, `wvs7data**$**Q57` extracts the *Q57* variable/column from the *wvs7data* dataframe object.
 
-We will aim to follow the `|>`/`%>%` "piped" workflow whenever possible, because it's more flexible to expand and reads more logically to humans. However, the `$` "extract" notation is ubiquitous and many functions that depend of base-R require it, so it's worth being aware of it.
+We will aim to follow the `|>`/`%>%` "piped" workflow whenever possible, because it's more flexible to expand and reads more logically to humans.
+However, the `$` "extract" notation is ubiquitous and many functions that depend of base-R require it, so it's worth being aware of it.
 
 The resulting frequency table will be printed in the Console, and will look something like this:
 
@@ -332,19 +369,22 @@ Interpret the table:
 
 ## Summarize numeric variables
 
-There are much fewer *numeric* variables in this dataset (and in sociological datasets in general). One that we have is  *age* (*Q262*). The base-R function `summary` is enough to get a basic summary of a quantitative/numeric type variable. Base R functions, however, don't always work with a pipe ( `|>` ) workflow; `summary` doesn't, so we must use the `$` operator:
+There are much fewer *numeric* variables in this dataset (and in sociological datasets in general).
+One that we have is *age* (*Q262*).
+The base-R function `summary` is enough to get a basic summary of a quantitative/numeric type variable.
+Base R functions, however, don't always work with a pipe ( `|>` ) workflow; `summary` doesn't, so we must use the `$` operator:
 
 ```{r}
 summary(wvs7data$Q262)
 
 ```
 
-There are various other options available too in different packages. For example, the below is the default output from the `describe_distribution()` function from the `{datawizard}` package which is part of the `{easystats}` ecosystem that we already installed and loaded:
+There are various other options available too in different packages.
+For example, the below is the default output from the `describe_distribution()` function from the `{datawizard}` package which is part of the `{easystats}` ecosystem that we already installed and loaded:
 
 ```{r}
 wvs7data |> describe_distribution(Q262)
 ```
-
 
 ```{r}
 #| echo: false
@@ -352,15 +392,15 @@ wvs7data |> describe_distribution(Q262)
 
 # Prints nicely with flextable()
 
-wvs7data |> describe_distribution(Q262) |> flextable::flextable()
+wvs7data |> describe_distribution(Q262) |> flextable()
 ```
 
-The `describe_distribution()` function also allows us to change the measure of "central tendency" that we want reported. The easiest is to request "all" available measures of centrality available for the given variable type:
+The `describe_distribution()` function also allows us to change the measure of "central tendency" that we want reported.
+The easiest is to request "all" available measures of centrality available for the given variable type:
 
 ```{r}
 wvs7data |> describe_distribution(Q262, centrality = "all")
 ```
-
 
 ```{block , type = 'questionblock'}
 **Question**
@@ -377,18 +417,22 @@ Interpret the outputs:
 
 There are a few statistics in the outputs above that may be less straightforward:
 
-- the *1st Qu.* and *3rd Qu.* refer to the 1st and 3rd quartiles (i.e. the 25th and 75th percentiles), respectively. Half (50%, i.e. 75%-25%) of the values in the variable fall between these two values. The range of values between the two is also known as the *interquartile range* (IQR), and it's a similar measure of spread/dispersion of the data as the *standard deviation* (SD) or the *variance* (the square of the SD), but more robust against outliers.
-- the *MAD* refers to the *median absolute deviation*, another measure of data dispersion. It is the *median* of the absolute values of the deviations of each data point from the data's median.
-- the *MAP* (for *Maximum A Posteriori* probability estimate) is effectively an equivalent of the *mode* for numeric/continuous variables.
-- the *skewness* and *kurtosis* of a distribution is easiest to evaluate visually, but there are rules of thumb for evaluating the statistics; if the skewness value is roughly between -0.5 and 0.5, the distribution is approximately symmetric; values between  -1 and -0.5 or between 0.5 and 1 reflect moderate negative or positive skewness, respectively; if the skewness is lower than -1 (negative skewed) or greater than 1 (positive skewed), the data are extremely skewed. Similarly, kurtosis values greater than 3 denote a *leptokurtic* shape (peaked, with thick tails), values below 3 a *platykurtic* (flatter) shape, and values around 3 denote a roughly normal distribution. The values of -0.71 thus means a strongly *platykurtic* (flat) distribution. We can get a better sense of what this means by looking at a visual description of the variable's distribution.
-
-
+-   the *1st Qu.* and *3rd Qu.* refer to the 1st and 3rd quartiles (i.e. the 25th and 75th percentiles), respectively. Half (50%, i.e. 75%-25%) of the values in the variable fall between these two values. The range of values between the two is also known as the *interquartile range* (IQR), and it's a similar measure of spread/dispersion of the data as the *standard deviation* (SD) or the *variance* (the square of the SD), but more robust against outliers.
+-   the *MAD* refers to the *median absolute deviation*, another measure of data dispersion. It is the *median* of the absolute values of the deviations of each data point from the data's median.
+-   the *MAP* (for *Maximum A Posteriori* probability estimate) is effectively an equivalent of the *mode* for numeric/continuous variables.
+-   the *skewness* and *kurtosis* of a distribution is easiest to evaluate visually, but there are rules of thumb for evaluating the statistics; if the skewness value is roughly between -0.5 and 0.5, the distribution is approximately symmetric; values between -1 and -0.5 or between 0.5 and 1 reflect moderate negative or positive skewness, respectively; if the skewness is lower than -1 (negative skewed) or greater than 1 (positive skewed), the data are extremely skewed. Similarly, kurtosis values greater than 3 denote a *leptokurtic* shape (peaked, with thick tails), values below 3 a *platykurtic* (flatter) shape, and values around 3 denote a roughly normal distribution. The values of -0.71 thus means a strongly *platykurtic* (flat) distribution. We can get a better sense of what this means by looking at a visual description of the variable's distribution.
 
 ## Visualising distributions
 
-It is often useful to make a graph to visualise a variable, especially a *numeric* variable. A figure can often convey information in a much more efficient way that a statistic/number. One of the most useful graph types for visualising numeric variables is a *histogram*. There are many functions available in R for producing graphs. Once you become more proficient and use R more often, it is very useful to learn the graphing workflow of the `{ggplot2}` package (included in the `{tidyverse}`), which builds up a graph canvas step by step using various elements. That allows the creation of highly customized figures of publishable quality. 
+It is often useful to make a graph to visualise a variable, especially a *numeric* variable.
+A figure can often convey information in a much more efficient way that a statistic/number.
+One of the most useful graph types for visualising numeric variables is a *histogram*.
+There are many functions available in R for producing graphs.
+Once you become more proficient and use R more often, it is very useful to learn the graphing workflow of the `{ggplot2}` package (included in the `{tidyverse}`), which builds up a graph canvas step by step using various elements.
+That allows the creation of highly customized figures of publishable quality.
 
-For quick graphs, base R also has good plotting functionality with simple commands. A histogram of age could be called with:
+For quick graphs, base R also has good plotting functionality with simple commands.
+A histogram of age could be called with:
 
 ```{r}
 hist(wvs7data$Q262)
@@ -407,7 +451,8 @@ If you see a cryptic warning message that a number of "rows containing non-finit
 
 The `{ggformula}` package can be a useful choice if you want to combine the ease of expanding the graphs in more complex ways with a command structure that will become more familiar once we start modelling relationships between variables.
 
-All the plot calls in the `{ggformula}` package start with `gf_`, and they require a "formula" style input. The command would be:
+All the plot calls in the `{ggformula}` package start with `gf_`, and they require a "formula" style input.
+The command would be:
 
 ```{r}
 gf_histogram( ~ Q262, data = wvs7data)
@@ -418,8 +463,9 @@ wvs7data |> gf_histogram( ~ Q262)
 
 ```
 
-This function has a similar structure to the functions that we will use for statistical modelling, generically of the form **goal(y \~ x, data = my_data)**. In our case, we are only "modelling" one variable here, so the first (y-axis) object before the tilde (\~) is missing. The data can be specified with the option `data = ...`, or in a "piped" workflow.
-
+This function has a similar structure to the functions that we will use for statistical modelling, generically of the form **goal(y \~ x, data = my_data)**.
+In our case, we are only "modelling" one variable here, so the first (y-axis) object before the tilde (\~) is missing.
+The data can be specified with the option `data = ...`, or in a "piped" workflow.
 
 *Density plots* are also useful for this purpose:
 
@@ -427,8 +473,8 @@ This function has a similar structure to the functions that we will use for stat
 wvs7data |> gf_density( ~ Q262)
 ```
 
-
-*Categorical* variables are best visualised using *bar charts*. For example, a bar chart of the "generalised trust" variable:
+*Categorical* variables are best visualised using *bar charts*.
+For example, a bar chart of the "generalised trust" variable:
 
 ```{r}
 wvs7data |> gf_bar( ~ Q57)
@@ -443,7 +489,8 @@ wvs7data |>
 
 ```
 
-Finally, we could combine the two graphs that we have created so far, faceting the histogram of *age* by the categories of the "generalised trust" variable. To do this, we add the categorical variable after a vertical bar (\|):
+Finally, we could combine the two graphs that we have created so far, faceting the histogram of *age* by the categories of the "generalised trust" variable.
+To do this, we add the categorical variable after a vertical bar (\|):
 
 ```{r}
 wvs7data |> 
@@ -463,15 +510,13 @@ wvs7data |>
 
 ```
 
-
-
-
 ## Exercise B4: On your own
 
-- Make sure that you have copied all the commands from this page to your R script and that you have saved the script so you can access the commands at a later date.
+-   Make sure that you have copied all the commands from this page to your R script and that you have saved the script so you can access the commands at a later date.
 
-- In your own time, go on and select a few more variables from the dataset and explore them using the appropriate descriptive statistics using the functions we have practiced above.
+-   In your own time, go on and select a few more variables from the dataset and explore them using the appropriate descriptive statistics using the functions we have practiced above.
 
-- Think about what the results tell you. Finally, transfer the commands that you practiced here into th `Lab_2.qmd` document, setting up code chunks appropriately, organising the code blocks into relevant sections under sub-titles, and adding some explanatory text in between. When you're done, click on the "Render" button and check the resulting output. Will you manage to generate an output without errors?
-
-
+-   Think about what the results tell you.
+    Finally, transfer the commands that you practiced here into th `Lab_2.qmd` document, setting up code chunks appropriately, organising the code blocks into relevant sections under sub-titles, and adding some explanatory text in between.
+    When you're done, click on the "Render" button and check the resulting output.
+    Will you manage to generate an output without errors?

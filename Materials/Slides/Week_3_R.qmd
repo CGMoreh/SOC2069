@@ -11,14 +11,13 @@ format:
 #| output: false
 
 library(tidyverse)
-library(strengejacke)
+# library(strengejacke)
 library(easystats)
 library(ggformula)
 
 ```
 
-
-##
+## 
 
 ```{r}
 #| echo: false
@@ -27,29 +26,15 @@ library(ggformula)
 inequality <- readRDS("../../Data/for_analysis/lab3macro.rds")
 ```
 
-
 ## 
-
-
-
 
 # Is inequality affecting social trust?
 
 ## "The spirit level" (2010)
 
-
-
-
-
-
-
 ## 
 
-
-
-
 ## 
-
 
 ```{r}
 #| echo: true
@@ -57,13 +42,12 @@ inequality <- readRDS("../../Data/for_analysis/lab3macro.rds")
 data_peek(inequality)
 ```
 
-
 ```{r}
 #| echo: true
 describe_distribution(inequality)
 ```
 
-##
+## 
 
 ```{r}
 #| echo: true
@@ -76,14 +60,11 @@ gf_density( ~ s80s20, data = inequality)
 
 ```
 
-
 ## 
-
 
 ```{r}
 gf_point(trust_pct ~ s80s20, data = inequality)
 ```
-
 
 ## 
 
@@ -92,7 +73,7 @@ gf_point(trust_pct ~ s80s20, data = inequality) |>
   gf_lm()
 ```
 
-##
+## 
 
 ```{r}
 gf_point(trust_pct ~ s80s20, data = inequality) |> 
@@ -100,8 +81,7 @@ gf_point(trust_pct ~ s80s20, data = inequality) |>
   gf_lm()
 ```
 
-
-##
+## 
 
 ```{r}
 gf_point(trust_pct ~ s80s20, data = inequality) |> 
@@ -110,15 +90,9 @@ gf_point(trust_pct ~ s80s20, data = inequality) |>
   gf_text(label = ~ country, size = 2.5, hjust = 0, nudge_x = 0.15, nudge_y = 0.15)
 ```
 
+## 
 
-##
-
-
-
-
-
-
-##
+## 
 
 ```{r}
 gf_point(trust_pct ~ s80s20, data = inequality) |> 
@@ -126,7 +100,7 @@ gf_point(trust_pct ~ s80s20, data = inequality) |>
   gf_text(label = ~ country, size = 2.5, hjust = 0, nudge_x = 0.15)
 ```
 
-##
+## 
 
 ```{r}
 gf_point(trust_pct ~ s80s20, data = inequality, color = ~ Region) |> 
@@ -134,52 +108,26 @@ gf_point(trust_pct ~ s80s20, data = inequality, color = ~ Region) |>
   gf_lm()
 ```
 
-
-##
-
+## 
 
 ```{r}
 lm(trust_pct ~ s80s20, data = inequality) |> 
   summary()
 ```
 
-
-
 # Measurement: from questionnaire items to dataset variables
-
 
 ## Variables
 
-
-
 # Understanding and describing (clean) data
-
-
-
-
-
-
 
 # Managing "messy" data
 
-
-
-
-
-
-
-
 # Visualisation
-
-
-
-
-
 
 ## This print "Two content" output
 
-:::: {.columns}
-
+::: columns
 ::: {.column width="40%"}
 ```{r}
 #| echo: true
@@ -196,20 +144,15 @@ ggplot(penguins,
 :::
 
 ::: {.column width="60%"}
-
 Something else
-
+:::
 :::
 
-::::
-
-::: {.notes}
+::: notes
 I may write a lot of extra stuff here in case you are interested.
 :::
 
-
 ## Title
-
 
 ```{r}
 #| echo: true
@@ -221,13 +164,10 @@ ggplot(penguins,
   geom_point()
 ```
 
-
 ## This prints to Comparison
 
-:::: {.columns}
-
-::: {.column}
-
+::: columns
+::: column
 ```{r}
 #| echo: true
 #| output: true
@@ -236,11 +176,9 @@ plot(penguins$bill_depth_mm,
      penguins$bill_length_mm)
 
 ```
-
 :::
 
-::: {.column}
-
+::: column
 ```{r}
 #| echo: true
 #| output: true
@@ -250,19 +188,15 @@ ggplot(penguins,
            bill_length_mm)) +
   geom_point()
 ```
-
+:::
 :::
 
-::::
-
---------------------------------------------------------------------------------
+------------------------------------------------------------------------
 
 ## Using `with()` in *base R*
 
-:::: {.columns}
-
-::: {.column}
-
+::: columns
+::: column
 ```{r}
 #| echo: true
 #| output: true
@@ -272,11 +206,9 @@ with(penguins,
           bill_length_mm))
 
 ```
-
 :::
 
-::: {.column}
-
+::: column
 ```{r}
 #| echo: true
 #| output: true
@@ -286,20 +218,15 @@ ggplot(penguins,
            bill_length_mm)) +
   geom_point()
 ```
-
+:::
 :::
 
-::::
-
-
---------------------------------------------------------------------------------
+------------------------------------------------------------------------
 
 ## Changing the `ggplot` theme
 
-:::: {.columns}
-
-::: {.column}
-
+::: columns
+::: column
 ```{r}
 #| echo: true
 #| output: true
@@ -309,11 +236,9 @@ with(penguins,
           bill_length_mm))
 
 ```
-
 :::
 
-::: {.column}
-
+::: column
 ```{r}
 #| echo: true
 #| output: true
@@ -324,20 +249,15 @@ ggplot(penguins,
   geom_point() +
   theme_classic()
 ```
-
+:::
 :::
 
-::::
-
-
---------------------------------------------------------------------------------
+------------------------------------------------------------------------
 
 ## *Some* further styling options
 
-:::: {.columns}
-
-::: {.column}
-
+::: columns
+::: column
 ```{r}
 #| echo: true
 #| output: true
@@ -362,12 +282,9 @@ with(penguins,
      )
 
 ```
-
-
 :::
 
-::: {.column}
-
+::: column
 ```{r}
 #| echo: true
 #| output: true
@@ -379,21 +296,12 @@ ggplot(penguins,                              # draw empty canvas
   geom_point() +                              # select plot type
   theme_classic()                             # select pre-set style settings (theme)
 ```
-
+:::
 :::
 
-::::
-
-
-
-
-
-
---------------------------------------------------------------------------------
-
+------------------------------------------------------------------------
 
 ## Test
-
 
 ```{r}
 #| echo: true
@@ -408,10 +316,4 @@ mtcars |>
   geom_smooth(method = "loess", formula = "y~x")
 ```
 
-
-
-
---------------------------------------------------------------------------------
-
-
-
+------------------------------------------------------------------------

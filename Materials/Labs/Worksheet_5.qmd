@@ -1,0 +1,331 @@
+---
+title: "Worksheet 5"
+subtitle: "Modelling interactions in R"
+format: 
+  # docx: default # word doc in docs already edited a bit
+  html: 
+    code-link: true
+    embed-resources: true
+    fig-align: center
+    # fig-width: 5
+    # fig-asp: .8
+    # fig-responsive: true
+    code-overflow: wrap
+    code-tools:
+      source: false # add URL to script document to be downloaded
+      toggle: false
+      caption: none
+execute: 
+  warning: false
+  error: false
+  echo: true
+  purl: false
+knitr: 
+  opts_chunk: 
+    comment: ""
+    prompt: false
+    message: false
+    strip.white: false
+css: labcss.css
+bibliography: references.bib
+---
+
+------------------------------------------------------------------------
+
+```         
+Timetable week: 7
+Topic: "Interaction models"
+```
+
+------------------------------------------------------------------------
+
+# Learning outcomes
+
+By the end of the session you will know how to:
+
+-   You will learn how to fit, visualise and interpret results from regression models that include interaction terms.
+
+# Introduction
+
+So far, we have only considered so-called *additive* models, in which each explanatory (predictor; independent) variable is assumed to have an effect on the outcome (explained; predicted; dependent) variable that is independent of the values of other explanatory variables included in the model.
+We call these effects (i.e. the coefficients associated with each predictor) "main effects".
+A useful reminder in ***R*** that a model is *additive* is the fact that we enter explanatory variables in the regression code separated by a **+** sign (e.g. trust \~ education **+** age).
+
+Of course, we know that in real life effects are never "additive" in this sense; the effect of an explanatory variable is always *dependent* to some degree on the values of the other explanatory variables included in the model.
+Most often, however, these dependencies (what we can call *interactions* between various explanatory variables) are rather weak and modelling them would significantly complicate the interpretability of our models - the main advantage of regression models is that they are able to reduce complex associations between various aspects of social life to simple coefficients (the "main effects") that are good enough to enable some practical conclusions to be drawn.
+In other words, regression modelling is an act of simplification with the aim of drawing conclusions that are accurate enough for practical purposes.
+
+At the same time, some of these *dependencies* are strong enough to warrant complicating a regression model by including them; or they may be the main focus of an investigation, for example if we are testing/building a theory about "intersectionality".
+As @ConnellyEtAl2016ModellingKeyVariables \[p. 11\] explain, "examining the ***interactions*** between variables that identify multiple characteristics of individuals (e.g. their gender, ethnicity and social class) is a methodological strategy for examining intersectionality" (emphasis added) [see also @BlockEtAl2023-07-01EvaluatingClaimsIntersectionality].
+
+In an interaction model, we reject the assumption of additivity and are interested in exploring whether an explanatory variable has a different effect on the outcome depending on the values of other explanatory variables.
+The relationship between the outcome variable and the interacted explanatory variables will become *multiplicative*.
+Again, in ***R***, a useful reminder that a model is *multiplicative* in this sense is the use of the **\*** sign for specifying an interaction in code.
+For the hypothetical example above, we can include an interaction term between education and age (e.g. trust \~ education + age + education**\***age) to find out whether age has a different effect on trust depending on one's level of education (or vice-versa).
+We may find, for instance, that among those with high education higher age is associated with higher levels of trust, whereas among those with lower education levels higher age is associated with lower levels of trust.
+This is just a fictitious example, but it demonstrates the types of questions we are able to ask and answer using interaction models.
+In this lab we will look at some interaction models in practice.
+
+# Exercise 0: Setup
+
+1.  **Open the `R Studio` interface** by clicking on the ***.Rproj*** file included in the project folder that you created in *Lab2*.
+    The folder should be stored on your Newcastle University **OneDrive** and accessible from any computer.
+
+2.  **Create a new blank Quarto document for this lab session and call it *Lab5.qmd***
+
+3.  At the top of the page briefly detail what the script is about (e.g. "Lab work for Week x").
+
+4.  **Load `R` packages** that we will use in this session
+
+::: {.codebox .code}
+**An alternative function to install and load packages in one go**
+
+To simplify the process of loading packages *and* installing them if they are missing from your computer, the `{pacman}` package provides a set of functions, of which `p_load()` is the most useful.
+
+`p_load()` takes as arguments unquoted package names and does what `library()` does; however, if the package is not yet installed, it will first automatically call `install.packages()` on the package name, then do the `library()` call.
+This functionality can come in very handy if one is often using different computers where `R` packages need to be installed again and again.
+Furthermore, `{pacman}` also provides for downloading packages not hosted on the official `CRAN` repository, but instead available on popular private repositories such as the *GitHub* platform, using the `p_install_gh()` function, which takes as arguments a quoted text string of the GitHub username and the package name, separated by `/` (e.g. `p_install_gh("strengejacke/strengejacke")`).
+
+First, install `{pacman}` the standard way:
+
+```{r}
+install.packages("pacman")          # needs to be "quoted"
+```
+
+Then load/install+load multiple packages as:
+
+```{r, eval=FALSE}
+pacman::p_load(tidyverse, easystats, gtsummary, ggformula, ggeffects, sjlabelled, marginaleffects)
+```
+
+Of course, it's always useful to list each package in a separate line to increase readability and maybe add comments on the packages:
+
+```{r}
+pacman::p_load(tidyverse,             # metapackage; general data management (especially the `dplyr` package)
+               easystats,             # metapackage; data management and model summaries
+               gtsummary,             # data and model summary tables
+               ggformula,             # formula syntax to simplify `ggplot2` graphics
+               sjlabelled,            # work with labelled survey data from other statistical packages
+               ggeffects,             # extract and plot marginal/conditional/interaction effects from models
+               marginaleffects        # extract and plot marginal/conditional/interaction effects from models
+               )
+```
+:::
+
+# Exercise 1: Are preferences for redistribution associated with education in European countries, and is the association moderated by social trust?
+
+`About 30  minutes`
+
+------------------------------------------------------------------------
+
+The research question asked in the title of this exercise relates directly to the research reported by @Akaeda2023TrustEducationalGap.
+Following a detailed review of the literature on the relationship between attitudes towards redistribution, education, and social- and institutional trust, the author derives a hypothesis that they want to investigate: "trust decreases the gap in preferences for redistribution due to education" (p. 296).
+They break down the hypothesis into two parts, one relating *social* trust and the other to *institutional* trust.
+
+@Akaeda2023TrustEducationalGap combine data from several waves (years) of the World Values Survey (WVS) and the European Values Study (EVS) to test this research hypothesis.
+Their combined dataset contains data on "74 countries, 26 years, 259 country-years, and 254,214 individuals".
+Their interest is in modelling the hypothesised relationship on a global level, accounting both for various individual explanatory variables as well as macro-social factors at the level of countries and country-years (i.e. change over time within countries).
+
+Our aim in this exercise is more modest, but we will attempt to fit a smaller version of their "Model 3" (reported in *Table 2*).
+In terms of data, our exercise task focuses specifically on "European" countries; for this purpose, we will use data from the latest wave of the EVS (download the data and read the codebook here: <https://soc2069.chrismoreh.com/data/data_main>).
+In terms of variable selection and transformations, we will roughly follow @Akaeda2023TrustEducationalGap, with some adjustments for convenience.
+@Akaeda2023TrustEducationalGap [pp. 297-298] describe their variable selection procedure in these words:
+
+> -   the ***dependent*** variable is the **score of preferences for redistribution**. This score is based on a question ... that asks respondents to indicate **on a scale from 1 to 10** whether **'Incomes should be made more equal (1)'** or **'We need larger income differences as incentives for individual effort (10)'**. In accordance with previous research, **the scores were reversed** such that a higher score indicates stronger support for redistribution;
+> -   the **level of education** is a ***key independent variable*** because the association between education and support for redistribution is a main focus of this study. Because previous studies have shed light on the mechanisms of university education related to a conservative view of redistribution, this analysis adopts **the dummy for university or higher degree** as an independent variable;
+> -   as a ***key moderator variable*** ... **social trust** as measured by the question, 'Generally speaking, would you say that most people can be trusted or that you need to be very careful in dealing with people?', which had the following two potential responses: '1. Most people can be trusted', '2. Need to be very careful'. Based on previous research involving social trust, this analysis employs **the dummy for social trust** (**1 = 'Most people can be trusted'**);
+> -   the following individual-level ***controls***: **gender** (1 = female, 0= male), **age**, **age squared**, **employment status** (*employed, self-employed, unemployed, retired, other*), **household income** (z scored for country-year units, **marital status** (married = 1), **child** (having child = 1), and **political orientation** (1 = right to 10 = left)
+
+## Step 0-2: Data management
+
+Using functions that we are already familiar with from Lab 4, we import and transform the data as needed:
+
+```{r}
+
+# Make sure to download the EVS dataset to your local folder (from here: https://soc2069.chrismoreh.com/data/data_main)
+
+# Import the EVS data to R:
+
+evs <- readRDS("D:/GitHub/SOC2069/Data/for_analysis/evs2017.rds")
+
+# Select the variables needed for this exercise:
+
+ex5.1 <- evs |> 
+  select(v106,      # redistribution pref.
+         v243_r,    # education
+         v31,       # social trust
+         v225,      # sex/gender
+         age,
+         v244,      # employment status
+         v261_ppp,  # household income (corrected)
+         v234,      # marital status
+         v239_r,    # number of children
+         v102,      # political orientation (1=left...10=right)
+         )
+
+
+# `View` the codebook for the selected variables:
+
+data_codebook(ex5.1) |> View()
+
+
+# Recode variables to match Akaeda (2023) as closely as possible:
+
+ex5.1 <- ex5.1 |> 
+  data_modify(redistribute = reverse(v106),
+              educ_univ = recode_values(v243_r,
+                                   recode = list("University degree" = 3,
+                                                 "0" = c(1, 2, 66))),
+              trusting = recode_values(v31,
+                                       recode = list("Trusting" = 1,
+                                                     "0" = 2)),
+              female = recode_values(v225,
+                                     recode = list("Female" = 2,
+                                                   "0" = 1)),
+              v244 = as_factor(v244),
+              employment = recode_values(v244,
+                                         recode = list("Employed" = c(1, 2), 
+                                                       "Self-employed" = 3, 
+                                                       "Unemployed" = 8, 
+                                                       "Retired" = 5, 
+                                                       "Other" = c(4, 6, 7, 9, 10))),
+              hh_income = v261_ppp,
+              married = recode_values(v234,
+                                      recode = list("Married" = 1,
+                                                    "0" = 2:6)),
+              child = recode_values(v239_r,
+                                    recode = list("Has children" = 1:5)),
+              politics = reverse(v102)
+              )
+
+# `View` the codebook for the recoded dataset:
+
+data_codebook(ex5.1) |> View()
+```
+
+## Step 3: Describe the relationship between the main variables of interest
+
+Following @Akaeda2023TrustEducationalGap, the main variables of interest are `redistribute`, `educ_univ` and `trusting`.
+Using techniques that we have covered in previous Lab exercises, describe some of the relationships between them using tabulations and graphs:
+
+```{r}
+#| echo: true
+#| eval: false
+
+# Describe the relationship between the variables:
+
+
+
+```
+
+## Step 4: Fit and interpret a multiple regression model *without* interaction terms
+
+Our dependent variable (`redistribute`) can be treated as *numeric*, so we will fit a linear (ordinary least squares) regression model using the `lm()` function:
+
+```{r}
+m5.1 <- lm(redistribute ~ educ_univ + trusting + female + employment + hh_income + married + child + politics, data = ex5.1)
+```
+
+Let's then check the model coefficients (parameters):
+
+```{r}
+model_parameters(m5.1)
+```
+
+::: {.questionbox .question}
+**Discuss with the person sitting next to you**
+
+How would you interpret the effect of *education* and of *social trust* on *redistributive attitudes based on this model?*
+:::
+
+## Step 5: Re-fit the model with an interaction between *education* and *social trust*
+
+We can include an interaction between two variables in a regression model by including their "multiplication" using the "\*" operator:
+
+```{r}
+m5.1x <- lm(redistribute ~ educ_univ + trusting + educ_univ*trusting + female + employment + hh_income + married + child + politics, data = ex5.1)
+```
+
+Let's then check the model coefficients (parameters):
+
+```{r}
+model_parameters(m5.1x)
+```
+
+We can compare our results with those reported in *Model 3* (Table 2) of @Akaeda2023TrustEducationalGap, keeping in mind that our data are very different.
+Nonetheless, we find a similar positive effect for the interaction term (0.41), which in our case is stronger.
+
+## Interpreting interactions
+
+As with results from *logistic regression* models, interpreting interaction results is not straightforward.
+
+First of all, the coefficients associated with the individual variables included in the interaction term can no longer be interpreted in the usual direct way, and we usually no longer interpret the "main effects" of `educ_univ` and `trusting`, but only the multiplicative effect of the interaction between them.
+The interpretation of the numeric results, however, is rather convoluted and prone to lead to misinterpretations.
+In essence, what we get is the effect of a unit-change in trust among the university-educated **compared to** the effect of a unit-change in trust among the non-university-educated.
+
+As with interpreting *logistic regression*, it can be much easier and reliable to interpret a plot of the "marginal effects".
+As we already know from Lab 4, that can be achieved using the `ggpredict()` and the `plot()` functions, and we would add both constitutive terms of the interaction.
+Depending on which variable we write first we get either the effect of trust *by* education, or the effect of education *by* trust:
+
+Education by trust:
+
+```{r}
+ggpredict(m5.1x, terms = c("educ_univ", "trusting")) |> 
+  plot()
+```
+
+Trust by education:
+
+```{r}
+ggpredict(m5.1x, terms = c("trusting", "educ_univ")) |> 
+  plot()
+```
+
+The latter plot reproduces *Figure 1* from @Akaeda2023TrustEducationalGap.
+To get an even closer reproduction of that Figure, we could add an additional argument to the plotting function, asking for the point-predictions to be connected with lines:
+
+```{r}
+ggpredict(m5.1x, terms = c("trusting", "educ_univ")) |> 
+  plot(connect_lines = TRUE)
+```
+
+Looking at whether and how much the *confidence intervals* of the predicted coefficients overlap with the point-predictions of the coefficients, we can visually asses the interaction effect.
+We find that positive differences in the level of social trust have a much steeper effect on *redistributive attitudes* among the highly educated than it does among the lower educated.
+
+::: {.questionbox .question}
+**Practice interpretation**
+
+How does @Akaeda2023TrustEducationalGap discuss their findings in respect to *social trust*?
+Read the relevant sections in the journal article and attempt to write down our own findings along those lines.
+:::
+
+# Exercise 2: Are anti-immigrant attitudes associated with lower social trust, and is the association dependent on gender, financial insecurity or authoritarian inclinations?
+
+`About 30  minutes`
+
+------------------------------------------------------------------------
+
+You will notice that the first part of the question exactly replicates the research question posed in *Exercise 3* of Worksheet 3.
+Go back to that exercise and refit it here.
+Then, refit it three times, each time including a separate interaction between *anti-immigrant attitudes* and *gender*, *financial insecurity* and *authoritarian inclination*s, respectively.
+Interpret the results and compare your models.
+
+You should use the following variables from the European Social Survey (ESS) for *financial insecurity* and *authoritarian inclinations*:
+
+|         |                                           |
+|:--------|:------------------------------------------|
+| hincfel | Feeling about household's income nowadays |
+
+|         |                                                              |
+|:--------|:-------------------------------------------------------------|
+| accalaw | Acceptable for country to have a strong leader above the law |
+
+# Exercise 3: How does education relate to social trust in Great Britain, and is the relationship dependent on income?
+
+`About 30  minutes`
+
+------------------------------------------------------------------------
+
+You will notice that the first part of the question exactly replicates the research question posed in *Exercise 2* of *Worksheet 4*.
+As in the previous exercise, fit the model as described there, then re-fit it by also including an interaction between *education* and *income*.
+Visualise and interpret the results by combining what you now know about the interpretation of logistic regressions (Lab 4) and of interaction terms.

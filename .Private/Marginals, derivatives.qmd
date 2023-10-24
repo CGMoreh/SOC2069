@@ -1,0 +1,175 @@
+Working through this example: https://library.virginia.edu/data/articles/a-beginners-guide-to-marginal-effects
+
+# A Beginner's Guide to Marginal Effects
+
+## Data
+
+```{r}
+set.seed(1)
+x <- sort(runif(20, -5, 10))
+y <- 1.5 + 3*x - 0.5*x^2 + rnorm(20, sd = 3)
+d <- data.frame(y = y, x = x)
+plot(y ~ x, data = d)
+```
+
+## Model
+
+```{r}
+m <- lm(y ~ x + I(x^2), data = d)
+summary(m)
+```
+
+## Plot fitted line
+
+```{r}
+plot(y ~ x, data = d)
+lines(x, fitted(m))
+```
+
+## Average marginal effects" with `{margins}`
+
+```{r}
+library(margins)
+mfx <- margins(m, variables = "x")
+summary(mfx)
+```
+
+## "Average marginal effects" using other functions
+
+## Derivatives
+
+The derivative of a function is a fundamental concept in calculus that represents how a function changes as its input changes.
+
+The definition of the derivative is:
+
+$$ f'(x) = \lim_{{h \to 0}} \frac{{f(x + h) - f(x)}}{h} $$
+
+Let's unpack the definition of a derivative step by step:
+
+1.  Average Rate of Change:
+
+For a function $f(x)$, the average rate of change between two points $(x, f(x))$ and $(x + h, f(x + h))$ is given by the formula: $$ \text{Average Rate of Change} = \frac{f(x + h) - f(x)}{h} $$
+
+Here, $h$ represents the change in the input variable $x$.
+It's often used in the definition of derivatives to denote an infinitesimally small change in the input variable (in this case, "x").
+
+When calculating derivatives, you're essentially finding the rate at which a function changes as the input (usually denoted by "x") changes by a very small amount "h." Taking the limit as "h" approaches 0 gives you the instantaneous rate of change at a specific point.
+
+The symbol "h" is used traditionally, but you might also see other letters like $\delta x$ or $\Delta x$ (i.e. lower-case or capital Greek letter *delta*; *delta* is the initial letter of the Greek word διαφορά \[diaphorá\], meaning "difference") used in similar contexts, where they all serve a similar purpose of denoting a small change in the input variable.
+
+2.  Instantaneous Rate of Change:
+
+The derivative represents the instantaneous rate of change of a function at a specific point.
+To find this instantaneous rate of change, we need to let the interval $\Delta x$ (or $h$) approach 0.
+This is [expressed mathematically as a limit]{.underline}: $$ f'(x) = \lim_{{h \to 0}} \frac{f(x + h) - f(x)}{h} $$
+
+3.  Interpretation:
+
+-   **Geometrically:** The derivative at a point $x$ represents the slope of the tangent line to the graph of the function at that point. It indicates how steeply the function is rising or falling at that specific point.
+-   **Physically:** In physics, the derivative often represents velocity when the function represents displacement with respect to time. For example, if $s(t)$ represents the position of an object at time $t$, then $s'(t)$ represents the velocity of the object at time $t$.
+
+4.  Differentiability:
+
+A function is said to be differentiable at a point if the derivative exists at that point.
+Not all functions are differentiable everywhere; there are certain conditions and types of functions that are differentiable only within specific intervals or points.
+
+5.  Notation:
+
+The derivative of a function $f(x)$ is denoted as $f'(x)$ or $\frac{df}{dx}$.
+Higher order derivatives, indicating how the rate of change itself changes, can be denoted as $f''(x)$ (second derivative), $f'''(x)$ (third derivative), and so on.
+
+## The derivative of `y` with respect to `x`: the *power rule*
+
+We have the following function resulting from a fitted regression model:
+
+$$
+y = 2.25 + 2.98x - 0.51x^2
+$$
+
+To find its derivative with respect to $x$, we differentiate each term using the power rule.
+
+The power rule states that the derivative of a function of the form $f(x) = x^n$, where $n$ is a constant, with respect to $x$ is given by:
+
+$$
+\frac{d}{dx} (x^n) = n \times x^{(n-1)}
+$$
+
+In words, to differentiate a term where $x$ is raised to a constant power $n$, you bring down the exponent as the coefficient and then decrease the exponent by 1.
+
+To differentiate the equation above:
+
+1.  The derivative of the constant term $2.25$ is $0$ because the derivative of a constant is always $0$.
+    This results from the definition of a "derivative" (see above).
+    For a constant function, $f(x) = c$, where $c$ is a constant, $f(x + h) = c$ for any $h$.
+    Therefore, the expression becomes: $\frac{{c - c}}{h} = \frac{0}{h} = 0$.
+    As $h$ approaches 0, the fraction $\frac{0}{h}$ remains 0.
+    Therefore, the limit as $h$ approaches 0 is 0.
+    This proves that the derivative of the constant function $f(x) = c$ is always 0 for any constant $c$.
+
+2.  For the term $2.98x$, the derivative with respect to $x$ is $2.98$ because it follows the form $ax^1$ (where $a = 2.98$).
+
+3.  For the term $-0.51x^2$, where $-0.51$ is a constant and $x^2$ follows the form $x^n$ with $n = 2$, we therefore get:
+
+$$
+\begin{split}
+\frac{d}{dx}(-0.51x^2) &= 2 \times (-0.51) \times x^{2-1} \\ &= 2 \times (-0.51) \times x^1 \\ &=  2 \times (-0.51) \times x \\ &= -1.02 \times x
+\end{split}
+$$
+
+So, the derivative of ($-0.51x^2$) with respect to $x$ is $-1.02x^{(2-1)} = -1.02x$ using the power rule.
+
+Summing up these derivatives, the derivative of the function $y = 2.25 + 2.98x - 0.51x^2$ with respect to $x$ is:
+
+$$
+\begin{split}
+\frac{dy}{dx} &= 0 + 2.98 + 2(-0.51)x \\ &= 0 + 2.98 - 1.02x
+\end{split}
+$$
+
+So to calculate the "dydx" values we can do the following (showing only the first six values):
+
+```{r}
+# m$coefficients[2] = 2.98
+# m$coefficients[3] = -0.51
+head(m$coefficients[2] + 2 * m$coefficients[3] * d$x)
+```
+
+We can confirm these match the "dydx" column in the mfx data frame:
+
+```{r}
+head(mfx$dydx_x)
+```
+
+Now let's take the average of these "dydx" values.
+
+```{r}
+mean(mfx$dydx_x)
+```
+
+And there it is, our average marginal effect.
+It is literally the average of the marginal effects.
+Stated another way, it is the average of the slopes of the tangent lines at 20 different xy coordinates.
+Is this useful?
+Probably not in this case.
+The effect of x changes as itself changes.
+The average of all these effects doesn't tell us much.
+We're better off just looking at our original plot with the fitted line.
+
+A better approach may be to examine marginal effects at representative values.
+For example, what if we were interested in the marginal effects at x = -1 and x = 6?
+We can use the at argument to specify at which x values to calculate the marginal effects.
+These need to specified as a list object.
+If you're a Stata user, the equivalent code would be margins, dydx(x) at(x = (-1 6)).
+
+```{r}
+mfx2 <- margins(m, variables = "x", 
+                at = list(x = c(-1, 6)))
+summary(mfx2)
+```
+
+Now we have two measures of the effect of "x".
+When x = -1, we can imagine a tangent line with a positive slope of about 4.
+When x = 6, we can imagine a tangent line with a negative slope of about -3.2.
+The summary output provides 95% confidence intervals on these estimates in the "lower" and "upper" columns.
+
+# Now let's look at marginal effects from another angle, this time in the context of more realistic data.

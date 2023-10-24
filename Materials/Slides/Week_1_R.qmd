@@ -11,40 +11,35 @@ format:
 
 # Packages
 library(tidyverse)
-library(palmerpenguins)
+# library(palmerpenguins)
 ```
 
-
-# Information > Data > Models
-
-
+# Information \> Data \> Models
 
 ## Models in social science
 
-- Descriptive
-- Predictive
-- Inferential
-- Causal
+-   Descriptive
+-   Predictive
+-   Inferential
+-   Causal
 
 ## Typical research objectives by required sample size (*n*)
 
-- **$n\to\infty$**
-- **n $\approx$ 5,000 - 100,000**: stratified population survey
-- **n $\approx$ 1,000 - 5,000**: population survey
-- **n $\approx$ 100 - 1,000**: targeted survey
-- **n $\approx$ 50 - 100**: stratified narrative study
-- **n $\approx$ 10 - 50**: narrative study
-- **n $\approx$ 5 - 10**: interactive narrative study
-- **n = 2 - 4**: comparative case study
-- **n = 1**: case study
-- **n = 0**: theoretical/simulation study
+-   $n\to\infty$
+-   **n** $\approx$ 5,000 - 100,000: stratified population survey
+-   **n** $\approx$ 1,000 - 5,000: population survey
+-   **n** $\approx$ 100 - 1,000: targeted survey
+-   **n** $\approx$ 50 - 100: stratified narrative study
+-   **n** $\approx$ 10 - 50: narrative study
+-   **n** $\approx$ 5 - 10: interactive narrative study
+-   **n = 2 - 4**: comparative case study
+-   **n = 1**: case study
+-   **n = 0**: theoretical/simulation study
 
 ## The *n = 0* principle
 
-:::: {.columns}
-
+::: columns
 ::: {.column width="40%"}
-
 ```{r}
 #| echo: true
 #| eval: false
@@ -75,7 +70,6 @@ tail(dataset)
 :::
 
 ::: {.column width="60%"}
-
 ```{r}
 #| echo: false
 #| eval: true
@@ -103,30 +97,20 @@ head(dataset)
 tail(dataset)
 
 ```
-
+:::
 :::
 
-::::
-
-
-
-
---------------------------------------------------------------------------------
+------------------------------------------------------------------------
 
 # Module outline
 
---------------------------------------------------------------------------------
+------------------------------------------------------------------------
 
-
-
-
-
-
---------------------------------------------------------------------------------
+------------------------------------------------------------------------
 
 # Finding data
 
---------------------------------------------------------------------------------
+------------------------------------------------------------------------
 
 ## 
 
@@ -136,10 +120,9 @@ tail(dataset)
 # Libraries
 library(tidyverse)
 library(ggrepel)
-library(strengejacke)
+# library(strengejacke)
 library(easystats)
 ```
-
 
 ```{r}
 
@@ -171,9 +154,7 @@ data %>%
   scale_y_continuous(breaks = seq(0, 6050, 1000), limits = c(0, 6050))
 ```
 
-
-##
-
+## 
 
 ```{r}
 
@@ -197,9 +178,7 @@ data %>%
   scale_y_continuous(breaks = seq(0, 6050, 1000), limits = c(0, 6050))
 ```
 
-
-##
-
+## 
 
 ```{r}
 
@@ -221,9 +200,7 @@ data %>%
   ) 
 ```
 
-
-##
-
+## 
 
 ```{r}
 
@@ -245,9 +222,7 @@ data %>%
   ) 
 ```
 
-
-##
-
+## 
 
 ```{r}
 
@@ -270,9 +245,7 @@ data %>%
   geom_text(aes(label = country), check_overlap = TRUE)
 ```
 
-
-##
-
+## 
 
 ```{r}
 
@@ -293,16 +266,9 @@ data %>%
 
 ## Finding data
 
-
-
-
-
-
-
 ## This print "Two content" output
 
-:::: {.columns}
-
+::: columns
 ::: {.column width="40%"}
 ```{r}
 #| echo: true
@@ -313,35 +279,26 @@ data %>%
 :::
 
 ::: {.column width="60%"}
-
 Something else
-
+:::
 :::
 
-::::
-
-::: {.notes}
+::: notes
 Notes.
 :::
 
-
 ## Title
-
 
 ```{r}
 #| echo: true
 
 
 ```
-
-
 
 ## This prints to Comparison
 
-:::: {.columns}
-
-::: {.column}
-
+::: columns
+::: column
 ```{r}
 #| echo: true
 #| output: true
@@ -349,30 +306,24 @@ Notes.
 
 
 ```
-
 :::
 
-::: {.column}
-
+::: column
 ```{r}
 #| echo: true
 #| output: true
 
 
 ```
-
+:::
 :::
 
-::::
-
---------------------------------------------------------------------------------
+------------------------------------------------------------------------
 
 ## Using `with()` in *base R*
 
-:::: {.columns}
-
-::: {.column}
-
+::: columns
+::: column
 ```{r}
 #| echo: true
 #| output: true
@@ -380,93 +331,67 @@ Notes.
 
 
 ```
-
 :::
 
-::: {.column}
-
+::: column
 ```{r}
 #| echo: true
 #| output: true
 
 
 ```
-
+:::
 :::
 
-::::
-
-
---------------------------------------------------------------------------------
+------------------------------------------------------------------------
 
 ## Changing the `ggplot` theme
 
-:::: {.columns}
-
-::: {.column}
-
+::: columns
+::: column
 ```{r}
 #| echo: true
 #| output: true
 
 
 ```
-
 :::
 
-::: {.column}
-
+::: column
 ```{r}
 #| echo: true
 #| output: true
 
 ```
-
+:::
 :::
 
-::::
-
-
---------------------------------------------------------------------------------
+------------------------------------------------------------------------
 
 ## *Some* further styling options
 
-:::: {.columns}
-
-::: {.column}
-
+::: columns
+::: column
 ```{r}
 #| echo: true
 #| output: true
 
 
 ```
-
-
 :::
 
-::: {.column}
-
+::: column
 ```{r}
 #| echo: true
 #| output: true
 
 ```
-
+:::
 :::
 
-::::
-
-
-
-
-
-
---------------------------------------------------------------------------------
-
+------------------------------------------------------------------------
 
 ## Test
-
 
 ```{r}
 #| echo: true
@@ -481,16 +406,8 @@ mtcars |>
   geom_smooth(method = "loess", formula = "y~x")
 ```
 
-
-
-
---------------------------------------------------------------------------------
-
+------------------------------------------------------------------------
 
 ## Final
 
-
 This is an [important sentence!]{.fragment .highlight-red}
-
-
-

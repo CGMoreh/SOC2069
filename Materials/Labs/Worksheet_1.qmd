@@ -29,35 +29,33 @@ css: labcss.css
 bibliography: references.bib
 ---
 
-```{r setup, include = FALSE}
-knitr::opts_chunk$set(
-  comment = ""
-)
-```
-
 ------------------------------------------------------------------------
 
-```
+```         
 Timetable week: 4
 Topic: "Questions, Data, Models"
 ```
+
 ------------------------------------------------------------------------
 
 # Learning outcomes
 
 By the end of the session, you should be familiar with:
 
-  - some important cross-national and UK large-scale representative survey programmes
-  - how to access data from the UK Data Service and other data repositories
-  - how to find, download and read data documentation, including survey questionnaires
-  - the challenges of measuring sociological concepts
-  - opening the ***RStudio*** interface
+-   some important cross-national and UK large-scale representative survey programmes
+-   how to access data from the UK Data Service and other data repositories
+-   how to find, download and read data documentation, including survey questionnaires
+-   the challenges of measuring sociological concepts
+-   opening the ***RStudio*** interface
 
 # Intro
 
-The lecture has provided a broad introduction to sociological questions, data and conceptual model-building. You will practice asking questions and thinking about the best models to answer them throughout the module. In this first practical lab, you will begin your data analysis journey by exploring some online sources of reliable, high-quality sociological data available for secondary analysis.
+The lecture has provided a broad introduction to sociological questions, data and conceptual model-building.
+You will practice asking questions and thinking about the best models to answer them throughout the module.
+In this first practical lab, you will begin your data analysis journey by exploring some online sources of reliable, high-quality sociological data available for secondary analysis.
 
-Throughout the semester, we will be using the research topic of *(social) trust* to guide our data analysis, but as we progress, exercises will ask you to apply the methods we practised to other sociological concepts operationalised in the datasets that we will use. This will help you build up your skills and confidence in asking and addressing research questions of your own.
+Throughout the semester, we will be using the research topic of *(social) trust* to guide our data analysis, but as we progress, exercises will ask you to apply the methods we practised to other sociological concepts operationalised in the datasets that we will use.
+This will help you build up your skills and confidence in asking and addressing research questions of your own.
 
 As a first exercise, let's explore the survey mentioned in the lecture: the **World Values Survey**
 
@@ -65,11 +63,11 @@ As a first exercise, let's explore the survey mentioned in the lecture: the **Wo
 
 `About 20 minutes`
 
-****
+------------------------------------------------------------------------
 
 ### Task 1
 
-Navigate to the [The World Values Survey (WVS)](https://www.worldvaluessurvey.org/WVSContents.jsp) website and read about the World Values Survey. 
+Navigate to the [The World Values Survey (WVS)](https://www.worldvaluessurvey.org/WVSContents.jsp) website and read about the World Values Survey.
 
 ```{block WVS, type = 'questionblock'}
 
@@ -89,9 +87,12 @@ Navigate to the [The World Values Survey (WVS)](https://www.worldvaluessurvey.or
 
 ### Task 2
 
-If you haven't yet done so, create a folder for this module on your institutional **OneDrive** (e.g. C:\\**OneDrive - Newcastle University**\\SOC2069). Within that folder, create a sub-folder called "Data". Within the "Data" folder, create another sub-folder called "WVS7". You can now save files relating to WVS data into that folder, and because it is stored on the institutional **OneDrive**, you will always have access to it on any computer, once you log in to your institutional Microsoft Windows account.
+If you haven't yet done so, create a folder for this module on your institutional **OneDrive** (e.g. C:\\**OneDrive - Newcastle University**\\SOC2069).
+Within that folder, create a sub-folder called "Data".
+Within the "Data" folder, create another sub-folder called "WVS7".
+You can now save files relating to WVS data into that folder, and because it is stored on the institutional **OneDrive**, you will always have access to it on any computer, once you log in to your institutional Microsoft Windows account.
 
-On the WVS website , navigate to the *Wave 7* data section (*Data and Documentation > Data Download > Wave 7 (2017-2022*) and download the **Master Questionnaire** and the **Codebook** documents to your newly created "WVS7" folder. 
+On the WVS website , navigate to the *Wave 7* data section (*Data and Documentation \> Data Download \> Wave 7 (2017-2022*) and download the **Master Questionnaire** and the **Codebook** documents to your newly created "WVS7" folder.
 
 Open the two PDF documents and using the search function identify all the survey questions and variables that relate to ***trust***.
 
@@ -106,26 +107,33 @@ Open the two PDF documents and using the search function identify all the survey
 
 ```
 
-
 # Exercise 2: Explore some other cross-national surveys
 
 `About 20 minutes`
 
-****
+------------------------------------------------------------------------
 
-There are several large-scale social surveys that are conducted internationally and allow researchers to compare different societies. There is a [Wikipedia article](https://en.wikipedia.org/wiki/List_of_comparative_social_surveys) that lists many such surveys. In this exercise, we will explore three further cross-national surveys that routinely include measurements of *social trust*.
+There are several large-scale social surveys that are conducted internationally and allow researchers to compare different societies.
+There is a [Wikipedia article](https://en.wikipedia.org/wiki/List_of_comparative_social_surveys) that lists many such surveys.
+In this exercise, we will explore three further cross-national surveys that routinely include measurements of *social trust*.
 
 To save time, you will organise in three groups, and each group will explore at least one of the following surveys:
 
-- [The European Social Survey (ESS)](https://www.europeansocialsurvey.org/)
-- [The European Values Study (EVS)](https://europeanvaluesstudy.eu) 
-- [The International Social Survey Programme (ISSP)](https://issp.org)
+-   [The European Social Survey (ESS)](https://www.europeansocialsurvey.org/)
+-   [The European Values Study (EVS)](https://europeanvaluesstudy.eu)
+-   [The International Social Survey Programme (ISSP)](https://issp.org)
 
-As you have done in the previous exercise, create a new sub-folder for these surveys, where you can save the documentation and always have it at hand. 
+As you have done in the previous exercise, create a new sub-folder for these surveys, where you can save the documentation and always have it at hand.
 
-Navigating the survey websites, identify the latest wave/round of published data for each survey. The *EVS* and the *ISSP* are using the GESIS data repository (at the University of Leibniz) to store their data, and you will be taken to that website. You can also search the [https://search.gesis.org/](https://search.gesis.org/) site directly for various data, beyond the *EVS* and *ISSP*. Please note that you do not have to register in order to download the documentation; if you are asked to register, you have made a wrong click at some point. When you will want to download the actual data files, you will need to register first, but htat can wait for now.
+Navigating the survey websites, identify the latest wave/round of published data for each survey.
+The *EVS* and the *ISSP* are using the GESIS data repository (at the University of Leibniz) to store their data, and you will be taken to that website.
+You can also search the <https://search.gesis.org/> site directly for various data, beyond the *EVS* and *ISSP*.
+Please note that you do not have to register in order to download the documentation; if you are asked to register, you have made a wrong click at some point.
+When you will want to download the actual data files, you will need to register first, but htat can wait for now.
 
-Locate the data documentation and download the *questionnaire* and the *codebook*. Each survey has a slightly different way of referring to and naming these documents, and they often have versions in various languages and several supplements. Make sure to download the main/master survey document in English.
+Locate the data documentation and download the *questionnaire* and the *codebook*.
+Each survey has a slightly different way of referring to and naming these documents, and they often have versions in various languages and several supplements.
+Make sure to download the main/master survey document in English.
 
 Were you to explore all the surveys we discussed so far and download the mentioned documentation files keeping their original names, your folder structure should look something like this:
 
@@ -144,21 +152,26 @@ fs::dir_tree("D:/OneDrive - Newcastle University/SOC2069/Data")
 
 ```
 
-
-
 # Exercise 3: Exploring the *UK Data Service*
 
 `About 30 minutes`
 
-****
+------------------------------------------------------------------------
 
-So far we have explored a number of international comparative surveys. UK-based researchers also have access to data hosted by the UK Data Service (UKDS), the country's largest data repository. It makes a variety of data available to UK researchers for secondary analysis. The UKDS is available at this website: [https://ukdataservice.ac.uk/](https://ukdataservice.ac.uk/){target="_blank"}
+So far we have explored a number of international comparative surveys.
+UK-based researchers also have access to data hosted by the UK Data Service (UKDS), the country's largest data repository.
+It makes a variety of data available to UK researchers for secondary analysis.
+The UKDS is available at this website: [https://ukdataservice.ac.uk/](https://ukdataservice.ac.uk/){target="_blank"}
 
 It is also useful to become acquainted with the variety of secondary data available there and the basic functionalities of the site, as you may decide to use secondary data for your final third-year dissertation.
 
-Begin by exploring the options available under the **Find data** tab of the UKDS website. The **Find data** page contains a short video on *How to use the UK Data Service catalogue search tool*, which you can watch outside class. As we are just exploring the data offerings of the service, navigate to the *Browse and access data* page, where you can browse data by theme or type, among some other options. Let's choose to *Browse by data type* and select *UK Surveys*.
+Begin by exploring the options available under the **Find data** tab of the UKDS website.
+The **Find data** page contains a short video on *How to use the UK Data Service catalogue search tool*, which you can watch outside class.
+As we are just exploring the data offerings of the service, navigate to the *Browse and access data* page, where you can browse data by theme or type, among some other options.
+Let's choose to *Browse by data type* and select *UK Surveys*.
 
-This takes us to the main data catalogue, where we can see that the search is filtered down to "UK Survey data" in the *Data Type* field of the menu on the left. We can perform various selections using that menu, refining the search by date or setting other filters.
+This takes us to the main data catalogue, where we can see that the search is filtered down to "UK Survey data" in the *Data Type* field of the menu on the left.
+We can perform various selections using that menu, refining the search by date or setting other filters.
 
 ```{block Question 1, type = 'questionblock'}
 
@@ -182,15 +195,18 @@ The number of results in the light blue box above the results list refer to the 
 </details>
 ```
 
-Take some time to explore and become familiar with the page. Try to:
+Take some time to explore and become familiar with the page.
+Try to:
 
 -   Find the newest studies based on their date of collection (tip: check out *Sort by*)
 
 -   Remove the filter on data type and scroll through some of the most recently released datasets
 
--   **Search a keyword** of your own interest in the search field (*Search our data catalogue)* (e.g. 'migration', 'gender violence', or any topic you are currently interested in). How many studies did you find?
+-   **Search a keyword** of your own interest in the search field (*Search our data catalogue)* (e.g. 'migration', 'gender violence', or any topic you are currently interested in).
+    How many studies did you find?
 
--   **Choose one study** that you find most interesting and read through the details. Write down a few notes on the aims, methodology, etc. employed:
+-   **Choose one study** that you find most interesting and read through the details.
+    Write down a few notes on the aims, methodology, etc. employed:
 
     -   What was the main aim of the study? (usually stated somewhere in the abstract)
     -   When was the study conducted and where?
@@ -199,7 +215,8 @@ Take some time to explore and become familiar with the page. Try to:
     -   What were the methods of data collection?
     -   Under what conditions are the data available? (tip: click on *Access data*) [$\rightarrow$ read more about data access conditions here](https://ukdataservice.ac.uk/terms-and-conditions/){target="_blank"}
 
--   Are there any *Series* that matched your keyword? This is useful information because the *Series* contain data from large-scale publicly funded surveys with publicly available data that can be used for secondary analysis.
+-   Are there any *Series* that matched your keyword?
+    This is useful information because the *Series* contain data from large-scale publicly funded surveys with publicly available data that can be used for secondary analysis.
 
 ```{block , type = 'discussion'}
 **Discussion**
@@ -208,16 +225,18 @@ What you have found out about your chosen study/topic?
 
 ```
 
-
 # Exercise 4: Find qualitative and mixed data
 
 `You will likely finish this exercise outside class. But don't worry, we will be looking at qualitative data in the second part of the module, and we will return to this exercise then.`
 
 `If there are less than 10 minutes left of the class, please proceed instead to Exercise 5`
 
-****
+------------------------------------------------------------------------
 
-Most of the secondary data available on the UKDS is *quantitative*. But we can find some qualitative and mixed methods studies too, some of which have made their data (e.g. transcribed and anonymized interview data) available. We can find such studies if we *Browse by data type*. Give it a go - but remember to clear your previous search to find *all* qualitative and mixed methods studies, not only the ones relevant to your keyword.
+Most of the secondary data available on the UKDS is *quantitative*.
+But we can find some qualitative and mixed methods studies too, some of which have made their data (e.g. transcribed and anonymized interview data) available.
+We can find such studies if we *Browse by data type*.
+Give it a go - but remember to clear your previous search to find *all* qualitative and mixed methods studies, not only the ones relevant to your keyword.
 
 ```{block Question 2, type = 'questionblock'}
 
@@ -233,16 +252,16 @@ At the time of writing there were `1665`
 </details>
 ```
 
+You may have found some studies that you find interesting based on their titles.
+You can have a closer look at them outside class, but because not all datasets are equally well documented and made available, you can have a closer look at a few studies that I find particularly interesting:
 
-You may have found some studies that you find interesting based on their titles. You can have a closer look at them outside class, but because not all datasets are equally well documented and made available, you can have a closer look at a few studies that I find particularly interesting:
+-   Stetka, Vaclav and Mihelj, Sabina and Toth, Fanni and Kondor, Katherine (2022) **"The Illiberal Turn? News Consumption, Polarization and Democracy in Central and Eastern Europe, 2019-2020"** [https://doi.org/10.5255/UKDA-SN-855088](https://doi.org/10.5255/UKDA-SN-855088){target="_blank"}
 
-- Stetka, Vaclav and Mihelj, Sabina and Toth, Fanni and Kondor, Katherine (2022) **"The Illiberal Turn? News Consumption, Polarization and Democracy in Central and Eastern Europe, 2019-2020"** [https://doi.org/10.5255/UKDA-SN-855088](https://doi.org/10.5255/UKDA-SN-855088){target="_blank"}
+-   Wrighton, Sam J (2021) **"The Annexation of Populations: A New State Strategy, 2017-2021"** [https://doi.org/10.5255/UKDA-SN-854598](https://doi.org/10.5255/UKDA-SN-854598){target="_blank"}
 
-- Wrighton, Sam J (2021) **"The Annexation of Populations: A New State Strategy, 2017-2021"** [https://doi.org/10.5255/UKDA-SN-854598](https://doi.org/10.5255/UKDA-SN-854598){target="_blank"}
+-   Einarsdottir, Anna and Mumford, Karen and Birks, Yvonne and Lockyer, Bridget and Sayli, Melisa and Jeep, Sudthasiri (2021) **"LGBT+ Networks, 2017-2020"** [https://doi.org/10.5255/UKDA-SN-855322](https://doi.org/10.5255/UKDA-SN-855322){target="_blank"}
 
-- Einarsdottir, Anna and Mumford, Karen and Birks, Yvonne and Lockyer, Bridget and Sayli, Melisa and Jeep, Sudthasiri (2021) **"LGBT+ Networks, 2017-2020"** [https://doi.org/10.5255/UKDA-SN-855322](https://doi.org/10.5255/UKDA-SN-855322){target="_blank"}
-
-- Pearce, Sioned and Fox, Stuart (2020) **"Young people and Brexit 2017"** [https://doi.org/10.5255/UKDA-SN-854031](https://doi.org/10.5255/UKDA-SN-854031){target="_blank"}
+-   Pearce, Sioned and Fox, Stuart (2020) **"Young people and Brexit 2017"** [https://doi.org/10.5255/UKDA-SN-854031](https://doi.org/10.5255/UKDA-SN-854031){target="_blank"}
 
 Write down a few notes on the aims, methodology, etc.
 
@@ -255,40 +274,44 @@ What are the most interesting aspects of these studies? (i.e. things that really
 
 If one of the studies has caught your attention, make a note of it, as we will use some data from them later for the purposes of the second assignment.
 
-
 # Exercise 5: Open *RStudio* for the first time
 
 Before we conclude this practical lab, let's check if we can access the software that we will be using from next week to analyse data.
 
-Let's return to **Exercise 1** and the *Data Download* section of the WVS website for Wave 7: [https://www.worldvaluessurvey.org/WVSDocumentationWV7.jsp](https://www.worldvaluessurvey.org/WVSDocumentationWV7.jsp). 
+Let's return to **Exercise 1** and the *Data Download* section of the WVS website for Wave 7: <https://www.worldvaluessurvey.org/WVSDocumentationWV7.jsp>.
 
-Scroll down to the "Statistical Data Files" section and click to download the ***WVS Cross-National Wave 7 R v5 0.zip (rds)*** data file. This will open up a registration page, and it is now time to create a free account in order to access the raw data from the survey. Fill in the registration form, accept 'the conditions of use', and click "DOWNLOAD". Save the file in your "WVS7" folder.
+Scroll down to the "Statistical Data Files" section and click to download the ***WVS Cross-National Wave 7 R v5 0.zip (rds)*** data file.
+This will open up a registration page, and it is now time to create a free account in order to access the raw data from the survey.
+Fill in the registration form, accept 'the conditions of use', and click "DOWNLOAD".
+Save the file in your "WVS7" folder.
 
-You can extract the file from the zipped folder - but for our purposes you may be able to simply click on the compressed folder to see the contents. Ideally, if the computer has an active version of **R** and **RStudio** installed and the `.rds` extension is associated with it, you should see a blue **RStudio** icon before the data file name, as in the picture below: 
+You can extract the file from the zipped folder - but for our purposes you may be able to simply click on the compressed folder to see the contents.
+Ideally, if the computer has an active version of **R** and **RStudio** installed and the `.rds` extension is associated with it, you should see a blue **RStudio** icon before the data file name, as in the picture below:
 
 ![](sheet_pics/wvs_in_folder.png){fig-align="center"}
 
-Double-click on the file to open it. If the file type is already associated with **RStudio**, then a dialogue box will open up asking if you would like to load the data into an **R** object of the same name.
+Double-click on the file to open it.
+If the file type is already associated with **RStudio**, then a dialogue box will open up asking if you would like to load the data into an **R** object of the same name.
 
 ![](sheet_pics/r_studio_open_object_dialogue.png){fig-align="center"}
 
-Next week we will see why it's a good idea to give much shorter names to **R** data objects, but for now you can just click "OK". This will open up the **RStudio** interface.
+Next week we will see why it's a good idea to give much shorter names to **R** data objects, but for now you can just click "OK".
+This will open up the **RStudio** interface.
 
-If the `.rds` extension is not associated with **R**/**RStudio** on your PC, don't panic. But let's check to make sure that you have the software available on the computer. Click on the "Windows" icon and search for apps/programmes on the computer. Search for **RStudio** and see if you can locate the software. If you find it, double-click on it to open it up. 
+If the `.rds` extension is not associated with **R**/**RStudio** on your PC, don't panic.
+But let's check to make sure that you have the software available on the computer.
+Click on the "Windows" icon and search for apps/programmes on the computer.
+Search for **RStudio** and see if you can locate the software.
+If you find it, double-click on it to open it up.
 
-Next week we will start by loading data into **R** via **RStudio**, so feel free to begin navigating the software's interface in your spare time. You should also download **R** and **RStudio** to your personal computers so you have access to them outside class.
+Next week we will start by loading data into **R** via **RStudio**, so feel free to begin navigating the software's interface in your spare time.
+You should also download **R** and **RStudio** to your personal computers so you have access to them outside class.
 
 It's also a good idea to begin completing the first few episodes of the [R for Social Scientists](https://datacarpentry.org/r-socialsci/) online training to gain some familiarity with the software before you encounter it in exercises in next week's practical lab.
 
-
-
 # Outro
 
-We have now seen some examples of social science data and have learnt how to find out more about them and how to access them. Thinking ahead to your third-year dissertation, you may want to register for a free user account on the UKDS or some of the other data repositories we have explored. The UKDS provides some great [resources and advice on using their data for undergraduate dissertations](https://ukdataservice.ac.uk/learning-hub/new-to-using-data/students/resources-for-dissertations/) and there's also an annual [Dissertation Award!](https://ukdataservice.ac.uk/learning-hub/new-to-using-data/students/dissertation-award/) So, keep this great option in mind.
-
-
-
-
-
-
-
+We have now seen some examples of social science data and have learnt how to find out more about them and how to access them.
+Thinking ahead to your third-year dissertation, you may want to register for a free user account on the UKDS or some of the other data repositories we have explored.
+The UKDS provides some great [resources and advice on using their data for undergraduate dissertations](https://ukdataservice.ac.uk/learning-hub/new-to-using-data/students/resources-for-dissertations/) and there's also an annual [Dissertation Award!](https://ukdataservice.ac.uk/learning-hub/new-to-using-data/students/dissertation-award/)
+So, keep this great option in mind.

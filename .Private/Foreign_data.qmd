@@ -1,0 +1,91 @@
+---
+title: "Tables"
+format: 
+  # html: 
+  #   code-link: true
+  #   embed-resources: true
+  #   fig-align: center
+  #   fig-width: 5
+  #   fig-asp: .8
+  #   fig-responsive: true
+  #   code-overflow: wrap
+  #   code-tools:
+  #     source: false # add URL to script document to be downloaded
+  #     toggle: false
+  #     caption: none
+  docx: default
+execute: 
+  warning: false
+  error: false
+  echo: true
+  eval: true
+knitr: 
+  opts_chunk: 
+    comment: ""
+    prompt: false
+    message: false
+    strip.white: false
+    purl: false
+css: labcss.css
+bibliography: references.bib
+---
+
+# Statement of purpose
+
+Evaluate the disadvantages in how `R` stores data compared to other data analysis packages designed specifically with social science data-sets in mind (such as *Stata* and *SPSS*). 
+
+
+
+## Packages
+
+### Base-R `{foreing}`
+
+
+
+
+### Tidyverse and the `{haven}` package
+
+
+
+
+### The `{sjlabelled}` package
+
+
+
+
+### The `{memisc}` package
+
+
+See here: https://www.martin-elff.net/software/memisc/import/ 
+
+> The “foreign” package for R already provides facilities to import data from other statistical software packages such as SPSS or Stata, but they are limited by the way survey data are generally represented in R. That is, since variables in an R data frame can only be numerical vectors or factors, any direct translation of SPSS or Stata data sets into data frames will lead to the loss of information of information, such as variable labels, variable labels, or user-specified missing values. (Value labels can be preserved by translating them into factor levels, but this means losing information about the original codes. It will also lead to undesired missing values, if variables in the original data sets are only partially labelled.) The “memisc” package for this reason provides functions that allow to import SPSS or Stata data sets into objects of the class "data.set" defined in it.
+
+
+
+....
+
+But:
+
+> Note that from version 13, Stata changed the format of .dta files considerably. I do not plan to support the new format (called dta-117 and dta-118) in the near future. Stata files readible by this package can still be produced in newer versions of Stata by a command like saveold "<filename>", version(12).
+
+
+
+
+
+## Data
+
+```{r}
+
+# data1 <- readRDS(here("Data", "for_analysis", "wvs7.rds")) |>
+# data <- data_read(here("Data", "for_analysis", "wvs7.rds")) |>
+#   sjlabelled::drop_labels() |>
+#   data_extract(c(B_COUNTRY, Q1, Q57, Q195, Q260, Q261:Q263)) |>
+#   mutate(B_COUNTRY = as_character(B_COUNTRY),
+#          across(Q261:Q262, as_numeric)) |> 
+#   sample_n(1000)
+
+```
+
+
+
+

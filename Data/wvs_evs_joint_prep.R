@@ -9,19 +9,24 @@
 
 ##### Packages #####
 
-if (!require("pak")) install.packages("pak")
+# if (!require("pak")) install.packages("pak")
+# 
+# pak::pkg_install("xfun")
+# 
+# xfun::pkg_attach("tidyverse",
+#                  "ggrepel",
+#                  "strengejacke",
+#                  "easystats",
+#                  "archive",
+#                  "fs",
+#                  install = "pak" # requires the {pak} packages to run pak::pkg_install
+#                  )
 
-pak::pkg_install("xfun")
+if (!require("pacman")) install.packages("pacman")
 
-xfun::pkg_attach("tidyverse",
-                 "ggrepel",
-                 "strengejacke",
-                 "easystats",
-                 "archive",
-                 "fs",
-                 install = "pak" # requires the {pak} packages to run pak::pkg_install
-                 )
-
+pacman::p_load(
+  tidyverse, ggrepel, easystats, archive, fs
+)
 
 ##### Wave 7 only #####
 
