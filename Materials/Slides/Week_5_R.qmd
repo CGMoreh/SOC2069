@@ -1,413 +1,135 @@
 ---
-title: "Introduction: Information, Data, Models"
-subtitle: "Week 1"
+title: "Interaction models"
+subtitle: "Week 4"
 format:
   pptx:
     incremental: true   
     reference-doc: templates/SOC2069_pptx_template.pptx
 ---
 
-```{r}
+## Statistical models
 
-# Packages
-library(tidyverse)
-# library(palmerpenguins)
-```
+-   **(general) linear models**
 
-# Information \> Data \> Models
+    -   For when we are interested in the relationship of some ***continuous*** outcome variable, say $Y$, and one or more explanatory (predictor) variables, say $X_1 \dots {p}$
+        -   for $p=1$. we have a *simple* (bi-variate) regression;
+            -   a more general version of a ***correlation*** between two variables, using the true, unstandardised scales on which variables are measured;
+            -   when driven by substantive theory on a specific topic we wish to explain the observed variation in one of the variables (designated as the "dependent"/"outcome"/"explained" variable) based on the variability of the other variable (the "independent"/"predictor"/"explanatory" variable)
+        -   for $p>1$, we have a *multiple* regression;
+            -   a more general version of a ***partial correlation*** between two variables in the presence of other covariates;
+    -   Lets us characterize the relationship between $Y$ and $X$ as: $Y = \beta_0 + \beta_1 X + \epsilon$, where
+        -   $\beta_0$ is just a baseline, average value of $Y$ when we assign $X$ the value **0** (so exclude its effect)
+        -   $\beta_1$ is the predicted difference in the value of $Y$ associated with a *one unit* change in $X$; where "unit" depends on how $X$ is measured (e.g. one year of age; one extra £ of income; a 1-point jump on an attitudinal scale running from 0 to 10; being 1 (=Female) compared to 0(=Male);
+        -   the $\epsilon$ is "noise"; accounts for the deviations between the data points and the expected linear trend line
+        -   $\epsilon$ must follow a ***normal distribution*** to satisfy the mathematical requirements for a linear model; if not, we need to think about other modelling approaches
 
-## Models in social science
+-   **Generalised linear models**
 
--   Descriptive
--   Predictive
--   Inferential
--   Causal
+    -   Logistic regression
+        -   For when we are interested in the relationship between a **binary** outcome variable and one or more explanatory variables
 
-## Typical research objectives by required sample size (*n*)
+## Interaction models
 
--   $n\to\infty$
--   **n** $\approx$ 5,000 - 100,000: stratified population survey
--   **n** $\approx$ 1,000 - 5,000: population survey
--   **n** $\approx$ 100 - 1,000: targeted survey
--   **n** $\approx$ 50 - 100: stratified narrative study
--   **n** $\approx$ 10 - 50: narrative study
--   **n** $\approx$ 5 - 10: interactive narrative study
--   **n = 2 - 4**: comparative case study
--   **n = 1**: case study
--   **n = 0**: theoretical/simulation study
+-   In linear models, each explanatory variable is assumed to have an effect on the outcome variable that is independent of the values of other explanatory variables included in the model  main effects
+-   We can reject this assumption and model any theoretically motivated dependencies between the explanatory variables themselves
+-   We "multiplicate" the effect of two explanatory variables to estimate their effect as dependent on the values of the other explanatory variable(s)
 
-## The *n = 0* principle
+## Remember...
 
-::: columns
-::: {.column width="40%"}
-```{r}
-#| echo: true
-#| eval: false
+```{r, include=FALSE}
 
-set.seed(2069)
+pacman::p_load(tidyverse,             # metapackage; general data management (especially the `dplyr` package)
+               easystats,             # metapackage; data management and model summaries
+               gtsummary,             # data and model summary tables
+               ggformula,             # formula syntax to simplify `ggplot2` graphics
+               sjlabelled,            # work with labelled survey data from other statistical packages
+               ggeffects,             # extract and plot marginal/conditional/interaction effects from models
+               marginaleffects,        # extract and plot marginal/conditional/interaction effects from models
+               latex2exp              # math annotation on graphs
+               )
 
-student_numbers <- 120
 
-sex <- sample(c("Female", "Male"), 
-              size = student_numbers,
-              prob = c(70, 30),
-              replace = TRUE)
-
-height <- case_when(sex %in% c("Female") ~ rnorm(n = student_numbers, 
-                                           mean = 162.4, 
-                                           sd = 12),
-                    sex %in% c("Male") ~ rnorm(n = student_numbers, 
-                                         mean = 175.9, 
-                                         sd = 13))
-
-dataset <- data.frame(sex, height)
-
-head(dataset)
-
-tail(dataset)
-
-```
-:::
-
-::: {.column width="60%"}
-```{r}
-#| echo: false
-#| eval: true
-
-set.seed(2069)
-
-student_numbers <- 120
-
-sex <- sample(c("Female", "Male"), 
-              size = student_numbers,
-              prob = c(70, 30),
-              replace = TRUE)
-
-height <- case_when(sex %in% c("Female") ~ rnorm(n = student_numbers, 
-                                           mean = 162.4, 
-                                           sd = 12),
-                    sex %in% c("Male") ~ rnorm(n = student_numbers, 
-                                         mean = 175.9, 
-                                         sd = 13))
-
-dataset <- data.frame(sex, height)
-
-head(dataset)
-
-tail(dataset)
-
-```
-:::
-:::
-
-------------------------------------------------------------------------
-
-# Module outline
-
-------------------------------------------------------------------------
-
-------------------------------------------------------------------------
-
-# Finding data
-
-------------------------------------------------------------------------
-
-## 
-
-```{r}
-#| echo: false
-
-# Libraries
-library(tidyverse)
-library(ggrepel)
-# library(strengejacke)
-library(easystats)
+inequality <- data_read("https://github.com/CGMoreh/SOC2069/raw/main/Data/for_analysis/lab3macro.rds")
 ```
 
 ```{r}
+inequality <- drop_na(inequality, trust_pct, s80s20)
 
-data <- read_rds("../../Data/data_for_logo.rds") |> 
-  mutate(gdp = GDPpercap2,
-         ln_gdp = log(gdp),
-         lnx_gdp = log(log(log(gdp))),
-         exp_trust = (trust_pct^2)
-         ) |>
-  drop_na()
+## Recode Turkey into Region
 
-data %>%
-  filter(country != "China") |> 
-  arrange(desc(pop)) %>%
-  mutate(country = factor(country, country)) %>%
-  ggplot( aes(x=lnx_gdp, y=exp_trust, size = pop, color = Region)) +
-  geom_point(alpha=0.7) +
-  scale_size(range = c(3, 15), name="Population") +
-  scale_colour_manual(values=c("#293352", "#C4961A", "#52854C", "#D16103", "#99999900", "#9a372d", "#2d9aa4")) +
-  theme(axis.title.x = element_blank(), 
-        axis.title.y = element_blank(),
-        axis.text.x = element_blank(),
-        axis.ticks.x = element_blank(),
-        axis.text.y = element_blank(),
-        axis.ticks.y = element_blank(),
-        legend.position="none"
-  ) +
-  scale_x_continuous(breaks = seq(0.7, 0.88, 0.02), limits = c(0.7, 0.88)) +
-  scale_y_continuous(breaks = seq(0, 6050, 1000), limits = c(0, 6050))
+gf_point(trust_pct ~ s80s20, data = inequality) |> 
+  gf_lm(color="red", size = 1) |> 
+  gf_text(label = ~ country, size = 2.5, hjust = 0, nudge_x = 0.15, nudge_y = 0.15) +
+  theme_minimal() +
+  scale_y_continuous(limits = c(0, 80), breaks = c(seq(0, 80, 10))) +
+  scale_x_continuous(limits = c(0, 17)) 
+  
 ```
 
-## 
+```{r echo=FALSE}
+
+# inequality <- with(inequality,  inequality[order(country) , ])
+
+
+mod <- lm(trust_pct ~ s80s20, data = inequality)
+mod_m <- lm(trust_pct ~ s80s20 + I(pop*1e-06) + Region, data = inequality)
+mod_x <- lm(trust_pct ~ s80s20*Region + I(pop*1e-06), data = inequality)
+
+
+ggeffects::ggpredict(mod_m, terms = c("s80s20", "Region")) |> plot()
+
+model_parameters(mod)
+
+compare_parameters(mod, mod_m, mod_x)
+
+selected_countries <- c("Nicaragua", "United Kingdom")
+intercept <-  coef(mod)[1] |> as.numeric() |> round(1)
+
+pred <- estimate_prediction(mod) |> 
+  mutate(country = inequality$country,
+         coef = mod$effects) |> 
+  relocate(country) |> 
+  filter(country %in% selected_countries)
+
+
+
+inequality <- inequality |> 
+  mutate(colours = case_when(country == "United Kingdom" ~ "#009C6B",
+                            country == "Nicaragua" ~ "#FF8916",
+                            TRUE ~ "black"),
+         sizes = case_when(country %in% selected_countries ~ 2.5, 
+                           TRUE ~ 1.5),
+         transparency = case_when(country %in% selected_countries ~ 1,
+                                  TRUE ~ 0.1),
+         fitted = case_when(country %in% selected_countries ~ mod$fitted.values))
+
+gf_point(trust_pct ~ s80s20, alpha = inequality$transparency, color = inequality$colours, size = inequality$sizes, data = inequality) |> 
+  gf_lm(color="darkred", size = 1) |> 
+  gf_text(label = ~ country, size = 3, hjust = 0, nudge_x = 0.15, nudge_y = 0.15, alpha = inequality$transparency, color = inequality$colours) |> 
+  # gf_hline(yintercept = fit, color = "darkblue", linetype = "dashed") |> 
+  gf_hline(yintercept = 0, color = "black") |> 
+  gf_vline(xintercept = 0, color = "black") |> 
+  gf_segment(fitted + trust_pct ~ s80s20 + s80s20, linetype = "solid", color = inequality$colours, size = 0.7) |> 
+  gf_segment(fitted + -10 ~ s80s20 + s80s20, linetype = "dashed", color = inequality$colours, size = 0.6) |>
+  gf_segment(fitted + fitted ~ -1 + s80s20, linetype = "dashed", color = inequality$colours, size = 0.6) +
+  theme_bw() +
+    theme(panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank()) +
+  scale_y_continuous(limits = c(-10, 80), breaks = c(seq(-10, 80, 10)), expand = c(0,0)) +
+  scale_x_continuous(limits = c(-1, 17), breaks = c(seq(-1, 17, 1)), expand = c(0,0)) +
+  annotate("point", shape = 4, x = 0, y = intercept, size = 3, color = "darkred", stroke = 2) +
+  annotate("text", x = 1.7, y = intercept+3.4, size = 3, color = "black", label = paste(TeX(r"($\beta_0$)"), " (Intercept) ==", intercept), parse = TRUE) +
+  annotate("text", x = 16.5, y = 75, size = 5, hjust = "right", label = paste("Model: ", TeX(r"($Trust = \beta_0 + \beta_1 \times Inequality + \epsilon$)")), parse = TRUE, color = "darkred") +
+  annotate("text", x = 16.5, y = 67, size = 4, hjust = "right", label = paste(TeX(r"($Trust_{UK} =  45.4 + (-3.1) \times 5.40$ = 28.7)")), parse = TRUE, color = "#009C6B") +
+  annotate("text", x = 16.5, y = 60, size = 4, hjust = "right", label = paste(TeX(r"($Trust_{Nic.} =  45.4 + (-3.1) \times 10.2$ = 13.7)")), parse = TRUE, color = "#FF8916")
+  
+```
 
 ```{r}
 
-data %>%
-  filter(country != "China") |> 
-  arrange(desc(pop)) %>%
-  mutate(country = factor(country, country)) %>%
-  ggplot( aes(x=lnx_gdp, y=exp_trust, size = pop, color = Region)) +
-  geom_point(alpha=0.7) +
-  scale_size(range = c(3, 15), name="Population") +
-  scale_colour_manual(values=c("#293352", "#C4961A", "#52854C", "#D16103", "#99999900", "#9a372d", "#2d9aa4")) +
-  theme(axis.title.x = element_blank(), 
-        axis.title.y = element_blank(),
-        # axis.text.x = element_blank(),
-        # axis.ticks.x = element_blank(),
-        # axis.text.y = element_blank(),
-        # axis.ticks.y = element_blank(),
-        legend.position="none"
-  ) +
-  scale_x_continuous(breaks = seq(0.7, 0.88, 0.02), limits = c(0.7, 0.88)) +
-  scale_y_continuous(breaks = seq(0, 6050, 1000), limits = c(0, 6050))
-```
-
-## 
-
-```{r}
-
-data %>%
-  filter(country != "China") |> 
-  arrange(desc(pop)) %>%
-  mutate(country = factor(country, country)) %>%
-  ggplot( aes(x=gdp, y=trust_pct, size = pop, color = Region)) +
-  geom_point(alpha=0.7) +
-  scale_size(range = c(3, 15), name="Population") +
-  scale_colour_manual(values=c("#293352", "#C4961A", "#52854C", "#D16103", "#99999900", "#9a372d", "#2d9aa4")) +
-  theme(axis.title.x = element_blank(), 
-        axis.title.y = element_blank(),
-        # axis.text.x = element_blank(),
-        # axis.ticks.x = element_blank(),
-        # axis.text.y = element_blank(),
-        # axis.ticks.y = element_blank(),
-        legend.position="none"
-  ) 
-```
-
-## 
-
-```{r}
-
-data %>%
-  # filter(country != "China") |> 
-  arrange(desc(pop)) %>%
-  mutate(country = factor(country, country)) %>%
-  ggplot( aes(x=gdp, y=trust_pct, size = pop, color = Region)) +
-  geom_point(alpha=0.7) +
-  scale_size(range = c(3, 15), name="Population") +
-  scale_colour_manual(values=c("#293352", "#C4961A", "#52854C", "#D16103", "#99999900", "#9a372d", "#2d9aa4")) +
-  theme(axis.title.x = element_blank(), 
-        axis.title.y = element_blank(),
-        # axis.text.x = element_blank(),
-        # axis.ticks.x = element_blank(),
-        # axis.text.y = element_blank(),
-        # axis.ticks.y = element_blank(),
-        legend.position="none"
-  ) 
-```
-
-## 
-
-```{r}
-
-data %>%
-  # filter(country != "China") |> 
-  arrange(desc(pop)) %>%
-  mutate(country = factor(country, country)) %>%
-  ggplot( aes(x=gdp, y=trust_pct, size = pop, color = Region)) +
-  # geom_point(alpha=0.7) +
-  scale_size(range = c(3, 15), name="Population") +
-  scale_colour_manual(values=c("#293352", "#C4961A", "#52854C", "#D16103", "#99999900", "#9a372d", "#2d9aa4")) +
-  theme(axis.title.x = element_blank(), 
-        axis.title.y = element_blank(),
-        # axis.text.x = element_blank(),
-        # axis.ticks.x = element_blank(),
-        # axis.text.y = element_blank(),
-        # axis.ticks.y = element_blank(),
-        legend.position="none"
-  ) +
-  geom_text(aes(label = country), check_overlap = TRUE)
-```
-
-## 
-
-```{r}
-
-data %>%
-  # filter(country != "China") |> 
-  arrange(desc(pop)) %>%
-  mutate(country = factor(country, country)) %>%
-  ggplot( aes(x=gdp, y=trust_pct, size = pop, color = Region)) +
-  # geom_point(alpha=0.7) +
-  scale_size(range = c(3, 15), name="Population") +
-  scale_colour_manual(values=c("#293352", "#C4961A", "#52854C", "#D16103", "#99999900", "#9a372d", "#2d9aa4")) +
-  theme(legend.position="none"  ) +
-  geom_text(aes(label = country), check_overlap = TRUE) +
-  xlab("GDP/capita in PPP") +
-  ylab("Generalised trust (% of trusting in national population)") +
-  ggtitle("Figure 1: Generalised Trust by GDP")
-```
-
-## Finding data
-
-## This print "Two content" output
-
-::: columns
-::: {.column width="40%"}
-```{r}
-#| echo: true
-#| eval: true
-
+gf_point(trust_pct ~ s80s20, data = inequality, color = ~ Region) |> 
+  gf_lims(y = c(1, 80)) |> 
+  gf_lm() +
+  theme_minimal()
 
 ```
-:::
-
-::: {.column width="60%"}
-Something else
-:::
-:::
-
-::: notes
-Notes.
-:::
-
-## Title
-
-```{r}
-#| echo: true
-
-
-```
-
-## This prints to Comparison
-
-::: columns
-::: column
-```{r}
-#| echo: true
-#| output: true
-
-
-
-```
-:::
-
-::: column
-```{r}
-#| echo: true
-#| output: true
-
-
-```
-:::
-:::
-
-------------------------------------------------------------------------
-
-## Using `with()` in *base R*
-
-::: columns
-::: column
-```{r}
-#| echo: true
-#| output: true
-
-
-
-```
-:::
-
-::: column
-```{r}
-#| echo: true
-#| output: true
-
-
-```
-:::
-:::
-
-------------------------------------------------------------------------
-
-## Changing the `ggplot` theme
-
-::: columns
-::: column
-```{r}
-#| echo: true
-#| output: true
-
-
-```
-:::
-
-::: column
-```{r}
-#| echo: true
-#| output: true
-
-```
-:::
-:::
-
-------------------------------------------------------------------------
-
-## *Some* further styling options
-
-::: columns
-::: column
-```{r}
-#| echo: true
-#| output: true
-
-
-```
-:::
-
-::: column
-```{r}
-#| echo: true
-#| output: true
-
-```
-:::
-:::
-
-------------------------------------------------------------------------
-
-## Test
-
-```{r}
-#| echo: true
-#| output-location: column-fragment
-#| code-line-numbers: "|2"
-
-library(ggplot2)
-
-mtcars |> 
-  ggplot(aes(x = disp, y = mpg)) +
-  geom_point() +
-  geom_smooth(method = "loess", formula = "y~x")
-```
-
-------------------------------------------------------------------------
-
-## Final
-
-This is an [important sentence!]{.fragment .highlight-red}
