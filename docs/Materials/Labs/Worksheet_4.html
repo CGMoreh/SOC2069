@@ -3486,9 +3486,9 @@ return!"\t\n\x0B\f\r                　\u2028\u2029
   <li><a href="#step-3-describe-the-relationship-between-the-main-variables-of-interest" id="toc-step-3-describe-the-relationship-between-the-main-variables-of-interest" class="nav-link" data-scroll-target="#step-3-describe-the-relationship-between-the-main-variables-of-interest">Step 3: Describe the relationship between the main variables of interest</a></li>
   <li><a href="#step-4-fit-and-interpret-a-simple-bivariate-logistic-regression-model" id="toc-step-4-fit-and-interpret-a-simple-bivariate-logistic-regression-model" class="nav-link" data-scroll-target="#step-4-fit-and-interpret-a-simple-bivariate-logistic-regression-model">Step 4: Fit and interpret a simple bivariate logistic regression model</a></li>
   <li><a href="#step-5-add-demographic-control-variables-to-the-logistic-regression-model" id="toc-step-5-add-demographic-control-variables-to-the-logistic-regression-model" class="nav-link" data-scroll-target="#step-5-add-demographic-control-variables-to-the-logistic-regression-model">Step 5: Add demographic control variables to the logistic regression model</a></li>
-  <li><a href="#exercise-2-refitting-the-model-for-a-single-country" id="toc-exercise-2-refitting-the-model-for-a-single-country" class="nav-link" data-scroll-target="#exercise-2-refitting-the-model-for-a-single-country">Exercise 2: Refitting the model for a single country</a></li>
   </ul>
 </li>
+  <li><a href="#exercise-2-refitting-the-model-for-a-single-country" id="toc-exercise-2-refitting-the-model-for-a-single-country" class="nav-link" data-scroll-target="#exercise-2-refitting-the-model-for-a-single-country">Exercise 2: Refitting the model for a single country</a></li>
   </ul></nav>
 </nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
@@ -3570,26 +3570,35 @@ Topic: &quot;Logistic models&quot;</code></pre>
 </section><section id="step-1-find-and-describe-individual-variables" class="level2"><h2 class="anchored" data-anchor-id="step-1-find-and-describe-individual-variables">Step 1: Find and describe individual variables</h2>
 <p>The next step is to identify the variables that are most useful for answering the research question we posed. We can do this by browsing through the WVS7 codebook (https://soc2069.chrismoreh.com/data/data_main#wvs7-codebook). If our aim is to stay as close as possible to <span class="citation" data-cites="Wu2021-12-01EducationSocialTrust">(<a href="#ref-Wu2021-12-01EducationSocialTrust" role="doc-biblioref">Wu 2021</a>)</span>’s analysis, we can also read the sections of the paper where they describe their choice of variables:</p>
 <blockquote class="blockquote">
-<p>“For the WVS, I use the standard survey item asking, “Generally speaking, would you say that most people can be trusted or that you can’t be too careful in dealing with people?” (Rosenberg 1956). The variable is coded on a 0 to 1 scale, with 1 corresponding to high levels of trust.” (p. 1170) “For the WVS, I measure educational attainment using respondents’ highest education level attained with eight categories, namely, 1 = no formal education or inadequately completed elementary education, 2 = completed (compulsory) elementary education, 3 = incomplete secondary school: technical/vocational, 4 = complete secondary school: technical/vocational, 5 = incomplete secondary: university, 6 = complete secondary: university, 7 = some university without degree, and 8 = university with degree/higher education. In some analyses, I treat education as a categorical variable. To reduce the number of categories, I recode respondents’ education into Primary, Secondary, Post-secondary, and Tertiary. This is also consistent with the most recent wave of the WVS coding” (p. 1171) “I also control for relevant demographic covariates such as gender, age, income, marital status, and occupational status at the individual level” (p. 1172)</p>
+<p>For the WVS, I use the standard survey item asking, “Generally speaking, would you say that most people can be trusted or that you can’t be too careful in dealing with people? (Rosenberg 1956). The variable is coded on a 0 to 1 scale, with 1 corresponding to high levels of trust.” (p. 1170)</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>For the WVS, I measure educational attainment using respondents’ highest education level attained with eight categories, namely, 1 = no formal education or inadequately completed elementary education, 2 = completed (compulsory) elementary education, 3 = incomplete secondary school: technical/vocational, 4 = complete secondary school: technical/vocational, 5 = incomplete secondary: university, 6 = complete secondary: university, 7 = some university without degree, and 8 = university with degree/higher education.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>In some analyses, I treat education as a categorical variable. To reduce the number of categories, I recode respondents’ education into Primary, Secondary, Post-secondary, and Tertiary. This is also consistent with the most recent wave of the WVS coding (p. 1171)</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>I also control for relevant demographic covariates such as gender, age, income, marital status, and occupational status at the individual level (p. 1172)</p>
 </blockquote>
 <p>Based on the above description, the most appropriate variables available to us in the WVS7 dataset are:</p>
 <div class="cell">
 <div class="cell-output-display">
 
-<div id="rlxorlddfd" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#rlxorlddfd table {
+<div id="skbxwzvpqj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#skbxwzvpqj table {
 font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 -webkit-font-smoothing: antialiased;
 -moz-osx-font-smoothing: grayscale;
 }
-#rlxorlddfd thead, #rlxorlddfd tbody, #rlxorlddfd tfoot, #rlxorlddfd tr, #rlxorlddfd td, #rlxorlddfd th {
+#skbxwzvpqj thead, #skbxwzvpqj tbody, #skbxwzvpqj tfoot, #skbxwzvpqj tr, #skbxwzvpqj td, #skbxwzvpqj th {
 border-style: none;
 }
-#rlxorlddfd p {
+#skbxwzvpqj p {
 margin: 0;
 padding: 0;
 }
-#rlxorlddfd .gt_table {
+#skbxwzvpqj .gt_table {
 display: table;
 border-collapse: collapse;
 line-height: normal;
@@ -3614,11 +3623,11 @@ border-left-style: none;
 border-left-width: 2px;
 border-left-color: #D3D3D3;
 }
-#rlxorlddfd .gt_caption {
+#skbxwzvpqj .gt_caption {
 padding-top: 4px;
 padding-bottom: 4px;
 }
-#rlxorlddfd .gt_title {
+#skbxwzvpqj .gt_title {
 color: #333333;
 font-size: 125%;
 font-weight: initial;
@@ -3629,7 +3638,7 @@ padding-right: 5px;
 border-bottom-color: #FFFFFF;
 border-bottom-width: 0;
 }
-#rlxorlddfd .gt_subtitle {
+#skbxwzvpqj .gt_subtitle {
 color: #333333;
 font-size: 85%;
 font-weight: initial;
@@ -3640,7 +3649,7 @@ padding-right: 5px;
 border-top-color: #FFFFFF;
 border-top-width: 0;
 }
-#rlxorlddfd .gt_heading {
+#skbxwzvpqj .gt_heading {
 background-color: #FFFFFF;
 text-align: center;
 border-bottom-color: #FFFFFF;
@@ -3651,12 +3660,12 @@ border-right-style: none;
 border-right-width: 1px;
 border-right-color: #D3D3D3;
 }
-#rlxorlddfd .gt_bottom_border {
+#skbxwzvpqj .gt_bottom_border {
 border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 }
-#rlxorlddfd .gt_col_headings {
+#skbxwzvpqj .gt_col_headings {
 border-top-style: solid;
 border-top-width: 2px;
 border-top-color: #D3D3D3;
@@ -3670,7 +3679,7 @@ border-right-style: none;
 border-right-width: 1px;
 border-right-color: #D3D3D3;
 }
-#rlxorlddfd .gt_col_heading {
+#skbxwzvpqj .gt_col_heading {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -3689,7 +3698,7 @@ padding-left: 5px;
 padding-right: 5px;
 overflow-x: hidden;
 }
-#rlxorlddfd .gt_column_spanner_outer {
+#skbxwzvpqj .gt_column_spanner_outer {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -3700,13 +3709,13 @@ padding-bottom: 0;
 padding-left: 4px;
 padding-right: 4px;
 }
-#rlxorlddfd .gt_column_spanner_outer:first-child {
+#skbxwzvpqj .gt_column_spanner_outer:first-child {
 padding-left: 0;
 }
-#rlxorlddfd .gt_column_spanner_outer:last-child {
+#skbxwzvpqj .gt_column_spanner_outer:last-child {
 padding-right: 0;
 }
-#rlxorlddfd .gt_column_spanner {
+#skbxwzvpqj .gt_column_spanner {
 border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
@@ -3717,10 +3726,10 @@ overflow-x: hidden;
 display: inline-block;
 width: 100%;
 }
-#rlxorlddfd .gt_spanner_row {
+#skbxwzvpqj .gt_spanner_row {
 border-bottom-style: hidden;
 }
-#rlxorlddfd .gt_group_heading {
+#skbxwzvpqj .gt_group_heading {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -3745,7 +3754,7 @@ border-right-color: #D3D3D3;
 vertical-align: middle;
 text-align: left;
 }
-#rlxorlddfd .gt_empty_group_heading {
+#skbxwzvpqj .gt_empty_group_heading {
 padding: 0.5px;
 color: #333333;
 background-color: #FFFFFF;
@@ -3759,13 +3768,13 @@ border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 vertical-align: middle;
 }
-#rlxorlddfd .gt_from_md > :first-child {
+#skbxwzvpqj .gt_from_md > :first-child {
 margin-top: 0;
 }
-#rlxorlddfd .gt_from_md > :last-child {
+#skbxwzvpqj .gt_from_md > :last-child {
 margin-bottom: 0;
 }
-#rlxorlddfd .gt_row {
+#skbxwzvpqj .gt_row {
 padding-top: 0px;
 padding-bottom: 0px;
 padding-left: 5px;
@@ -3783,7 +3792,7 @@ border-right-color: #D3D3D3;
 vertical-align: middle;
 overflow-x: hidden;
 }
-#rlxorlddfd .gt_stub {
+#skbxwzvpqj .gt_stub {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -3795,7 +3804,7 @@ border-right-color: #D3D3D3;
 padding-left: 5px;
 padding-right: 5px;
 }
-#rlxorlddfd .gt_stub_row_group {
+#skbxwzvpqj .gt_stub_row_group {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -3808,13 +3817,13 @@ padding-left: 5px;
 padding-right: 5px;
 vertical-align: top;
 }
-#rlxorlddfd .gt_row_group_first td {
+#skbxwzvpqj .gt_row_group_first td {
 border-top-width: 2px;
 }
-#rlxorlddfd .gt_row_group_first th {
+#skbxwzvpqj .gt_row_group_first th {
 border-top-width: 2px;
 }
-#rlxorlddfd .gt_summary_row {
+#skbxwzvpqj .gt_summary_row {
 color: #333333;
 background-color: #FFFFFF;
 text-transform: inherit;
@@ -3823,14 +3832,14 @@ padding-bottom: 8px;
 padding-left: 5px;
 padding-right: 5px;
 }
-#rlxorlddfd .gt_first_summary_row {
+#skbxwzvpqj .gt_first_summary_row {
 border-top-style: solid;
 border-top-color: #D3D3D3;
 }
-#rlxorlddfd .gt_first_summary_row.thick {
+#skbxwzvpqj .gt_first_summary_row.thick {
 border-top-width: 2px;
 }
-#rlxorlddfd .gt_last_summary_row {
+#skbxwzvpqj .gt_last_summary_row {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -3839,7 +3848,7 @@ border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 }
-#rlxorlddfd .gt_grand_summary_row {
+#skbxwzvpqj .gt_grand_summary_row {
 color: #333333;
 background-color: #FFFFFF;
 text-transform: inherit;
@@ -3848,7 +3857,7 @@ padding-bottom: 8px;
 padding-left: 5px;
 padding-right: 5px;
 }
-#rlxorlddfd .gt_first_grand_summary_row {
+#skbxwzvpqj .gt_first_grand_summary_row {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -3857,7 +3866,7 @@ border-top-style: double;
 border-top-width: 6px;
 border-top-color: #D3D3D3;
 }
-#rlxorlddfd .gt_last_grand_summary_row_top {
+#skbxwzvpqj .gt_last_grand_summary_row_top {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -3866,10 +3875,10 @@ border-bottom-style: double;
 border-bottom-width: 6px;
 border-bottom-color: #D3D3D3;
 }
-#rlxorlddfd .gt_striped {
+#skbxwzvpqj .gt_striped {
 background-color: rgba(128, 128, 128, 0.05);
 }
-#rlxorlddfd .gt_table_body {
+#skbxwzvpqj .gt_table_body {
 border-top-style: solid;
 border-top-width: 2px;
 border-top-color: #D3D3D3;
@@ -3877,7 +3886,7 @@ border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 }
-#rlxorlddfd .gt_footnotes {
+#skbxwzvpqj .gt_footnotes {
 color: #333333;
 background-color: #FFFFFF;
 border-bottom-style: none;
@@ -3890,7 +3899,7 @@ border-right-style: none;
 border-right-width: 2px;
 border-right-color: #D3D3D3;
 }
-#rlxorlddfd .gt_footnote {
+#skbxwzvpqj .gt_footnote {
 margin: 0px;
 font-size: 90%;
 padding-top: 4px;
@@ -3898,7 +3907,7 @@ padding-bottom: 4px;
 padding-left: 5px;
 padding-right: 5px;
 }
-#rlxorlddfd .gt_sourcenotes {
+#skbxwzvpqj .gt_sourcenotes {
 color: #333333;
 background-color: #FFFFFF;
 border-bottom-style: none;
@@ -3911,57 +3920,57 @@ border-right-style: none;
 border-right-width: 2px;
 border-right-color: #D3D3D3;
 }
-#rlxorlddfd .gt_sourcenote {
+#skbxwzvpqj .gt_sourcenote {
 font-size: 90%;
 padding-top: 4px;
 padding-bottom: 4px;
 padding-left: 5px;
 padding-right: 5px;
 }
-#rlxorlddfd .gt_left {
+#skbxwzvpqj .gt_left {
 text-align: left;
 }
-#rlxorlddfd .gt_center {
+#skbxwzvpqj .gt_center {
 text-align: center;
 }
-#rlxorlddfd .gt_right {
+#skbxwzvpqj .gt_right {
 text-align: right;
 font-variant-numeric: tabular-nums;
 }
-#rlxorlddfd .gt_font_normal {
+#skbxwzvpqj .gt_font_normal {
 font-weight: normal;
 }
-#rlxorlddfd .gt_font_bold {
+#skbxwzvpqj .gt_font_bold {
 font-weight: bold;
 }
-#rlxorlddfd .gt_font_italic {
+#skbxwzvpqj .gt_font_italic {
 font-style: italic;
 }
-#rlxorlddfd .gt_super {
+#skbxwzvpqj .gt_super {
 font-size: 65%;
 }
-#rlxorlddfd .gt_footnote_marks {
+#skbxwzvpqj .gt_footnote_marks {
 font-size: 75%;
 vertical-align: 0.4em;
 position: initial;
 }
-#rlxorlddfd .gt_asterisk {
+#skbxwzvpqj .gt_asterisk {
 font-size: 100%;
 vertical-align: 0;
 }
-#rlxorlddfd .gt_indent_1 {
+#skbxwzvpqj .gt_indent_1 {
 text-indent: 5px;
 }
-#rlxorlddfd .gt_indent_2 {
+#skbxwzvpqj .gt_indent_2 {
 text-indent: 10px;
 }
-#rlxorlddfd .gt_indent_3 {
+#skbxwzvpqj .gt_indent_3 {
 text-indent: 15px;
 }
-#rlxorlddfd .gt_indent_4 {
+#skbxwzvpqj .gt_indent_4 {
 text-indent: 20px;
 }
-#rlxorlddfd .gt_indent_5 {
+#skbxwzvpqj .gt_indent_5 {
 text-indent: 25px;
 }
 </style>
@@ -4457,20 +4466,20 @@ Value |     N | Raw % | Valid % | Cumulative %
 <div class="cell">
 <div class="cell-output-display">
 
-<div id="gmhatxnqef" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#gmhatxnqef table {
+<div id="ksbnstkrxv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ksbnstkrxv table {
 font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 -webkit-font-smoothing: antialiased;
 -moz-osx-font-smoothing: grayscale;
 }
-#gmhatxnqef thead, #gmhatxnqef tbody, #gmhatxnqef tfoot, #gmhatxnqef tr, #gmhatxnqef td, #gmhatxnqef th {
+#ksbnstkrxv thead, #ksbnstkrxv tbody, #ksbnstkrxv tfoot, #ksbnstkrxv tr, #ksbnstkrxv td, #ksbnstkrxv th {
 border-style: none;
 }
-#gmhatxnqef p {
+#ksbnstkrxv p {
 margin: 0;
 padding: 0;
 }
-#gmhatxnqef .gt_table {
+#ksbnstkrxv .gt_table {
 display: table;
 border-collapse: collapse;
 line-height: normal;
@@ -4495,11 +4504,11 @@ border-left-style: none;
 border-left-width: 2px;
 border-left-color: #D3D3D3;
 }
-#gmhatxnqef .gt_caption {
+#ksbnstkrxv .gt_caption {
 padding-top: 4px;
 padding-bottom: 4px;
 }
-#gmhatxnqef .gt_title {
+#ksbnstkrxv .gt_title {
 color: #333333;
 font-size: 125%;
 font-weight: initial;
@@ -4510,7 +4519,7 @@ padding-right: 5px;
 border-bottom-color: #FFFFFF;
 border-bottom-width: 0;
 }
-#gmhatxnqef .gt_subtitle {
+#ksbnstkrxv .gt_subtitle {
 color: #333333;
 font-size: 85%;
 font-weight: initial;
@@ -4521,7 +4530,7 @@ padding-right: 5px;
 border-top-color: #FFFFFF;
 border-top-width: 0;
 }
-#gmhatxnqef .gt_heading {
+#ksbnstkrxv .gt_heading {
 background-color: #FFFFFF;
 text-align: center;
 border-bottom-color: #FFFFFF;
@@ -4532,12 +4541,12 @@ border-right-style: none;
 border-right-width: 1px;
 border-right-color: #D3D3D3;
 }
-#gmhatxnqef .gt_bottom_border {
+#ksbnstkrxv .gt_bottom_border {
 border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 }
-#gmhatxnqef .gt_col_headings {
+#ksbnstkrxv .gt_col_headings {
 border-top-style: solid;
 border-top-width: 2px;
 border-top-color: #D3D3D3;
@@ -4551,7 +4560,7 @@ border-right-style: none;
 border-right-width: 1px;
 border-right-color: #D3D3D3;
 }
-#gmhatxnqef .gt_col_heading {
+#ksbnstkrxv .gt_col_heading {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -4570,7 +4579,7 @@ padding-left: 5px;
 padding-right: 5px;
 overflow-x: hidden;
 }
-#gmhatxnqef .gt_column_spanner_outer {
+#ksbnstkrxv .gt_column_spanner_outer {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -4581,13 +4590,13 @@ padding-bottom: 0;
 padding-left: 4px;
 padding-right: 4px;
 }
-#gmhatxnqef .gt_column_spanner_outer:first-child {
+#ksbnstkrxv .gt_column_spanner_outer:first-child {
 padding-left: 0;
 }
-#gmhatxnqef .gt_column_spanner_outer:last-child {
+#ksbnstkrxv .gt_column_spanner_outer:last-child {
 padding-right: 0;
 }
-#gmhatxnqef .gt_column_spanner {
+#ksbnstkrxv .gt_column_spanner {
 border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
@@ -4598,10 +4607,10 @@ overflow-x: hidden;
 display: inline-block;
 width: 100%;
 }
-#gmhatxnqef .gt_spanner_row {
+#ksbnstkrxv .gt_spanner_row {
 border-bottom-style: hidden;
 }
-#gmhatxnqef .gt_group_heading {
+#ksbnstkrxv .gt_group_heading {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -4626,7 +4635,7 @@ border-right-color: #D3D3D3;
 vertical-align: middle;
 text-align: left;
 }
-#gmhatxnqef .gt_empty_group_heading {
+#ksbnstkrxv .gt_empty_group_heading {
 padding: 0.5px;
 color: #333333;
 background-color: #FFFFFF;
@@ -4640,13 +4649,13 @@ border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 vertical-align: middle;
 }
-#gmhatxnqef .gt_from_md > :first-child {
+#ksbnstkrxv .gt_from_md > :first-child {
 margin-top: 0;
 }
-#gmhatxnqef .gt_from_md > :last-child {
+#ksbnstkrxv .gt_from_md > :last-child {
 margin-bottom: 0;
 }
-#gmhatxnqef .gt_row {
+#ksbnstkrxv .gt_row {
 padding-top: 0px;
 padding-bottom: 0px;
 padding-left: 5px;
@@ -4664,7 +4673,7 @@ border-right-color: #D3D3D3;
 vertical-align: middle;
 overflow-x: hidden;
 }
-#gmhatxnqef .gt_stub {
+#ksbnstkrxv .gt_stub {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -4676,7 +4685,7 @@ border-right-color: #D3D3D3;
 padding-left: 5px;
 padding-right: 5px;
 }
-#gmhatxnqef .gt_stub_row_group {
+#ksbnstkrxv .gt_stub_row_group {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -4689,13 +4698,13 @@ padding-left: 5px;
 padding-right: 5px;
 vertical-align: top;
 }
-#gmhatxnqef .gt_row_group_first td {
+#ksbnstkrxv .gt_row_group_first td {
 border-top-width: 2px;
 }
-#gmhatxnqef .gt_row_group_first th {
+#ksbnstkrxv .gt_row_group_first th {
 border-top-width: 2px;
 }
-#gmhatxnqef .gt_summary_row {
+#ksbnstkrxv .gt_summary_row {
 color: #333333;
 background-color: #FFFFFF;
 text-transform: inherit;
@@ -4704,14 +4713,14 @@ padding-bottom: 8px;
 padding-left: 5px;
 padding-right: 5px;
 }
-#gmhatxnqef .gt_first_summary_row {
+#ksbnstkrxv .gt_first_summary_row {
 border-top-style: solid;
 border-top-color: #D3D3D3;
 }
-#gmhatxnqef .gt_first_summary_row.thick {
+#ksbnstkrxv .gt_first_summary_row.thick {
 border-top-width: 2px;
 }
-#gmhatxnqef .gt_last_summary_row {
+#ksbnstkrxv .gt_last_summary_row {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -4720,7 +4729,7 @@ border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 }
-#gmhatxnqef .gt_grand_summary_row {
+#ksbnstkrxv .gt_grand_summary_row {
 color: #333333;
 background-color: #FFFFFF;
 text-transform: inherit;
@@ -4729,7 +4738,7 @@ padding-bottom: 8px;
 padding-left: 5px;
 padding-right: 5px;
 }
-#gmhatxnqef .gt_first_grand_summary_row {
+#ksbnstkrxv .gt_first_grand_summary_row {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -4738,7 +4747,7 @@ border-top-style: double;
 border-top-width: 6px;
 border-top-color: #D3D3D3;
 }
-#gmhatxnqef .gt_last_grand_summary_row_top {
+#ksbnstkrxv .gt_last_grand_summary_row_top {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -4747,10 +4756,10 @@ border-bottom-style: double;
 border-bottom-width: 6px;
 border-bottom-color: #D3D3D3;
 }
-#gmhatxnqef .gt_striped {
+#ksbnstkrxv .gt_striped {
 background-color: rgba(128, 128, 128, 0.05);
 }
-#gmhatxnqef .gt_table_body {
+#ksbnstkrxv .gt_table_body {
 border-top-style: solid;
 border-top-width: 2px;
 border-top-color: #D3D3D3;
@@ -4758,7 +4767,7 @@ border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 }
-#gmhatxnqef .gt_footnotes {
+#ksbnstkrxv .gt_footnotes {
 color: #333333;
 background-color: #FFFFFF;
 border-bottom-style: none;
@@ -4771,7 +4780,7 @@ border-right-style: none;
 border-right-width: 2px;
 border-right-color: #D3D3D3;
 }
-#gmhatxnqef .gt_footnote {
+#ksbnstkrxv .gt_footnote {
 margin: 0px;
 font-size: 90%;
 padding-top: 4px;
@@ -4779,7 +4788,7 @@ padding-bottom: 4px;
 padding-left: 5px;
 padding-right: 5px;
 }
-#gmhatxnqef .gt_sourcenotes {
+#ksbnstkrxv .gt_sourcenotes {
 color: #333333;
 background-color: #FFFFFF;
 border-bottom-style: none;
@@ -4792,57 +4801,57 @@ border-right-style: none;
 border-right-width: 2px;
 border-right-color: #D3D3D3;
 }
-#gmhatxnqef .gt_sourcenote {
+#ksbnstkrxv .gt_sourcenote {
 font-size: 90%;
 padding-top: 4px;
 padding-bottom: 4px;
 padding-left: 5px;
 padding-right: 5px;
 }
-#gmhatxnqef .gt_left {
+#ksbnstkrxv .gt_left {
 text-align: left;
 }
-#gmhatxnqef .gt_center {
+#ksbnstkrxv .gt_center {
 text-align: center;
 }
-#gmhatxnqef .gt_right {
+#ksbnstkrxv .gt_right {
 text-align: right;
 font-variant-numeric: tabular-nums;
 }
-#gmhatxnqef .gt_font_normal {
+#ksbnstkrxv .gt_font_normal {
 font-weight: normal;
 }
-#gmhatxnqef .gt_font_bold {
+#ksbnstkrxv .gt_font_bold {
 font-weight: bold;
 }
-#gmhatxnqef .gt_font_italic {
+#ksbnstkrxv .gt_font_italic {
 font-style: italic;
 }
-#gmhatxnqef .gt_super {
+#ksbnstkrxv .gt_super {
 font-size: 65%;
 }
-#gmhatxnqef .gt_footnote_marks {
+#ksbnstkrxv .gt_footnote_marks {
 font-size: 75%;
 vertical-align: 0.4em;
 position: initial;
 }
-#gmhatxnqef .gt_asterisk {
+#ksbnstkrxv .gt_asterisk {
 font-size: 100%;
 vertical-align: 0;
 }
-#gmhatxnqef .gt_indent_1 {
+#ksbnstkrxv .gt_indent_1 {
 text-indent: 5px;
 }
-#gmhatxnqef .gt_indent_2 {
+#ksbnstkrxv .gt_indent_2 {
 text-indent: 10px;
 }
-#gmhatxnqef .gt_indent_3 {
+#ksbnstkrxv .gt_indent_3 {
 text-indent: 15px;
 }
-#gmhatxnqef .gt_indent_4 {
+#ksbnstkrxv .gt_indent_4 {
 text-indent: 20px;
 }
-#gmhatxnqef .gt_indent_5 {
+#ksbnstkrxv .gt_indent_5 {
 text-indent: 25px;
 }
 </style>
@@ -5878,7 +5887,7 @@ Type:  response </code></pre>
 <p>It looks like the effect of <em>education</em> on <em>trust</em> is stronger among those married, or single or cohabitating than among the divorced, separated or widowed, for both men and women.</p>
 <p>This is a rather complex finding, and we can explore this model in much more depth, as well as thinking about developing it or specifying it further.</p>
 <p>For the next exercise, let’s make a few minor tweaks to the data and model and compare the results.</p>
-</section><section id="exercise-2-refitting-the-model-for-a-single-country" class="level2"><h2 class="anchored" data-anchor-id="exercise-2-refitting-the-model-for-a-single-country">Exercise 2: Refitting the model for a single country</h2>
+</section></section><section id="exercise-2-refitting-the-model-for-a-single-country" class="level1"><h1>Exercise 2: Refitting the model for a single country</h1>
 <p>You will carry out this exercise on your own, but we’ll make two adjustments:</p>
 <ul>
 <li>Instead of treating the entire dataset as undifferentiated, originating from one single population, we will acknowledge the fact that the data originate from various countries and that the local socio-cultural context has an impact on social behaviours and attitudes. To account for this, re-fit the logistic regression model from the previous exercise in two different ways:
@@ -5922,7 +5931,7 @@ Type:  response </code></pre>
 
 
 
-</section></section><a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+</section><a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
 <div id="ref-Wu2021-12-01EducationSocialTrust" class="csl-entry" role="listitem">
 Wu, Cary. 2021. <span>“Education and Social Trust in Global Perspective.”</span> <em>Sociological Perspectives</em> 64 (6): 1166–86. <a href="https://doi.org/10.1177/0731121421990045">https://doi.org/10.1177/0731121421990045</a>.
 </div>

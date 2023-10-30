@@ -1,0 +1,52 @@
+1.  Are religious people more satisfied with life?
+
+-   WVS: Q171 - Q173 religion; Q49, life satisfaction
+-   EVS: v51 - v64 religiosity; v39, life sat (EVS)
+-   ESS: stflife How satisfied with life as a whole;
+
+2.  Are government/public sector employees more inclined to perceive higher levels of corruption than those working in the private sector?
+
+-   WVS: Q112, Perceptions of corruption in the country ... Q284: Sector of employment
+
+3.  Are older people more likely to see the death penalty as justifiable?
+
+-   WVS: Justifiable: Death penalty (WVS, Q195) ... Age (WVS, Q262)
+-   EVS: v163 do you justify: death penalty (Q44O) ... age
+-   BSA: DeathApp For some crimes, the death penalty is the most appropriate sentence ... RespAgeE Age last birthday capped at 80+
+
+4.  Are poorer Europeans more inclined to see it as an essential aspect of democracy that states make people's incomes equal?
+
+-   EVS: v139 democracy: the state makes people's incomes equal; v261, income
+
+5.  What factors are associated with opinions about future European Union enlargement among Europeans?
+
+-   EVS: v198 European Union enlargement (Q55);
+-   ESS: euftf European Union: European unification go further.. ;
+
+6.  Is higher internet use associated with stronger anti-immigrant sentiments?
+
+-   ESS: netustm Internet use, how much time on typical day ;
+-   ESS: imueclt Country's cultural life undermined or enriched by immigrants;
+-   ESS: imbgeco, imwbcnt
+
+7.  How does victimisation relate to trust in the police?
+
+-   ESS: trstplc Trust in the police
+-   ESS: crmvct Respondent or household member victim of burglary/assault last 5 years
+-   WVS: Q144, 145 - victim;
+-   WVS: Q69, Confidence in the police
+
+8.  Are people who fly more often by plane less likely to financially support environmental groups?
+
+-   ISSP: v56 Q21b Last five years: given money to an environmental group?;
+-   ISSP: v48 Q17a Last 12 months: number of trips by plane?
+
+9.  How do attitudes to welfare in Britain relate to having voted to leave the European Union in 2016?
+
+-   BSA: EUVOTWHO Did you vote to 'remain a member of the EU' or to
+-   BSA: welfhelp to proudwlf, and "welfarism scale" welfare2 or welfgrp
+
+10. What factors are associated with belief in life after death?
+
+-   WVS: Q166 Believe in: life after death
+-   EVS: v58 do you believe in: life after death (Q18B)

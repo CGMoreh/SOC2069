@@ -286,7 +286,7 @@ To get an even closer reproduction of that Figure, we could add an additional ar
 
 ```{r}
 ggpredict(m5.1x, terms = c("trusting", "educ_univ")) |> 
-  plot(connect_lines = TRUE)
+  plot(connect.lines = TRUE)
 ```
 
 Looking at whether and how much the *confidence intervals* of the predicted coefficients overlap with the point-predictions of the coefficients, we can visually asses the interaction effect.
