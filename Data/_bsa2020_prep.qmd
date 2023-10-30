@@ -56,7 +56,8 @@ bsa2020 <- bsa2020vars |>
          across(where(~ nlevels(.x) < 90),
                 ~ recode_values(.x, recode = list("NA" = "98, 99"))),           # 'Don't know/Prefer not to answer' to NA
          RespAgeE = case_match(RespAgeE, 999 ~ NA, 
-                                      .default = RespAgeE)                      # remove 999 age
+                                      .default = RespAgeE),                     # remove 999 age
+         EUVOTWHO = recode_values(EUVOTWHO, recode = list("NA" = "3, 4"))
          )
 
 bsa2020 <-  copy_labels(bsa2020, bsa2020vars)                                   # Copy over labels after recoding

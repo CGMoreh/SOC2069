@@ -12,6 +12,7 @@
 
 -   WVS: Justifiable: Death penalty (WVS, Q195) ... Age (WVS, Q262)
 -   EVS: v163 do you justify: death penalty (Q44O) ... age
+-   BSA: DeathApp For some crimes, the death penalty is the most appropriate sentence ... RespAgeE Age last birthday capped at 80+
 
 4.  Are poorer Europeans more inclined to see it as an essential aspect of democracy that states make people's incomes equal?
 
@@ -40,6 +41,12 @@
 -   ISSP: v56 Q21b Last five years: given money to an environmental group?;
 -   ISSP: v48 Q17a Last 12 months: number of trips by plane?
 
-9.  
+9.  How do attitudes to welfare in Britain relate to having voted to leave the European Union in 2016?
 
-10. 
+-   BSA: EUVOTWHO Did you vote to 'remain a member of the EU' or to
+-   BSA: welfhelp to proudwlf, and "welfarism scale" welfare2 or welfgrp
+
+10. What factors are associated with belief in life after death?
+
+-   WVS: Q166 Believe in: life after death
+-   EVS: v58 do you believe in: life after death (Q18B)

@@ -29,7 +29,7 @@ contents <- tibble(
   # Info = c(paste0("/materials/notes/info_w", 1:10)),
   # Notes = c(paste0("/materials/notes/notes_w", 1:10)),
   Slides = c(paste0("https://github.com/CGMoreh/SOC2069/raw/main/Materials/Slides/Week_", 1:10)),
-  Labs = c(paste0("/labs/worksheet_", 1:10)),
+  Labs = c(paste0("/Materials/Labs/Worksheet_", 1:10)),
   # Handouts = c(paste0("/materials/handouts/sheet_w", 1:10)),
   )
 
@@ -41,13 +41,13 @@ contents <- contents |>
          # Info = paste0("[{{< fa solid circle-info >}}]", glue('({Info}.qmd)')),
          # Notes = paste0("[{{< fa solid book-open >}}]", glue('({Notes}.qmd)')),
          Slides = paste0("[{{< fa solid person-chalkboard >}}]", glue('({Slides}.pptx)')),
-         Labs = paste0("[", "Lab", 1:10, "]", glue('({Labs}.qmd)')),
+         Labs = paste0("[", "Lab ", 1:10, "]", glue('({Labs}.qmd)')),
          # Handouts = paste0("[{{< fa solid sheet-plastic >}}]", glue('({Handouts}.qmd)')),
          Topic = paste("{{< ", Topic, " >}}"))
 
 
-contents[2, 4] <- paste(paste0("[", "Lab2a", "]", glue('(Labs/Worksheet_2a.qmd)')),
-                        paste0("[", "Lab2b", "]", glue('(Labs/Worksheet_2b.qmd)')))
+contents[2, 4] <- paste(paste0("[", "Lab 2a", "]", "&nbsp &nbsp", glue('(Labs/Worksheet_2a.qmd)')),
+                        paste0("[", "Lab 2b", "]", glue('(Labs/Worksheet_2b.qmd)')))
 
 
 tbl <- contents |>

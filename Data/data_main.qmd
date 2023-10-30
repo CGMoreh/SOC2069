@@ -35,7 +35,7 @@ Available datasets for download:
 -   **European Values Study, 2017**: `evs2017.rds` -- [**`Download`**](https://ncl.instructure.com/files/7506137/download?download_frd=1)
 -   **European Social Survey, Round 10, 2020**: `ess10.rds` -- [**`Download`**](https://ncl.instructure.com/files/7506136/download?download_frd=1)
 -   **International Social Survey Programme, 2020**: `issp2020.rds` -- [**`Download`**](https://ncl.instructure.com/files/7506138/download?download_frd=1)
--   **British Social Attitudes Study, 2020**: `bsa2020.rds` -- [**`Download`**](https://ncl.instructure.com/files/7561663/download?download_frd=1)
+-   **British Social Attitudes Study, 2020**: `bsa2020.rds` -- [**`Download`**](https://ncl.instructure.com/files/7561699/download?download_frd=1)
 
 More datasets will become available in the future.
 
