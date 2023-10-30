@@ -25,7 +25,7 @@
 if (!require("pacman")) install.packages("pacman")
 
 pacman::p_load(
-  tidyverse, ggrepel, easystats, archive, fs
+  tidyverse, ggrepel, easystats, sjlabelled, archive, fs
 )
 
 ##### Wave 7 only #####
@@ -38,7 +38,7 @@ pacman::p_load(
 ## and load them from there for different projects
 
 ## Copy the original folder to clipboard and read the the clipboard content in:
-## D:\OneDrive - Newcastle University\DATA\EVS_WVS\WVS_7
+# D:\OneDrive - Newcastle University\DATA\EVS_WVS\WVS_7
 
 datafolder <- readClipboard()
 
@@ -194,7 +194,7 @@ WB_CLASS <- readxl::read_xlsx("Data/raw/macro_contextual/CLASS.xlsx", sheet = 1,
                               "Kyrgyz Republic" ~ "Kyrgyzstan",
                               "Macao SAR, China" ~ "Macau SAR",
                               "Korea, Rep." ~ "South Korea",
-                              "Turkiye" ~ "Turkey",
+                              "Türkiye" ~ "Turkey",
                               .default = country))
   
 

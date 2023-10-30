@@ -1,7 +1,8 @@
-
 # British Social Attitudes Survey, 2020 (BSA2020)
 
-This dataset comes from the [British Social Attitudes Survey (2020)](https://beta.ukdataservice.ac.uk/datacatalogue/studies/study?id=9005). The data (bsa38, version 6) was downloaded in SPSS format to a local folder, `raw/bsa2020/`:
+This dataset comes from the [British Social Attitudes Survey (2020)](https://natcen.ac.uk/british-social-attitudes).
+You can access the documentation for the 2020 wave from [the UK Data Service](https://beta.ukdataservice.ac.uk/datacatalogue/studies/study?id=9005#!/documentation).
+The data (bsa38, version 6) was downloaded from the UKDS in SPSS format to a local folder, `raw/bsa2020/`:
 
 ```{r}
 #| echo: false
@@ -37,16 +38,28 @@ datafile <- here("Data", "raw", "bsa2020", "bsa2020_archive.sav")
 
 ## Read in the data file -----------------------------------------------------------------------------------------------------
 
-bsa2020 <- read_spss(datafile) |> 
-  drop_labels() |>
-  mutate(across(where(~ is.factor(.x) && nlevels(.x) > 9),
-                as_numeric),                                                    # Turn long factors to labelled numeric
-         across(c(TenureE, Spend1, Spend2, ChAttend, BestNatU2),
-                as_factor)) |>                                                  # Long factors that should stay categorical
-  set_labels(RespAgeE, PenExp2, 
-             labels = "") |>                                                    # Pure numeric, no labels needed
+bsa2020vars <- read_spss(datafile) |> 
   data_select(-c(serial, QnrVersion, NCOutcome, serialh, gor2, BSA20_wt_new,    # Technical variables
-                 RemLeaCl, RetExpb, REconAct20, RetirAg3))                      # Too much detail
+               RemLeaCl, RetExpb, REconAct20, RetirAg3))  |>                    # Too much detail
+  drop_labels() |>                                                              # Remove labels of empty categories
+  set_labels(RespAgeE, PenExp2, 
+             labels = "")                                                       # Pure numeric, no labels needed
+
+bsa2020 <- bsa2020vars |> 
+  mutate(across(where(~ is.factor(.x) && nlevels(.x) > 11),
+                as_numeric),                                                    # Turn long factors to labelled numeric
+         across(c(TenureE, Spend1, Spend2, ChAttend, BestNatU2, GOR, RetExp,
+                  Maininc5, Vote, PARTYFW),
+                as_factor),                                                     # Long factors that should stay categorical
+         across(where(~ nlevels(.x) < 9),
+                ~ recode_values(.x, recode = list("NA" = "8, 9"))),
+         across(where(~ nlevels(.x) < 90),
+                ~ recode_values(.x, recode = list("NA" = "98, 99"))),           # 'Don't know/Prefer not to answer' to NA
+         RespAgeE = case_match(RespAgeE, 999 ~ NA, 
+                                      .default = RespAgeE)                      # remove 999 age
+         )
+
+bsa2020 <-  copy_labels(bsa2020, bsa2020vars)                                   # Copy over labels after recoding
 
 
 ## Save the dataset for SOC2069 --------------------------------------------------------------------------------------
@@ -56,12 +69,14 @@ saveRDS(bsa2020, "for_analysis/bsa2020.rds", compress = "bzip2")
 
 ```
 
-
 If you use the BSA2020 data in your work, cite it as follows:
 
-  > NatCen Social Research. (2023). British Social Attitudes Survey, 2020. [data collection]. UK Data Service. SN: 9005, DOI: http://doi.org/10.5255/UKDA-SN-9005-1
-
-
+> NatCen Social Research.
+> (2023).
+> British Social Attitudes Survey, 2020.
+> \[data collection\].
+> UK Data Service.
+> SN: 9005, DOI: http://doi.org/10.5255/UKDA-SN-9005-1
 
 ## BSA2020 Codebook
 
@@ -81,4 +96,3 @@ If you use the BSA2020 data in your work, cite it as follows:
     print_html(font_size = "80%",
                line_padding = 0)
 ```
-

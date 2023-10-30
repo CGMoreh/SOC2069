@@ -1,0 +1,14 @@
+{
+  "hash": "587c76c39164430bb17648fb6e999766",
+  "result": {
+    "markdown": "1.  Are religious people more satisfied with life?\n\n-   WVS: Q171 - Q173 religion; Q49, life satisfaction\n-   EVS: v51 - v64 religiosity; v39, life sat (EVS)\n-   ESS: stflife How satisfied with life as a whole;\n\n2.  Are government/public sector employees more inclined to perceive higher levels of corruption than those working in the private sector?\n\n-   WVS: Q112, Perceptions of corruption in the country ... Q284: Sector of employment\n\n3.  Are older people more likely to see the death penalty as justifiable?\n\n-   WVS: Justifiable: Death penalty (WVS, Q195) ... Age (WVS, Q262)\n-   EVS: v163 do you justify: death penalty (Q44O) ... age\n\n4.  Are poorer Europeans more inclined to see it as an essential aspect of democracy that states make people's incomes equal?\n\n-   EVS: v139 democracy: the state makes people's incomes equal; v261, income\n\n5.  What factors are associated with opinions about future European Union enlargement among Europeans?\n\n-   EVS: v198 European Union enlargement (Q55);\n-   ESS: euftf European Union: European unification go further.. ;\n\n6.  Is higher internet use associated with stronger anti-immigrant sentiments?\n\n-   ESS: netustm Internet use, how much time on typical day ;\n-   ESS: imueclt Country's cultural life undermined or enriched by immigrants;\n-   ESS: imbgeco, imwbcnt\n\n7.  How does victimisation relate to trust in the police?\n\n-   ESS: trstplc Trust in the police\n-   ESS: crmvct Respondent or household member victim of burglary/assault last 5 years\n-   WVS: Q144, 145 - victim;\n-   WVS: Q69, Confidence in the police\n\n8.  Are people who fly more often by plane less likely to financially support environmental groups?\n\n-   ISSP: v56 Q21b Last five years: given money to an environmental group?;\n-   ISSP: v48 Q17a Last 12 months: number of trips by plane?\n\n9.  \n\n10. \n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

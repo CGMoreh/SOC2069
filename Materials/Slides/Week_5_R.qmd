@@ -37,6 +37,7 @@ format:
 ## Remember...
 
 ```{r, include=FALSE}
+# Packages and data
 
 pacman::p_load(tidyverse,             # metapackage; general data management (especially the `dplyr` package)
                easystats,             # metapackage; data management and model summaries
@@ -44,45 +45,53 @@ pacman::p_load(tidyverse,             # metapackage; general data management (es
                ggformula,             # formula syntax to simplify `ggplot2` graphics
                sjlabelled,            # work with labelled survey data from other statistical packages
                ggeffects,             # extract and plot marginal/conditional/interaction effects from models
-               marginaleffects,        # extract and plot marginal/conditional/interaction effects from models
-               latex2exp              # math annotation on graphs
-               )
+               marginaleffects,       # extract and plot marginal/conditional/interaction effects from models
+               latex2exp,             # math annotation on graphs
+               betareg,               # Beta regression for proportional data
+               ggpubr,                # GGplot functions (combine and arrange plots on page)
+               patchwork              # same
+               )                
 
 
 inequality <- data_read("https://github.com/CGMoreh/SOC2069/raw/main/Data/for_analysis/lab3macro.rds")
 ```
 
 ```{r}
-inequality <- drop_na(inequality, trust_pct, s80s20)
+# Data wrangling and extracting model components
 
-## Recode Turkey into Region
+# remove missing, arrange by Region, set up graphing aesthetics
 
-gf_point(trust_pct ~ s80s20, data = inequality) |> 
-  gf_lm(color="red", size = 1) |> 
-  gf_text(label = ~ country, size = 2.5, hjust = 0, nudge_x = 0.15, nudge_y = 0.15) +
-  theme_minimal() +
-  scale_y_continuous(limits = c(0, 80), breaks = c(seq(0, 80, 10))) +
-  scale_x_continuous(limits = c(0, 17)) 
+selected_countries <- c("United Kingdom", "Nicaragua") 
+
+inequality <- inequality |> 
+  drop_na(trust_pct, s80s20) |> 
+  arrange(Region) |> 
+  mutate(
+    trust_prop = structure(trust_pct/100, label = "Prop. people agreein that 'most people can be trusted'"),
+    non_trust_prop = structure(1-trust_prop, label = "Prop. people agreeing that 'one cannot be too careful'"),
+    # aesthetics
+    colours = case_when(country == selected_countries[1] ~ "#009C6B",
+                        country == selected_countries[2] ~ "#FF8916",
+                        TRUE ~ "black"),
+    sizes = case_when(country %in% selected_countries ~ 2.5, 
+                      TRUE ~ 1.5),
+    transparency = case_when(country %in% selected_countries ~ 1,
+                             TRUE ~ 0.1)
+  )
   
-```
-
-```{r echo=FALSE}
-
-# inequality <- with(inequality,  inequality[order(country) , ])
-
 
 mod <- lm(trust_pct ~ s80s20, data = inequality)
-mod_m <- lm(trust_pct ~ s80s20 + I(pop*1e-06) + Region, data = inequality)
-mod_x <- lm(trust_pct ~ s80s20*Region + I(pop*1e-06), data = inequality)
 
 
-ggeffects::ggpredict(mod_m, terms = c("s80s20", "Region")) |> plot()
+inequality <- inequality |> 
+  data_modify(fitted = case_when(country %in% selected_countries ~ mod$fitted.values))
+
+
+
+ggeffects::ggpredict(mod, terms = c("s80s20")) |> plot()
 
 model_parameters(mod)
 
-compare_parameters(mod, mod_m, mod_x)
-
-selected_countries <- c("Nicaragua", "United Kingdom")
 intercept <-  coef(mod)[1] |> as.numeric() |> round(1)
 
 pred <- estimate_prediction(mod) |> 
@@ -93,18 +102,29 @@ pred <- estimate_prediction(mod) |>
 
 
 
-inequality <- inequality |> 
-  mutate(colours = case_when(country == "United Kingdom" ~ "#009C6B",
-                            country == "Nicaragua" ~ "#FF8916",
-                            TRUE ~ "black"),
-         sizes = case_when(country %in% selected_countries ~ 2.5, 
-                           TRUE ~ 1.5),
-         transparency = case_when(country %in% selected_countries ~ 1,
-                                  TRUE ~ 0.1),
-         fitted = case_when(country %in% selected_countries ~ mod$fitted.values))
+
+
+
+```
+
+```{r}
+# Simple scatter with fit line
+
+gf_point(trust_pct ~ s80s20, data = inequality) |> 
+  gf_lm(color="red", size = 1) |> 
+  gf_text(label = ~ country, size = 2.5, hjust = 0, nudge_x = 0.15, nudge_y = 0.15) +
+  theme_minimal() +
+  scale_y_continuous(limits = c(0, 80), breaks = c(seq(0, 80, 10))) +
+  scale_x_continuous(limits = c(0, 17)) 
+  
+```
+
+```{r echo=FALSE, warning=FALSE}
+
+
 
 gf_point(trust_pct ~ s80s20, alpha = inequality$transparency, color = inequality$colours, size = inequality$sizes, data = inequality) |> 
-  gf_lm(color="darkred", size = 1) |> 
+  gf_lm(color="darkred", linewidth = 1) |> 
   gf_text(label = ~ country, size = 3, hjust = 0, nudge_x = 0.15, nudge_y = 0.15, alpha = inequality$transparency, color = inequality$colours) |> 
   # gf_hline(yintercept = fit, color = "darkblue", linetype = "dashed") |> 
   gf_hline(yintercept = 0, color = "black") |> 
@@ -119,9 +139,9 @@ gf_point(trust_pct ~ s80s20, alpha = inequality$transparency, color = inequality
   scale_x_continuous(limits = c(-1, 17), breaks = c(seq(-1, 17, 1)), expand = c(0,0)) +
   annotate("point", shape = 4, x = 0, y = intercept, size = 3, color = "darkred", stroke = 2) +
   annotate("text", x = 1.7, y = intercept+3.4, size = 3, color = "black", label = paste(TeX(r"($\beta_0$)"), " (Intercept) ==", intercept), parse = TRUE) +
-  annotate("text", x = 16.5, y = 75, size = 5, hjust = "right", label = paste("Model: ", TeX(r"($Trust = \beta_0 + \beta_1 \times Inequality + \epsilon$)")), parse = TRUE, color = "darkred") +
-  annotate("text", x = 16.5, y = 67, size = 4, hjust = "right", label = paste(TeX(r"($Trust_{UK} =  45.4 + (-3.1) \times 5.40$ = 28.7)")), parse = TRUE, color = "#009C6B") +
-  annotate("text", x = 16.5, y = 60, size = 4, hjust = "right", label = paste(TeX(r"($Trust_{Nic.} =  45.4 + (-3.1) \times 10.2$ = 13.7)")), parse = TRUE, color = "#FF8916")
+  annotate("text", x = 16.5, y = 75, size = 4, hjust = "right", label = paste("Model: ", TeX(r"($Trust = \beta_0 + \beta_1 \times Inequality + \epsilon$)")), parse = TRUE, color = "darkred") +
+  annotate("text", x = 16.5, y = 67, size = 3, hjust = "right", label = paste(TeX(r"($Trust_{UK} \phantom{0} =  45.4 + (-3.1) \times \phantom{0} 5.40$ = 28.7)")), parse = TRUE, color = "#009C6B") +
+  annotate("text", x = 16.5, y = 60, size = 3, hjust = "right", label = paste(TeX(r"($Trust_{Nic.} =  45.4 + (-3.1) \times 10.2$ = 13.7)")), parse = TRUE, color = "#FF8916")
   
 ```
 
