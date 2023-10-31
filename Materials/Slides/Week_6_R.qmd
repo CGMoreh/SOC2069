@@ -1,0 +1,380 @@
+---
+title: "Probability, uncertainty, inference"
+subtitle: "Week 6"
+format:
+  pptx:
+    incremental: true   
+    reference-doc: templates/SOC2069_pptx_template.pptx
+bibliography: references.bib
+---
+
+```{r include=FALSE}
+
+# Some options for outputs 
+options(digits = 2)
+
+
+# Load packages
+# The `include=FALSE` setting above ensures that no output from this code chunk will be shown in the rendered Word document
+
+if (!require("pacman")) install.packages("pacman")    # install {pacman} if not yet installed
+
+pacman::p_load(tidyverse,             # metapackage; general data management (especially the `dplyr` package)
+               easystats,             # metapackage; data management and model summaries
+               gtsummary,             # data and model summary tables
+               ggformula,             # formula syntax to simplify `ggplot2` graphics
+               sjlabelled,            # work with labelled survey data from other statistical packages
+               ggeffects,             # extract and plot marginal/conditional/interaction effects from models
+               marginaleffects,       # extract and plot marginal/conditional/interaction effects from models
+               flextable              # render tables nicely in MS Word/other text editors 
+               )
+
+pacman::p_load(tidyverse,             # metapackage; general data management (especially the `dplyr` package)
+               easystats,             # metapackage; data management and model summaries
+               gtsummary,             # data and model summary tables
+               ggformula,             # formula syntax to simplify `ggplot2` graphics
+               sjlabelled,            # work with labelled survey data from other statistical packages
+               ggeffects,             # extract and plot marginal/conditional/interaction effects from models
+               marginaleffects,       # extract and plot marginal/conditional/interaction effects from models
+               latex2exp,             # math annotation on graphs
+               betareg,               # Beta regression for proportional data
+               ggpubr,                # GGplot functions (combine and arrange plots on page)
+               patchwork              # same
+               )   
+
+```
+
+
+## Inference
+
+-   From "data" to "population"
+
+-   From "association" to "causality"
+
+-   ***Statistical inference*** can be formulated as a set of operations on data that yield ***estimates*** and ***uncertainty statements*** about ***predictions*** and ***parameters*** of some underlying ***process*** or ***population*** [@GelmanEtAl2020RegressionOtherStories]
+
+-   From a mathematical standpoint, these *probabilistic uncertainty statements* are derived based on some ***assumed probability model*** for observed data.
+
+-   The ***normal (Gaussian) distribution*** --- *linear regression*
+
+-   The ***binomial distribution*** --- *logistic regression*
+
+-   So far we have focused on the "point" **estimates** from regression models
+
+## Estimation
+
+***Terminology***
+
+-   Outcome: y
+-   Predictor: x
+-   Observed y, $y$: truth
+-   Predicted y, $\hat{y}$: fitted, estimated
+-   Residual: difference between observed and predicted outcome for a given value of predictor
+
+***Model evaluation***
+
+-   One concern in evaluating models is how well they do for prediction
+-   We're generally interested in how well a model might do for predicting the outcome for a new observation, not for predicting the outcome for an observation we used to fit the model (and already know its observed value)
+
+
+## Estimation
+
+-  Association between *inequality* and *social trust* at cross-national comparative level (W3Ex1) [@wilkinson2010]
+
+```{r echo=FALSE}
+inequality <- data_read("https://github.com/CGMoreh/SOC2069/raw/main/Data/for_analysis/lab3macro.rds")
+
+
+selected_countries <- c("United Kingdom", "Nicaragua") 
+
+inequality <- inequality |> 
+  drop_na(trust_pct, s80s20) |> 
+  arrange(Region) |> 
+  mutate(
+    trust_prop = structure(trust_pct/100, label = "Prop. people agreein that 'most people can be trusted'"),
+    non_trust_prop = structure(1-trust_prop, label = "Prop. people agreeing that 'one cannot be too careful'"),
+    # aesthetics
+    colours = case_when(country == selected_countries[1] ~ "#009C6B",
+                        country == selected_countries[2] ~ "#FF8916",
+                        TRUE ~ "black"),
+    sizes = case_when(country %in% selected_countries ~ 2.5, 
+                      TRUE ~ 1.5),
+    transparency = case_when(country %in% selected_countries ~ 1,
+                             TRUE ~ 0.1)
+  )
+  
+
+mod <- lm(trust_pct ~ s80s20, data = inequality)
+
+intercept <-  coef(mod)[1] |> as.numeric() |> round(1)
+
+inequality <- inequality |> 
+  data_modify(fitted = case_when(country %in% selected_countries ~ mod$fitted.values))
+
+gf_point(trust_pct ~ s80s20, data = inequality) |> 
+  gf_lm(color="red", size = 1) |> 
+  gf_text(label = ~ country, size = 2.5, hjust = 0, nudge_x = 0.15, nudge_y = 0.15) +
+  theme_minimal() +
+  scale_y_continuous(limits = c(0, 80), breaks = c(seq(0, 80, 10))) +
+  scale_x_continuous(limits = c(0, 17)) +
+  annotate("text", x = 16.5, y = 75, size = 4, hjust = "right", label = paste("Model: ", TeX(r"($Trust = \beta_0 + \beta_1 \times Inequality + \epsilon$)")), parse = TRUE, color = "darkred")
+
+
+```
+
+
+## Estimation
+-   **Intercept:** Social trust in countries with 0 inequality is expected to be 45.4 on average.
+-   **Slope:** For each additional point increase in Inequality, the model predicts the level of social trust to be lower, on average, by 3.1 points.
+
+
+```{r, echo=FALSE}
+
+gf_point(trust_pct ~ s80s20, alpha = inequality$transparency, color = inequality$colours, size = inequality$sizes, data = inequality) |> 
+  gf_lm(color="darkred", linewidth = 1) |> 
+  gf_text(label = ~ country, size = 3, hjust = 0, nudge_x = 0.15, nudge_y = 0.15, alpha = inequality$transparency, color = inequality$colours) |> 
+  # gf_hline(yintercept = fit, color = "darkblue", linetype = "dashed") |> 
+  gf_hline(yintercept = 0, color = "black") |> 
+  gf_vline(xintercept = 0, color = "black") |> 
+  gf_segment(fitted + trust_pct ~ s80s20 + s80s20, linetype = "solid", color = inequality$colours, size = 0.7) |> 
+  gf_segment(fitted + -10 ~ s80s20 + s80s20, linetype = "dashed", color = inequality$colours, size = 0.6) |>
+  gf_segment(fitted + fitted ~ -1 + s80s20, linetype = "dashed", color = inequality$colours, size = 0.6) +
+  theme_bw() +
+    theme(panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank()) +
+  scale_y_continuous(limits = c(-10, 80), breaks = c(seq(-10, 80, 10)), expand = c(0,0)) +
+  scale_x_continuous(limits = c(-1, 17), breaks = c(seq(-1, 17, 1)), expand = c(0,0)) +
+  annotate("point", shape = 4, x = 0, y = intercept, size = 3, color = "darkred", stroke = 2) +
+  annotate("text", x = 1.7, y = intercept+3.4, size = 3, color = "black", label = paste(TeX(r"($\beta_0$)"), " (Intercept) ==", intercept), parse = TRUE) +
+  annotate("text", x = 16.5, y = 75, size = 4, hjust = "right", label = paste("Model: ", TeX(r"($Trust = \beta_0 + \beta_1 \times Inequality + \epsilon$)")), parse = TRUE, color = "darkred") +
+  annotate("text", x = 16.5, y = 67, size = 3, hjust = "right", label = paste(TeX(r"($Trust_{UK} \phantom{0} =  45.4 + (-3.1) \times \phantom{0} 5.40$ = 28.7)")), parse = TRUE, color = "#009C6B") +
+  annotate("text", x = 16.5, y = 60, size = 3, hjust = "right", label = paste(TeX(r"($Trust_{Nic.} =  45.4 + (-3.1) \times 10.2$ = 13.7)")), parse = TRUE, color = "#FF8916")
+  
+```
+
+
+## From (sample) estimation to (population) inference
+
+> For each additional point increase in Inequality, the model predicts the level of social trust to be lower, on average, by 3.1 points
+
+-   This estimate is valid for the single sample of the countries in the model
+-   But what if we're not interested in quantifying the relationship between Inequality and Trust in only this sample?
+-   What if we want to say something about the relationship between these variables for all the countries in the world?
+
+
+## Statistical inference
+
+-   Statistical inference allows provide methods and tools for us to use the single sample we have observed to make valid statements (inferences) about the population it comes from
+
+-   For our inferences to be valid, the sample should be random and representative of the population we're interested in
+
+
+## Inference for simple linear regression
+
+-   Calculate a confidence interval for the slope, $\beta_1$
+
+-   Conduct a hypothesis test for the interval, $\beta_1$
+
+## Confidence interval for the slope
+
+
+-   **Confidence interval:** Provide a plausible range of values for $\beta_1$ at a given confidence level.
+
+-   Using only a single point estimate is like fishing in a murky lake with a spear, and using a confidence interval is like fishing with a net
+    -   We can throw a spear where we saw a fish but we will probably miss, if we toss a net in that area, we have a good chance of catching the fish
+    -   Similarly, if we report a point estimate, we probably will not hit the exact population parameter, but if we report a range of plausible values we have a good shot at capturing the parameter
+
+
+## Quantify the variability of the slope
+
+-   Two approaches:
+    1.  Via simulation
+    2.  Via mathematical models
+    
+-   Bootstrapping to quantify the variability of the slope for the purpose of estimation:
+    -   Bootstrap new samples from the original sample
+    -   Fit models to each of the samples and estimate the slope
+    -   Use features of the distribution of the bootstrapped slopes to construct a confidence interval
+
+
+## Quantify the variability of the slope (simulation)
+
+picture
+
+
+## Quantify the variability of the slope (mathematical models)
+
+
+***Mathematical representation of the model***
+
+$$
+\begin{aligned}
+Y &= Model + Error \\
+&= f(X) + \epsilon \\
+&= \mu_{Y|X} + \epsilon \\
+&= \beta_0 + \beta_1 X + \epsilon
+\end{aligned}
+$$
+
+where the errors are independent and normally distributed:
+
+-   independent: Knowing the error term for one observation doesn't tell you anything about the error term for another observation
+-   normally distributed: $\epsilon \sim N(0, \sigma_\epsilon^2)$
+
+## Mathematical representation, visualized {.smaller}
+
+$$
+Y|X \sim N(\beta_0 + \beta_1 X, \sigma_\epsilon^2)
+$$
+
+::: columns
+::: {.column width="70%"}
+```{r}
+#| out.width: "100%"
+#| fig.align: "center"
+
+# Code modified from https://stackoverflow.com/questions/31794876/ggplot2-how-to-curve-small-gaussian-densities-on-a-regression-line?rq=1
+# Modified based on BYSH: https://bookdown.org/roback/bookdown-bysh/ch-MLRreview.html#ordinary-least-squares-ols-assumptions
+set.seed(0)
+dat <- data.frame(
+  x = (x <- runif(10000, 0, 50)),
+  y = rnorm(10000, 10 * x, 100)
+)
+## breaks: where you want to compute densities
+breaks <- seq(0, max(dat$x), len = 5)
+dat$section <- cut(dat$x, breaks)
+## Get the residuals
+dat$res <- residuals(lm(y ~ x, data = dat))
+## Compute densities for each section, and flip the axes, and add means of sections
+## Note: the densities need to be scaled in relation to the section size (2000 here)
+dens <- do.call(rbind, lapply(split(dat, dat$section), function(x) {
+  d <- density(x$res, n = 50)
+  res <- data.frame(x = max(x$x) - d$y * 2000, y = d$x + mean(x$y))
+  res <- res[order(res$y), ]
+  ## Get some data for normal lines as well
+  xs <- seq(min(x$res), max(x$res), len = 50)
+  res <- rbind(res, data.frame(
+    y = xs + mean(x$y),
+    x = max(x$x) - 2000 * dnorm(xs, 0, sd(x$res))
+  ))
+  res$type <- rep(c("empirical", "normal"), each = 50)
+  res
+}))
+dens$section <- rep(levels(dat$section), each = 100)
+dens <- dens %>%
+  filter(type == "normal")
+
+ggplot(dat, aes(x, y)) +
+  geom_point(alpha = 0.05, size = 0.2) +
+  geom_smooth(method = "lm", fill = NA, se = FALSE, color = "steelblue") +
+  geom_path(data = dens, aes(x, y, group = interaction(section)), color = "#8F2D56", lwd = 1.1) +
+  geom_vline(xintercept = breaks, lty = 2, color = "grey") +
+  labs(
+    x = "x",
+    y = "y"
+  ) +
+  theme(
+    axis.title = element_text(size = 16),
+    axis.ticks = element_blank(),
+    axis.text.x = element_blank(),
+    axis.text.y = element_blank()
+  )
+```
+:::
+
+::: {.column width="30%"}
+-   Mean: $\beta_0 + \beta_1 X$, the predicted value based on the regression model
+-   Variance: $\sigma_\epsilon^2$, constant across the range of $X$
+    -   How do we estimate $\sigma_\epsilon^2$?
+:::
+:::
+
+## Regression standard error
+
+Once we fit the model, we can use the residuals to estimate the regression standard error (the spread of the distribution of the response, for a given value of the predictor variable):
+
+$$
+\hat{\sigma}_\epsilon = \sqrt{\frac{\sum_\limits{i=1}^n(y_i - \hat{y}_i)^2}{n-2}} = \sqrt{\frac{\sum_\limits{i=1}^ne_i^2}{n-2}}
+$$
+
+. . .
+
+::: question
+::: nonincremental
+1.  Why divide by $n - 2$?
+2.  Why do we care about the value of the regression standard error?
+:::
+:::
+
+## Standard error of $\hat{\beta}_1$
+
+$$
+SE_{\hat{\beta}_1} = \hat{\sigma}_\epsilon\sqrt{\frac{1}{(n-1)s_X^2}}
+$$
+
+
+
+
+
+## Hypothesis test for the slope
+
+
+-   "Do the data provide sufficient evidence that $\beta_1$ (the true slope for the population) is different from 0?"
+-   **Null hypothesis** - $H_0: \beta_1 = 0$, there is no linear relationship between `inequality` and `trust`
+-   **Alternative hypothesis** - $H_A: \beta_1 \ne 0$, there is a linear relationship between `inequality` and `trust`
+
+
+
+## Hypothesis testing framework
+
+-   Start with a null hypothesis, $H_0$ that represents the status quo
+
+-   Set an alternative hypothesis, $H_A$ that represents the research question, i.e. what we're testing for
+
+-   Conduct a hypothesis test under the assumption that the null hypothesis is true and calculate a **p-value** (probability of observed or more extreme outcome given that the null hypothesis is true)
+    -   if the test results suggest that the data do not provide convincing evidence for the alternative hypothesis, stick with the null hypothesis
+    -   if they do, then reject the null hypothesis in favour of the alternative
+
+
+
+
+## Review of questions and models
+
+2.  Predicting *social* *trust* from *inequality* and *urbanization*, while accounting for *world* *region* (W3, Ex2)
+3.  Are *anti-immigrant attitudes* associated with lower *social trust*? (W3, Ex3; also, assignment example analysis)
+4.  How does *education* relate to *social trust* (in a global perspective)? (W4Ex1) [@wu2021]
+5.  How does *education* relate to *social trust* in a chosen country? (W4Ex2)
+6.  Are *preferences for redistribution* associated with *education* in European countries, and is the association moderated by *social trust*? (W5Ex1) [@Akaeda2023TrustEducationalGap]
+7.  Are *anti-immigrant* attitudes associated with lower *social trust*, and is the association dependent on *gender*, *financial insecurity* or *authoritarian inclinations*? (W5Ex2) (a development of W3Ex3)
+8.  How does *education* relate to *social trust* in Great Britain, and is the relationship dependent on *income?* (W5Ex3)
+
+## Anti-immigrant attitudes
+
+
+```{r}
+
+data <- readRDS(here::here("Data", "for_analysis", "ess10.rds"))
+
+data <- data %>% 
+  select(ppltrst, imwbcnt, eduyrs, agea, gndr, hincfel, accalaw) |> 
+  data_modify(anti_immigrant = reverse(imwbcnt),
+              anti_immigrant = assign_labels(anti_immigrant, variable = "Immigrants make country worse place to live")
+              )
+```
+
+```{r, echo=FALSE}
+model1 <- lm(anti_immigrant ~ ppltrst + eduyrs + agea + gndr, data = data)
+```
+
+```{r, echo=FALSE}
+model_parameters(model1) %>% plot()
+
+```
+
+
+```{r, echo=FALSE}
+model_parameters(model1) %>% print_md()
+
+```
+
+
