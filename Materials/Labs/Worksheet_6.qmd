@@ -1,0 +1,109 @@
+---
+title: "Worksheet 6"
+subtitle: "Conducting and reporting quantitative research"
+format: 
+  # docx: default # word doc in docs already edited a bit
+  html: 
+    code-link: true
+    embed-resources: true
+    fig-align: center
+    # fig-width: 5
+    # fig-asp: .8
+    # fig-responsive: true
+    code-overflow: wrap
+    code-tools:
+      source: false # add URL to script document to be downloaded
+      toggle: false
+      caption: none
+execute: 
+  warning: false
+  error: false
+  echo: true
+  purl: false
+knitr: 
+  opts_chunk: 
+    comment: ""
+    prompt: false
+    message: false
+    strip.white: false
+css: labcss.css
+bibliography: references.bib
+---
+
+------------------------------------------------------------------------
+
+```         
+Timetable week: 8
+Topic: "Probability, uncertainty, inference"
+```
+
+------------------------------------------------------------------------
+
+# Learning outcomes
+
+-   Start working on an original research question for the assignment
+-   Learn a few settings that facilitate *rendering* Quarto markdown files to Microsoft Word documents
+-   Learn some tricks and treats to help interpreting regression results
+
+# Introduction
+
+This worksheet is all about getting started on the assignment research report. The assignment is a quantitative research report based on an original piece of research. The focus will be on quantitative analysis skills, but to complete the report you will need to situate the findings from the statistical analysis within existing literature on the broad topic of the research question.
+
+# Setup
+
+Download the [Assignment template folder](https://ncl.instructure.com/courses/53153/modules/items/3053399) from Canvas and open the *assignment1_template.qmd* file.
+
+Read through the descriptive text in the template file.
+
+
+
+# Choose a research question
+
+You can select one of the [optional research questions](https://ncl.instructure.com/courses/53153/pages/topic-slash-question-options?module_item_id=3052730) or come up with your own research question based on the variables available in the assignment datasets. 
+
+
+
+# Check the example analysis
+
+For inspiration on how to get started, you can check the [example analysis](https://ncl.instructure.com/courses/53153/modules) on Canvas. There is also a video recording running through the example analysis. The example contains some advice on how to best render certain table outputs produced by the `{datawizard}` package to Microsoft Word output format using the `print_md()` function.
+
+
+
+
+# Interpret results from the regression model(s)
+
+Based on the work from previous worksheet exercises, the lectures and the methodological readings, you should have developed by now some level of confidence with interpreting regression results. However, interpretation takes a lot of practice. To improve your interpretation skills, the `{easystats}` package provides some useful functions. Specifically, the `{report}` package includes functions that print out an interpretation of an analysis object. The most general function is `report()`.
+
+You can call the `report()` function on any model object. For example, if you follow through the [example analysis](https://ncl.instructure.com/courses/53153/modules), you will have produced a linear model object called `model1`. You can call the `report()` function on this object like so:
+
+```{r, eval=FALSE}
+report(model1)
+```
+
+The results that you get will be the following:
+
+```{r, echo=FALSE}
+cat("
+We fitted a linear model (estimated using OLS) to predict anti_immigrant with ppltrst, eduyrs, agea and gndr
+(formula: anti_immigrant ~ ppltrst + eduyrs + agea + gndr). The model explains a statistically significant and
+weak proportion of variance (R2 = 0.10, F(4, 35537) = 964.62, p < .001, adj. R2 = 0.10). The model's
+intercept, corresponding to ppltrst = 0, eduyrs = 0, agea = 0 and gndr = 1, is at 6.71 (95% CI [6.58, 6.84],
+t(35537) = 104.58, p < .001). Within this model:
+
+  - The effect of ppltrst is statistically significant and negative (beta = -0.23, 95% CI [-0.24, -0.22],
+t(35537) = -46.72, p < .001; Std. beta = -0.24, 95% CI [-0.25, -0.23])
+  - The effect of eduyrs is statistically significant and negative (beta = -0.08, 95% CI [-0.09, -0.07],
+t(35537) = -24.99, p < .001; Std. beta = -0.13, 95% CI [-0.14, -0.12])
+  - The effect of agea is statistically significant and positive (beta = 9.11e-03, 95% CI [7.75e-03, 0.01],
+t(35537) = 13.18, p < .001; Std. beta = 0.07, 95% CI [0.06, 0.08])
+  - The effect of gndr [2] is statistically significant and negative (beta = -0.08, 95% CI [-0.12, -0.03],
+t(35537) = -3.07, p = 0.002; Std. beta = -0.03, 95% CI [-0.05, -0.01])
+
+Standardized parameters were obtained by fitting the model on a standardized version of the dataset. 95%
+Confidence Intervals (CIs) and p-values were computed using a Wald t-distribution approximation.
+")
+
+```
+You can use this function to improve your interpretation of the statistical results, but do not include them in your report as it is. To develop your reporting skills, the best approach is to read again through the application readings to see how results from statistical analyses are reported in real research publicaitons. 
+
+
