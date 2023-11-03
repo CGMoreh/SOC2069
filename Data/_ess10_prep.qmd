@@ -1,7 +1,7 @@
 
 # European Social Survey, Round 10, 2020 (ESS10)
 
-This dataset comes from the [European Social Survey (ESS Round 10 - 2020)](https://ess-search.nsd.no/en/study/172ac431-2a06-41df-9dab-c1fd8f3877e7). The data (ESS10 - integrated file, edition 3.1) was downloaded in SPSS format from the ESS repository and stored in the folder `raw/ess10/`:
+This dataset comes from the [European Social Survey (ESS Round 10 - 2020)](https://ess-search.nsd.no/en/study/172ac431-2a06-41df-9dab-c1fd8f3877e7). The raw data (ESS10 - integrated file, edition 3.1, in SPSS format) and documentation was downloaded from the ESS repository to a local folder, `Data/raw/ess10/`:
 
 ```{r}
 #| echo: false
@@ -9,7 +9,7 @@ This dataset comes from the [European Social Survey (ESS Round 10 - 2020)](https
 #| message: false
 #| warning: false
 
-fs::dir_info("raw/ess10")[, c(1,3)] |> gt::gt_preview() |> gt::cols_align(align = "left") |> gt::tab_options(table.width = "70%")
+fs::dir_info("../Data/raw/ess10")[, c(1,3)] |> flextable::qflextable() |> flextable::fontsize(size = 10)
 
 ```
 
@@ -136,15 +136,61 @@ ess10sjrds |> sjmisc::frq(netusoft)
 If you use the ESS10 data in your work, cite it as follows:
 
  > European Social Survey European Research Infrastructure (ESS ERIC). (2023). ESS10 integrated file, edition 3.1 [Data set]. Sikt - Norwegian Agency for Shared Services in Education and Research. https://doi.org/10.21338/ess10e03_1
+ 
+ 
+ 
+## ESS10 variable search
 
-## ESS10 Codebook
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+#| eval: true
+
+
+d <- readRDS("for_analysis/ess10.rds") |> select(-gndr13)                        # empty!
+
+Levels <- c()
+for (i in names(d)) {
+  Levels <- c(Levels, nlevels(as_factor(d[[i]])))
+}
+  
+searchtable <- data_codebook(d) |>  
+  select(-c(1, 6:10)) |> 
+  filter(Name != "") |>
+  rename(`N (%) missing` = Missings) |>
+  mutate(Levels = Levels) |>
+  relocate(Levels, .after = Type)
+
+searchtable |> datatable(rownames = TRUE,
+            extensions = 'FixedHeader',
+            options = list(columnDefs = list(list(width = "50%", targets = "Label")),
+                           pageLength = 10,
+                           lengthMenu = c(5, 20, 50, nrow(searchtable)),
+                           fixedHeader = TRUE,
+                           headerCallback = DT::JS(                               # https://github.com/rstudio/DT/issues/783
+                              "function(thead) {",
+                              "  $(thead).css('font-size', '0.9em');",
+                              "}"
+                            ))) |>
+  formatStyle(columns = colnames(searchtable), fontSize = '85%')
+
+```
+
+
+
+
+## ESS10 codebook
+
+<details>
+  <summary><i>View the full codebook</i></summary>
 
 ```{r}
 #| echo: false
 #| message: false
 #| warning: false
 
-`SOC2069: European Social Survey, Round 10` <- ess10
+`SOC2069: European Social Survey, Round 10` <- d
 
 
 `SOC2069: European Social Survey, Round 10` |>  
@@ -155,3 +201,7 @@ If you use the ESS10 data in your work, cite it as follows:
     print_html(font_size = "80%",
                line_padding = 0)
 ```
+
+</details>
+
+

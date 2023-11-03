@@ -1,7 +1,7 @@
 
 # International Social Survey Programme, 2020 (ISSP2020)
 
-This dataset comes from the [International Social Survey Programme (2020)](https://www.gesis.org/en/issp/modules/issp-modules-by-topic/environment/2020). The data (version 2.0.0) was downloaded in SPSS format to a local folder, `raw/issp2020/`:
+This dataset comes from the [International Social Survey Programme (2020)](https://www.gesis.org/en/issp/modules/issp-modules-by-topic/environment/2020). The raw data (version 2.0.0, in SPSS format) and documentation was downloaded to a local folder, `Data/raw/issp2020/`:
 
 ```{r}
 #| echo: false
@@ -11,8 +11,7 @@ This dataset comes from the [International Social Survey Programme (2020)](https
 
 # The folder, which also contains the original data documentation, looks like this:
 
-fs::dir_info("raw/issp2020")[, c(1,3)] |> gt::gt_preview() |> gt::cols_align(align = "left") |>
-  gt::tab_options(table.width = "70%")
+fs::dir_info("../Data/raw/issp2020")[, c(1,3)] |> flextable::qflextable() |> flextable::fontsize(size = 10)
 
 ```
 
@@ -65,17 +64,62 @@ If you use the ISSP2020 data in your work, cite it as follows:
 
 
 
-## ISSP2020 Codebook
+## ESS10 variable search
 
 ```{r}
 #| echo: false
 #| message: false
 #| warning: false
+#| eval: true
 
 
-`SOC2069: International Social Survey Programme, 2020` <- issp2020 
+d <- readRDS("for_analysis/issp2020.rds") |> select(-ZA_ETHN2)                        # empty!
 
-`SOC2069: International Social Survey Programme, 2020`  |> 
+Levels <- c()
+for (i in names(d)) {
+  Levels <- c(Levels, nlevels(as_factor(d[[i]])))
+}
+  
+searchtable <- data_codebook(d) |>  
+  select(-c(1, 6:10)) |> 
+  filter(Name != "") |>
+  rename(`N (%) missing` = Missings) |>
+  mutate(Levels = Levels) |>
+  relocate(Levels, .after = Type)
+
+searchtable |> datatable(rownames = TRUE,
+            extensions = 'FixedHeader',
+            options = list(columnDefs = list(list(width = "50%", targets = "Label")),
+                           pageLength = 10,
+                           lengthMenu = c(5, 20, 50, nrow(searchtable)),
+                           fixedHeader = TRUE,
+                           headerCallback = DT::JS(                               # https://github.com/rstudio/DT/issues/783
+                              "function(thead) {",
+                              "  $(thead).css('font-size', '0.9em');",
+                              "}"
+                            ))) |>
+  formatStyle(columns = colnames(searchtable), fontSize = '85%')
+
+```
+
+
+
+
+
+
+
+## ISSP2020 codebook
+
+<details>
+  <summary><i>View the full codebook</i></summary>
+
+```{r}
+#| echo: false
+#| message: false
+
+`SOC2069: International Social Survey Programme, 2020` <- d
+
+`SOC2069: International Social Survey Programme, 2020` |>  
     data_codebook(variable_label_width = 50, 
                   value_label_width = 45,
                   max_values = 11,
@@ -84,6 +128,6 @@ If you use the ISSP2020 data in your work, cite it as follows:
                line_padding = 0)
 ```
 
-
+</details>
 
 

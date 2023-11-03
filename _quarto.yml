@@ -34,8 +34,8 @@ website:
       # - href: index.qmd
       #   text: Home
       - href: "Structure.html"
-        text: "Module structure"
-      - text: "Weekly materials"
+        text: "Timetable"
+      - text: "Materials"
         href: Materials/index.qmd
       - text: "Data"
         href: Data/data_main.qmd
@@ -75,9 +75,9 @@ website:
 
 format:
   html:
-    theme: 
-      - cosmo
-      - styles.css
+    # theme:
+    #   - cosmo
+    #   - styles.css
     toc: true
     toc-location: left
     toc-title: Contents

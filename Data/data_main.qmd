@@ -2,20 +2,29 @@
 title: "SOC2069 Datasets"
 format:
   html: 
-    # theme: cosmo
-    # fontsize: 1em
-    # linestretch: 0.9
-    # page-layout: full
+    toc: true
+    toc-location: left
+    toc-title: "SOC2069 Datasets"
+    embed-resources: false
     grid:
       sidebar-width: 300px
       body-width: 1200px
       margin-width: 5px
       gutter-width: 1.2rem
-    toc-title: "SOC2069 Datasets"
     # code-tools:
     #   source: https://link/to/exercise/sheet
 css: "./../Materials/Labs/labcss.css"
 ---
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, error=FALSE, include=FALSE}
+library(tidyverse)
+library(easystats)
+library(DT)
+
+DT:::DT2BSClass(c('compact', 'cell-border'))
+
+```
+
 
 These are real-life data from large-scale nationally representative surveys that include variables relating to (social) trust.
 The datasets have been prepared for use in lab exercises and the assignment.
@@ -37,7 +46,6 @@ Available datasets for download:
 -   **International Social Survey Programme, 2020**: `issp2020.rds` -- [**`Download`**](https://ncl.instructure.com/files/7506138/download?download_frd=1)
 -   **British Social Attitudes Study, 2020**: `bsa2020.rds` -- [**`Download`**](https://ncl.instructure.com/files/7561699/download?download_frd=1)
 
-More datasets will become available in the future.
 
 {{< include _wvs7_prep.qmd >}}
 

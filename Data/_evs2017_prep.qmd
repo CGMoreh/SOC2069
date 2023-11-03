@@ -1,7 +1,7 @@
 
 # European Values Study, 2017 (EVS2017)
 
-This dataset comes from the [European Values Study 2017 (EVS 2017)](https://search.gesis.org/research_data/ZA7500?doi=10.4232/1.13897). The data (Version 5.0.0) was downloaded in SPSS format from the GESIS repository and save to the `raw/evs2017/` folder:
+This dataset comes from the [European Values Study 2017 (EVS 2017)](https://search.gesis.org/research_data/ZA7500?doi=10.4232/1.13897). The raw data (Version 5.0.0, in SPSS format) and documentation was downloaded from the GESIS repository to a local folder, `Data/raw/evs2017/`:
 
 
 ```{r}
@@ -10,7 +10,7 @@ This dataset comes from the [European Values Study 2017 (EVS 2017)](https://sear
 #| message: false
 #| warning: false
 
-fs::dir_info("raw/evs2017")[, c(1,3)] |> gt::gt_preview() |> gt::cols_align(align = "left") |> gt::tab_options(table.width = "70%")
+fs::dir_info("../Data/raw/evs2017")[, c(1,3)] |> flextable::qflextable() |> flextable::fontsize(size = 10)
 
 ```
 
@@ -61,18 +61,65 @@ saveRDS(evs2017, "for_analysis/evs2017.rds", compress = "bzip2")
 If you use the EVS2017 data in your work, cite it as follows:
 
  > EVS (2022). European Values Study 2017: Integrated Dataset (EVS 2017). GESIS, Cologne. ZA7500 Data file Version 5.0.0, https://doi.org/10.4232/1.13897.
+ 
+ 
+ 
+## EVS2017 variable search
 
-## EVS2017 Codebook
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+#| eval: true
+
+
+d <- readRDS("for_analysis/evs2017.rds") |> remove_empty_columns()
+
+Levels <- c()
+for (i in names(d)) {
+  Levels <- c(Levels, nlevels(as_factor(d[[i]])))
+}
+  
+searchtable <- data_codebook(d) |>  
+  select(-c(1, 6:10)) |> 
+  filter(Name != "") |> 
+  rename(`N (%) missing` = Missings) |>
+  mutate(Levels = Levels) |> 
+  relocate(Levels, .after = Type)
+
+searchtable |> datatable(rownames = TRUE,
+            extensions = 'FixedHeader',
+            options = list(columnDefs = list(list(width = "50%", targets = "Label")),
+                           pageLength = 10,
+                           lengthMenu = c(5, 20, 50, nrow(searchtable)),
+                           fixedHeader = TRUE,
+                           headerCallback = DT::JS(                               # https://github.com/rstudio/DT/issues/783
+                              "function(thead) {",
+                              "  $(thead).css('font-size', '0.9em');",
+                              "}"
+                            ))) |>
+  formatStyle(columns = colnames(searchtable), fontSize = '85%')
+
+```
+
+ 
+ 
+ 
+ 
+
+## EVS2017 codebook
+
+<details>
+  <summary><i>View the full codebook</i></summary>
 
 ```{r}
 #| echo: false
 #| message: false
 #| warning: false
 
+`SOC2069: European Values Study, 2017` <- d
 
-`SOC2069: European Values Study, 2017` <- evs2017
-
-`SOC2069: European Values Study, 2017` |> 
+`SOC2069: European Values Study, 2017` |>  
     data_codebook(variable_label_width = 50, 
                   value_label_width = 45,
                   max_values = 10,
@@ -80,3 +127,5 @@ If you use the EVS2017 data in your work, cite it as follows:
     print_html(font_size = "80%",
                line_padding = 0)
 ```
+
+</details>

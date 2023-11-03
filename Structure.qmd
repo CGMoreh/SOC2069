@@ -13,26 +13,55 @@ format:
 
 ```{r, echo=F}
 
-# Set dates
-from_day <- as.Date("2023/09/1")
-to_day <- as.Date("2024/01/31")
-daylist <- seq(from_day, to_day, by="1 day")
 
-days_to_highlight <- match(as.Date(c("2023/11/24", "2024/1/12")),
-  daylist)
+# Set dates
+cal_start <- as.Date("2023/09/1")
+mod_start <- as.Date("2023/09/25")
+mod_break_1_start <- as.Date("2023/11/06")
+mod_break_1_end <- as.Date("2023/11/20")
+mod_break_2_start <- as.Date("2023/12/18")
+mod_break_2_end <- as.Date("2024/01/01")
+mod_end <- as.Date("2024/01/14")
+cal_end <- as.Date("2024/01/30")
+
+firstHalf <- seq(mod_start, mod_break_1_start, by="1 day")
+secondHalf <- seq(mod_break_1_end, mod_break_2_start, by="1 day")
+wholeMod <- seq(mod_start, mod_end, by="1 day")
+wholeCal <- seq(cal_start, cal_end, by="1 day")
+
+
+# View(data.frame(wholeMod))
+# View(data.frame(wholeCal))
+
+
+assessment_1 <- match(as.Date("2023/11/24"), wholeCal)
+assessment_2 <- match(as.Date("2024/01/12"), wholeCal)
+
+lectures <- c(seq(mod_start+1, mod_break_1_start, by="7 day"),
+              seq(mod_break_1_end+1, mod_break_2_start, by="7 day"))
+
+lectures_num <- match(lectures, wholeCal)
+
+
+
+highlights <- rep(NA, length(wholeCal))
+
+highlights[lectures_num] <- "Lecture"
+highlights[assessment_1] <- "Assignment 1"
+highlights[assessment_2] <- "Assignment 2"
 
 
 calendR::calendR(start_date = "2023/09/1", end_date = "2024/01/30", 
                  title = "SOC2069 23/24",
                  orientation = "portrait", 
                  start = "M",
-                 mbg.col = 4,                        # Background color for the month names
-                 months.col = "white",                # Text color of the month names
-                 special.days = days_to_highlight,
-                 special.col = "pink",               # Color of the special.days
-                 months.pos = 0.5,                    # Horizontal alignment of the month names)
-                 # legend.pos = "right"
-                 )     
+                 mbg.col = 4,                                                    # Background colour for the month names
+                 months.col = "white",                                           # Text colour of the month names
+                 special.days = highlights,
+                 special.col = c("pink", "pink", "lightgreen"),                   # Colour of the special.days
+                 months.pos = 0.5,                                               # Horizontal alignment of the month names)
+                 legend.pos = "right"
+                 ) 
 ```
 
 
@@ -43,4 +72,9 @@ calendR::calendR(start_date = "2023/09/1", end_date = "2024/01/30",
 t <- calendR::calendR(year = 2021, month = 8, papersize = "A0")
 
 ```
+
+
+There are also six **IT lab** groups taking place at various times and locations between Tuesdays and Fridays. Make sure to check your timetable app to see which group you have been assigned to, and when and where your IT lab will take place each week. A full module timetable [is available here](https://timetables.ncl.ac.uk/view.php?timetable=modules&show=grid&period=sem1&type=C%3BF%3BH%3BL%3BP%3BS%3BT%3BV%3BW%3BA%3BSO&modules=SOC2069&programme=&stage=&studentId=). The labs last 1.5 hours and are run by two teaching assistants. In the labs, you will be working through the exercises on the worksheets.
+
+
 

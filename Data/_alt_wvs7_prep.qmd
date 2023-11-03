@@ -1,0 +1,90 @@
+---
+title: "SOC2069 Datasets"
+format:
+  html:
+    # theme:
+    #   - cosmo
+    #   - styles.css
+    toc: true
+    toc-location: left
+    toc-title: Contents
+    embed-resources: false
+    grid:
+      sidebar-width: 350px
+      margin-width: 200px
+      body-width: 1200px
+
+css: "SOC2069/Materials/Labs/labcss.css"
+---
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, error=FALSE, include=FALSE}
+library(tidyverse)
+library(easystats)
+library(DT)
+
+DT:::DT2BSClass(c('compact', 'cell-border'))
+
+```
+
+
+# World Values Survey, Wave 7 (WVS7)
+
+
+
+## WVS7 Variable search
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+#| eval: true
+
+
+
+`SOC2069: World Values Survey, Wave 7` <- readRDS("D:/GitHub/SOC2069/Data/for_analysis/wvs7.rds") 
+
+table <- `SOC2069: World Values Survey, Wave 7`  |> 
+    data_codebook(variable_label_width = 50, 
+                  value_label_width = 45,
+                  max_values = 10,
+                  range_at = 6)
+
+table |>   select(-c(6:10)) |> filter(Name != "") |> 
+  datatable(rownames = FALSE, extensions = 'Scroller', options = list(
+  deferRender = TRUE,
+  scrollY = 400,
+  scroller = TRUE
+))
+
+```
+
+
+
+
+
+## WVS7 Codebook
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+#| eval: true
+
+
+# `SOC2069: World Values Survey, Wave 7` <- readRDS("for_analysis/wvs7.rds") 
+# 
+# `SOC2069: World Values Survey, Wave 7`  |> 
+#     data_codebook(variable_label_width = 50, 
+#                   value_label_width = 45,
+#                   max_values = 10,
+#                   range_at = 6) |> 
+table |>     print_html(font_size = "80%",
+               line_padding = 0,
+               table.width = "100%")
+  # select(-10) |>
+  # DT::datatable(rownames = FALSE, options = list(pageLength = 50))
+```
+
+
+
+
