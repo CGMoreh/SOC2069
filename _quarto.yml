@@ -7,8 +7,8 @@ project:
   render: 
     - "*.qmd"
     - "*.Rmd"
-    - "Assessment/resit.Rmd"
-    - "Assessment/alternative.Rmd"
+    - "assessment/resit.Rmd"
+    - "assessment/alternative.Rmd"
     - "!SOC2069-Statistical-analysis/"
     - "!Materials/Slides"
     # - "!Data/"
