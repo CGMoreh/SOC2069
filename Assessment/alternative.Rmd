@@ -138,8 +138,4 @@ Engaging with the assigned readings would further help improve your understandin
 -   Agresti (2018): Chapters 10--11 (pp. 287--337)
 -   Gelman et al. (2020): Chapter 10 and Appendix B (pp. 131--150; 493--496)
 
-`r fontawesome::fa("save")` [**Download the module reading pack for the 2022/2023 academic year from here (.zip 47MB)**](https://github.com/CGMoreh/SOC2069/raw/main/readings/soc2069-reading-pack.zip)
-
-
-
 
