@@ -1,0 +1,173 @@
+---
+title: "Worksheet 8"
+subtitle: "Elicitation: interviews and focus groups"
+format: 
+  # docx: default # word doc in docs already edited a bit
+  html: 
+    code-link: true
+    embed-resources: true
+    fig-align: center
+    # fig-width: 5
+    # fig-asp: .8
+    # fig-responsive: true
+    code-overflow: wrap
+    code-tools:
+      source: false # add URL to script document to be downloaded
+      toggle: false
+      caption: none
+execute: 
+  warning: false
+  error: false
+  echo: true
+  purl: false
+knitr: 
+  opts_chunk: 
+    comment: ""
+    prompt: false
+    message: false
+    strip.white: false
+css: labcss.css
+bibliography: references.bib
+---
+
+------------------------------------------------------------------------
+
+```         
+Timetable week: 8
+Topic: "Elicitation: interviews and focus groups"
+```
+
+------------------------------------------------------------------------
+
+# Learning outcomes
+
+-   Understand the principles and practice of asking research questions that are best addressed through in-depth qualitative interviews or focus-group research
+-   Develop skills for designing an interview guide
+-   Practice conducting interviews following a flexible interview guide
+
+# Introduction
+
+This week we move on to one of the most common qualitative data collection method - either as part of a more intensive ethnographic fieldwork or on its own: *qualitative interviewing*. Interviews aim to elicit information from key participants in their own words. Such information can provide an in-depth understanding of participants' lives, opinions, belief, or key events. Interviewing styles can also vary greatly, and they can be carried out either individually or in groups. There are numerous steps that a sociologist needs to cover when designing an interview-based research project. The lecture provided a broad introduction to some of the most important considerations, strategies and concepts in qualitative interviewing. In this lab, you will get the chance to read, think, and discuss about examples of sociological research carried out using interviews, and to design your own interview guides.
+
+# Exercise 1: Find qualitative and mixed-methods data on the UK Data Service
+
+`About 20 minutes`
+
+------------------------------------------------------------------------
+
+The UK Data Service (UKDS) is the country's largest data repository. It makes a variety of data available to UK researchers for secondary analysis, and we will be using data accessible through this repository throughout this module (and for the assignments!).
+
+It is also useful to become acquainted with the variety of secondary data available there and the basic functionalities of the site, as you may decide to use secondary data for your final third-year dissertation.
+
+The UKDS is available at this website: [https://ukdataservice.ac.uk/](https://ukdataservice.ac.uk/){target="_blank"}
+
+Begin by exploring the options available under the **Find data** tab of the UKDS website. The **Find data** page contains a short video on *How to use the UK Data Service catalogue search tool*, which you can watch outside class. As we are just exploring the data offerings of the service, navigate to the *Browse and access data* page, where you can browse data by theme or type, among some other options. Most of the secondary data available is *quantitative*. But we can find some qualitative and mixed methods studies too, some of which have made their data (e.g. transcribed and anonymised interview data) available. Let's choose to *Browse by data type* and select *Qualitative/mixed methods*.This takes us to the main data catalogue, where we can see that the search is filtered down to "Qualitative and mixed methods" in the *Data Type* field of the menu on the left. We can perform various selections using that menu, refining the search by date or setting other filters.
+
+```{block Question 1, type = 'questionblock'}
+
+**Question**
+
+How many qualitative and mixed methods studies are available on the UKDA in total?
+
+<details>
+  <summary><i>Click to view answer</i></summary>
+
+At the time of writing there were `1764`
+
+</details>
+```
+
+Take some time to explore and become familiar with the page. Try to:
+
+-   Find the newest studies based on their date of collection (tip: check out *Sort by*)
+
+-   **Search a keyword** of your own interest in the search field (*Search our data catalogue)* (e.g. 'migration', 'gender violence', or any topic you are currently interested in). How many studies did you find?
+
+You may have found some studies that you find interesting based on their titles. You can have a closer look at them outside class, but because not all datasets are equally well documented and made available, let's look at a few studies that I find particularly interesting and well-documented:
+
+-   Stetka, Vaclav and Mihelj, Sabina and Toth, Fanni and Kondor, Katherine (2022) **"The Illiberal Turn? News Consumption, Polarization and Democracy in Central and Eastern Europe, 2019-2020"** [https://doi.org/10.5255/UKDA-SN-855088](https://doi.org/10.5255/UKDA-SN-855088){target="_blank"}
+
+-   Wrighton, Sam J (2021) **"The Annexation of Populations: A New State Strategy, 2017-2021"** [https://doi.org/10.5255/UKDA-SN-854598](https://doi.org/10.5255/UKDA-SN-854598){target="_blank"}
+
+-   Einarsdottir, Anna and Mumford, Karen and Birks, Yvonne and Lockyer, Bridget and Sayli, Melisa and Jeep, Sudthasiri (2021) **"LGBT+ Networks, 2017-2020"** [https://doi.org/10.5255/UKDA-SN-855322](https://doi.org/10.5255/UKDA-SN-855322){target="_blank"}
+
+-   Pearce, Sioned and Fox, Stuart (2020) **"Young people and Brexit 2017"** [https://doi.org/10.5255/UKDA-SN-854031](https://doi.org/10.5255/UKDA-SN-854031){target="_blank"}
+
+-   **Choose one study** from among the above and read through the details. Write down a few notes on the aims, methodology, etc. employed:
+
+    -   What was the main aim of the study? (usually stated somewhere in the abstract)
+
+    -   When was the study conducted and where?
+
+    -   What kind of data was collected? (e.g. qualitative, quantitative, mixed, etc.)
+
+    -   What was the sampling methodology?
+
+    -   What were the methods of data collection?
+
+    -   Under what conditions are the data available? (tip: click on *Access data*) [$\rightarrow$ read more about data access conditions here](https://ukdataservice.ac.uk/terms-and-conditions/){target="_blank"}
+
+# Exercise 2: Example interview guide design
+
+`About 30 minutes`
+
+------------------------------------------------------------------------
+
+Let's look at another study that used a variety of different methods and for which the authors have made their documentation available. So, before we start thinking about designing our own data collection tools based on the methodological readings assigned for this week, let's explore how these may look like in practice.
+
+Let's have a look at a study undertake at the London School of Economics called "EU Kids Online" (associated with a larger project "Global Kids Online"). The details of the project can be accessed at this site: <https://www.lse.ac.uk/media-and-communications/research/research-projects/eu-kids-online>.
+
+The project description states that:
+
+> "EU Kids Online is a multinational research network. It seeks to enhance knowledge of European children's online opportunities, risks and safety. It uses multiple methods to map children's and parents' experience of the internet, in dialogue with national and European policy stakeholders."
+
+The technical report to the most recent wave of the project further details:
+
+> In the fourth wave, EU Kids Online IV, from 2017 to 2019, the network designed a second representative survey of children and online risks and opportunities. The survey was conducted in 19 European countries and targeted children aged 9--17 who use the internet.
+
+Previous waves of data collection also included interviews and focus groups. We'll look at all of these tools to think about their design choices. The authors provide a lot of information in a research toolkit section: <https://www.lse.ac.uk/media-and-communications/research/research-projects/eu-kids-online/toolkit>
+
+Let's look at their interview guides available in the project's qualitative toolkit: <https://www.lse.ac.uk/media-and-communications/research/research-projects/eu-kids-online/toolkit/qualitative-research>. The page contains a lot of valuable material that you are advised to look over outside class (such as the ethics form, consent forms, invitations to participate; the coding guides and examples are something we'll be looking at together in lab in a following week). But for this exercise, open the [Individual interview topic guide](https://www.lse.ac.uk/media-and-communications/assets/documents/research/eu-kids-online/toolkit/qualitative-research/Individual-interview-topic-guide.pdf "Individual_interview_topic_guide") and the [Focus group topic guide](https://www.lse.ac.uk/media-and-communications/assets/documents/research/eu-kids-online/toolkit/qualitative-research/Focus-group-topic-guide.pdf "Focus_group_topic_guide"). Read through them and take a few notes of your observations.
+
+```{block , type = 'discussion-10'}
+**Discussion**
+
+Relying on the readings from today, discuss how the interview and focus group guides achieve the aims of the research project. 
+- What are the main differences that you notice between a survey questionaire and an 'in-depth interview' guide?
+- What do these differences tell you about the different aims of the two tools?
+- What do these differences tell you about the different approaches to analysing the data?
+- What special considerations do we need to keep in mind when designing a focus group guide as opposed to a 'depth' interview?
+
+```
+
+# Exercise 3: Design your own interview guide
+
+`About 30 minutes; work in small groups`
+
+------------------------------------------------------------------------
+
+Work in small groups of three or four.
+
+You have the following research question: *How did people make their way from school into employment in the past?* As part of this main question, there are several sub-questions that one can think of, for example: *What choices were available to them; what factors drove their decision-making; were their choices influenced or informed by the people around them; was where they lived a factor; what did it mean to be 'young' then; and how did their social and leisure lives change (if they did)?*
+
+As part of this exercise, you will need to develop the research question into one that can be answered through an individual interview or a focus-group. Working together, develop a draft interview guide. Plan for a very short interview of between 15-20 minutes. You should discuss and consider the various issues and strategies discussed in the assigned readings from [@GersonDamaske2020ScienceArtInterviewing].
+
+Think in more detail about the following:
+
+1.  What exactly does the main research question and the sub-questions mean?
+2.  Who could you approach for the interview? Each member of the group needs to clearly identify one or two family members or older friend who you can interview. Returning to the research question: list 3-5 points of interest (what information would you need to collect to answer this research question?).
+3.  From there begin developing an interview guide. You also need to decide how many questions to include.
+4.  Once written, consider the flow of the questions. Are they okay in that order, or should they be re-ordered? Is there a logic to this?
+5.  Discuss your choices with the workshop leader.
+6.  When reasonably happy with you guide, go through each question together discussing what kinds of answers you'd expect, on the basis of your sense of education/employment trajectories and/or your knowledge of the person in question.
+7.  Save the finalised list and email it to each other in the group. You all will use the same list of questions to conduct a practice interview outside class, so make sure you have a copy!
+8.  Now turn your attention to how you are going to do the interviews. Who can use their mobile to record the interview? Would the interview need to take place by phone? If yes, would you still be able to record it, or have to take notes? Help each other to think through this.
+9.  Ethics: Have a good read of the informed consent form ([available to download from Canvas](https://ncl.instructure.com/files/7641811/download?download_frd=1)) and discuss it. Do you understand what it all means? You'll need to send this to your chosen interviewee so they can read it in advance. And you'll need to record their verbal consent as part of the interview.
+
+# Exercise 4: Conduct a brief interview
+
+`Outside class`
+
+------------------------------------------------------------------------
+
+Using the guide you co-designed in the previous exercise, conduct this short semi-structured interview sometime over the next two weeks, following the detailed guidance provided in [@GersonDamaske2020ScienceArtInterviewing] (Chapter 5). Keep the interview short (between 15-20 minutes). Transcribe the interview recording (if recorded) and bring your transcripts with you to the lab in Week 10 (TW15) (Interpretation: analysis and writing). There, you can use it as your primary material to practice thematic coding and qualitative analysis.
