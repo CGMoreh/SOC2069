@@ -61,7 +61,11 @@ It is also useful to become acquainted with the variety of secondary data availa
 
 The UKDS is available at this website: [https://ukdataservice.ac.uk/](https://ukdataservice.ac.uk/){target="_blank"}
 
-Begin by exploring the options available under the **Find data** tab of the UKDS website. The **Find data** page contains a short video on *How to use the UK Data Service catalogue search tool*, which you can watch outside class. As we are just exploring the data offerings of the service, navigate to the *Browse and access data* page, where you can browse data by theme or type, among some other options. Most of the secondary data available is *quantitative*. But we can find some qualitative and mixed methods studies too, some of which have made their data (e.g. transcribed and anonymised interview data) available. Let's choose to *Browse by data type* and select *Qualitative/mixed methods*.This takes us to the main data catalogue, where we can see that the search is filtered down to "Qualitative and mixed methods" in the *Data Type* field of the menu on the left. We can perform various selections using that menu, refining the search by date or setting other filters.
+Begin by exploring the options available under the **Find data** tab of the UKDS website. The **Find data** page contains a short video on *How to use the UK Data Service catalogue search tool*, which you can watch outside class. As we are just exploring the data offerings of the service, navigate to the *Browse and access data* page, where you can browse data by theme or type, among some other options.
+
+Most of the secondary data available is *quantitative*. But we can find some qualitative and mixed methods studies too, some of which have made their data (e.g. transcribed and anonymised interview data) available.
+
+Let's choose to *Browse by data type* and select *Qualitative/mixed methods*.This takes us to the main data catalogue, where we can see that the search is filtered down to "Qualitative and mixed methods" in the *Data Type* field of the menu on the left. We can perform various selections using that menu, refining the search by date or setting other filters.
 
 ```{block Question 1, type = 'questionblock'}
 
@@ -132,10 +136,14 @@ Let's look at their interview guides available in the project's qualitative tool
 ```{block , type = 'discussion-10'}
 **Discussion**
 
-Relying on the readings from today, discuss how the interview and focus group guides achieve the aims of the research project. 
+Relying on the readings from today, discuss how the interview and focus group guides achieve the aims of the research project.
+
 - What are the main differences that you notice between a survey questionaire and an 'in-depth interview' guide?
+
 - What do these differences tell you about the different aims of the two tools?
+
 - What do these differences tell you about the different approaches to analysing the data?
+
 - What special considerations do we need to keep in mind when designing a focus group guide as opposed to a 'depth' interview?
 
 ```
