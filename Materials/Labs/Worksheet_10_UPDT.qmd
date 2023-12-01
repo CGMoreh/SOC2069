@@ -1,0 +1,198 @@
+---
+title: "Worksheet 10"
+subtitle: "Analysing qualitative data"
+format: 
+  # docx: default # word doc in docs already edited a bit
+  html: 
+    code-link: true
+    embed-resources: true
+    fig-align: center
+    # fig-width: 5
+    # fig-asp: .8
+    # fig-responsive: true
+    code-overflow: wrap
+    code-tools:
+      source: false # add URL to script document to be downloaded
+      toggle: false
+      caption: none
+execute: 
+  warning: false
+  error: false
+  echo: true
+  purl: false
+knitr: 
+  opts_chunk: 
+    comment: ""
+    prompt: false
+    message: false
+    strip.white: false
+css: labcss.css
+bibliography: references.bib
+---
+
+
+------------------------------------------------------------------------
+
+    Timetable week: 15
+    Topic: "Analysing qualitative data"
+-----------------------------------------------------------------------
+
+# Intro
+
+While in the previous two weeks we practiced creating data collection instruments and finding textual data online, this week we turn to methods of analysing qualitative data collected through those instruments and techniques. Analysing qualitative data is a complex process involving organizing and categorizing the empirical materials and interpreting their meaning with reference to theories. There are many ways in which this can be done, such as the following (taken from Kara (2005: 102); see there to follow up on the references cited for each method):
+
+- content analysis: a semi-quantitative technique for counting the number of instances of each category or code (Robson 2011: 349)
+- thematic analysis: identifying themes from coded data (Robson 2011: 475)
+- narrative analysis: analysing stories from primary or secondary data (Bryman 2012: 582)
+- conversation analysis: detailed analysis of the verbal and non-verbal content of everyday interactions (Bryman 2012: 527)
+- discourse analysis: analysing patterns of speech and interaction in a detailed and sometimes semi-quantitative way, for example by measuring the length of pauses (Bryman 2012: 529)
+- metaphor analysis: analysing metaphors from primary or secondary data (Fletcher 2013: 1555–6)
+- phenomenological analysis: analysing participants’ stories from, and descriptions of, their ‘life-worlds’, or individual experiences and perceptions, with a focus on meaning (Papathomas and Lavallee 2010: 357; Mayoh, Bond and Todres 2012: 28)
+- life course analysis: analysis of the ‘interaction between individual lives and
+social change’ (Brittain and Green 2012: 253).
+
+You will have read about the various stages of the qualitative data analysis process in the assigned readings, but in this workshop we will be focusing on the practicalities of data reduction and categorization. One of the most commonly applied methods for qualitative data analysis is *thematic analysis*, which relies on *thematic coding* of the data, and we will focus on this technique. We will rely here most heavily on the detailed step-by-step guidance provided in **Gerson and Damaske (2020, Chapter 6)** and the concepts described by **Neuman (2014, Chapter 14)**. If you haven't read them yet, open the books on pages 143 and 480, respectively, to have them in the background for reference.
+
+# Readings
+
+Core readings:
+
+- Luker (2008): Chapters 10 and 11 (pp. 198–228)
+
+Secondary readings:
+
+- Gerson and Damaske (2020): Chapters 6 and 7 (pp. 143–193)
+- Emerson et al. (2011): Chapters 6 and 7 (pp. 171–242)
+- Kara (2015): Chapters 6 and 7 (pp. 99–136)
+- Neuman (2014): Chapters 14 and 15 (pp. 477–546)
+
+
+<!-- SHIFT+CNTRL+C to comment out -->
+
+# Videos
+
+In addition to the readings, you should watch some instructive videos on data analysis and qualitative coding, available through the library and linked in on Canvas:
+
+- [Introduction to Qualitative Data Analysis (mid-length video)](https://ncl.instructure.com/courses/48074/modules/items/2535073){target="_blank"}
+- [Data Analysis Through Coding (short video)](https://ncl.instructure.com/courses/48074/modules/items/2535070){target="_blank"}
+- [Thematic Analysis, Constructionist Analysis (short video)](https://ncl.instructure.com/courses/48074/modules/items/2535071){target="_blank"}
+- [Example research: Researching Negative Facebook Comments on Art Galleries & Museums using Thematic Analysis (short video)](https://ncl.instructure.com/courses/48074/modules/items/2535072){target="_blank"}
+
+
+# Exercise 1: Example coding of 'EU Kids Online'
+
+`About 40  minutes + questions and discussion`
+
+------------------------------------------------------------------------
+
+We return to one of the example projects we looked at on Worksheet 3: the “EU Kids Online” project and their qualitative toolkit resources: https://www.lse.ac.uk/media-and-communications/research/research-projects/eu-kids-online/toolkit/qualitative-research.
+
+You should already be familiar with the description of the project, its aims, methodology and data collection instruments from previous weeks. To remind yourself of those instruments, you can open the *Individual interview topic guide* and the *Focus group topic guide* and have a quick look through them. 
+
+In this exercise we will focus on the resources related to *coding* the primary qualitative material obtained from the interviews and focus groups. The reserach team provides a good guide on how the analysis took place, so the first task is to open their [Technical report](https://www.lse.ac.uk/media-and-communications/assets/documents/research/eu-kids-online/toolkit/qualitative-research/QualitativeMethodReport.pdf) on the qualitative research. The project was a complex cross-national comparative study involving several researchers, interviewers, data coders, translators and analysts. For this reason, the project leaders provide some good guidance to the various people involved in the analysis.
+
+## Task 1: Read and discuss the approach to analysis
+
+- Read Pages 9-13 of the [Technical report](https://www.lse.ac.uk/media-and-communications/assets/documents/research/eu-kids-online/toolkit/qualitative-research/QualitativeMethodReport.pdf)
+- Read the [Instructions for first level coding of the pilot interviews](https://www.lse.ac.uk/media-and-communications/assets/documents/research/eu-kids-online/toolkit/qualitative-research/Coding-Pilot-Procedure.pdf) document
+
+Spend about 20 minutes reading through the two documents and try to answer the questions below.
+
+```{block Question 1, type = 'questionblock'}
+**Questions**
+
+- Data was collected in several European countries. Was all the qualitative interview/focus group data translated into English for analysis? What motivated the researchers' decision in respect to translation of materials?
+- What were the aims of the *pilot* study? Thinking about the feedback from the pilots, was it a useful exercise? Do you think your own dissertation research may benefit from a *piloting* phase? How would you go about it?
+- How many *levels* of coding were included as part of analysis, and what was the purpose of each *level*?
+- How many researchers were involved in *first-level* coding <u>the same</u> transcripts? Were there any exceptions to this?
+- Did the researchers use any software to perform the coding? 
+- Were the *codes* developed before-hand, or did they emerge through the process of analysis? 
+
+```
+
+
+## Task 2: First-level coding
+
+- Read the [Example of first level coding](https://www.lse.ac.uk/media-and-communications/assets/documents/research/eu-kids-online/toolkit/qualitative-research/Coded-Transcript-FG-12-13-girls-Belgiun.pdf) of a focus-group transcript from Belgium.
+
+The transcript is in the original language (Dutch), but the side comments (i.e codes) are in English. Spend some time reading the comments in order. They are short, so you should be able to go through the whole documents relatively quickly. See if you can discover some of the general sentiments, ideas, information of the group interview by reading only the coding comments. Note down your own comments on what you think are the main issues raised by the interviewees/discussants.
+
+```{block , type = 'discussion'}
+**Discussion**
+
+Based only on your reading of the side comments, what are the main issues that emerge from the focus group discussion?
+
+How do you think that the participants' personal characteristics have affected these emerging issues, themes? (hint: look again at the English-language overview section at the start of the transcript)
+```
+
+## Task 3: Second-level coding
+
+We know from the technical report we read earlier that some of the thematic codes were developed before the analysis or at the piloting stage, while other thematic codes have emerged from the first-level coding procedure itself. This is usually what happens in most qualitative research: you are initially guided by your research questions, other existing empirical literature and the theoretical underpinnings of your project towards paying attention to certain 'matters', 'issues', 'topics' etc. Research instruments are usually designed with some idea of what topics will emerge. All these are *higher level codes* that frame your analysis from the start. Some may not come up at all in the empirical material and may be discarded or changed later. But other important issues, themes, etc. may come to light from the empirical material itself, during *first-level coding*. The task of the analysis is to maintain an interactive relationship between these different *levels*. 
+
+In this task, explore some of the *second-level* coding employed by the research theme.
+
+- Read the [Definitions related to the second level coding](https://www.lse.ac.uk/media-and-communications/assets/documents/research/eu-kids-online/toolkit/qualitative-research/Qualitative-Analysis-definitions.pdf)
+- Read the [Overview](https://www.lse.ac.uk/media-and-communications/assets/documents/research/eu-kids-online/toolkit/qualitative-research/Coded-Excel-overview-example-Romania.pdf) and [close up](https://www.lse.ac.uk/media-and-communications/assets/documents/research/eu-kids-online/toolkit/qualitative-research/Coded-Excel-close-up-example-Romania.pdf) examples of second level coding
+
+Look at a few pages of the first-level coding transcript from the previous task and attempt to match the notes on the page to the second-level codes described in the documents you have just read.
+
+
+# Exercise 2: Collaborative first-level coding
+
+`About 50 minutes including discussion`
+
+------------------------------------------------------------------------
+
+In this exercise we turn to the qualitative data that will be used in *Assignment 1*. You should already be acquainted with the **“Young people and Brexit 2017"** project to some extent from Worksheet 1. There you practiced searching for qualitative secondary datasets on the UK Data Service repository.
+
+You can access the description of the study and  documentation about the data collection here:
+
+- Pearce, Sioned and Fox, Stuart (2020) “Young people and Brexit 2017” [https://doi.org/10.5255/UKDA-SN-854031](https://doi.org/10.5255/UKDA-SN-854031)
+
+The dataset containing the qualitative interviews collected during the project is also available for download from the [Canvas page](https://ncl.instructure.com/courses/48074/files/6172677?module_item_id=2528759).
+
+In this exercise you will practice first-level coding on one of the interview transcripts. **You will be working together with one colleague** (the person sitting next/closest to you) to code a portion of the same transcript, individually. Then you will compare your *codes* and check for consistencies or discrepancies between your two approaches.
+
+## Task 1: Individual thematic coding
+
+Together with your activity partner, select one transcript at random from the folder containing the transcripts. Individually, at your desktops, perform a rough initial thematic coding of **the first three pages** of the transcript. This *coding* should look something like the example you have looked at in the previous exercise, adding some comments on the Word document of the transcript. It does not need to be as detailed and rich in codes as that example.
+
+It may be useful for the coding process for you to be aware of the general aims of the research, so if you haven't yet done it, spend a few minutes to read through the project description.
+
+Spend about 25 minutes on this task.
+
+## Task 2: Compare your coding
+
+After you have completed your initial coding individually, get together with your colleague and compare the thematic codes you have identified and discuss your strategy and findings in pairs.
+
+Spend some 5-10 minutes on this task.
+
+
+```{block , type = 'discussion-15'}
+**Discussion**
+
+Discuss with the seminar group:
+
+- What were the themes that have emerged in your analyses?
+- What is the overlap between the themes that different coders/pairs have identified?
+- Are there any themes that only came up in your fragment?
+- Imagine you all were analysts on the same large research project and the fragments you have just analysed was the complete data produced in the project. What would your collective approach to developing *second-level* or *higher-level* thematic codes?
+
+```
+
+# Exercise 3: Start work on Assignment 1
+
+`Start in class, continue outside class`
+
+------------------------------------------------------------------------
+
+Now that you have gained some practice with thematic coding, you can begin thinking about your analysis for Assignment 1. Have a look at the task and start selecting a number of transcripts that you will focus your analysis on. Feel free to include the one you have just started coding in the previous exercise if you would like. 
+
+Rather than beginning any thematic coding just yet, a better approach for the assessment task would be to fist gain an overview perspective of your data (i.e. all the transcripts you have selected to include in your analysis). Gerson and Damaske (2020) call this step *initial immersion* and they advise to "start your analysis by reading the interview transcripts carefully and thoroughly" (p. 146). They then advise that you should select a software program for analysing qualitative data, but in your case the size of the data will not require this. The overhead of the learning curve would be too much for such a small project aimed at one assignment. You can instead follow the strategy we saw in the previous exercise and use standard word processing and tabulating software such as Word and Excel.
+
+# Thinking about analysis software for the future
+
+However, thinking ahead to your 3rd-year dissertation, it may be worth investing some time to get acquainted with some available software for qualitative analysis. The Canvas page lists some videos to get you started, so check them out. These are usually heavy and expensive proprietary programmes, but the University subscribes to some of them, such as NVivo. If you are interested in some options for free, open source qualitative data analysis software that you may want to use in the future when you no longer have access to the subscription provided by the University, check out this interesting webinar presentation on the topic:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/9teZO-KVwqk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen data-external="1" ></iframe>
+

@@ -33,7 +33,7 @@ bibliography: references.bib
 ------------------------------------------------------------------------
 
 ```         
-Timetable week: 8
+Timetable week: 13
 Topic: "Elicitation: interviews and focus groups"
 ```
 
