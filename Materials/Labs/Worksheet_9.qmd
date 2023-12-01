@@ -163,7 +163,9 @@ Think again about some of your sociological interests and about what online mate
 
 The *Wayback Machine* is also a useful tool to archive any online material that you use and cite in your research. This can ensure that online information that you reference in your writing will have an archived imprint that your readers can check for themselves. That is the main aim of employing academic referencing standards in our writing. But even if we reference our sources correctly, online sources may change or become unavailable over time. This is the challenge compared to academic sources such as journal articles or published books.
 
-Choose one website relevant to your study and register it for harvesting with the Wayback Machine. See here for how to save copies of pages you are interested in: https://help.archive.org/help/save-pages-in-the-wayback-machine/#. Read some more about how Wayback Machine works and how you could take advantage of what it offers in your own research (https://help.archive.org/help/category/the-wayback-machine/).
+Choose one website relevant to your study and register it for harvesting with the Wayback Machine. 
+See here for how to save copies of pages you are interested in: [https://help.archive.org/help/save-pages-in-the-wayback-machine/#](https://help.archive.org/help/save-pages-in-the-wayback-machine/#). 
+Read some more about how Wayback Machine works and how you could take advantage of what it offers in your own research [https://help.archive.org/help/category/the-wayback-machine/](https://help.archive.org/help/category/the-wayback-machine/).
 
 ```{block , type = 'questionblock'}
 
