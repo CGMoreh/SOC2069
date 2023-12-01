@@ -43,8 +43,8 @@ topic:
   w4: "Logistic models"
   w5: "Interaction models"
   w6: "Probability, uncertainty, inference"
-  w7: "Elicitation: interviews and focus groups"
-  w8: "Observation: ethnographic fieldwork"
+  w7: "Observation: ethnographic fieldwork" 
+  w8: "Elicitation: interviews and focus groups"
   w9: "Exploration: documents and archives"
   w10: "Interpretation: analysis and writing"
 
