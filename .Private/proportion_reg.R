@@ -18,6 +18,37 @@ Class            Grade  Pass  Fail
  'Natali'         7      4    16
 ")
 
+
+
+### Beta regression
+
+## See discussion here: https://twitter.com/OndrejZika/status/1733082976412471514
+
+Data$Proportion = Data$Pass / (Data$Pass + Data$Fail)
+head(Data)
+
+pacman::p_load(betareg, glmmTMB, effectsize)
+
+model.lm = lm(Proportion ~ Grade, data=Data)
+
+model.beta = betareg(Proportion ~ Grade, data=Data)
+model.beta2 = glmmTMB(Proportion ~ Grade, data=Data, family = beta_family(link = "logit"))
+
+parameters::model_parameters(model.beta)
+parameters::model_parameters(model.beta2)
+anova(model.beta)
+
+effectsize::eta_squared(model.lm)
+effectsize::eta_squared(model.beta)
+effectsize::eta_squared(model.beta2)
+
+summary(model.beta)
+summary(model.beta2)
+summary(model.lm)
+
+
+
+
 # Transform data for logistic regression
 
 Trials = cbind(Data$Pass, Data$Fail)         # Successes, Failures
