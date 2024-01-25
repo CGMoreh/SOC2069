@@ -11,7 +11,10 @@ project:
     - "assessment/alternative.Rmd"
     - "!SOC2069-Statistical-analysis/"
     - "!Materials/Slides"
+    - "2023/*.html"
     # - "!Data/"
+  resources: 
+    - "2023/*.html"    
 
 
 embed-resources: true
