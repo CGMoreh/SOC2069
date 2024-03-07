@@ -50,15 +50,25 @@ contents[2, 4] <- paste(paste0("[", "Worksheet 2a", "]", glue('(Labs/Worksheet_2
                         paste0("[", "Worksheet 2b", "]", glue('(Labs/Worksheet_2b.qmd)')))
 
 
-tbl <- contents |>
-  kbl(escap = FALSE, align = "llll", table.attr = 'class="schedule-table"') |>
-  kable_styling() |>
-  column_spec(1, width = "5%") |>  
-  column_spec(2, width = "25%") |>  
-  column_spec(3, width = "10%") |>  
-  column_spec(4, width = "10%")
+# tbl <- contents |>
+#   kbl(escap = FALSE, align = "llll", table.attr = 'class="schedule-table"') |>
+#   kable_styling() |>
+#   column_spec(1, width = "5%") |>  
+#   column_spec(2, width = "25%") |>  
+#   column_spec(3, width = "10%") |>  
+#   column_spec(4, width = "10%")
+# 
+#   cat(tbl)
 
-  cat(tbl)
+contents |> 
+  gt::gt() |> 
+  gt::fmt_markdown() |> 
+  gt::cols_width(
+    Week ~ px(70),
+    Topic ~ px(500),
+    Slides ~ px(50),
+    Labs ~ px(150)
+    )
 
 ```
 

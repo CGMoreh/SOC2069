@@ -1,0 +1,17 @@
+---
+title: "Ethics"
+self-contained: true
+bibliography: ../../../OneDrive - Newcastle University/LIBRARY/My Library.bib
+csl: https://raw.githubusercontent.com/citation-style-language/styles/master/dependent/the-sociological-review.csl
+output: pdf_document
+---
+
+## Anonymisation/Pseudonymisation and its pitfalls
+
+In his chapter on "Rigorous ethnography" [@GerxhaniEtAl2022HandbookSociologicalScienceContributionsRigorous, p. 215-231], Federico Varese discusses the various challenges posed to ethnographic research by the practice to anonymise research participants' and fieldwork location details. He notes that there are various degrees of anonymisation and in more extreme forms "anonymity protocol can morph into *de facto* falsification of data, as in the case of composite characters" [-@GerxhaniEtAl2022HandbookSociologicalScienceContributionsRigorous, p. 222]. He writes (p. 222):
+
+> When sensitive and/or highly personal information is being shared, or when participants will talk only if their name is anonymized, there is a good case for changing people's names. Compromising the confidentiality of the participants puts them at risk and undermines attempts by other scholars to study the same or similar communities. As consent is a key requirement of ethnography, the scholar's options are limited: report anonymously or not at all. Yet anonymization has evolved into a default position, routinely used even when unnecessary. Furthermore, there have been several cases of bad anonymization, where offering to change names in no way leads to the protection of the participants' identity and the process becomes futile. Thus, there are benefits but also serious costs to anonymization and an assessment should be made case by case. When it is possible, I suggest scholars ask participants to 'go on the record,' as done by journalists with their sources, and try to avoid masking places. RE should strive to keep anonymity at a minimum because the practice of hiding or distorting identifying information reduces the ability to construct cumulative social science (Jerolmack & Murphy 2019; see also the chapter by Auspurg & Brüderl on reproducibility and credibility).
+
+# Journalism
+
+Ethnographic research in particular shares many aspects of in-depth investigative journalism. Yet, while journalism is regulated by strict professional standards, these seem to be less demanded of academic social scientists. 
