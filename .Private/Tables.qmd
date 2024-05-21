@@ -70,6 +70,7 @@ library(flextable)
 #| eval: false
 
 # data1 <- readRDS(here("Data", "for_analysis", "wvs7.rds")) |>
+
 data_read(here("Data", "for_analysis", "wvs7.rds")) |>
   sjlabelled::drop_labels() |>
   data_extract(c(B_COUNTRY, Q1, Q57, Q195, Q260, Q261:Q263)) |>
@@ -131,15 +132,33 @@ data |> tabyl(Q263) |>
   flextable()
 ```
 
+
+#### `sjmisc::frq()`
+
+```{r}
+#| eval: false
+#| include: false
+
+data |> frq(Q263)
+
+```
+
+
 #### `{easystats}` `datawizard::data_tabulate()`
 
 ```{r}
-
 
 data |> datawizard::data_tabulate(Q263) |> sjmisc::print_html()         # needs help from sjmisc to print in Word
 
 data |> datawizard::data_tabulate(Q263) |> sjmisc::print_md()
 
+
+#### Reproduce frq() using data_tabulate()
+
+t <- data |> data_tabulate(Q263)
+t$Label <- data |> data_tabulate(labels_to_levels(Q263))[["Value"]]
+t <- data_relocate(t, 7, after = 2)
+print(t)
 
 ```
 
@@ -168,7 +187,7 @@ modelsummary::datasummary(Q57 + 1 ~ N + Percent(),                        # Colu
 
 data |> gtsummary::tbl_summary(include = Q57)                        # a bit hacky; meant to summarise dataframes, not single variables
 # , missing = "no"
-# |> gtsummary::modify_header(label ~ "")
+## |> gtsummary::modify_header(label ~ "")
 
 
 ```
@@ -182,6 +201,9 @@ data |>
   # drop_na(Q57) |>  
   flextable::proc_freq("Q57")
 ```
+
+
+------------------------------------------------------------------------------------------------------------------------
 
 ## Two-way tabulations (corsstabulations)
 

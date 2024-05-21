@@ -1,0 +1,26 @@
+
+
+# Structure of R intro course
+
+### 
+### calculator / operators (arithmetic, logical, ...)
+### ...
+### operators ...
+### formulas
+    Discuss "formulas" and the "~" operator early, before introducing it in the context of ggplot2 graphics and modelling functions. It is used in many other cases too and useful to know about (see. e.g. )
+    
+### Data types
+
+```{r}
+?typeof()
+?mode()
+?class()
+
+?attributes()
+  
+```
+
+    
+
+    
+    

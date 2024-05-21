@@ -34,10 +34,20 @@ Below you will find some outputs from a statistical analysis undertaken using da
 
 Your task is to interpret the findings as completely as you can in the format of a brief report (2,000 words).
 
-The outputs contain some information about the variables included in the analysis, but to gain a more complete understanding of where the data came from and how the variables were measured you should also engage with the survey’s webpage. Information about the survey will be provided.
+The outputs contain some information about the variables included in the analysis, but to gain a more complete understanding of where the data came from and how the variables were measured you should also engage with the survey’s webpage. Links to the surveys where the data come from and further details about the variables are also available from the [Data page](https://cgmoreh.github.io/SOC2069/Data/data_main.html)
 
 
 # Statistical results
 
-Outputs and further information will be posted here ahead of the resit period.
+Outputs from a statistical analysis will be posted here ahead of the exam period period. If you are preparing your submission for alternative assessment and the outputs have not yet been posted below, please let me know at [chris.moreh@newcastle.ac.uk](mailto:chris.moreh@newcastle.ac.uk).
+
+<br><br><br>
+
+# How to prepare
+
+The outputs above are very similar to the ones we produced in class in the IT labs. Therefore, the best way to prepare your answers is to revisit the Week 2-6 worksheets available under the [Materials](https://cgmoreh.github.io/SOC2069/Materials/) tab and your class notes.
+
+Make sure to engage with the survey website too to gain insight into the meaning of variables beyond the description provided in the outputs.
+
+Engaging with the assigned readings will further help improve your understanding of the statistics in this exercise and help you provide a more accurate interpretation of the results.
 

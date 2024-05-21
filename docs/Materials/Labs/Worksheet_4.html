@@ -5842,9 +5842,9 @@ educ num    |       1.19 | 4.60e-03 | [1.18, 1.20] |   45.46 | &lt; .001</code><
 </div>
 </div>
 <p>However, the fact that the exponentiated coefficients are measured on a multiplicative scale poses some difficulties and it makes it easy to fall into the trap of interpreting these <em>odds</em> as <em>probabilities</em>. The issue is that odds can range from 0 to infinity, so the scale is far from standard. <em>Probabilities</em>, on the other hand, have the nice feature of being constrained between 0 and 1, so a percentage change has much more meaning.</p>
-<p>There are several packages that help us compute various comparative statistics on the <em>probability</em> scale from logistic models. Below, we will use the <code><a href="https://rdrr.io/pkg/marginaleffects/man/slopes.html">avg_slopes()</a></code> function from the <a href="https://marginaleffects.com/">marginaleffects</a> package to compute the average difference in the probability of being <em>trusting</em> based on a one-unit difference in education level:</p>
+<p>There are several packages that help us compute various comparative statistics on the <em>probability</em> scale from logistic models. Below, we will use the <code><a href="https://marginaleffects.com/man/slopes.html">avg_slopes()</a></code> function from the <a href="https://marginaleffects.com/">marginaleffects</a> package to compute the average difference in the probability of being <em>trusting</em> based on a one-unit difference in education level:</p>
 <div class="cell">
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/marginaleffects/man/slopes.html">avg_slopes</a></span><span class="op">(</span><span class="va">m1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://marginaleffects.com/man/slopes.html">avg_slopes</a></span><span class="op">(</span><span class="va">m1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
      Term Estimate Std. Error    z Pr(&gt;|z|)   S  2.5 % 97.5 %
@@ -5855,7 +5855,7 @@ Type:  response </code></pre>
 </div>
 </div>
 <p>The result tells us that that probability is just over <strong>3%</strong>.</p>
-<p>To make these numerical results easier to understand, we can plot the result. There are several options, but probably the most straightforward approach is to estimate the probabilities of being <em>trusting</em> at each level of the predictor variable (<em>education</em>). The <code><a href="https://rdrr.io/pkg/marginaleffects/man/plot_predictions.html">plot_predictions()</a></code> function from the <a href="https://marginaleffects.com/">marginaleffects</a> package or the <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> function of <a href="https://strengejacke.github.io/ggeffects/">ggeffects</a> can be used here. Below, we’ll use the latter:</p>
+<p>To make these numerical results easier to understand, we can plot the result. There are several options, but probably the most straightforward approach is to estimate the probabilities of being <em>trusting</em> at each level of the predictor variable (<em>education</em>). The <code><a href="https://marginaleffects.com/man/plot_predictions.html">plot_predictions()</a></code> function from the <a href="https://marginaleffects.com/">marginaleffects</a> package or the <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> function of <a href="https://strengejacke.github.io/ggeffects/">ggeffects</a> can be used here. Below, we’ll use the latter:</p>
 <div class="cell">
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://strengejacke.github.io/ggeffects/reference/ggpredict.html">ggpredict</a></span><span class="op">(</span><span class="va">m1</span>, <span class="st">&quot;educ_num&quot;</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -5933,7 +5933,7 @@ employment [8] |    -0.20 |     0.08 | [-0.35, -0.05] |  -2.52 | 0.012 </code></
 </div>
 <p>Transform the coefficients to <em>probability</em> scale:</p>
 <div class="cell">
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/marginaleffects/man/slopes.html">avg_slopes</a></span><span class="op">(</span><span class="va">m2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://marginaleffects.com/man/slopes.html">avg_slopes</a></span><span class="op">(</span><span class="va">m2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
        Term Contrast Estimate Std. Error       z Pr(&gt;|z|)     S    2.5 %
