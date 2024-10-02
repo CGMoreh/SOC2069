@@ -1,0 +1,15 @@
+{
+  "hash": "1ebd744dd02d9ec93e76b99393dba316",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Worksheets\"\n---\n\n\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

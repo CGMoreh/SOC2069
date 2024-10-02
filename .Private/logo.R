@@ -208,6 +208,13 @@ ggplot(logo_data, aes(x, y)) +
 
 dev.print(png, "SOC2069_slide_logo.png", width = 1407, height = 725, bg = "transparent", res = 100)
 
+
+
+
+
+
+
+
 #### Data logos ------------------------------
 
 # Gapminder slide logo

@@ -1,0 +1,417 @@
+---
+title: "Introduction: Information, Data, Models"
+subtitle: "Week 1"
+format:
+  pptx:
+    incremental: true   
+    reference-doc: templates/SOC2069_pptx_template.pptx
+---
+
+```{r}
+
+# Packages
+library(tidyverse)
+# library(palmerpenguins)
+```
+
+# Information \> Data \> Models
+
+## Models in social science
+
+-   Descriptive
+-   Predictive
+-   Inferential
+-   Causal
+
+## Typical research objectives by required sample size (*n*)
+
+-   $n\to\infty$
+-   **n** $\approx$ 5,000 - 100,000: stratified population survey
+-   **n** $\approx$ 1,000 - 5,000: population survey
+-   **n** $\approx$ 100 - 1,000: targeted survey
+-   **n** $\approx$ 50 - 100: stratified narrative study
+-   **n** $\approx$ 10 - 50: narrative study
+-   **n** $\approx$ 5 - 10: interactive narrative study
+-   **n = 2 - 4**: comparative case study
+-   **n = 1**: case study
+-   **n = 0**: theoretical/simulation study
+
+## The *n = 0* principle
+
+::: columns
+::: {.column width="40%"}
+```{r}
+#| echo: true
+#| eval: false
+
+set.seed(2069)
+
+student_numbers <- 120
+
+sex <- sample(c("Female", "Male"), 
+              size = student_numbers,
+              prob = c(70, 30),
+              replace = TRUE)
+
+height <- case_when(sex %in% c("Female") ~ rnorm(n = student_numbers, 
+                                           mean = 162.4, 
+                                           sd = 12),
+                    sex %in% c("Male") ~ rnorm(n = student_numbers, 
+                                         mean = 175.9, 
+                                         sd = 13))
+
+dataset <- data.frame(sex, height)
+
+head(dataset)
+
+tail(dataset)
+
+```
+:::
+
+::: {.column width="60%"}
+```{r}
+#| echo: false
+#| eval: true
+
+set.seed(2069)
+
+student_numbers <- 120
+
+sex <- sample(c("Female", "Male"), 
+              size = student_numbers,
+              prob = c(70, 30),
+              replace = TRUE)
+
+height <- case_when(sex %in% c("Female") ~ rnorm(n = student_numbers, 
+                                           mean = 162.4, 
+                                           sd = 12),
+                    sex %in% c("Male") ~ rnorm(n = student_numbers, 
+                                         mean = 175.9, 
+                                         sd = 13))
+
+dataset <- data.frame(sex, height)
+
+head(dataset)
+
+tail(dataset)
+
+```
+:::
+:::
+
+------------------------------------------------------------------------
+
+# Module outline
+
+------------------------------------------------------------------------
+
+------------------------------------------------------------------------
+
+# Finding data
+
+------------------------------------------------------------------------
+
+## 
+
+```{r}
+#| echo: false
+
+# Libraries
+library(tidyverse)
+library(ggrepel)
+# library(strengejacke)
+library(easystats)
+```
+
+```{r}
+
+data <- read_rds("data/lab3macro.rds") |> 
+  mutate(gdp = GDPpercap2,
+         ln_gdp = log(gdp),
+         lnx_gdp = log(log(log(gdp))),
+         exp_trust = (trust_pct^2)
+         ) |>
+  drop_na()
+
+data %>%
+  filter(country != "China") |> 
+  arrange(desc(pop)) %>%
+  mutate(country = factor(country, country)) %>%
+  ggplot( aes(x=lnx_gdp, y=exp_trust, size = pop, color = Region)) +
+  geom_point(alpha=0.7) +
+  scale_size(range = c(3, 15), name="Population") +
+  scale_colour_manual(values=c("#293352", "#C4961A", "#52854C", "#D16103", "#99999900", "#9a372d", "#2d9aa4")) +
+  theme(axis.title.x = element_blank(), 
+        axis.title.y = element_blank(),
+        axis.text.x = element_blank(),
+        axis.ticks.x = element_blank(),
+        axis.text.y = element_blank(),
+        axis.ticks.y = element_blank(),
+        legend.position="none"
+  ) +
+  scale_x_continuous(breaks = seq(0.7, 0.88, 0.02), limits = c(0.7, 0.88)) +
+  scale_y_continuous(breaks = seq(0, 6050, 1000), limits = c(0, 6050))
+```
+
+## 
+
+```{r}
+
+data %>%
+  # filter(country != "China") |> 
+  arrange(desc(pop)) %>%
+  mutate(country = factor(country, country)) %>%
+  ggplot( aes(x=lnx_gdp, y=exp_trust, size = pop, color = Region)) +
+  geom_point(alpha=0.7) +
+  scale_size(range = c(3, 15), name="Population") +
+  scale_colour_manual(values=c("#293352", "#C4961A", "#52854C", "#D16103", "#99999900", "#9a372d", "#2d9aa4")) +
+  theme(axis.title.x = element_blank(), 
+        axis.title.y = element_blank(),
+        # axis.text.x = element_blank(),
+        # axis.ticks.x = element_blank(),
+        # axis.text.y = element_blank(),
+        # axis.ticks.y = element_blank(),
+        legend.position="none"
+  ) +
+  scale_x_continuous(breaks = seq(0.7, 0.88, 0.02), limits = c(0.7, 0.88)) +
+  scale_y_continuous(breaks = seq(0, 6050, 1000), limits = c(0, 6050))
+```
+
+## 
+
+```{r}
+
+i <- data %>%
+  # filter(country != "China") |> 
+  arrange(desc(pop)) %>%
+  mutate(country = factor(country, country)) %>%
+  ggplot( aes(x=gdp, y=trust_pct, size = pop, color = Region)) +
+  geom_point(alpha=0.7) +
+  scale_size(range = c(3, 15), name="Population") +
+  scale_colour_manual(values=c("#293352", "#C4961A", "#52854C", "#D16103", "#99999900", "#9a372d", "#2d9aa4")) +
+  theme_void() +
+  theme(
+        axis.title.x = element_blank(),
+        axis.title.y = element_blank(),
+        axis.text.x = element_blank(),
+        axis.ticks.x = element_blank(),
+        axis.text.y = element_blank(),
+        axis.ticks.y = element_blank(),
+        legend.position="none"
+  ) 
+
+ggsave("image1.png", i, height = 5, width = 9, dpi = 320)
+```
+
+## 
+
+```{r}
+
+data %>%
+  # filter(country != "China") |> 
+  arrange(desc(pop)) %>%
+  mutate(country = factor(country, country)) %>%
+  ggplot( aes(x=gdp, y=trust_pct, size = pop, color = Region)) +
+  geom_point(alpha=0.7) +
+  scale_size(range = c(3, 15), name="Population") +
+  scale_colour_manual(values=c("#293352", "#C4961A", "#52854C", "#D16103", "#99999900", "#9a372d", "#2d9aa4")) +
+  theme(axis.title.x = element_blank(), 
+        axis.title.y = element_blank(),
+        # axis.text.x = element_blank(),
+        # axis.ticks.x = element_blank(),
+        # axis.text.y = element_blank(),
+        # axis.ticks.y = element_blank(),
+        legend.position="none"
+  ) 
+```
+
+## 
+
+```{r}
+
+data %>%
+  # filter(country != "China") |> 
+  arrange(desc(pop)) %>%
+  mutate(country = factor(country, country)) %>%
+  ggplot( aes(x=gdp, y=trust_pct, size = pop, color = Region)) +
+  # geom_point(alpha=0.7) +
+  scale_size(range = c(3, 15), name="Population") +
+  scale_colour_manual(values=c("#293352", "#C4961A", "#52854C", "#D16103", "#99999900", "#9a372d", "#2d9aa4")) +
+  theme(axis.title.x = element_blank(), 
+        axis.title.y = element_blank(),
+        # axis.text.x = element_blank(),
+        # axis.ticks.x = element_blank(),
+        # axis.text.y = element_blank(),
+        # axis.ticks.y = element_blank(),
+        legend.position="none"
+  ) +
+  geom_text(aes(label = country), check_overlap = TRUE)
+```
+
+## 
+
+```{r}
+
+data %>%
+  # filter(country != "China") |> 
+  arrange(desc(pop)) %>%
+  mutate(country = factor(country, country)) %>%
+  ggplot( aes(x=gdp, y=trust_pct, size = pop, color = Region)) +
+  # geom_point(alpha=0.7) +
+  scale_size(range = c(3, 15), name="Population") +
+  scale_colour_manual(values=c("#293352", "#C4961A", "#52854C", "#D16103", "#99999900", "#9a372d", "#2d9aa4")) +
+  theme(legend.position="none"  ) +
+  geom_text(aes(label = country), check_overlap = TRUE) +
+  xlab("GDP/capita in PPP") +
+  ylab("Generalised trust (% of trusting in national population)") +
+  ggtitle("Figure 1: Generalised Trust by GDP")
+```
+
+## Finding data
+
+## This print "Two content" output
+
+::: columns
+::: {.column width="40%"}
+```{r}
+#| echo: true
+#| eval: true
+
+
+```
+:::
+
+::: {.column width="60%"}
+Something else
+:::
+:::
+
+::: notes
+Notes.
+:::
+
+## Title
+
+```{r}
+#| echo: true
+
+
+```
+
+## This prints to Comparison
+
+::: columns
+::: column
+```{r}
+#| echo: true
+#| output: true
+
+
+
+```
+:::
+
+::: column
+```{r}
+#| echo: true
+#| output: true
+
+
+```
+:::
+:::
+
+------------------------------------------------------------------------
+
+## Using `with()` in *base R*
+
+::: columns
+::: column
+```{r}
+#| echo: true
+#| output: true
+
+
+
+```
+:::
+
+::: column
+```{r}
+#| echo: true
+#| output: true
+
+
+```
+:::
+:::
+
+------------------------------------------------------------------------
+
+## Changing the `ggplot` theme
+
+::: columns
+::: column
+```{r}
+#| echo: true
+#| output: true
+
+
+```
+:::
+
+::: column
+```{r}
+#| echo: true
+#| output: true
+
+```
+:::
+:::
+
+------------------------------------------------------------------------
+
+## *Some* further styling options
+
+::: columns
+::: column
+```{r}
+#| echo: true
+#| output: true
+
+
+```
+:::
+
+::: column
+```{r}
+#| echo: true
+#| output: true
+
+```
+:::
+:::
+
+------------------------------------------------------------------------
+
+## Test
+
+```{r}
+#| echo: true
+#| output-location: column-fragment
+#| code-line-numbers: "|2"
+
+library(ggplot2)
+
+mtcars |> 
+  ggplot(aes(x = disp, y = mpg)) +
+  geom_point() +
+  geom_smooth(method = "loess", formula = "y~x")
+```
+
+------------------------------------------------------------------------
+
+## Final
+
+This is an [important sentence!]{.fragment .highlight-red}

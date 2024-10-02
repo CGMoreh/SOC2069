@@ -1,3 +1,13 @@
 ---
 title: "Worksheets"
 ---
+
+```{r include=FALSE}
+## Packages used
+
+librarian::stock(
+  marginaleffects
+)
+
+```
+

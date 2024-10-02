@@ -1,0 +1,177 @@
+---
+title: "Resit Part 1: Interpreting statistical results"
+output:
+  html_document:
+    theme: lumen
+    toc: yes
+    toc_float: yes
+    toc_highlight: yes
+    tabset: yes
+    number_sections: no
+    anchor_sections: no
+    self_contained: yes
+    code_download: no
+    highlight: default
+page-layout: full
+---
+
+```{r, include=FALSE, purl=FALSE}
+options(repos = list(CRAN="http://cran.rstudio.com/"))
+```
+
+```{r setup, include = FALSE, purl=FALSE}
+# knitr::knit_hooks$set(purl = knitr::hook_purl)
+
+knitr::opts_chunk$set(error = FALSE, warning=FALSE, comment="", prompt=FALSE, message = F, strip.white = F, fig.width = 5, fig.asp = .8, fig.align = "center", fig.show = 'hold')
+```
+
+
+
+# Task description
+
+
+Below you will find some outputs from a statistical analysis undertaken to answer research question ***1. Are religious people more satisfied with life?*** from among the proposed [optional assignment research questions](https://ncl.instructure.com/courses/53153/pages/topic-slash-question-options?module_item_id=3052730).
+
+Your task is to interpret the findings as completely as you can in the format of a brief report (max. 1,000 words). The outputs contain some information about the variables included in the analysis, but to gain a more complete understanding of where the data came from and how the variables were measured you should also engage with the information made available in the survey documentation by the original survey agency and the [data search utilities provided on the module's website](https://soc2069.chrismoreh.com/data).
+
+When interpreting the outputs below, make sure to address the following: 
+
+1. Are the chosen variables useful for answering the stated research question? Why so, or why not? What are their limitations?
+2. What are the univariate descriptive statistics telling us about the variables?
+3. Provide a detailed and clear interpretation of the meaning of each coefficient in the regression model outputs. Make sure to explain what the effects shown mean in the concrete context of the variables modelled.
+4. Provide a narrative answer to the stated research question based on the statistical findings.
+
+
+
+
+# Statistical results
+
+The outputs below are from an analysis attempting to answer the following research question:
+
+> **1. Are religious people more satisfied with life?**
+
+To answer this research questions, data from [wave 10 of the European Social Survey](https://soc2069.chrismoreh.com/data/data_main#european-social-survey-round-10-2020-ess10) was used. For a thorough understanding of the variables shown in the outputs below it will be useful to also engage with the survey documentation available on [the European Social Survey Data Portal website](https://ess.sikt.no/en/study/172ac431-2a06-41df-9dab-c1fd8f3877e7/445).
+
+The following outputs were produced in the process of addressing the question empirically.
+
+### Descriptive statistics
+
+```{r include=TRUE}
+
+# Packages used in this report
+
+library(easystats)   ## For easier data management tools
+library(ggformula)   ## For easier plotting/graphing functions
+library(sjlabelled)  ## For better management of labelled data
+```
+
+```{r}
+
+# Data import and variable selection
+
+ess <- data_read("../../Data/for_analysis/ess10.rds") |> 
+  data_select(c(stflife, rlgdgr, gndr, agea, cntry, health))
+```
+
+The imported `ess` dataset was reduced to the following six variables:
+
+```{r eval=FALSE}
+datawizard::data_codebook(ess)
+```
+```{r eval=TRUE, echo=FALSE}
+datawizard::data_codebook(ess) |> print_html(line_padding=0, font_size="90%")
+```
+
+As can be seen, we have chosen the variable `stflife` as a measurement of "life satisfaction" and the variable `rlgdgr` as a measurement of "religiosity" for the purpose of our analysis. There may have been other relevant variables in the dataset, but this is a choice we have made. The other variables were selected to act as additional *control variables* in the regression model that we will build.
+
+To make the analysis simpler to undertake using the methods covered on the module, we will treat - and transform as such - the variables `stflife` and `rlgdgr` as *numeric* scales. This is possible because they were measured on relatively long 11-point scales (0 to 10).
+
+```{r}
+ess <- ess |> 
+  data_modify(stflife = sjlabelled::as_numeric(stflife, start.at = 0),
+              rlgdgr = sjlabelled::as_numeric(rlgdgr, start.at = 0)
+  )
+```
+
+We can have a peek again at the dataset with the transformed variables to make sure they are recognised an *numeric*:
+
+```{r eval=FALSE}
+datawizard::data_peek(ess)
+
+```
+```{r eval=TRUE, echo=FALSE}
+datawizard::data_peek(ess) |> print_html(line_padding=0, font_size="90%")
+
+```
+
+
+#### Bar charts of the "life satisfaction" and "religiosity" variables:
+
+```{r}
+ess |> gf_bar( ~ stflife)
+ess |> gf_bar( ~ rlgdgr)
+```
+
+
+### Bivariate statistics - boxplot of wellbeing by employment:
+
+#### An attempted scatter-plot with superimposed linear trend line
+
+```{r}
+ess |> gf_point(stflife ~ rlgdgr, alpha = 0.002) |> 
+  gf_lm()
+```
+Because both variables are measured on a very short scale (11 levels, 0-10) and the data is well spread out across the categories - as we could see from the bar plots - the scatter plot is not very informative, despite applying a very high transparency level (that's what the `alpha = 0.002` bit in the code does) so that the colour of the points is stronger where there are more overlapping points.
+
+Another option is to apply a so-called "jitter" to the data points, which would artificially distance them from one another to better spot their concentration in certain spots:
+
+```{r}
+ess |> gf_jitter(stflife ~ rlgdgr, alpha = 0.01) |> 
+  gf_lm()
+```
+
+To obtain a more accurate numeric description of the relationship between the two variables, we perform a simple bivariate regression.
+
+#### Results from a simple regression model:
+
+```{r eval=FALSE}
+m1 <- lm(stflife ~ rlgdgr, data = ess)
+
+model_parameters(m1, digits = 3)
+```
+```{r eval=TRUE, echo=FALSE}
+m1 <- lm(stflife ~ rlgdgr, data = ess)
+
+model_parameters(m1, digits = 3) |> print_html(line_padding=0, font_size="90%")
+```
+
+To account for the fact that there may be other factors that correlate with religiosity and life satisfaction, we build a more complex regression model in which we "control" for the effects of some of these additional variables by also including them into the model. In our case, we have selected to also account for the effect of "age", "sex", "health" and "country" where the data was collected. By adding these variables into the model we can estimate their effects on "life satisfaction", but we also obtain a more accurate and cleaner estimate of the effect of "religiosity" once the effect of these additional variables is also accounted for.
+
+### Results from a multiple regression model:
+
+```{r eval=FALSE}
+m2 <- lm(stflife ~ rlgdgr + gndr + agea + health + cntry , data = ess)
+
+model_parameters(m2, digits = "signif", drop = "cntry")
+```
+```{r eval=TRUE, echo=FALSE}
+m2 <- lm(stflife ~ rlgdgr + gndr + agea + health + cntry , data = ess)
+
+model_parameters(m2, digits = "signif", drop = "cntry") |> print_html(line_padding=0, font_size="90%")
+```
+
+As shown in the code, model `m2` also includes the "country" (`cntry`) variable, but we explicitly excluded them from being shown in the table output. We did that because `cntry` is a categorical variable with 22 levels (i.e. we have data from 22 European countries in this wave of the European Social Survey) and the table would be unnecessarily long. This makes sense for our analysis because we are mainly interested in "controlling" for the effect of belonging to different European countries rather than wanting to see the effect of each country. In other words, the coefficients shown in the output table account for any cross-country differences in the other variables included.
+
+
+# How to prepare
+
+The outputs above are similar to the ones we produced in class in the IT labs. Therefore, the best way to prepare your answers is to revisit the lab worksheets (available via the module's Canvas page) and your class notes.
+
+Engaging with the assigned readings would further help improve your understanding of the statistics in this exercise and help you provide a more accurate interpretation of the results. A list of readings and access to them is also available via the module's Canvas page.
+
+**Recommended readings:**
+
+-   Agresti (2018): Chapters 10--11 (pp. 287--337)
+-   Gelman et al. (2020): Chapter 10 and Appendix B (pp. 131--150; 493--496)
+
+

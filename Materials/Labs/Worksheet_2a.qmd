@@ -52,14 +52,8 @@ The term "`R`" is used to refer to both the programming language and the softwar
 
 **Navigate to the ["1. Before we Start" section of the "R for Social Scientists"](https://datacarpentry.org/r-socialsci/instructor/00-intro.html) course and work your way through that section.**
 
-If you have kept up with the exercises in Lab 1, you should already have a folder for your work on this module that is organised something like this:
+If you have kept up with the exercises in Lab 1, you should already have a folder for your work on this module.
 
-```{r}
-#| echo: false
-#| width: 60
-
-fs::dir_tree("D:/OneDrive - Newcastle University/SOC2069/Data")
-```
 Last week we saved all the survey documentation materials there for the various surveys you read about. If you already have a folder like this, try turning the `/SOC2069/` parent folder into an *RStudio Project*. You can start off with the same steps (*File \> New project \>*), but instead of `New directory` choose `Existing directory` and find your `/SOC2069/` folder on OneDrive. When you are done, you will see that a new file with the extension `.Rproj` has been created in the folder.
 
 The great advantage of having an `.Rproj` file in the folder that you are using is that you don't have to worry about setting manually any paths to files that you will be using or producing; everything is stored relative to where the `.Rproj` file is located on your computer.

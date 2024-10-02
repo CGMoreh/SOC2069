@@ -36,8 +36,8 @@ website:
     right:
       # - href: index.qmd
       #   text: Home
-      - href: "Structure.html"
-        text: "Timetable"
+     # - href: "Structure.html"
+    #    text: "Timetable"
       - text: "Materials"
         href: Materials/index.qmd
       - text: "Data"
