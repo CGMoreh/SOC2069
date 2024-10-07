@@ -163,6 +163,21 @@ model_parameters(m2, digits = "signif", drop = "cntry") |> print_html(line_paddi
 As shown in the code, model `m2` also includes the "country" (`cntry`) variable, but we explicitly excluded them from being shown in the table output. We did that because `cntry` is a categorical variable with 22 levels (i.e. we have data from 22 European countries in this wave of the European Social Survey) and the table would be unnecessarily long. This makes sense for our analysis because we are mainly interested in "controlling" for the effect of belonging to different European countries rather than wanting to see the effect of each country. In other words, the coefficients shown in the output table account for any cross-country differences in the other variables included.
 
 
+```{r eval=FALSE, include=FALSE, fig.asp=1.2}
+model_performance(m2)
+check_autocorrelation(m2)
+check_model(m2)
+dat <- get_data(m2)
+res <- get_residuals(m2)
+pred_dat <- predict(m2)
+diff <- dat$stflife - pred_dat
+identical(round(diff, 6), round(res, 6))  ## Should be identical
+all.equal(diff, res)                      ## should be equal
+n_unique(m2)
+```
+
+
+
 # How to prepare
 
 The outputs above are similar to the ones we produced in class in the IT labs. Therefore, the best way to prepare your answers is to revisit the lab worksheets (available via the module's Canvas page) and your class notes.
