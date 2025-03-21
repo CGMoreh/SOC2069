@@ -23,7 +23,7 @@ library(ggformula)
 #| echo: false
 #| warning: false
 
-inequality <- readRDS("../../Data/for_analysis/lab3macro.rds")
+inequality <- readRDS("data/lab3macro.rds")
 ```
 
 ## 
@@ -114,6 +114,8 @@ gf_point(trust_pct ~ s80s20, data = inequality, color = ~ Region) |>
 lm(trust_pct ~ s80s20, data = inequality) |> 
   summary()
 ```
+
+
 
 # Measurement: from questionnaire items to dataset variables
 

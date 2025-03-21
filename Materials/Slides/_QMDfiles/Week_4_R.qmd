@@ -65,37 +65,41 @@ logit_df_line <- tibble(
 )
 
 logit_df_point <- tibble(
-  lp = -5:6,
+  lp = -6:6,
   p = round(exp(lp) / (exp(lp) + 1), 3)
 ) |>
   mutate(
-    label = glue::glue("({lp}, {p})"),
+    label = glue::glue("({lp} , {p})"),
     label_pos = case_when(
-      lp %in% c(-5, -3, 4, 6) ~ "above",
-      lp %in% c(-4, 3, 5)     ~ "below",
-      lp == -2                ~ "right",
-      lp %in% c(-1, 0, 1, 2)  ~ "left",
+      lp %in% c(3, 4, 5, 6)     ~ "left-down",
+      lp %in% c(1, 2)           ~ "left",
+      lp %in% 0                   ~ "centre",
+      lp %in% c(-6, -5, -4, -3) ~ "right-up",
+      lp %in% c(-2, -1, 0)      ~ "right",
     )
   )
 
 ggplot(logit_df_line, aes(x = lp, y = p)) +
+  theme_minimal() + scale_x_discrete(limits = c(-6:6)) + scale_y_continuous(limits = c(0:1), breaks = c(seq(0, 1, 0.1))) +
   geom_hline(yintercept = 0, linetype = "dashed", color = "blue") +
   geom_hline(yintercept = 1, linetype = "dashed", color = "blue") +
-  geom_smooth(se = FALSE, size = 0.5) +
+  geom_smooth(se = FALSE, linewidth = 0.5, color = "black") +
   coord_cartesian(
-    xlim = c(-5.5, 6.15), 
-    ylim = c(-0.05, 1.1)
+    xlim = c(-6.15, 6.15), 
+    ylim = c(-0.1, 1.1)
   ) +
-  geom_point(data = logit_df_point, shape = "circle open", 
-             size = 3, color = "red", stroke = 2) +
-  geom_text(data = logit_df_point |> filter(label_pos == "above"), 
-            aes(label = label), vjust = -2) +
-  geom_text(data = logit_df_point |> filter(label_pos == "below"), 
-            aes(label = label), vjust = 2.5) +
-  geom_text(data = logit_df_point |> filter(label_pos == "right"), 
-            aes(label = label), hjust = -0.25) +
+  geom_point(data = logit_df_point, shape = "circle", 
+             size = 3, color = "black", stroke = 1.5) +
+  geom_text(data = logit_df_point |> filter(label_pos == "left-down"), 
+            aes(label = label), hjust = 1.2, size = 3.5, angle = 70) +
   geom_text(data = logit_df_point |> filter(label_pos == "left"), 
-            aes(label = label), hjust = 1.25) +
+            aes(label = label), hjust = 1.2, vjust = 0.2, size = 3.5, angle = 10) +
+  geom_text(data = logit_df_point |> filter(label_pos == "centre"), 
+            aes(label = label), hjust = 0.38, vjust = 0.3, size = 6, color = "#800020", fontface = "bold") +
+  geom_text(data = logit_df_point |> filter(label_pos == "right-up"), 
+            aes(label = label), hjust = -0.2, size = 3.5, angle = 70) +
+  geom_text(data = logit_df_point |> filter(label_pos == "right"), 
+            aes(label = label), hjust = -0.2, size = 3.5, angle = 10) +
   labs(
     x = expression(logit(p[i])),
     y = expression(p[i])
