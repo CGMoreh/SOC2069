@@ -5,16 +5,14 @@ css: labcss.css
 
 ```{r packages-data, include=FALSE} 
 
-library(groundhog)
-pkgs <- c(
-    "tidyverse",
-    "knitr",
-    "kableExtra",
-    "lubridate",
-    "glue"
+if (!require("pacman")) install.packages("pacman")
+pacman::p_load(
+    tidyverse,
+    knitr,
+    kableExtra,
+    lubridate,
+    glue
     )
-
-groundhog.library(pkgs, '2023-10-01')
 ```
 
 
@@ -30,8 +28,8 @@ contents <- tibble(
   Topic = c(paste0("var topic.w", 1:10)),
   # Info = c(paste0("/materials/notes/info_w", 1:10)),
   # Notes = c(paste0("/materials/notes/notes_w", 1:10)),
-  Slides = c(paste0("https://github.com/CGMoreh/SOC2069/raw/main/materials/Slides/Week_", 1:10)),
-  Labs = c(paste0("/materials/Labs/Worksheet_", 1:10)),
+  Slides = c(paste0("https://github.com/CGMoreh/SOC2069/raw/main/Materials/Slides/Week_", 1:10)),
+  Labs = c(paste0("/Materials/Labs/Worksheet_", 1:10)),
   # Handouts = c(paste0("/materials/handouts/sheet_w", 1:10)),
   )
 
