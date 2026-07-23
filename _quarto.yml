@@ -13,8 +13,12 @@ project:
     - "!Materials/Slides"
     - "2023/*.html"
     # - "!Data/"
-  resources: 
-    - "2023/*.html"    
+  resources:
+    - "2023/*.html"
+    # GitHub Pages custom domain. Kept at project root and copied into docs/
+    # on each render, because a render clears output-dir and would otherwise
+    # take docs/CNAME with it, dropping the site back to the default domain.
+    - "CNAME"
 
 
 embed-resources: true
